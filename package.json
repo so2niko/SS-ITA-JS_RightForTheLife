@@ -1,0 +1,19 @@
+{
+  "name": "ss-ita-js_rightforthelife",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PsyhoBelka/SS-ITA-JS_RightForTheLife.git"
+  },
+  "author": "dp-180-webui",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PsyhoBelka/SS-ITA-JS_RightForTheLife/issues"
+  },
+  "homepage": "https://github.com/PsyhoBelka/SS-ITA-JS_RightForTheLife#readme"
+}
