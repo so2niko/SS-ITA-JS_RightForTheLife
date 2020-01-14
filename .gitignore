@@ -1,1 +1,23 @@
 .idea
+
+# dependencies
+right-for-life_front/node_modules
+right-for-life_front/.pnp
+right-for-life_front/.pnp.js
+
+# testing
+right-for-life_front/coverage
+
+# production
+right-for-life_front/build
+
+# misc
+right-for-life_front/.DS_Store
+right-for-life_front/.env.local
+right-for-life_front/.env.development.local
+right-for-life_front/.env.test.local
+right-for-life_front/.env.production.local
+
+right-for-life_front/npm-debug.log*
+right-for-life_front/yarn-debug.log*
+right-for-life_front/yarn-error.log*
