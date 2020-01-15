@@ -1,8 +1,9 @@
 import React from 'react';
+import AnimalsPage from './containers/AnimalsPage';
 
 function App() {
   return (
-    <div>there will be an app!</div>
+    <AnimalsPage />
   );
 }
 
