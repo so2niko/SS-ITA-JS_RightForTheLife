@@ -14,7 +14,7 @@ const AnimalsPage = (props) => {
   }, []);
     
   return (
-    <div className="animals-page bg-gray-300">
+    <div className="animals-page bg-lightgray-300">
       <Header />
       <AnimalsList animals={animals} />
       <Footer />
