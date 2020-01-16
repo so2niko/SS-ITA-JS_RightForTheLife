@@ -1,5 +1,5 @@
 import React from 'react';
-import { HappyStoriesList } from './happy-stories-list';
+import { HappyStoriesList } from './HappyStoriesList';
 
 function App() {
   return <>
