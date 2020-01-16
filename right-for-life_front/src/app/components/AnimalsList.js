@@ -10,7 +10,7 @@ const AnimalsList = ({animals}) => {
         })
       }
     </ul>
-  )
+  );
 }
 
 export default AnimalsList;
