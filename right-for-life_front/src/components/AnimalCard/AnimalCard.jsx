@@ -1,7 +1,7 @@
 import React from 'react';
 import calcAge from '../../heplers/calcAge';
 
-const AnimalCard = (props) => {
+export const AnimalCard = (props) => {
   const { name, age, photos } = props.animal;
 
   return (
@@ -22,5 +22,3 @@ const AnimalCard = (props) => {
     </li >
   );
 }
-
-export default AnimalCard;
