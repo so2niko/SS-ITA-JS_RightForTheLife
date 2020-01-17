@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import AnimalsList from '../components/AnimalsList';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import AnimalsList from '../../components/AnimalsList/AnimalsList';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 
 const AnimalsPage = (props) => {
   const dataApi = "https://alex-boklag.github.io/SSA-Demo-AnimalShelter/db/animals.json";

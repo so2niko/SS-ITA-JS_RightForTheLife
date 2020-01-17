@@ -1,5 +1,5 @@
 import React from 'react';
-import calcAge from '../heplers/calcAge';
+import calcAge from '../../heplers/calcAge';
 
 const AnimalCard = (props) => {
   const { name, age, photos } = props.animal;

@@ -1,5 +1,5 @@
 import React from 'react';
-import AnimalCard from '../components/AnimalCard';
+import AnimalCard from '../../components/AnimalCard/AnimalCard';
 
 const AnimalsList = ({animals}) => {
   return (
