@@ -5,7 +5,7 @@ export const AnimalsList = ({ animals }) => {
 	return (
 		<ul className="flex flex-wrap justify-center">
 			{animals.map(animal => {
-				return <AnimalCard key={animal.id.toString()} animal={animal} />;
+				return <AnimalCard key={animal.id} animal={animal} />;
 			})}
 		</ul>
 	);
