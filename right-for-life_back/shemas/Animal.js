@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const dbUrl = require('../utils/configs.js').dbUrl;
+const dbURL = require('../utils/configs.js').dbURL;
 const Schema = mongoose.Schema;
 
 const animalScheme = new Schema({
@@ -9,6 +9,6 @@ const animalScheme = new Schema({
   age: Number,
 });
 
-mongoose.connect(dbUrl, { useNewUrlParser: true });
+mongoose.connect(dbURL, { useNewUrlParser: true });
 
 module.exports.Animal = mongoose.model('Animal', animalScheme);

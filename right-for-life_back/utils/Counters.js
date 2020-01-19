@@ -1,4 +1,4 @@
-const db_url = require('./configs.js').dbUrl;
+const db_url = require('./configs.js').dbURL;
 const mongoClient = require('mongodb').MongoClient;
 
 export class Counters {
