@@ -1,14 +1,13 @@
 const express = require('express');
-const fs = require('fs');
 const cors = require('cors');
-const mongoClient = require('mongodb').MongoClient;
+const ObjectId = require('mongodb').ObjectId;
 
-const dbName = 'right-for-life';
-const animalsCollectionName = 'animals';
-const db_url = 'mongodb://localhost:27017';
+const Animal = require('./shemas/Animal.js').Animal;
+const serverPort = require('./utils/configs.js').serverPort;
 
 const app = express();
-const port = 4000;
+
+const jsonParser = express.json;
 
 //enable CORS
 app.use(cors());
@@ -18,21 +17,35 @@ app.use(cors());
 // });
 
 app.get('/animals', (request, response) => {
-  mongoClient.connect(db_url, function (err, client) {
-    if (err) {
-      return console.error(err);
+  Animal.find((err, docs) => {
+    err ? console.log(err) : response.status(200).json(docs);
+  });
+});
+
+app.post('/animals', jsonParser(), (request, response) => {
+  console.log(request);
+  const animal = new Animal({
+    name: request.body.name,
+    type: request.body.type,
+    gender: request.body.gender,
+    age: request.body.age,
+  });
+  animal.save(err => {
+    if (!err) {
+      response.status(200).json(animal);
+    } else {
+      console.log(err);
     }
-    client
-      .db(dbName)
-      .collection(animalsCollectionName)
-      .find()
-      .toArray((err, result) => {
-        // console.log(result);
-        response.send(result.filter((x) => {
-          return x.type === 'пес';
-        }));
-        client.close();
-      });
+  });
+});
+
+app.delete('/animals', jsonParser(), (request, response) => {
+  console.log(request.body);
+  Animal.deleteOne({ _id: ObjectId(request.body._id) }, (err, result) => {
+    console.log(result);
+    Animal.find((err, docs) => {
+      response.status(200).json(docs);
+    });
   });
 });
 
@@ -42,6 +55,6 @@ app.get('/query', (request, response) => {
   response.send('<h1>Информация</h1><p>id=' + id + '</p><p>name=' + userName + '</p>');
 });
 
-app.listen(port, function () {
-  console.log('Example app listening on port %s!', port);
+app.listen(serverPort, () => {
+  console.log('Example app listening on port %s!', serverPort);
 });
