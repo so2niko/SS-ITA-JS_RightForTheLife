@@ -16,15 +16,16 @@ module.exports = {
       white: '#fff',
 
       lightgray: {
-        100: '#f2f2f2',
-        200: '#e6e6e6',
-        300: '#d9d9d9',
-        400: '#d3d3d3',
-        500: '#cccccc',
-        600: '#bfbfbf',
-        700: '#b3b3b3',
-        800: '#a6a6a6',
-        900: '#999999',
+        50: '#FAFAFA',
+        100: '#F5F5F5',
+        200: '#EEEEEE',
+        300: '#E0E0E0',
+        400: '#BDBDBD',
+        500: '#9E9E9E',
+        600: '#757575',
+        700: '#616161',
+        800: '#424242',
+        900: '#212121',
       },
       gray: {
         100: '#f7fafc',
@@ -233,6 +234,8 @@ module.exports = {
       default: '1',
     },
     fontFamily: {
+      display: ['Rubik', 'sans-serif'],
+      body: ['Rubik', 'sans-serif'],
       sans: [
         '-apple-system',
         'BlinkMacSystemFont',
