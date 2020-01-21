@@ -7,9 +7,14 @@ export const Header = () => {
 		<header>
 			<nav>
 				<ul className="fixed flex justify-center items-center py-2 w-full bg-white shadow-md font-bold text-xl text-gray-600 z-50">
-					<li className="mx-4 cursor-pointer ">
+					<NavLink
+						className="mx-4 cursor-pointer"
+						exact
+						to="/"
+						activeClassName="text-gray-700"
+					>
 						<Logo />
-					</li>
+					</NavLink>
 					<NavLink
 						className="mx-4 cursor-pointer hover:text-gray-700"
 						exact
