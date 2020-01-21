@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 
 export const Header = () => {
@@ -9,12 +10,38 @@ export const Header = () => {
 					<li className="mx-4 cursor-pointer ">
 						<Logo />
 					</li>
-					<li className="mx-4 cursor-pointer hover:text-gray-700">Новости</li>
-					<li className="mx-4 cursor-pointer hover:text-gray-700">Питомцы</li>
-					<li className="mx-4 cursor-pointer hover:text-gray-700">Товары</li>
-					<li className="mx-4 cursor-pointer hover:text-gray-700">
+					<NavLink
+						className="mx-4 cursor-pointer hover:text-gray-700"
+						exact
+						to="/"
+						activeClassName="text-gray-700"
+					>
+						Новости
+					</NavLink>
+					<NavLink
+						className="mx-4 cursor-pointer hover:text-gray-700"
+						exact
+						to="/animals"
+						activeClassName="text-gray-700"
+					>
+						Питомцы
+					</NavLink>
+					<NavLink
+						className="mx-4 cursor-pointer hover:text-gray-700"
+						exact
+						to="/supplies"
+						activeClassName="text-gray-700"
+					>
+						Товары
+					</NavLink>
+					<NavLink
+						className="mx-4 cursor-pointer hover:text-gray-700"
+						exact
+						to="/stories"
+						activeClassName="text-gray-700"
+					>
 						Счастливые истории
-					</li>
+					</NavLink>
 				</ul>
 			</nav>
 		</header>
