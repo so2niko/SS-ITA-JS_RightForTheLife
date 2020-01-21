@@ -18,13 +18,13 @@ export function HappyStoriesList(props) {
     >
       { isStoriesDisplayed ? 'Hide Stories' : 'Show Stories' }
     </button>
-    {isStoriesDisplayed && happyStoriesData && (
-      <>
-        <h1>Истории</h1>
+    {/*isStoriesDisplayed && */happyStoriesData && (
+      <div className="container mx-auto">
+        <h1 className="uppercase mb-20 text-3xl font-bold">Истории</h1>
         {happyStoriesData.map( story =>
           <HappyStoriesListItem key={story.id} image={story.image} title={story.title} />
         )}
-      </>
+      </div>
     )
     }
   </div>
