@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
-import urgentSrc from "../../assets/urgent.png";
 
 export const Header = () => {
 	return (
@@ -57,12 +56,12 @@ export const Header = () => {
 						О нас
 					</NavLink>
 					<NavLink
-						className="mx-4 cursor-pointer hover:text-gray-700"
+						className="mx-4 cursor-pointer text-red-600 hover:text-red-700"
 						exact
 						to="/urgent"
-						activeClassName="text-gray-700"
+						activeClassName="text-red-700"
 					>
-						<img src={urgentSrc} alt='urgent' />
+						Срочная помощь
 					</NavLink>
 				</ul>
 			</nav>
