@@ -9,10 +9,13 @@ function App() {
 		<Router>
 			<Header />
 			<Switch>
-				<Route exact path="/" /*component={NewsPage}*/ />
+				<Route exact path="/" /*component={HomePage}*/ />
 				<Route exact path="/animals" component={AnimalsPage} />
-				<Route exact path="/supplies" /*component={SuppliesPage}*/ />
+				<Route exact path="/news" /*component={NewsPage}*/ />
 				<Route exact path="/stories" /*component={StoriesPage}*/ />
+				<Route exact path="/help" /*component={HelpPage}*/ />
+				<Route exact path="/about" /*component={AboutPage}*/ />
+				<Route exact path="/urgent" /*component={UrgentPage}*/ />
 			</Switch>
 			<Footer />
 		</Router>
