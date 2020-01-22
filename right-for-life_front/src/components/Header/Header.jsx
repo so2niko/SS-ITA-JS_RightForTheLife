@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { ReactComponent as Logo } from "../../assets/logo.svg";
+import logo from "../../assets/logo.jpg";
 
 export const Header = () => {
 	return (
@@ -8,12 +8,12 @@ export const Header = () => {
 			<nav>
 				<ul className="fixed flex justify-center items-center py-2 w-full bg-white shadow-md font-bold text-xl text-gray-600 z-50">
 					<NavLink
-						className="mx-4 cursor-pointer"
+						className="mx-2 cursor-pointer"
 						exact
 						to="/"
 						activeClassName="text-gray-700"
 					>
-						<Logo />
+						<img width="40px" src={logo} alt="logo" />
 					</NavLink>
 					<NavLink
 						className="mx-4 cursor-pointer hover:text-gray-700"
