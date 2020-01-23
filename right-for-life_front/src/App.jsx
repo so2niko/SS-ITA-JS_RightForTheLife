@@ -1,11 +1,12 @@
 import React from "react";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { AnimalsPage } from "./containers/AnimalsPage";
 import { NewsPage } from "./containers/NewsPage";
-import {HappyStoriesPage} from "./containers/HappyStoriesPage";
+import { HappyStoriesPage } from "./containers/HappyStoriesPage";
+import { ErrorIndicator } from "./components/ErrorIndicator";
 
 function App({ store }) {
 	return (
@@ -20,6 +21,12 @@ function App({ store }) {
 					<Route exact path="/help" /*component={HelpPage}*/ />
 					<Route exact path="/about" /*component={AboutPage}*/ />
 					<Route exact path="/urgent" /*component={UrgentPage}*/ />
+					<Route render={() => 
+						<ErrorIndicator 
+							message="Страница не найдена :("
+							renderAction={() => <Link to="/">Вернуться на главную</Link>}
+						/>} 
+					/>
 				</Switch>
 				<Footer />
 			</Router>
