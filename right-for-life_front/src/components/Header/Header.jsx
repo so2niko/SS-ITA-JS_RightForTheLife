@@ -58,7 +58,7 @@ export const Header = () => {
 					<NavLink
 						className="mx-4 cursor-pointer text-red-600 hover:text-red-700"
 						exact
-						to="/urgent"
+						to="/emergency"
 						activeClassName="text-red-700"
 					>
 						Срочная помощь
