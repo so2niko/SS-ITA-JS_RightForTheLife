@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './SuppliesTable.css';
-import SuppliesTableHeader from './../SuppliesTableHeader';
-import SuppliesTableRow from './../SuppliesTableRow';
+import SuppliesTableRow from '../SuppliesTableRow';
 
 export default class SuppliesTable extends Component {
   constructor() {
@@ -44,7 +43,14 @@ export default class SuppliesTable extends Component {
 
     return (
       <table className='table-fixed mx-auto mt-6'>
-        <SuppliesTableHeader />
+        <thead>
+          <tr className='text-2xl uppercase font-bold text-lightgray-700'>
+            <th className='px-4 py-2'>Товар</th>
+            <th className='px-4 py-2'>Тип</th>
+            <th className='px-4 py-2'>Кол-во</th>
+            <th className='px-4 py-2'>Инфо</th>
+          </tr>
+        </thead>
         <tbody>{tableBody}</tbody>
       </table>
     );
