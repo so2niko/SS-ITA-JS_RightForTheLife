@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { ArticlesList } from "../../components/NewsList";
+import { ArticlesList } from "../../components/ArticlesList";
 
 export const HappyStoriesPage = () => {
   const dataApi = "https://raw.githubusercontent.com/AlexeyKasaev3/softServe-academy/master/demo-3-data/news.json";

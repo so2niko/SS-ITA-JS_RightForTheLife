@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {ArticlesList} from "../../components/NewsList";
+import {ArticlesList} from "../../components/ArticlesList";
 
 export const NewsPage = () => {
   const dataApi = "https://raw.githubusercontent.com/protonaby/demo3-animal-shelter/master/db/news.json";
