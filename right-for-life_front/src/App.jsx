@@ -1,17 +1,28 @@
-import React, { Fragment } from "react";
+import React from "react";
+import { Provider } from "react-redux";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { AnimalsPage } from "./containers/AnimalsPage";
-import {HappyStoriesList} from "./containers/HappyStoriesList";
+import { NewsPage } from "./containers/NewsPage";
 
-function App() {
+function App({ store }) {
 	return (
-		<Fragment>
-			<Header />
-			<AnimalsPage />
-			<HappyStoriesList />
-			<Footer />
-		</Fragment>
+		<Provider store={store}>
+			<Router>
+				<Header />
+				<Switch>
+					<Route exact path="/" /*component={HomePage}*/ />
+					<Route exact path="/animals" component={AnimalsPage} />
+					<Route exact path="/news" component={NewsPage} />
+					<Route exact path="/stories" /*component={StoriesPage}*/ />
+					<Route exact path="/help" /*component={HelpPage}*/ />
+					<Route exact path="/about" /*component={AboutPage}*/ />
+					<Route exact path="/urgent" /*component={UrgentPage}*/ />
+				</Switch>
+				<Footer />
+			</Router>
+		</Provider>
 	);
 }
 
