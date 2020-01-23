@@ -1,1 +1,1 @@
-export { NewsList } from './NewsList';
+export { ArticlesList } from './ArticlesList';

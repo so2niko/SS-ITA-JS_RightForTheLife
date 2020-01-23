@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { AnimalsList } from "../../components/AnimalsList";
+import { AnimalsList } from "../../components/ArticleList";
 
 export const AnimalsPage = () => {
 	const dataApi =
