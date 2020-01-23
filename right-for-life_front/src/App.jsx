@@ -13,23 +13,21 @@ function App({ store }) {
 		<Provider store={store}>
 			<Router>
 				<Header />
-				<article className="container mx-auto">
-					<Switch>
-						<Route exact path="/" /*component={HomePage}*/ />
-						<Route exact path="/animals" component={AnimalsPage} />
-						<Route exact path="/news" component={NewsPage} />
-						<Route exact path="/stories" component={HappyStoriesPage} />
-						<Route exact path="/help" /*component={HelpPage}*/ />
-						<Route exact path="/about" /*component={AboutPage}*/ />
-						<Route exact path="/urgent" /*component={UrgentPage}*/ />
-						<Route render={() => 
-							<ErrorIndicator 
-								message="Страница не найдена :("
-								renderAction={() => <Link to="/">Вернуться на главную</Link>}
-							/>} 
-						/>
-					</Switch>
-				</article>
+				<Switch>
+					<Route exact path="/" /*component={HomePage}*/ />
+					<Route exact path="/animals" component={AnimalsPage} />
+					<Route exact path="/news" component={NewsPage} />
+					<Route exact path="/stories" component={HappyStoriesPage} />
+					<Route exact path="/help" /*component={HelpPage}*/ />
+					<Route exact path="/about" /*component={AboutPage}*/ />
+					<Route exact path="/urgent" /*component={UrgentPage}*/ />
+					<Route render={() => 
+						<ErrorIndicator 
+							message="Страница не найдена :("
+							renderAction={() => <Link to="/">Вернуться на главную</Link>}
+						/>} 
+					/>
+				</Switch>
 				<Footer />
 			</Router>
 		</Provider>
