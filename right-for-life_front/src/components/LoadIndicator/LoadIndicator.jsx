@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './LoadIndicator.css';
 
 export const LoadIndicator = ({ message }) => (
@@ -13,5 +14,9 @@ export const LoadIndicator = ({ message }) => (
 );
 
 LoadIndicator.defaultProps = {
-  message: 'Загрузка...'
-};  
+  message: 'Загрузка...',
+}; 
+
+LoadIndicator.propTypes = {
+  message: PropTypes.string,
+};

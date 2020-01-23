@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import dog from '../../assets/dog.png';
 
 export const ErrorIndicator = ({ message, renderAction }) => {
@@ -12,5 +13,10 @@ export const ErrorIndicator = ({ message, renderAction }) => {
 };
 
 ErrorIndicator.defaultProps = {
-  message: 'Ошибка...'
+  message: 'Ошибка!',
+};
+
+ErrorIndicator.propTypes = {
+  message: PropTypes.string,
+  renderAction: PropTypes.func,
 };
