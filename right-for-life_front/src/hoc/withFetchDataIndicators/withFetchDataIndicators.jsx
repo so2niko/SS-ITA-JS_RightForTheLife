@@ -30,7 +30,7 @@ const fetchData = (dataApi, setData, setError) => {
   setTimeout(() => {
     fetch(dataApi)
       .then(result => result.json())
-      .then(json => setData(json))
+      .then(data => setData(data))
       .catch(error => setError(error));
   }, 1000);
 };
