@@ -12,7 +12,7 @@ export const HappyStoriesPage = () => {
   }, []);
 
   return (
-    <div className="bg-lightgray-100 min-h-screen pt-16 pb-2">
+    <div className="bg-lightgray-100 min-h-screen pb-8">
       <ArticlesList articles={happyStories} listTitle="Cчастливые истории"/>
     </div>
   );

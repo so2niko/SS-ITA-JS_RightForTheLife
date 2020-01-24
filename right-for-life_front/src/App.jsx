@@ -9,6 +9,7 @@ import { HappyStoriesPage } from "./containers/HappyStoriesPage";
 import { EmergencyHelpPage } from "./containers/EmergencyHelpPage"
 import { ErrorIndicator } from "./components/ErrorIndicator";
 import {SiteContentContainer} from "./components/SiteContentContainer";
+import { HomePage } from "./containers/HomePage";
 
 function App({ store }) {
 	return (
@@ -17,7 +18,7 @@ function App({ store }) {
 				<Header />
 					<SiteContentContainer>
 						<Switch>
-							<Route exact path="/" /*component={HomePage}*/ />
+							<Route exact path="/" component={HomePage} />
 							<Route exact path="/animals" component={AnimalsPage} />
 							<Route exact path="/news" component={NewsPage} />
 							<Route exact path="/stories" component={HappyStoriesPage} />
