@@ -6,6 +6,7 @@ import { Footer } from "./components/Footer";
 import { AnimalsPage } from "./containers/AnimalsPage";
 import { NewsPage } from "./containers/NewsPage";
 import { HappyStoriesPage } from "./containers/HappyStoriesPage";
+import { EmergencyHelpPage } from "./containers/EmergencyHelpPage"
 import { ErrorIndicator } from "./components/ErrorIndicator";
 
 function App({ store }) {
@@ -20,7 +21,7 @@ function App({ store }) {
 					<Route exact path="/stories" component={HappyStoriesPage} />
 					<Route exact path="/help" /*component={HelpPage}*/ />
 					<Route exact path="/about" /*component={AboutPage}*/ />
-					<Route exact path="/urgent" /*component={UrgentPage}*/ />
+					<Route exact path="/emergency" component={EmergencyHelpPage} />
 					<Route render={() => 
 						<ErrorIndicator 
 							message="Страница не найдена :("
