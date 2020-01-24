@@ -12,7 +12,7 @@ export const NewsPage = () => {
   }, []);
 
   return (
-    <div className="bg-lightgray-100 min-h-screen pb-8">
+    <div className="bg-lightgray-100">
       <ArticlesList articles={news} listTitle="Новости"/>
     </div>
   );
