@@ -8,6 +8,7 @@ import { NewsPage } from "./containers/NewsPage";
 import { HappyStoriesPage } from "./containers/HappyStoriesPage";
 import { EmergencyHelpPage } from "./containers/EmergencyHelpPage"
 import { ErrorIndicator } from "./components/ErrorIndicator";
+import { DonatePage } from "./containers/DonatePage";
 
 function App({ store }) {
 	return (
@@ -19,14 +20,14 @@ function App({ store }) {
 					<Route exact path="/animals" component={AnimalsPage} />
 					<Route exact path="/news" component={NewsPage} />
 					<Route exact path="/stories" component={HappyStoriesPage} />
-					<Route exact path="/help" /*component={HelpPage}*/ />
+					<Route exact path="/help" component={DonatePage} />
 					<Route exact path="/about" /*component={AboutPage}*/ />
 					<Route exact path="/emergency" component={EmergencyHelpPage} />
-					<Route render={() => 
-						<ErrorIndicator 
+					<Route render={() =>
+						<ErrorIndicator
 							message="Страница не найдена :("
 							renderAction={() => <Link to="/">Вернуться на главную</Link>}
-						/>} 
+						/>}
 					/>
 				</Switch>
 				<Footer />
