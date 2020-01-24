@@ -4,9 +4,7 @@ import { withFetchDataIndicators } from "../../hoc/withFetchDataIndicators";
 
 const HappyStoriesPage = ({ data }) => {
   return (
-    <div className="bg-lightgray-100 min-h-screen pt-16 pb-2">
       <ArticlesList articles={data} listTitle="Cчастливые истории"/>
-    </div>
   );
 };
 
