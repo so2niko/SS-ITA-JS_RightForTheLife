@@ -12,9 +12,9 @@ export const ArticleItem = ({article}) => {
           style={{backgroundImage: "url(" + photo + ")"}}
         />
       <div className="z-40 w-19/20 bg-white text-lightgray-700 shadow-xl rounded-xl self-center -mt-10 px-5
-                      pt-5 pb-20 overflow-hidden relative">
+                      pt-5 pb-20 overflow-hidden relative xl:h-56">
         <p className="font-medium mb-2">{new Date(Number(date)).toLocaleDateString()}</p>
-        <h2 className="uppercase mb-2 font-bold">{title.slice(0, 80)}{title.length >= 80 ? '...' : ''}</h2>
+        <h2 className="uppercase mb-2 font-bold ">{title.slice(0, 80)}{title.length >= 80 ? '...' : ''}</h2>
         <p className="mt-b font-size-sm">{text.slice(0, 120)}...</p>
           <Link
             to={`${currentURL}/${id}`}
