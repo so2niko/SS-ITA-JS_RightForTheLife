@@ -1,0 +1,7 @@
+{
+  "env": {
+    "DB_PASS": "root",
+    "PORT": 4000,
+    "DB_NAME": "animal-for-life"
+  }
+}

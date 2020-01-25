@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "initDb": "node ./utils/initDB.js"
   },
@@ -15,6 +15,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongodb": "^3.5.1",
-    "mongoose": "^5.8.9"
+    "mongoose": "^5.8.9",
+    "morgan": "^1.9.1"
   }
 }
