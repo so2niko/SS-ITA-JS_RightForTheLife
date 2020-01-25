@@ -10,6 +10,8 @@ import { EmergencyHelpPage } from "./containers/EmergencyHelpPage"
 import { ErrorIndicator } from "./components/ErrorIndicator";
 import {SiteContentContainer} from "./components/SiteContentContainer";
 import { HomePage } from "./containers/HomePage";
+import { AboutPage } from './containers/AboutPage';
+
 
 function App({ store }) {
 	return (
@@ -23,7 +25,7 @@ function App({ store }) {
 							<Route exact path="/news" component={NewsPage} />
 							<Route exact path="/stories" component={HappyStoriesPage} />
 							<Route exact path="/help" /*component={HelpPage}*/ />
-							<Route exact path="/about" /*component={AboutPage}*/ />
+							<Route exact path="/about" component={AboutPage} />
 							<Route exact path="/emergency" component={EmergencyHelpPage} />
 							<Route render={() =>
 								<ErrorIndicator
