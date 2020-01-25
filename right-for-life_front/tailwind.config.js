@@ -158,6 +158,11 @@ module.exports = {
       '48': '12rem',
       '56': '14rem',
       '64': '16rem',
+<<<<<<< Updated upstream
+=======
+      '72': '18rem',
+      '80': '20rem',
+>>>>>>> Stashed changes
     },
     backgroundColor: theme => theme('colors'),
     backgroundPosition: {
