@@ -2,8 +2,10 @@ const dbName = 'right-for-life';
 const dbOptions = {
   useUnifiedTopology: true,
   useNewUrlParser: true,
+  dbName: dbName,
 };
 
+module.exports.dbName = dbName;
 module.exports.dbURL = `mongodb://localhost:27017/${dbName}`;
 module.exports.animalsCollectionName = 'animals';
 module.exports.serverPort = 4000;

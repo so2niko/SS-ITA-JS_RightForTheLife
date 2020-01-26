@@ -1,9 +1,4 @@
-const dbUrl = require('./configs.js').dbURL;
-console.log('wip on init script');
-
-const MongoClient = require('mongodb').MongoClient;
-
-const db = new MongoClient(dbUrl);
-if (db) {
-  console.log('db exists');
-}
+require('../json-db/init/read-animals.js');
+require('../json-db/init/read-happy-stories.js');
+require('../json-db/init/read-news.js');
+require('../json-db/init/read-suppliers.js');

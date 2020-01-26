@@ -10,7 +10,23 @@ router.get('/', (req, res, next) => {
     .then(doc => {
       res.status(200).json(doc);
     });
-  // res.status(200).json({ message: 'animals GET' });
+});
+
+router.get('/:animalID', (req, res, next) => {
+  Animal.findById(new mongoose.Types.ObjectId(req.params.animalID))
+    .exec()
+    .then(doc => {
+      if (doc)
+        res.status(200).json(doc);
+      else
+        throw { status: 400, message: 'not found' };
+    })
+    .catch(err => {
+      if (err.status === 400)
+        res.status(400).json(err);
+      else
+        res.status(500).json(err);
+    });
 });
 
 router.post('/', (req, res, next) => {
@@ -20,11 +36,13 @@ router.post('/', (req, res, next) => {
     price: req.body.price,
   };
   const newAnimal = new Animal(animal);
-  newAnimal.save().then(result => {
-    console.log(result);
-  }).catch(err => {
-    console.log(err);
-  });
+  newAnimal.save()
+    .then(result => {
+      console.log(result);
+    })
+    .catch(err => {
+      console.log(err);
+    });
   res.status(200).json({ message: 'animals POST', animal });
 
 });
