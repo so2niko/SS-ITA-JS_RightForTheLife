@@ -28,10 +28,6 @@ export const withFetchDataIndicators = (WrappedComponent, api) => (props) => {
   );
 
   if (error) return <ErrorIndicator message="Упс... Ошибка!" renderAction={() => action} />
-  if (!data) return <LoadIndicator message="Загружаем данные..." />;
-  if (data) return (
-    <div className="animated fadeIn faster">
-      <WrappedComponent {...props} data={data} />
-    </div>
-  );
+  if (!data) return <LoadIndicator message="Загружаем данные..." />
+  if (data) return <WrappedComponent {...props} data={data} />
 };
