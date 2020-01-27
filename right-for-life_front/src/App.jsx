@@ -24,6 +24,7 @@ function App({ store }) {
 							<Route exact path="/animals" component={AnimalsPage} />
 							<Route exact path="/news" component={NewsPage} />
 							<Route exact path="/stories" component={HappyStoriesPage} />
+              <Route exact path="/stories/page/:requestedPage" component={HappyStoriesPage} />
 							<Route exact path="/help" /*component={HelpPage}*/ />
 							<Route exact path="/about" component={AboutPage} />
 							<Route exact path="/emergency" component={EmergencyHelpPage} />

@@ -2,7 +2,7 @@ import React from "react";
 import cn from 'classnames';
 import { Link, useLocation } from 'react-router-dom';
 
-export function Pagination ({classNames, currentPageNum, totalPagesQuantity, pageChangeHandler, linkText = 'page-'}) {
+export function Pagination ({classNames, currentPageNum, totalPagesQuantity, pageChangeHandler}) {
 
   const paginationContainerClasses = cn(
     'flex flex-wrap justify-center select-none',
@@ -28,7 +28,6 @@ export function Pagination ({classNames, currentPageNum, totalPagesQuantity, pag
           key={1}
           classNames={pageButtonClasses}
           pageNum={1}
-          linkText={linkText}
           isActive={false}
           paginationElementClickHandler={handlePaginationElementClick}
         />
@@ -47,7 +46,6 @@ export function Pagination ({classNames, currentPageNum, totalPagesQuantity, pag
           key={i}
           classNames={pageButtonClasses}
           pageNum={i}
-          linkText={linkText}
           isActive={currentPageNum === i}
           paginationElementClickHandler={handlePaginationElementClick}
         />
@@ -60,7 +58,6 @@ export function Pagination ({classNames, currentPageNum, totalPagesQuantity, pag
         <PaginationButton
           key={totalPagesQuantity}
           classNames={pageButtonClasses}
-          linkText={linkText}
           pageNum={totalPagesQuantity}
           isActive={false}
           paginationElementClickHandler={handlePaginationElementClick}
@@ -73,13 +70,12 @@ export function Pagination ({classNames, currentPageNum, totalPagesQuantity, pag
 
   return (
     <>
-      {totalPagesQuantity > 2 && (
+      {totalPagesQuantity >= 2 && (
         <div className={paginationContainerClasses}>
           {currentPageNum !== 1 && (
             <PaginationStepButton
               classNames={pageButtonClasses}
               buttonType="backward"
-              linkText={linkText}
               currentPageNum={currentPageNum}
               paginationElementClickHandler={handlePaginationElementClick}
             />
@@ -89,7 +85,6 @@ export function Pagination ({classNames, currentPageNum, totalPagesQuantity, pag
             <PaginationStepButton
               classNames={pageButtonClasses}
               buttonType="forward"
-              linkText={linkText}
               currentPageNum={currentPageNum}
               paginationElementClickHandler={handlePaginationElementClick}
             />
@@ -101,12 +96,11 @@ export function Pagination ({classNames, currentPageNum, totalPagesQuantity, pag
 }
 
 
-function PaginationButton({classNames, pageNum, isActive, paginationElementClickHandler, linkText}) {
-  const { pathname: currentURL } = useLocation();
+function PaginationButton({classNames, pageNum, isActive, paginationElementClickHandler}) {
 
   return (
     <Link
-      to={`${currentURL}/${linkText}${pageNum}`}
+      to={`page/${pageNum}`}
       className={cn(classNames, {'text-white bg-blue-500 cursor-default': isActive})}
       onClick={isActive ? (event)=>{event.preventDefault()} : (event) => paginationElementClickHandler(event, pageNum)}
     >
@@ -116,12 +110,11 @@ function PaginationButton({classNames, pageNum, isActive, paginationElementClick
 }
 
 
-function PaginationStepButton({classNames, currentPageNum, buttonType, paginationElementClickHandler, linkText}) {
-  const { pathname: currentURL } = useLocation();
+function PaginationStepButton({classNames, currentPageNum, buttonType, paginationElementClickHandler}) {
 
   return (
     <Link
-      to={`${currentURL}/${linkText}${buttonType === 'forward' ? currentPageNum + 1 : currentPageNum - 1}`}
+      to={`page/${buttonType === 'forward' ? currentPageNum + 1 : currentPageNum - 1}`}
       className={classNames}
       onClick={(event) => paginationElementClickHandler(event, buttonType === 'forward' ? currentPageNum + 1 : currentPageNum - 1)}
     >
