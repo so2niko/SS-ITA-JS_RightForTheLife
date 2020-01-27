@@ -1,0 +1,1 @@
+export { withFetchDataIndicators } from './withFetchDataIndicators';

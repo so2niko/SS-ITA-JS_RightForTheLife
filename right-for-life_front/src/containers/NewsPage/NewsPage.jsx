@@ -1,21 +1,14 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import {ArticlesList} from "../../components/ArticlesList";
-import {Pagination} from "../../components/Pagination";
+import { withFetchDataIndicators } from "../../hoc/withFetchDataIndicators";
 
-export const NewsPage = () => {
-  const dataApi = "https://raw.githubusercontent.com/protonaby/demo3-animal-shelter/master/db/news.json";
-  const [news, setNews] = useState([]);
-
-  useEffect(() => {
-    fetch(dataApi)
-      .then(data => data.json())
-      .then(list => setNews(list));
-  }, []);
-
+const NewsPage = ({ data }) => {
   return (
-    <div className="bg-lightgray-100 min-h-screen pt-16 pb-2">
-      <ArticlesList articles={news} listTitle="Новости"/>
-      <Pagination currentPageNum={13} totalPagesQuantity={50} pageChangeHandler={(d) => console.log(d)} />
-    </div>
+      <ArticlesList articles={data} listTitle="Новости"/>
   );
 };
+
+const dataApi = 'https://raw.githubusercontent.com/protonaby/demo3-animal-shelter/master/db/news.json';
+const wrappedComponent = withFetchDataIndicators(NewsPage, dataApi);
+
+export { wrappedComponent as NewsPage };
