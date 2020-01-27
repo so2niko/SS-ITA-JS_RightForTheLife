@@ -5,8 +5,8 @@ import {Link} from "react-router-dom";
 
 export const withPagination = (WrappedComponent) => (props) => {
   const articlesPerPage = 10;
-  console.log(props)
-  const requestedPageNum = extractAndCheckRequestedPage(props.match, props.data, articlesPerPage);
+
+  const requestedPageNum = extractAndCheckRequestedPage(props.data, articlesPerPage, props.location);
   if(!requestedPageNum) {
     return <ErrorIndicator
       message="Нет такой страницы"
@@ -15,11 +15,16 @@ export const withPagination = (WrappedComponent) => (props) => {
   }
 
   function handlePaginationPageChange(nextPage) {
-    props.history.push(`/stories/page/${nextPage}`);
+    window.scrollTo(0, 0)
+    props.history.push(`${props.location.pathname}?page=${nextPage}`);
   }
 
   return <>
-    <WrappedComponent {...props} />
+    <WrappedComponent
+      {...props}
+      data = {trimDataForCurrentPage(props.data, requestedPageNum, articlesPerPage)}
+      name = {WrappedComponent.name}
+    />
     <Pagination
       classNames="mb-16"
       currentPageNum={requestedPageNum}
@@ -28,11 +33,14 @@ export const withPagination = (WrappedComponent) => (props) => {
     />
   </>
 
-  function extractAndCheckRequestedPage(match, articles, articlesPerPage) {
-    if(!match.params.requestedPage) {
+  function extractAndCheckRequestedPage(articles, articlesPerPage, location) {
+    const params = new URLSearchParams(location.search);
+    const requestedPage = params.get("page");
+
+    if(!requestedPage) {
       return 1
     }
-    const requestedPageNum = Number(match.params.requestedPage);
+    const requestedPageNum = Number(requestedPage);
     if(isNaN(requestedPageNum)) {
       return false;
     }
@@ -40,5 +48,11 @@ export const withPagination = (WrappedComponent) => (props) => {
       return false
     }
     return requestedPageNum
+  }
+
+  function trimDataForCurrentPage(data, requestedPageNum, articlesPerPage) {
+    const start = requestedPageNum * articlesPerPage - articlesPerPage;
+    const end = requestedPageNum * articlesPerPage;
+    return data.slice(start, end);
   }
 }
