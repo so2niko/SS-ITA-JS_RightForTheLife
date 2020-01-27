@@ -2,7 +2,7 @@ import React from 'react';
 import { LoadIndicator } from '../../components/LoadIndicator';
 
 export const HomePage = () => (
-  <article className="flex flex-col lg:flex-row flex-1">
+  <article className="flex flex-col lg:flex-row flex-1 pb-8">
     <section className="w-full lg:w-2/3 p-5">
       <div className="w-full h-72 flex items-center justify-center font-bold text-3xl rounded-xl text-lightgray-500 bg-lightgray-200">
         <LoadIndicator message="Печатаем наши фото..." />
