@@ -4,7 +4,7 @@ import { withFetchDataIndicators } from "../../hoc/withFetchDataIndicators";
 
 const AnimalsPage = ({ data }) => {
 	return (
-		<div className="animals-page bg-lightgray-100 min-h-screen pt-16 pb-2">
+		<div className="animals-page pb-8">
 			<AnimalsList animals={data} />
 		</div>
 	);

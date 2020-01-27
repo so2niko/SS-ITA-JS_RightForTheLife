@@ -3,7 +3,7 @@ import logo from "../../assets/logo.jpg";
 
 export const Footer = () => {
 	return (
-		<footer>
+		<footer className="flex-shrink-0">
 			<ul className="flex justify-center items-center py-2 bg-white shadow-md font-bold text-xl text-gray-600">
 				<li className="ml-24">0932350370</li>
 				<li className="mx-6">
