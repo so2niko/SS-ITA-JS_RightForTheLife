@@ -10,6 +10,6 @@ const HappyStoriesPage = ({ data }) => {
 };
 
 const dataApi = 'https://raw.githubusercontent.com/AlexeyKasaev3/softServe-academy/master/demo-3-data/news.json';
-const wrappedComponent = withFetchDataIndicators(withPagination(HappyStoriesPage), dataApi);
+const wrappedComponent = withFetchDataIndicators(withPagination(HappyStoriesPage, 10), dataApi, HappyStoriesPage.name);
 
 export { wrappedComponent as HappyStoriesPage };

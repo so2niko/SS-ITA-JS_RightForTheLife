@@ -10,6 +10,6 @@ const EmergencyHelpPage = ({ data }) => {
 };
 
 const dataApi = "https://alex-boklag.github.io/SSA-Demo-AnimalShelter/db/emergency.json";
-const wrappedComponent = withFetchDataIndicators(withPagination(EmergencyHelpPage), dataApi);
+const wrappedComponent = withFetchDataIndicators(withPagination(EmergencyHelpPage, 10), dataApi, EmergencyHelpPage.name);
 
 export { wrappedComponent as EmergencyHelpPage }

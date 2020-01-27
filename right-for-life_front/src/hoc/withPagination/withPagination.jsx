@@ -3,8 +3,7 @@ import {Pagination} from "../../components/Pagination";
 import {ErrorIndicator} from "../../components/ErrorIndicator";
 import {Link} from "react-router-dom";
 
-export const withPagination = (WrappedComponent) => (props) => {
-  const articlesPerPage = 10;
+export const withPagination = (WrappedComponent, articlesPerPage) => (props) => {
 
   const requestedPageNum = extractAndCheckRequestedPage(props.data, articlesPerPage, props.location);
   if(!requestedPageNum) {
