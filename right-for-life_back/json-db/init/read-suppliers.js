@@ -1,1 +1,0 @@
-console.log('List of supplies TBD later');

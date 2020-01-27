@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 
-const Animal = require('../models/animalModel.js');
+const Animal = require('../models/AnimalModel.js');
 
 router.get('/', (req, res, next) => {
   Animal.find()

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const animalSchema = new mongoose.Schema(
+const AnimalSchema = new mongoose.Schema(
   {
     _id: mongoose.Schema.Types.ObjectId,
     name: String,
@@ -11,5 +11,4 @@ const animalSchema = new mongoose.Schema(
     description: String,
   });
 
-// module.exports = mongoose.model('Animal', animalSchema);
-module.exports = animalSchema;
+module.exports = AnimalSchema;

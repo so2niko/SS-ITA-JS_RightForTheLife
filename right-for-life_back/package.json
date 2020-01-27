@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "initDb": "node ./utils/initDB.js"
+    "initDb": "node ./utils/initDB.js root_compass root_admin"
   },
   "author": "",
   "license": "ISC",
