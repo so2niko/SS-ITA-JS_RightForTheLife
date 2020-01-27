@@ -13,7 +13,7 @@ setTimeout(() => {
   require('../json-db/init/read-happy-stories.js');
   require('../json-db/init/read-news.js');
   require('../json-db/init/read-supplies.js');
+  console.log('---init finished---');
 }, 3000);
 
 mongoose.connection.close();
-console.log('---init finished---');
