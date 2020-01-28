@@ -1,0 +1,79 @@
+.floating-button button:focus {
+  outline:0;
+}
+
+.floating-button {
+  transition: background-color .2s;
+}
+
+.floating-button__extend-1-enter {
+  transform: translate(0, -70px);
+}
+
+.floating-button__extend-1-enter.floating-button__extend-1-enter-active {
+  transform: translate(0);
+  transition:  250ms ease-in;
+}
+
+.floating-button__extend-1-leave {
+  transform: translate(0);
+}
+
+.floating-button__extend-1-leave.floating-button__extend-1-leave-active {
+  transform: translate(0, -70px);
+  transition:  250ms ease-in;
+}
+
+.floating-button__extend-2-enter {
+  transform: translate(0, -140px);
+}
+
+.floating-button__extend-2-enter.floating-button__extend-2-enter-active {
+  transform: translate(0);
+  transition:  250ms ease-in;
+}
+
+.floating-button__extend-2-leave {
+  transform: translate(0);
+}
+
+.floating-button__extend-2-leave.floating-button__extend-2-leave-active {
+  transform: translate(0, -140px);
+  transition:  250ms ease-in;
+}
+
+.floating-button__extend-3-enter {
+  transform: translate(0, -210px);
+}
+
+.floating-button__extend-3-enter.floating-button__extend-3-enter-active {
+  transform: translate(0);
+  transition:  250ms ease-in;
+}
+
+.floating-button__extend-3-leave {
+  transform: translate(0);
+}
+
+.floating-button__extend-3-leave.floating-button__extend-3-leave-active {
+  transform: translate(0, -210px);
+  transition:  250ms ease-in;
+}
+
+.floating-button__extend-4-enter {
+  transform: translate(0, -280px);
+}
+
+.floating-button__extend-4-enter.floating-button__extend-4-enter-active {
+  transform: translate(0);
+  transition:  250ms ease-in;
+}
+
+.floating-button__extend-4-leave {
+  transform: translate(0);
+}
+
+.floating-button__extend-4-leave.floating-button__extend-4-leave-active {
+  transform: translate(0, -280px);
+  transition:  250ms ease-in;
+}
