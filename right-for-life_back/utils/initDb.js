@@ -13,6 +13,7 @@ setTimeout(() => {
   require('../json-db/init/read-happy-stories.js');
   require('../json-db/init/read-news.js');
   require('../json-db/init/read-supplies.js');
+  require('../json-db/init/read-about.js');
   console.log('---init finished---');
 }, 3000);
 
