@@ -1,12 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { NEWS } from '../../rootConstants';
-import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
 
-const ArticlesListWidget = ({ data }) => {
+export const ArticlesListWidget = ({ data }) => {
   return (
     <article className="h-full flex flex-col justify-between rounded-xl text-lightgray-700">
-      { data.reverse().slice(0, 3).map(item => <ArticlesListWidgetItem key={item.id} data={item} />) }
+      { data.slice(0, 3).map(item => <ArticlesListWidgetItem key={item.id} data={item} />) }
       <div className="w-full flex justify-center">
         <Link 
           to="/news" 
@@ -34,8 +32,3 @@ const ArticlesListWidgetItem = ({ data: { id, title, photo } }) => (
     </section>
   </Link>
 );
-
-const dataApi = 'https://raw.githubusercontent.com/protonaby/demo3-animal-shelter/master/db/news.json';
-const wrappedComponent = withFetchDataIndicators(ArticlesListWidget, NEWS, dataApi);
-
-export { wrappedComponent as ArticlesListWidget };
