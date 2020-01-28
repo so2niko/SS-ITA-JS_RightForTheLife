@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'; 
+import PropTypes from 'prop-types';
 import { requestData } from './actions';
 import { ErrorIndicator } from '../../components/ErrorIndicator';
 import { LoadIndicator } from '../../components/LoadIndicator';
 
-export const withFetchDataIndicators = (WrappedComponent, api) => (props) => {
-  const { name } = WrappedComponent;
+export const withFetchDataIndicators = (WrappedComponent, dataName, dataApi) => (props) => {
+  const name = dataName;
+  const api = dataApi;
   const dispatch = useDispatch();
   let { error, data } = useSelector(({ fetchDataReducer }) => ({ ...fetchDataReducer }));
 
@@ -31,3 +33,9 @@ export const withFetchDataIndicators = (WrappedComponent, api) => (props) => {
   if (!data) return <LoadIndicator message="Загружаем данные..." />
   if (data) return <WrappedComponent {...props} data={data} />
 };
+
+withFetchDataIndicators.propTypes = {
+  WrappedComponent: PropTypes.func.isRequired,
+  dataName: PropTypes.string.isRequired,
+  dataApi: PropTypes.string.isRequired,
+}
