@@ -7,7 +7,7 @@ export const ArticlesListWidget = ({ data, url }) => {
       { data.reverse().slice(0, 3).map(item => <ArticlesListWidgetItem key={item.id} data={item} url={url} />) }
       <div className="w-full flex justify-center">
         <Link 
-          to="/news" 
+          to={`/${url}`} 
           className="relative z-10 mt-1 p-2 px-5 bg-white shadow-xl rounded-xl hover:bg-green-300 hover:text-green-700">
           Больше новостей
         </Link>
