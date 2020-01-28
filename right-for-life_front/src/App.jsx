@@ -14,11 +14,13 @@ import { HomePage } from "./containers/HomePage";
 import { AboutPage } from './containers/AboutPage';
 import { DonatePage } from "./containers/DonatePage";
 import {NewsPage} from "./containers/NewsPage";
+import {ScrollToTop} from "./components/ScrollToTop";
 
 function App({ store }) {
 	return (
 		<Provider store={store}>
 			<Router>
+				<ScrollToTop />
 				<Header />
 					<SiteContentContainer>
 						<Switch>
