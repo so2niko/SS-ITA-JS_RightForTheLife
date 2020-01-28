@@ -8,16 +8,9 @@ export const Article = ({article}) => {
   return (
     <article>
       <div
-        className="h-78 rounded-b-xl bg-cover shadow-md bg-center relative"
+        className="h-78 rounded-b-xl bg-cover shadow-md bg-center"
         style={{backgroundImage: "url(" + photo + ")"}}
       >
-        <Link
-          to={`${currentURL.slice(0, currentURL.lastIndexOf('/'))}`}
-          className="block rounded-full h-12 w-12 flex items-center justify-center bg-white absolute"
-          style={{top: "20px", left: "20px"}}
-        >
-          <i className="fa fa-arrow-left" style={{'fontSize': '20px', color: 'gray'}} />
-        </Link>
         <BackAndShareButtons />
       </div>
       <h2 className="uppercase font-extrabold text-xl z-20 relative bg-white text-lightgray-700
