@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { NEWS } from '../../rootConstants';
-import { withPagination } from "../../hoc/withPagination";
 import { withFetchDataIndicators } from "../../hoc/withFetchDataIndicators";
 import { Article } from "../../components/Article";
 import { ErrorIndicator } from "../../components/ErrorIndicator";
@@ -24,6 +23,6 @@ const NewsPage = ({ data }) => {
 };
 
 const dataApi = 'https://raw.githubusercontent.com/protonaby/demo3-animal-shelter/master/db/news.json';
-const wrappedComponent = withFetchDataIndicators(withPagination(NewsPage, 10), NEWS, dataApi);
+const wrappedComponent = withFetchDataIndicators(NewsPage, NEWS, dataApi);
 
 export {wrappedComponent as NewsPage};
