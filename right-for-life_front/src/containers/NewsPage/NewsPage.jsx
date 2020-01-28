@@ -16,8 +16,8 @@ const NewsPage = ({ data }) => {
     />;
   
   return (
-    <div className="flex flex-wrap justify-center">
-      <Article article={article}/>
+    <div className="-mt-10 max-w-4xl mx-auto mb-20">
+      <Article article={article} />
     </div>
   );
 };
