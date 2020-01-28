@@ -18,7 +18,7 @@ const SingleEmergencyHelpPage = ({ data }) => {
     />;
 
   return (
-    <div className="flex flex-wrap justify-center">
+    <div className="-mt-10 max-w-4xl mx-auto mb-20">
       <Article article={article} />
     </div>
   );
