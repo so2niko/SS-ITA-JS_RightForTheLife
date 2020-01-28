@@ -1,9 +1,11 @@
 import React from "react";
 import Slider from "react-slick";
+import { HAPPY_STORIES } from '../../rootConstants'; 
+import { withFetchDataIndicators } from "../../hoc/withFetchDataIndicators";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-export const ImageCarousel = ({ data }) => {
+const ImageCarousel = ({ data }) => {
     const sliderSettings = {
         className: "w-full h-80",
         dots: true,
@@ -28,3 +30,8 @@ export const ImageCarousel = ({ data }) => {
         </div>
     )
 };
+
+const dataApi = 'https://raw.githubusercontent.com/AlexeyKasaev3/softServe-academy/master/demo-3-data/news.json';
+const wrappedComponent = withFetchDataIndicators(ImageCarousel, HAPPY_STORIES, dataApi);
+
+export { wrappedComponent as ImageCarousel };
