@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const fs = require('fs');
 const dbOptions = require('../../utils/configs.js').dbOptions;
 const connectionURI = require('../../utils/configs.js').connectionURI;
-const AnimalSchema = require('../../models/AnimalModel.js');
+const AnimalSchema = require('../../models/AnimalSchema.js');
 
 initAnimals();
 

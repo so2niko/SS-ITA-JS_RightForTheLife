@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { SUPPLIES } from '../../rootConstants';
+import { BE_URL } from '../../helpers/configs.js';
 import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
+import { SUPPLIES } from '../../rootConstants';
 import SuppliesTableRow from '../SuppliesTableRow';
 import './SuppliesTable.css';
 
@@ -17,7 +18,7 @@ class SuppliesTable extends Component {
         return 0;
       })
       .map(el => {
-        return <SuppliesTableRow itemData={el} key={el.id} />;
+        return <SuppliesTableRow itemData={el} key={el._id} />;
       });
   }
 
@@ -42,6 +43,6 @@ class SuppliesTable extends Component {
   }
 }
 
-const dataApi = 'https://topvv.github.io/SoftServe-IT-Academy/Demo/Demo3/supplies.json';
+const dataApi = `${BE_URL}/supplies`;
 
 export default withFetchDataIndicators(SuppliesTable, SUPPLIES, dataApi);

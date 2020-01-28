@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const fs = require('fs');
 const dbOptions = require('../../utils/configs.js').dbOptions;
 const connectionURI = require('../../utils/configs.js').connectionURI;
-const SupplySchema = require('../../models/SupplyModel.js');
+const SupplySchema = require('../../models/SupplySchema.js');
 
 initSupplies();
 

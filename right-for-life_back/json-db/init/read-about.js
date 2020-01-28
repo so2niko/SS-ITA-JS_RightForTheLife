@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const fs = require('fs');
 const dbOptions = require('../../utils/configs.js').dbOptions;
 const connectionURI = require('../../utils/configs.js').connectionURI;
-const AboutSchema = require('../../models/AboutModel.js');
+const AboutSchema = require('../../models/AboutSchema.js');
 
 initAbout();
 
@@ -17,12 +17,12 @@ function getConnection() {
 function initAbout() {
   const connection = getConnection();
   const AboutModel = connection.model('About', AboutSchema);
-  AboutModel.insertMany(extractedAnimals(AboutModel))
+  extractedAnimals(AboutModel).save()
     .then(() => {
-      console.log('Animals collection created');
+      console.log('About collection created');
       connection.close();
     })
-    .catch(err => console.log('save error\n' + err));
+    .catch(err => console.log('About save error\n' + err));
 }
 
 function extractedAnimals(About) {

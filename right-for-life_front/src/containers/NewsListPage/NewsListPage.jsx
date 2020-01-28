@@ -1,8 +1,9 @@
-import React from "react";
-import {ArticlesList} from "../../components/ArticlesList";
-import { withFetchDataIndicators } from "../../hoc/withFetchDataIndicators";
-import {NEWS} from "../../rootConstants";
-import {withPagination} from "../../hoc/withPagination";
+import React from 'react';
+import { ArticlesList } from '../../components/ArticlesList';
+import { BE_URL } from '../../helpers/configs.js';
+import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
+import { withPagination } from '../../hoc/withPagination';
+import { NEWS } from '../../rootConstants';
 
 const NewsListPage = ({ data }) => {
   return (
@@ -10,7 +11,7 @@ const NewsListPage = ({ data }) => {
   );
 };
 
-const dataApi = 'https://raw.githubusercontent.com/protonaby/demo3-animal-shelter/master/db/news.json';
+const dataApi = `${BE_URL}/news`;
 const wrappedComponent = withFetchDataIndicators(withPagination(NewsListPage, 10), NEWS, dataApi);
 
 export { wrappedComponent as NewsListPage};

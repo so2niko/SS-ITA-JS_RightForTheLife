@@ -1,8 +1,9 @@
-import React from "react";
+import React from 'react';
+import { AnimalsList } from '../../components/AnimalsList';
+import { BE_URL } from '../../helpers/configs.js';
+import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
+import { withPagination } from '../../hoc/withPagination';
 import { ANIMALS } from '../../rootConstants';
-import { AnimalsList } from "../../components/AnimalsList";
-import { withFetchDataIndicators } from "../../hoc/withFetchDataIndicators";
-import {withPagination} from "../../hoc/withPagination";
 
 const AnimalsPage = ({ data }) => {
 	return (
@@ -12,7 +13,7 @@ const AnimalsPage = ({ data }) => {
 	);
 };
 
-const dataApi = 'https://alex-boklag.github.io/SSA-Demo-AnimalShelter/db/animals.json';
+const dataApi = `${BE_URL}/animals`;
 const wrappedComponent = withFetchDataIndicators(withPagination(AnimalsPage, 8), ANIMALS, dataApi);
 
 export { wrappedComponent as AnimalsPage };

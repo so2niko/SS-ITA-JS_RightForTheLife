@@ -14,6 +14,7 @@ setTimeout(() => {
   require('../json-db/init/read-news.js');
   require('../json-db/init/read-supplies.js');
   require('../json-db/init/read-about.js');
+  require('../json-db/init/read-donate.js');
   console.log('---init finished---');
 }, 3000);
 

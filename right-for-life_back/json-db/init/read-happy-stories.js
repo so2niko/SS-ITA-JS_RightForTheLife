@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const fs = require('fs');
 const dbOptions = require('../../utils/configs.js').dbOptions;
-const HappyStorySchema = require('../../models/HappyStoryModel.js');
+const HappyStorySchema = require('../../models/HappyStorySchema.js');
 const connectionURI = require('../../utils/configs.js').connectionURI;
 
 initHappyStories();

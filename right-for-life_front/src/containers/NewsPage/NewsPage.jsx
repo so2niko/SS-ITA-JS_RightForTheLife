@@ -1,13 +1,14 @@
-import React from "react";
-import { Link, useParams } from "react-router-dom";
+import React from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { Article } from '../../components/Article';
+import { ErrorIndicator } from '../../components/ErrorIndicator';
+import { BE_URL } from '../../helpers/configs.js';
+import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
 import { NEWS } from '../../rootConstants';
-import { withFetchDataIndicators } from "../../hoc/withFetchDataIndicators";
-import { Article } from "../../components/Article";
-import { ErrorIndicator } from "../../components/ErrorIndicator";
 
 const NewsPage = ({ data }) => {
   let {id} = useParams();
-  const article = data.find(article => article.id === Number(id));
+  const article = data.find(article => article._id === id);
   
   if (!article)
     return <ErrorIndicator
@@ -22,7 +23,7 @@ const NewsPage = ({ data }) => {
   );
 };
 
-const dataApi = 'https://raw.githubusercontent.com/protonaby/demo3-animal-shelter/master/db/news.json';
+const dataApi = `${BE_URL}/news`;
 const wrappedComponent = withFetchDataIndicators(NewsPage, NEWS, dataApi);
 
 export {wrappedComponent as NewsPage};

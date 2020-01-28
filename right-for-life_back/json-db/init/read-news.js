@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const fs = require('fs');
 const dbOptions = require('../../utils/configs.js').dbOptions;
 const connectionURI = require('../../utils/configs.js').connectionURI;
-const NewsSchema = require('../../models/NewsModel.js');
+const NewsSchema = require('../../models/NewsSchema.js');
 
 initNews();
 

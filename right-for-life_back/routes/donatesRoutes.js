@@ -2,33 +2,34 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 
-const AnimalScheme = require('../models/AnimalModel.js');
-const Animal = mongoose.connection.model('Animal', AnimalScheme);
+const DonateSchema = require('../models/DonateSchema.js');
+const DonateModel = mongoose.connection.model('Donate', DonateSchema);
 
 router.get('/', (req, res, next) => {
-  Animal.find()
+  DonateModel.findOne()
     .exec()
     .then(doc => {
       res.status(200).json(doc);
     });
 });
 
-router.get('/:animalID', (req, res, next) => {
-  Animal.findById(new mongoose.Types.ObjectId(req.params.animalID))
-    .exec()
-    .then(doc => {
-      if (doc)
-        res.status(200).json(doc);
-      else
-        throw { status: 400, message: 'not found' };
-    })
-    .catch(err => {
-      if (err.status === 400)
-        res.status(400).json(err);
-      else
-        res.status(500).json(err);
-    });
-});
+// router.get('/:ID', (req, res, next) => {
+//   console.log(req.params.newsID);
+//   AboutModel.findById(new mongoose.Types.ObjectId(req.params.newsID))
+//     .exec()
+//     .then(doc => {
+//       if (doc)
+//         res.status(200).json(doc);
+//       else
+//         throw { status: 400, message: 'not found' };
+//     })
+//     .catch(err => {
+//       if (err.status === 400)
+//         res.status(400).json(err);
+//       else
+//         res.status(500).json(err);
+//     });
+// });
 
 router.post('/', (req, res, next) => {
   const animal = {
@@ -36,7 +37,7 @@ router.post('/', (req, res, next) => {
     name: req.body.name,
     price: req.body.price,
   };
-  const newAnimal = new Animal(animal);
+  const newAnimal = new DonateModel(animal);
   newAnimal.save()
     .then(result => {
       console.log(result);

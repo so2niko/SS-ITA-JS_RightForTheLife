@@ -1,10 +1,12 @@
 import React from 'react';
-import { ABOUT_US } from '../../rootConstants';
-import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
-import AboutContent from '../../components/AboutContent';
 import AboutContacts from '../../components/AboutContacts';
+import AboutContent from '../../components/AboutContent';
+import { BE_URL } from '../../helpers/configs.js';
+import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
+import { ABOUT_US } from '../../rootConstants';
 
 const AboutPage = ({ data }) => {
+  console.log(data);
   const { image, text, facebook, phone, email, additionalContacts } = data;
 
   return (
@@ -15,7 +17,7 @@ const AboutPage = ({ data }) => {
   );
 };
 
-const dataApi = 'https://topvv.github.io/SoftServe-IT-Academy/Demo/Demo3/about_us_info.json';
+const dataApi = `${BE_URL}/about`;
 const wrappedComponent = withFetchDataIndicators(AboutPage, ABOUT_US, dataApi);
 
 export { wrappedComponent as AboutPage };
