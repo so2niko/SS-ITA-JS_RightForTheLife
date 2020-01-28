@@ -12,6 +12,7 @@ import {SiteContentContainer} from "./components/SiteContentContainer";
 import { HomePage } from "./containers/HomePage";
 import { AboutPage } from './containers/AboutPage';
 import {NewsPage} from "./containers/NewsPage";
+import {HappyStoryPage} from "./containers/HappyStoryPage";
 
 function App({ store }) {
 	return (
@@ -25,6 +26,7 @@ function App({ store }) {
 							<Route exact path="/news" component={NewsListPage} />
 							<Route exact path="/news/:id" component={NewsPage} />
 							<Route exact path="/stories" component={HappyStoriesPage} />
+              <Route exact path="/stories/:id" component={HappyStoryPage} />
 							<Route exact path="/help" /*component={HelpPage}*/ />
 							<Route exact path="/about" component={AboutPage} />
 							<Route exact path="/emergency" component={EmergencyHelpPage} />

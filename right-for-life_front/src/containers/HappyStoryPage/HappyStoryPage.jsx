@@ -1,11 +1,11 @@
-import React from "react";
-import {Link, useParams} from "react-router-dom";
+import React from 'react'
 import {withFetchDataIndicators} from "../../hoc/withFetchDataIndicators";
-import {Article} from "../../components/Article";
 import {ErrorIndicator} from "../../components/ErrorIndicator";
+import {Link, useParams} from "react-router-dom";
+import {Article} from "../../components/Article";
 
-const NewsPage = ({data}) => {
-  let {id} = useParams();
+const HappyStoryPage = ({data}) => {
+  const {id} = useParams();
   const article = data.find(article => article.id === Number(id));
   if (!article)
     return <ErrorIndicator
@@ -19,7 +19,7 @@ const NewsPage = ({data}) => {
   );
 };
 
-const dataApi = 'https://raw.githubusercontent.com/protonaby/demo3-animal-shelter/master/db/news.json';
-const wrappedComponent = withFetchDataIndicators(NewsPage, dataApi);
+const dataApi = 'https://raw.githubusercontent.com/AlexeyKasaev3/softServe-academy/master/demo-3-data/news.json';
+const wrappedComponent = withFetchDataIndicators(HappyStoryPage, dataApi);
 
-export {wrappedComponent as NewsPage};
+export {wrappedComponent as HappyStoryPage};
