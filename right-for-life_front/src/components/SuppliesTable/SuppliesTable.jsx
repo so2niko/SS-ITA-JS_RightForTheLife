@@ -1,26 +1,10 @@
 import React, { Component } from 'react';
-import './SuppliesTable.css';
+import { SUPPLIES } from '../../rootConstants';
+import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
 import SuppliesTableRow from '../SuppliesTableRow';
+import './SuppliesTable.css';
 
-export default class SuppliesTable extends Component {
-  constructor() {
-    super();
-    this.getData();
-  }
-  state = {
-    suppliesData: []
-  };
-  getData() {
-    fetch(
-      'https://topvv.github.io/SoftServe-IT-Academy/Demo/Demo3/supplies.json'
-    )
-      .then(resp => resp.json())
-      .then(body =>
-        this.setState({
-          suppliesData: body
-        })
-      );
-  }
+class SuppliesTable extends Component {
   getTableBody(suppliesArr) {
     return [...suppliesArr]
       .sort((a, b) => {
@@ -36,10 +20,11 @@ export default class SuppliesTable extends Component {
         return <SuppliesTableRow itemData={el} key={el.id} />;
       });
   }
+
   render() {
-    const { suppliesData } = this.state;
+    const { data } = this.props;
     const tableBody =
-      suppliesData.length > 0 ? this.getTableBody(suppliesData) : null;
+      data.length > 0 ? this.getTableBody(data) : null;
 
     return (
       <table className='table-fixed mx-auto mt-6'>
@@ -56,3 +41,7 @@ export default class SuppliesTable extends Component {
     );
   }
 }
+
+const dataApi = 'https://topvv.github.io/SoftServe-IT-Academy/Demo/Demo3/supplies.json';
+
+export default withFetchDataIndicators(SuppliesTable, SUPPLIES, dataApi);

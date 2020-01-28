@@ -7,7 +7,7 @@ module.exports = {
       sm: '640px',
       md: '768px',
       lg: '1024px',
-      xl: '1280px',
+      xl: '1310px',
     },
     colors: {
       transparent: 'transparent',
@@ -158,11 +158,8 @@ module.exports = {
       '48': '12rem',
       '56': '14rem',
       '64': '16rem',
-<<<<<<< Updated upstream
-=======
       '72': '18rem',
       '80': '20rem',
->>>>>>> Stashed changes
     },
     backgroundColor: theme => theme('colors'),
     backgroundPosition: {
@@ -299,6 +296,7 @@ module.exports = {
       ...theme('spacing'),
       full: '100%',
       screen: '100vh',
+      '78': '26rem',
     }),
     inset: {
       '0': '0',
