@@ -5,6 +5,7 @@ import { ErrorIndicator } from '../../components/ErrorIndicator';
 import { LoadIndicator } from '../../components/LoadIndicator';
 
 export const withFetchDataIndicators = (WrappedComponent, api, componentName) => (props) => {
+  console.log('props', props);
   const name = WrappedComponent.name || componentName;
   const dispatch = useDispatch();
   let { error, data } = useSelector(({ fetchDataReducer }) => ({ ...fetchDataReducer }));
