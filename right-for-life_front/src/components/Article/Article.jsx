@@ -1,9 +1,8 @@
 import React from "react";
-import {Link, useLocation} from "react-router-dom";
 import calcAge from '../../helpers/calcAge';
+import {BackAndShareButtons} from "../BackAndShareButtons";
 
 export const Article = ({article}) => {
-  const {pathname: currentURL} = useLocation();
   const {title, date, photo, text} = article;
 
   return (
@@ -19,6 +18,7 @@ export const Article = ({article}) => {
         >
           <i className="fa fa-arrow-left" style={{'fontSize': '20px', color: 'gray'}} />
         </Link>
+        <BackAndShareButtons />
       </div>
       <h2 className="uppercase font-extrabold text-xl z-20 relative bg-white text-lightgray-700
                  shadow-xl rounded-xl -mt-10 px-8 flex items-center mx-8 mb-10"
