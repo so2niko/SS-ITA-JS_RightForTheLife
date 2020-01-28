@@ -1,8 +1,9 @@
 import React from 'react';
 import calcAge from '../../helpers/calcAge';
+import { Link } from "react-router-dom";
 
 export const AnimalCard = (props) => {
-  const { name, age, photos } = props.animal;
+  const { name, age, photos, id } = props.animal;
 
   return (
     <li className="w-64 m-4 flex flex-col">
@@ -15,9 +16,13 @@ export const AnimalCard = (props) => {
         <button className="w-5/12 bg-green-300 hover:bg-green-400 text-green-700 font-bold py-2 px-2 rounded-xl mt-2 mb-4" style={{ outline: 'none'}}>
           Приютить
         </button>
-        <button className="w-5/12 bg-orange-300 hover:bg-orange-400 text-orange-700 font-bold py-2 px-2 rounded-xl mt-2 mb-4 ml-2" style={{ outline: 'none'}}>
-          История
-        </button>
+        <Link to={"/animals/" + id}>
+          <button
+            className="w-5/12 bg-orange-300 hover:bg-orange-400 text-orange-700 font-bold py-2 px-2 rounded-xl mt-2 mb-4 ml-2"
+            style={{outline: 'none'}}>
+            История
+          </button>
+        </Link>
       </div>
     </li >
   );
