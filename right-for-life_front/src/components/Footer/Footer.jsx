@@ -3,25 +3,11 @@ import { NavLink } from "react-router-dom";
 
 import logo from "../../assets/logo.jpg";
 
-// export const Footer = () => {
-// 	return (
-// 		<footer className="flex-shrink-0">
-// 			<ul className="flex justify-center items-center py-2 bg-white shadow-md font-bold text-xl text-gray-600">
-// 				<li className="ml-24">0932350370</li>
-// 				<li className="mx-6">
-// 					<img width="40px" src={logo} alt="logo" />
-// 				</li>
-// 				<li>olyaum76@gmail.com</li>
-// 			</ul>
-// 		</footer>
-// 	);
-// };
-
 export const Footer = () => {
 	const iconsClassName = 'mx-2 text-3xl';
 
 	return (
-		<footer className="flex flex-shrink-0 justify-center py-3 bg-white shadow-md font-bold text-xl text-gray-600">
+		<footer className="flex flex-shrink-0 justify-center items-center py-3 bg-white shadow-md font-bold text-xl text-gray-600">
 			<ul className="flex">
 				<li>
 					<a
@@ -43,13 +29,17 @@ export const Footer = () => {
 					</a>
 				</li>
 			</ul>
-			<span className="mx-24">Все права защищены (нет) SoftServe Inc.</span>
+			<span className="mx-24">Developed by group DP-180 Web-UI SoftServe Inc.</span>
 			<NavLink
 				className="mx-4 cursor-pointer text-red-600 hover:text-red-700 select-none"
 				exact
-				to="/help"
+				to="/"
 			>
-				Помочь
+				<img
+					width="40px"
+					src={logo}
+					alt="logo"
+				/>
 			</NavLink>
 		</footer>
 	);
