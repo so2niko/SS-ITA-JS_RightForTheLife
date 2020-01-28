@@ -1,5 +1,5 @@
 import React from 'react';
-import { HAPPY_STORIES } from '../../rootConstants';
+import { HAPPY_STORIES, NEWS } from '../../rootConstants';
 import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
 import { ImageCarousel } from '../../components/ImageCarousel';
 import { ArticlesListWidget } from '../../components/ArticlesListWidget';
@@ -15,12 +15,14 @@ export const HomePage = () => (
     </section>
     <section className="w-full lg:w-1/3 h-72 lg:h-auto p-5">
       <div className="w-full h-full flex items-center justify-center font-bold rounded-xl text-lightgray-500">
-        <HomeArticlesListWidget />
+        <HomeArticlesListWidget url="news" />
       </div>
     </section>
   </article>
 );
 
-const dataApi = 'https://raw.githubusercontent.com/AlexeyKasaev3/softServe-academy/master/demo-3-data/news.json';
-const HomeImageCarousel = withFetchDataIndicators(ImageCarousel, HAPPY_STORIES, dataApi);
-const HomeArticlesListWidget = withFetchDataIndicators(ArticlesListWidget, HAPPY_STORIES, dataApi);
+const dataStoriesApi = 'https://raw.githubusercontent.com/AlexeyKasaev3/softServe-academy/master/demo-3-data/news.json';
+const dataNewsApi = 'https://raw.githubusercontent.com/protonaby/demo3-animal-shelter/master/db/news.json';
+
+const HomeImageCarousel = withFetchDataIndicators(ImageCarousel, HAPPY_STORIES, dataStoriesApi);
+const HomeArticlesListWidget = withFetchDataIndicators(ArticlesListWidget, NEWS, dataNewsApi);
