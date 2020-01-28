@@ -16,11 +16,13 @@ import { DonatePage } from "./containers/DonatePage";
 import { AboutPage } from './containers/AboutPage';
 import { EmergencyHelpPage } from "./containers/EmergencyHelpPage"
 import { SingleEmergencyHelpPage } from "./containers/SingleEmergencyHelpPage"
+import { ScrollToTop } from "./components/ScrollToTop";
 
 function App({ store }) {
 	return (
 		<Provider store={store}>
 			<Router>
+				<ScrollToTop />
 				<Header />
 				<SiteContentContainer>
 					<Switch>
