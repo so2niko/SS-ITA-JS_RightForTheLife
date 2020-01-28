@@ -9,7 +9,7 @@ export const withPagination = (WrappedComponent, articlesPerPage) => (props) => 
   if(!requestedPageNum) {
     return <ErrorIndicator
       message="Нет такой страницы"
-      renderAction={() => <Link to="/stories">Вернуться на первую страницу</Link>}
+      renderAction={() => <Link to={`${props.location.pathname}`}>Вернуться к первой странице</Link>}
     />
   }
 
