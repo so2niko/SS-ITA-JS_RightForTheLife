@@ -4,14 +4,16 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { AnimalsPage } from "./containers/AnimalsPage";
-import { NewsPage } from "./containers/NewsPage";
+import { NewsListPage } from "./containers/NewsListPage";
 import { HappyStoriesPage } from "./containers/HappyStoriesPage";
 import { EmergencyHelpPage } from "./containers/EmergencyHelpPage"
 import { ErrorIndicator } from "./components/ErrorIndicator";
+
 import {SiteContentContainer} from "./components/SiteContentContainer";
 import { HomePage } from "./containers/HomePage";
 import { AboutPage } from './containers/AboutPage';
-
+import { DonatePage } from "./containers/DonatePage";
+import {NewsPage} from "./containers/NewsPage";
 
 function App({ store }) {
 	return (
@@ -22,9 +24,10 @@ function App({ store }) {
 						<Switch>
 							<Route exact path="/" component={HomePage} />
 							<Route exact path="/animals" component={AnimalsPage} />
-							<Route exact path="/news" component={NewsPage} />
+							<Route exact path="/news" component={NewsListPage} />
+							<Route exact path="/news/:id" component={NewsPage} />
 							<Route exact path="/stories" component={HappyStoriesPage} />
-							<Route exact path="/help" /*component={HelpPage}*/ />
+							<Route exact path="/help" component={DonatePage} />
 							<Route exact path="/about" component={AboutPage} />
 							<Route exact path="/emergency" component={EmergencyHelpPage} />
 							<Route render={() =>
