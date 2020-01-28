@@ -1,3 +1,4 @@
+export const HOME = "HOME";
 export const ANIMALS = 'ANIMALS';
 export const NEWS = 'NEWS';
 export const HAPPY_STORIES = 'HAPPY_STORIES';
