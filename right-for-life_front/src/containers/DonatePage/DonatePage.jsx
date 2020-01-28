@@ -10,8 +10,8 @@ const DonatePage = ({ data }) => {
     const { title, manager, summary, paymentMethodsInfo, moneyTransferInfo } = data;
 
     return (
-        <div className="min-h-full pt-16 pb-2 max-w-5xl mx-auto text-lightgray-700">
-            <header className="my-5">
+        <div className="text-lightgray-700">
+            <header className="mb-5">
                 <h1 className="text-4xl uppercase font-bold">{title}</h1>
             </header>
             <section className="mb-5">

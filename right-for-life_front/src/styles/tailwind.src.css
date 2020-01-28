@@ -10,6 +10,10 @@ html, body {
   @apply font-display bg-lightgray-100;
 }
 
+body {
+  @apply overflow-y-scroll;
+}
+
 #root {
   @apply flex flex-col h-screen;
 }

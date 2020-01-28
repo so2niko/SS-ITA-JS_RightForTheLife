@@ -15,11 +15,9 @@ export const withFetchDataIndicators = (WrappedComponent, dataName, dataApi) => 
 
   useEffect(() => {
     if (!data) {
-      setTimeout(() => {
-        dispatch(requestData({ api, name }));
-      }, 1000);
+      dispatch(requestData({ api, name }));
     }
-  }, []);
+  }, [data, api, name, dispatch]);
 
   const action = (
     <button 

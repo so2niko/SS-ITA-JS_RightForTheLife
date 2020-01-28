@@ -8,7 +8,7 @@ const AboutPage = ({ data }) => {
   const { image, text, facebook, phone, email, additionalContacts } = data;
 
   return (
-    <div className='about-page pt-16 pb-2 px-5'>
+    <div className='about-page pb-8 px-5'>
       <AboutContent contentData={{ image, text }} />
       <AboutContacts contactsData={{ facebook, phone, email, additionalContacts }} />
     </div>
