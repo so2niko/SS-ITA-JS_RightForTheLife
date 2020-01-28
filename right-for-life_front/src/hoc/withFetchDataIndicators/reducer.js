@@ -5,7 +5,6 @@ export const fetchDataReducer = (state = { data: {}, error: null }, action) => {
 
   switch(type) {
     case FETCH_DATA_REQUEST:
-      console.log(state);
       return { ...state, error: null };
 
     case FETCH_DATA_FAILURE:

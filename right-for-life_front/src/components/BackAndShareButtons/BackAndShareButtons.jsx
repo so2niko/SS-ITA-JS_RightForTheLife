@@ -25,9 +25,9 @@ export const BackAndShareButtons = () => {
         <i className="fa fa-arrow-left" style={{'fontSize': '20px', color: 'gray'}}></i>
       </Link>
       <div className="mt-4 mr-6">
-        <div className={`share flex flex-col border-white rounded-full pt-2 px-1 ${active ? 'border' : ''}`}>
+        <div className={`share flex flex-col border-white rounded-full pt-2 px-1 ${active ? 'border bg-white' : ''}`}>
           <button
-            className={`rounded-full h-12 w-12 flex items-center justify-center bg-white px-0 py-0 hover:bg-lightgray-200 shareBtn self-center mb-2 ${active ? 'active' : ''}`}
+            className={`rounded-full h-12 w-12 flex items-center justify-center bg-white px-0 py-0 hover:bg-lightgray-200 shareBtn self-center mb-2 ${active ? 'active' : ''} focus:outline-none`}
             onClick={() => setActive(!active)}
           >
             <i className="fa fa-share-alt" style={{'fontSize': '20px', color: 'gray'}}></i>
