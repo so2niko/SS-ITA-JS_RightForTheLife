@@ -6,74 +6,34 @@
   transition: background-color .2s;
 }
 
-.floating-button__extend-1-enter {
-  transform: translate(0, -70px);
+.floating-button {
+  transform: scale(0);
+  animation: 200ms floating-button-anim forwards;
+  animation-delay: calc(100ms * var(--btn-index));
 }
 
-.floating-button__extend-1-enter.floating-button__extend-1-enter-active {
-  transform: translate(0);
-  transition:  250ms ease-in;
+@keyframes floating-button-anim {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
+  }
 }
 
-.floating-button__extend-1-leave {
-  transform: translate(0);
-}
-
-.floating-button__extend-1-leave.floating-button__extend-1-leave-active {
-  transform: translate(0, -70px);
-  transition:  250ms ease-in;
-}
-
-.floating-button__extend-2-enter {
-  transform: translate(0, -140px);
-}
-
-.floating-button__extend-2-enter.floating-button__extend-2-enter-active {
-  transform: translate(0);
-  transition:  250ms ease-in;
-}
-
-.floating-button__extend-2-leave {
+.floating-button__extend-leave {
   transform: translate(0);
 }
 
-.floating-button__extend-2-leave.floating-button__extend-2-leave-active {
-  transform: translate(0, -140px);
-  transition:  250ms ease-in;
+.floating-button__extend-leave.floating-button__extend-leave-active {
+  transform: translate(0, calc(var(--btn-index) * -70px));
+  transition: transform calc(250ms) cubic-bezier(0.4, 0, 0.2, 1);;
 }
 
-.floating-button__extend-3-enter {
-  transform: translate(0, -210px);
-}
-
-.floating-button__extend-3-enter.floating-button__extend-3-enter-active {
-  transform: translate(0);
-  transition:  250ms ease-in;
-}
-
-.floating-button__extend-3-leave {
-  transform: translate(0);
-}
-
-.floating-button__extend-3-leave.floating-button__extend-3-leave-active {
-  transform: translate(0, -210px);
-  transition:  250ms ease-in;
-}
-
-.floating-button__extend-4-enter {
-  transform: translate(0, -280px);
-}
-
-.floating-button__extend-4-enter.floating-button__extend-4-enter-active {
-  transform: translate(0);
-  transition:  250ms ease-in;
-}
-
-.floating-button__extend-4-leave {
-  transform: translate(0);
-}
-
-.floating-button__extend-4-leave.floating-button__extend-4-leave-active {
-  transform: translate(0, -280px);
-  transition:  250ms ease-in;
-}
+{ --btn-index: 0; }
+[data-floating-btn-index="1"] { --btn-index: 1; }
+[data-floating-btn-index="2"] { --btn-index: 2; }
+[data-floating-btn-index="3"] { --btn-index: 3; }
+[data-floating-btn-index="4"] { --btn-index: 4; }
+[data-floating-btn-index="5"] { --btn-index: 5; }
