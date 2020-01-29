@@ -16,7 +16,7 @@ export const Header = () => {
 						<img width="40px" src={logo} alt="logo" />
 					</NavLink>
 					<NavLink
-						className="mx-4 cursor-pointer text-green-600 hover:text-green-700"
+						className="mx-3 cursor-pointer text-green-700 bg-green-200 py-1 px-3 rounded-lg hover:bg-green-300 hover:text-green-800"
 						exact
 						to="/help"
 						activeClassName="text-green-700"
@@ -40,7 +40,7 @@ export const Header = () => {
 						Счастливые истории
 					</NavLink>
 					<NavLink
-						className="mx-4 cursor-pointer text-red-600 hover:text-red-700"
+						className="mx-3 cursor-pointer text-red-700 bg-red-200 py-1 px-3 rounded-lg hover:bg-red-300 hover:text-red-800"
 						exact
 						to="/emergency"
 						activeClassName="text-red-700"
