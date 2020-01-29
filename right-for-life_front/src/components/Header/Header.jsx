@@ -16,12 +16,36 @@ export const Header = () => {
 						<img width="40px" src={logo} alt="logo" />
 					</NavLink>
 					<NavLink
+						className="mx-4 cursor-pointer text-green-600 hover:text-green-700"
+						exact
+						to="/help"
+						activeClassName="text-green-700"
+					>
+						Помощь
+					</NavLink>
+					<NavLink
 						className="mx-4 cursor-pointer hover:text-gray-700"
 						exact
 						to="/animals"
 						activeClassName="text-gray-700"
 					>
 						Питомцы
+					</NavLink>
+					<NavLink
+						className="mx-4 cursor-pointer hover:text-gray-700"
+						exact
+						to="/stories"
+						activeClassName="text-gray-700"
+					>
+						Счастливые истории
+					</NavLink>
+					<NavLink
+						className="mx-4 cursor-pointer text-red-600 hover:text-red-700"
+						exact
+						to="/emergency"
+						activeClassName="text-red-700"
+					>
+						Срочники
 					</NavLink>
 					<NavLink
 						className="mx-4 cursor-pointer hover:text-gray-700"
@@ -34,34 +58,10 @@ export const Header = () => {
 					<NavLink
 						className="mx-4 cursor-pointer hover:text-gray-700"
 						exact
-						to="/stories"
-						activeClassName="text-gray-700"
-					>
-						Счастливые истории
-					</NavLink>
-					<NavLink
-						className="mx-4 cursor-pointer hover:text-gray-700"
-						exact
-						to="/help"
-						activeClassName="text-gray-700"
-					>
-						Помощь
-					</NavLink>
-					<NavLink
-						className="mx-4 cursor-pointer hover:text-gray-700"
-						exact
 						to="/about"
 						activeClassName="text-gray-700"
 					>
 						О нас
-					</NavLink>
-					<NavLink
-						className="mx-4 cursor-pointer text-red-600 hover:text-red-700"
-						exact
-						to="/emergency"
-						activeClassName="text-red-700"
-					>
-						Срочная помощь
 					</NavLink>
 				</ul>
 			</nav>
