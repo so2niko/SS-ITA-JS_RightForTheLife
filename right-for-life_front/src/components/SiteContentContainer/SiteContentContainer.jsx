@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { setBackBtnValueAction } from "./setBackBtnValueAction.js";
+import { setUseOrNotGoBack } from "./setUseOrNotGoBack.js";
 
 class SiteContentContainer extends React.Component {
   // to will be '/[value]', from will be '/[value]/[any symbols]'
@@ -19,7 +19,7 @@ class SiteContentContainer extends React.Component {
       window.name = String(Date.now())
     } else if (window.history.length < 50 &&
       window.history.length === Number(sessionStorage.getItem('backBtn' + window.name))) {
-      this.props.setBackBtnValue(true);
+      this.props.setUseOrNotGoBack(true);
     }
 
     window.addEventListener('beforeunload', () => {
@@ -35,8 +35,8 @@ class SiteContentContainer extends React.Component {
         return prevProps.location.pathname === '/' + item.from &&
           this.props.location.pathname.match(new RegExp(`/${item.to ? item.to : item.from}/.+`))
       });
-      this.props.setBackBtnValue(useBackBtn);
-      //console.log(prevProps.location.pathname + " --> " + this.props.location.pathname);
+
+      this.props.setUseOrNotGoBack(useBackBtn);
     }
   }
 
@@ -55,7 +55,7 @@ class SiteContentContainer extends React.Component {
 const withConnect = connect(state => ({
   useOrNotGoBack: state.useOrNotGoBack
 }), {
-  setBackBtnValue: setBackBtnValueAction
+  setUseOrNotGoBack: setUseOrNotGoBack
 })(withRouter(props => <SiteContentContainer {...props} />));
 
 export { withConnect as SiteContentContainer };
