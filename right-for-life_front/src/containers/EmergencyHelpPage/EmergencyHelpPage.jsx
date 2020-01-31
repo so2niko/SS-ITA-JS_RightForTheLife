@@ -6,7 +6,7 @@ import {withPagination} from "../../hoc/withPagination";
 
 const EmergencyHelpPage = ({ data }) => {
   return (
-      <ArticlesList articles={data} listTitle="Cрочная помощь"/>
+      <ArticlesList articles={data} listTitle="Cрочники"/>
   );
 };
 
