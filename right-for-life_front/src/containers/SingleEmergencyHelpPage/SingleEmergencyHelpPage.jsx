@@ -18,7 +18,7 @@ const SingleEmergencyHelpPage = ({ data }) => {
     />;
 
   return (
-    <div className="-mt-10 max-w-4xl mx-auto mb-20">
+    <div className="-mt-10 max-w-4xl mx-auto">
       <Article article={article} />
     </div>
   );
