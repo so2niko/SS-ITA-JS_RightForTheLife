@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { setUseOrNotGoBack } from "./setUseOrNotGoBack.js";
 
 class SiteContentContainer extends React.Component {
-  // to will be '/[value]', from will be '/[value]/[any symbols]'
-  // if to unset, to = from
+  // 'to' will be '/[value]', 'from' will be '/[value]/[any symbols]'
+  // if 'to' unset, to = from
   allowedPages = [
     {from: 'animals'},
     {from: 'stories'},
