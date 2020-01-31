@@ -7,7 +7,7 @@ import {ArticleImageGallery} from "../ArticleImageGallery";
 import './style.css';
 
 export const Article = ({article}) => {
-  let {title, date, photo, text, gallery, videos} = article;
+  const {title, date, photo, text, gallery, videos} = article;
 
   return (
     <article>
