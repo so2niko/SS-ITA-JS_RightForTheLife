@@ -9,7 +9,7 @@
 .floating-button {
   transform: scale(0);
   animation: 200ms floating-button-anim forwards;
-  animation-delay: calc(100ms * var(--btn-index));
+  animation-delay: calc(50ms * var(--btn-index));
 }
 
 @keyframes floating-button-anim {

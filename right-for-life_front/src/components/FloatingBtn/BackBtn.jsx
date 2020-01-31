@@ -1,12 +1,17 @@
 import React from "react";
 import { FloatingBtn } from "./FloatingBtn.jsx";
+import { connect } from 'react-redux';
 
-export const BackBtn = ({position}) => (
+const BackBtn = ({position, useOrNotGoBack}) => (
   <div className="relative width-full">
     <FloatingBtn
       icon="fa-arrow-left"
       position={position}
-      onClick={window.history.length === 1 ? null : () => window.history.back()}
-      url="/"/>
+      onClick={useOrNotGoBack ? () => window.history.forward() || window.history.back() : null}
+      url={window.location.pathname.match(/\/[a-z]+/)[0]}/>
   </div>
 );
+
+const withConnect = connect(state => ({useOrNotGoBack: state.useOrNotGoBack}))(BackBtn);
+
+export {withConnect as BackBtn};

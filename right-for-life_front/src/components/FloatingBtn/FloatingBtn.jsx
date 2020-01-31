@@ -8,7 +8,6 @@ export const FloatingBtn = ({icon, position, onClick, url, content,}) => {
   const className = `floating-button float-right absolute z-20 bg-white hover:bg-gray-300 rounded-full flex items-center justify-center cursor-pointer shadow-lg text-gray-700 text-lg h-12 w-12 ${position}`;
   const iconElem = content ? content : <i className={`fas ${icon}`}/>;
 
-
   return (
     <CSSTransition
       transitionName="floating-button"
@@ -16,8 +15,10 @@ export const FloatingBtn = ({icon, position, onClick, url, content,}) => {
       transitionAppearTimeout={null}
       transitionEnter={false}
       transitionLeave={false}>
-      {onClick ? <div onClick={onClick} className={className}>{iconElem}</div>
-        : <Link className={className} to={url}>{iconElem}</Link>}
+      {
+        !onClick && url ? <Link className={className} to={url}>{iconElem}</Link>
+          : <div onClick={onClick} className={className}>{iconElem}</div>
+      }
     </CSSTransition>
   )
 };
@@ -34,5 +35,4 @@ FloatingBtn.defaultProps = {
   icon: '',
   position: 'left-0 ml-2 mt-2',
   onClick: null,
-  url: '/'
 };

@@ -1,11 +1,42 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
+import { setBackBtnValueAction } from "./setBackBtnValueAction.js";
 
 class SiteContentContainer extends React.Component {
+  // to will be '/[value]', from will be '/[value]/[any symbols]'
+  // if to unset, to = from
+  allowedPages = [
+    {from: 'animals'},
+    {from: 'stories'},
+    {from: 'news'},
+    {from: 'news', to: 'reports'},
+    {from: 'reports'},
+  ];
+
+  componentDidMount() {
+    if (!window.name) {
+      window.name = String(Date.now())
+    } else if (window.history.length < 50 &&
+      window.history.length === Number(sessionStorage.getItem('backBtn' + window.name))) {
+      this.props.setBackBtnValue(true);
+    }
+
+    window.addEventListener('beforeunload', () => {
+      if (this.props.useOrNotGoBack) {
+        sessionStorage.setItem('backBtn' + window.name, String(window.history.length))
+      }
+    })
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
-      console.log("Route change!", this.props.location.pathname);
+      const useBackBtn = -1 !== this.allowedPages.findIndex(item => {
+        return prevProps.location.pathname === '/' + item.from &&
+          this.props.location.pathname.match(new RegExp(`/${item.to ? item.to : item.from}/.+`))
+      });
+      this.props.setBackBtnValue(useBackBtn);
+      //console.log(prevProps.location.pathname + " --> " + this.props.location.pathname);
     }
   }
 
@@ -19,35 +50,12 @@ class SiteContentContainer extends React.Component {
     )
   }
 
-};
+}
 
-const withConnect = withRouter(props => <SiteContentContainer {...props} />);
+const withConnect = connect(state => ({
+  useOrNotGoBack: state.useOrNotGoBack
+}), {
+  setBackBtnValue: setBackBtnValueAction
+})(withRouter(props => <SiteContentContainer {...props} />));
 
 export { withConnect as SiteContentContainer };
-
-
-/*import { FETCH_DATA_FAILURE, FETCH_DATA_SUCCESS, FETCH_DATA_REQUEST } from './constants';
-
-export const fetchDataReducer = (state = { data: {}, error: null }, action) => {
-  const { type, payload } = action;
-
-  switch(type) {
-    case FETCH_DATA_REQUEST:
-      return { ...state, error: null };
-
-    case FETCH_DATA_FAILURE:
-      return { ...state, error: payload };
-
-    case FETCH_DATA_SUCCESS:
-      const { success, name } = payload;
-      const { data } = state;
-
-      data[name] = success;
-
-      return { ...state, data };
-
-    default:
-      return state;
-  }
-};
-*/
