@@ -34,4 +34,5 @@ FloatingBtn.defaultProps = {
   icon: '',
   position: 'left-0 ml-2 mt-2',
   onClick: null,
+  url: '/'
 };
