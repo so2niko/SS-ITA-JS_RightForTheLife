@@ -18,7 +18,8 @@ class SiteContentContainer extends React.Component {
 
       this.props.setUrlForBackBtn(null);
     } else {
-      this.props.setUrlForBackBtn(this.props.location.pathname.match(/\/[a-z]+/)[0]);
+      const categoryUrl = this.props.location.pathname.match(/\/[a-z]+/);
+      this.props.setUrlForBackBtn(categoryUrl ? categoryUrl[0] : '/');
     }
 
     window.addEventListener('beforeunload', () => {
