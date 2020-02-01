@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { fetchDataReducer } from './hoc/withFetchDataIndicators';
-import { useOrNotGoBackReducer as useOrNotGoBack } from './components/SiteContentContainer/useOrNotGoBackReducer';
+import { urlForBackBtnReducer as urlForBackBtn } from './components/SiteContentContainer/';
 
 export const rootReducer = combineReducers({
-  fetchDataReducer, useOrNotGoBack,
+  fetchDataReducer, urlForBackBtn,
 });

@@ -6,7 +6,7 @@
   transition: background-color .2s;
 }
 
-.floating-button {
+.floating-button-appear.floating-button-appear-active {
   transform: scale(0);
   animation: 200ms floating-button-anim forwards;
   animation-delay: calc(50ms * var(--btn-index));

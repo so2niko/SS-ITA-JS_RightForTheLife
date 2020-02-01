@@ -11,8 +11,8 @@ export const FloatingBtn = ({icon, position, onClick, url, content,}) => {
   return (
     <CSSTransition
       transitionName="floating-button"
-      transitionAppear={false}
-      transitionAppearTimeout={null}
+      transitionAppear={true}
+      transitionAppearTimeout={550}
       transitionEnter={false}
       transitionLeave={false}>
       {

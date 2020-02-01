@@ -1,43 +1,51 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { setUseOrNotGoBack } from "./setUseOrNotGoBack.js";
+import { setUrlForBackBtn } from "./setUrlForBackBtn.js";
 
 class SiteContentContainer extends React.Component {
-  // 'to' will be '/[value]', 'from' will be '/[value]/[any symbols]'
-  // if 'to' unset, to = from
-  allowedPages = [
-    {from: 'animals'},
-    {from: 'stories'},
-    {from: 'news'},
-    {from: 'news', to: 'reports'},
-    {from: 'reports'},
-  ];
+  backOrForwardUsed = false;
 
   componentDidMount() {
+    // if first start app in this tab
     if (!window.name) {
       window.name = String(Date.now())
-    } else if (window.history.length < 50 &&
+    }
+
+    // if page reloaded
+    if (window.history.length < 50 &&
       window.history.length === Number(sessionStorage.getItem('backBtn' + window.name))) {
-      this.props.setUseOrNotGoBack(true);
+
+      this.props.setUrlForBackBtn(null);
+    } else {
+      this.props.setUrlForBackBtn(this.props.location.pathname.match(/\/[a-z]+/)[0]);
     }
 
     window.addEventListener('beforeunload', () => {
-      if (this.props.useOrNotGoBack) {
+      if (this.props.urlForBackBtn === null) {
         sessionStorage.setItem('backBtn' + window.name, String(window.history.length))
       }
-    })
+    });
+
+    window.addEventListener('popstate', (event) => {
+      this.backOrForwardUsed = true;
+    });
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.location.pathname !== prevProps.location.pathname) {
-      const useBackBtn = -1 !== this.allowedPages.findIndex(item => {
-        return prevProps.location.pathname === '/' + item.from &&
-          this.props.location.pathname.match(new RegExp(`/${item.to ? item.to : item.from}/.+`))
-      });
+    // setTimeout used to start after popstate event
+    setTimeout(() => {
+      // first 'if' used to prevent unnecessary use of store
+      if (this.props.location.pathname !== prevProps.location.pathname) {
+        if (this.backOrForwardUsed) {
+          this.props.setUrlForBackBtn(prevProps.location.pathname + prevProps.location.search);
+        } else {
+          this.props.setUrlForBackBtn(null);
+        }
+      }
 
-      this.props.setUseOrNotGoBack(useBackBtn);
-    }
+      this.backOrForwardUsed = false;
+    })
   }
 
   render() {
@@ -53,9 +61,9 @@ class SiteContentContainer extends React.Component {
 }
 
 const withConnect = connect(state => ({
-  useOrNotGoBack: state.useOrNotGoBack
+  urlForBackBtn: state.urlForBackBtn
 }), {
-  setUseOrNotGoBack: setUseOrNotGoBack
+  setUrlForBackBtn: setUrlForBackBtn
 })(withRouter(props => <SiteContentContainer {...props} />));
 
 export { withConnect as SiteContentContainer };
