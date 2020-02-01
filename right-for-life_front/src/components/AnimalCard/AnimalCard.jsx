@@ -7,7 +7,7 @@ export const AnimalCard = (props) => {
 
   return (
     <li className="w-64 m-4 flex flex-col">
-      <div className="z-40 pointer">
+      <div className="z-0 pointer">
         <div className="h-56 rounded-xl bg-cover bg-top shadow-md" style={{ backgroundImage: "url(" + photos[0] + ")" }}></div>
       </div>
       <div className="w-11/12 bg-white font-bold text-gray-700 text-center shadow-xl rounded-b-xl self-center">
