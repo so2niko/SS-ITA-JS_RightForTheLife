@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SUPPLIES } from '../../rootConstants';
+import { API } from '../../rootConstants';
 import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
 import SuppliesTableRow from '../SuppliesTableRow';
 import './SuppliesTable.css';
@@ -42,6 +42,4 @@ class SuppliesTable extends Component {
   }
 }
 
-const dataApi = 'https://topvv.github.io/SoftServe-IT-Academy/Demo/Demo3/supplies.json';
-
-export default withFetchDataIndicators(SuppliesTable, SUPPLIES, dataApi);
+export default withFetchDataIndicators(SuppliesTable, API.SUPPLIES);
