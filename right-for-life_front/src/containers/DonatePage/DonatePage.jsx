@@ -1,10 +1,7 @@
 import React from 'react';
-import TabBar from '../../components/TabBar';
-import { BE_URL } from '../../helpers/configs.js';
-
+import { API } from '../../rootConstants';
 import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
-
-import { DONATE } from '../../rootConstants';
+import TabBar from '../../components/TabBar';
 
 const DonatePage = ({ data }) => {
 
@@ -27,7 +24,6 @@ const DonatePage = ({ data }) => {
     );
 };
 
-const dataUrl = `${BE_URL}/donate`;
-const wrappedComponent = withFetchDataIndicators(DonatePage, DONATE, dataUrl);
+const wrappedComponent = withFetchDataIndicators(DonatePage, API.DONATE);
 
 export { wrappedComponent as DonatePage };

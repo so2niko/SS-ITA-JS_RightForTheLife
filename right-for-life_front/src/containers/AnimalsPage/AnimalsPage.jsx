@@ -1,19 +1,21 @@
-import React from 'react';
-import { AnimalsList } from '../../components/AnimalsList';
-import { BE_URL } from '../../helpers/configs.js';
-import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
-import { withPagination } from '../../hoc/withPagination';
-import { ANIMALS } from '../../rootConstants';
+import React from "react";
+import { API } from "../../rootConstants";
+import { AnimalsList } from "../../components/AnimalsList";
+import { withPagination } from "../../hoc/withPagination";
+import { withFetchDataIndicators } from "../../hoc/withFetchDataIndicators";
 
 const AnimalsPage = ({ data }) => {
-	return (
-		<div className="animals-page pb-8">
-			<AnimalsList animals={data} />
-		</div>
-	);
+  return (
+    <div className="animals-page pb-8">
+      <AnimalsList animals={data} />
+    </div>
+  );
 };
 
-const dataApi = `${BE_URL}/animals`;
-const wrappedComponent = withFetchDataIndicators(withPagination(AnimalsPage, 8), ANIMALS, dataApi);
+const wrappedComponent = withFetchDataIndicators(
+  withPagination(AnimalsPage, 8),
+  API.ANIMALS,
+  true
+);
 
 export { wrappedComponent as AnimalsPage };

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { BE_URL } from '../../helpers/configs.js';
+import { API } from '../../rootConstants';
 import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
-import { SUPPLIES } from '../../rootConstants';
 import SuppliesTableRow from '../SuppliesTableRow';
 import './SuppliesTable.css';
 
@@ -43,6 +42,4 @@ class SuppliesTable extends Component {
   }
 }
 
-const dataApi = `${BE_URL}/supplies`;
-
-export default withFetchDataIndicators(SuppliesTable, SUPPLIES, dataApi);
+export default withFetchDataIndicators(SuppliesTable, API.SUPPLIES);

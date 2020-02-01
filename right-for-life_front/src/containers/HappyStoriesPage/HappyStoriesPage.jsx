@@ -1,17 +1,18 @@
-import React from 'react';
-import { ArticlesList } from '../../components/ArticlesList';
-import { BE_URL } from '../../helpers/configs.js';
-import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
-import { withPagination } from '../../hoc/withPagination';
-import { HAPPY_STORIES } from '../../rootConstants';
+import React from "react";
+import { API } from "../../rootConstants";
+import { ArticlesList } from "../../components/ArticlesList";
+import { withFetchDataIndicators } from "../../hoc/withFetchDataIndicators";
+import { withPagination } from "../../hoc/withPagination";
 
 const HappyStoriesPage = ({ data }) => {
   return (
-      <ArticlesList articles={data} listTitle="Cчастливые истории"/>
+    <ArticlesList articles={data} listTitle="Cчастливые истории"/>
   );
 };
 
-const dataApi = `${BE_URL}/happyStories`;
-const wrappedComponent = withFetchDataIndicators(withPagination(HappyStoriesPage, 10), HAPPY_STORIES, dataApi);
+const wrappedComponent = withFetchDataIndicators(
+  withPagination(HappyStoriesPage, 10),
+  API.HAPPY_STORIES,
+);
 
 export { wrappedComponent as HappyStoriesPage };

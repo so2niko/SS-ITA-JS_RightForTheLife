@@ -1,17 +1,18 @@
-import React from 'react';
-import { ArticlesList } from '../../components/ArticlesList';
-import { BE_URL } from '../../helpers/configs.js';
-import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
-import { withPagination } from '../../hoc/withPagination';
-import { NEWS } from '../../rootConstants';
+import React from "react";
+import { API } from "../../rootConstants";
+import { ArticlesList } from "../../components/ArticlesList";
+import { withPagination } from "../../hoc/withPagination";
+import { withFetchDataIndicators } from "../../hoc/withFetchDataIndicators";
 
 const NewsListPage = ({ data }) => {
   return (
-      <ArticlesList articles={data} listTitle="Новости"/>
+    <ArticlesList articles={data} listTitle="Новости"/>
   );
 };
 
-const dataApi = `${BE_URL}/news`;
-const wrappedComponent = withFetchDataIndicators(withPagination(NewsListPage, 10), NEWS, dataApi);
+const wrappedComponent = withFetchDataIndicators(
+  withPagination(NewsListPage, 10),
+  API.NEWS,
+);
 
-export { wrappedComponent as NewsListPage};
+export { wrappedComponent as NewsListPage };
