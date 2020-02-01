@@ -30,7 +30,7 @@ export class HeaderMobile extends React.Component {
           <div>
             <div className="opacity-25 bg-black fixed w-full h-full z-30" onClick={this.hideCategories}/>
             <ul
-              className="rounded-t-xl fixed flex flex-col justify-between items-center w-full bg-gray-100 shadow-2xl font-bold text-xl text-gray-600 z-30 bottom-0 mb-16 py-8">
+              className="rounded-t-xl fixed flex flex-col justify-between items-center w-full bg-gray-100 shadow-2xl font-bold text-xl text-gray-600 z-30 bottom-0 mb-16 py-8 overflow-auto max-h-full">
               <HeaderLink to="/" title="Главная" onClick={this.hideCategories}/>
 
               <HeaderButton to="/help" title="Помощь" color="green" onClick={this.hideCategories}/>
