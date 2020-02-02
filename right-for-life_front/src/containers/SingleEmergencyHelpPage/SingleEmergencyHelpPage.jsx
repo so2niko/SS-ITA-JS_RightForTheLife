@@ -1,21 +1,23 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-
-import { EMERGENCY_HELP } from '../../rootConstants';
-
-import { withFetchDataIndicators } from "../../hoc/withFetchDataIndicators";
+import { API } from "../../rootConstants";
 import { Article } from "../../components/Article";
 import { ErrorIndicator } from "../../components/ErrorIndicator";
+import { withFetchDataIndicators } from "../../hoc/withFetchDataIndicators";
 
 const SingleEmergencyHelpPage = ({ data }) => {
   let { id } = useParams();
   const article = data.find(article => article.id === Number(id));
 
   if (!article)
-    return <ErrorIndicator
-      message="Страница не найдена :("
-      renderAction={() => <Link to="/emergency">Вернуться на страницу срочной помощи</Link>}
-    />;
+    return (
+      <ErrorIndicator
+        message="Страница не найдена :("
+        renderAction={() => (
+          <Link to="/emergency">Вернуться на страницу срочной помощи</Link>
+        )}
+      />
+    );
 
   return (
     <div className="-mt-10 max-w-4xl mx-auto">
@@ -24,7 +26,9 @@ const SingleEmergencyHelpPage = ({ data }) => {
   );
 };
 
-const dataApi = "https://alex-boklag.github.io/SSA-Demo-AnimalShelter/db/emergency.json";
-const wrappedComponent = withFetchDataIndicators(SingleEmergencyHelpPage, EMERGENCY_HELP, dataApi);
+const wrappedComponent = withFetchDataIndicators(
+  SingleEmergencyHelpPage,
+  API.EMERGENCY_HELP,
+);
 
 export { wrappedComponent as SingleEmergencyHelpPage };

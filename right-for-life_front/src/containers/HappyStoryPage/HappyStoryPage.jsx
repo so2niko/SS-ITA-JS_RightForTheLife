@@ -1,18 +1,22 @@
-import React from 'react'
-import { HAPPY_STORIES } from '../../rootConstants';
-import {withFetchDataIndicators} from "../../hoc/withFetchDataIndicators";
-import {ErrorIndicator} from "../../components/ErrorIndicator";
-import {Link, useParams} from "react-router-dom";
-import {Article} from "../../components/Article";
+import React from "react";
+import { Link, useParams } from "react-router-dom";
+import { API } from "../../rootConstants";
+import { Article } from "../../components/Article";
+import { ErrorIndicator } from "../../components/ErrorIndicator";
+import { withFetchDataIndicators } from "../../hoc/withFetchDataIndicators";
 
-const HappyStoryPage = ({data}) => {
-  const {id} = useParams();
+const HappyStoryPage = ({ data }) => {
+  const { id } = useParams();
   const article = data.find(article => article.id === Number(id));
+
   if (!article)
-    return <ErrorIndicator
-      message="Страница не найдена :("
-      renderAction={() => <Link to="/">Вернуться на главную</Link>}
-    />;
+    return (
+      <ErrorIndicator
+        message="Страница не найдена :("
+        renderAction={() => <Link to="/">Вернуться на главную</Link>}
+      />
+    );
+  
   return (
     <div className="-mt-10 max-w-4xl mx-auto">
       <Article article={article} />
@@ -20,7 +24,9 @@ const HappyStoryPage = ({data}) => {
   );
 };
 
-const dataApi = 'https://raw.githubusercontent.com/AlexeyKasaev3/softServe-academy/master/demo-3-data/news.json';
-const wrappedComponent = withFetchDataIndicators(HappyStoryPage, HAPPY_STORIES, dataApi);
+const wrappedComponent = withFetchDataIndicators(
+  HappyStoryPage,
+  API.HAPPY_STORIES,
+);
 
-export {wrappedComponent as HappyStoryPage};
+export { wrappedComponent as HappyStoryPage };
