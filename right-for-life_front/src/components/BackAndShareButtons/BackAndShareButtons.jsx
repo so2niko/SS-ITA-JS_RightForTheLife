@@ -19,11 +19,11 @@ export const BackAndShareButtons = () => {
 
   return (
     <div className="flex flex-row justify-between">
-      <Link to={`${currentURL.slice(0, currentURL.lastIndexOf('/'))}`}
+      <button onClick={window.history.length === 1 ? null : () => window.history.back()}
             className="rounded-full h-12 w-12 flex items-center justify-center
                        bg-white px-0 py-0 hover:bg-lightgray-200 mt-6 ml-6 ">
         <i className="fa fa-arrow-left" style={{'fontSize': '20px', color: 'gray'}}></i>
-      </Link>
+      </button>
       <div className="mt-4 mr-6">
         <div className={`share flex flex-col border-white rounded-full pt-2 px-1 ${active ? 'border bg-white' : ''}`}>
           <button

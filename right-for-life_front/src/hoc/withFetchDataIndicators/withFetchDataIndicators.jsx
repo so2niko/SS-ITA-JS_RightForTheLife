@@ -5,19 +5,16 @@ import { requestData } from './actions';
 import { ErrorIndicator } from '../../components/ErrorIndicator';
 import { LoadIndicator } from '../../components/LoadIndicator';
 
-export const withFetchDataIndicators = (WrappedComponent, dataName, dataApi) => (props) => {
-  const name = dataName;
-  const api = dataApi;
+export const withFetchDataIndicators = (WrappedComponent, API, isUpdate) => (props) => {
+  const { name, api } = API;
   const dispatch = useDispatch();
   let { error, data } = useSelector(({ fetchDataReducer }) => ({ ...fetchDataReducer }));
 
-  data = data[name]; 
+  data = data[name];
 
   useEffect(() => {
-    if (!data) {
-      dispatch(requestData({ api, name }));
-    }
-  }, [data, api, name, dispatch]);
+    if (isUpdate || !data) dispatch(requestData({ api, name }));
+  }, []);
 
   const action = (
     <button 
@@ -34,6 +31,9 @@ export const withFetchDataIndicators = (WrappedComponent, dataName, dataApi) => 
 
 withFetchDataIndicators.propTypes = {
   WrappedComponent: PropTypes.func.isRequired,
-  dataName: PropTypes.string.isRequired,
-  dataApi: PropTypes.string.isRequired,
+  API: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    api: PropTypes.string.isRequired,
+  }).isRequired,
+  isUpdate: PropTypes.bool,
 }
