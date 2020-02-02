@@ -7,7 +7,7 @@ import { withFetchDataIndicators } from "../../hoc/withFetchDataIndicators";
 
 const SingleEmergencyHelpPage = ({ data }) => {
   let { id } = useParams();
-  const article = data.find(article => article.id === Number(id));
+  const article = data.find(article => article.id === id);
 
   if (!article)
     return (

@@ -1,30 +1,32 @@
+export const BE_URL = 'http://localhost:4000';
+
 export const API = Object.freeze({
   ANIMALS: {
     name: 'ANIMALS',
-    api: 'https://alex-boklag.github.io/SSA-Demo-AnimalShelter/db/animals.json',
+    api: `${BE_URL}/animals`,
   },
   NEWS: {
     name: 'NEWS',
-    api: 'https://raw.githubusercontent.com/protonaby/demo3-animal-shelter/master/db/news.json',
+    api: `${BE_URL}/news`,
   },
   HAPPY_STORIES: {
     name: 'HAPPY_STORIES',
-    api: 'https://raw.githubusercontent.com/AlexeyKasaev3/softServe-academy/master/demo-3-data/news.json',
+    api: `${BE_URL}/happyStories`,
   },
   DONATE: {
     name: 'DONATE',
-    api: 'https://student-dev-ivan.github.io/Web-UI-HW/DB/donatePageInfo.json',
+    api: `${BE_URL}/donate`,
   },
   SUPPLIES: {
     name: 'SUPPLIES',
-    api: 'https://topvv.github.io/SoftServe-IT-Academy/Demo/Demo3/supplies.json',
+    api: `${BE_URL}/supplies`,
   },
   ABOUT_US: {
     name: 'ABOUT_US',
-    api: 'https://topvv.github.io/SoftServe-IT-Academy/Demo/Demo3/about_us_info.json',
+    api: `${BE_URL}/about`,
   },
   EMERGENCY_HELP: {
     name: 'EMERGENCY_HELP',
-    api: 'https://alex-boklag.github.io/SSA-Demo-AnimalShelter/db/emergency.json',
+    api: `${BE_URL}/emergency`,
   }, 
 });
