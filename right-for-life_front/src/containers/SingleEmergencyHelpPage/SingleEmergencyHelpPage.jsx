@@ -1,13 +1,13 @@
-import React from "react";
-import { Link, useParams } from "react-router-dom";
-import { API } from "../../rootConstants";
-import { Article } from "../../components/Article";
-import { ErrorIndicator } from "../../components/ErrorIndicator";
-import { withFetchDataIndicators } from "../../hoc/withFetchDataIndicators";
+import React from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { Article } from '../../components/Article';
+import { ErrorIndicator } from '../../components/ErrorIndicator';
+import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
+import { API } from '../../rootConstants';
 
 const SingleEmergencyHelpPage = ({ data }) => {
   let { id } = useParams();
-  const article = data.find(article => article.id === id);
+  const article = data.find(article => article._id === id);
 
   if (!article)
     return (
