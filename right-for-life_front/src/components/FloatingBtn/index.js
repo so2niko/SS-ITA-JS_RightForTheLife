@@ -17,11 +17,12 @@
  * base:
  * <FloatingBtn />
  * props:
- * icon="[icon code from font awesome; e.g. fa-share-alt]"
+ * icon="[icon code from font awesome; e.g. "share-alt"]"
  * position="[absolute position in TailwindCSS; if unset "left-0 ml-2 mt-2" used]"
- * url="[url to component; e.g. /animals]"
- * onClick={[function]} if set onClick ignored
- * content=[node, e.g. <div>123</div>,]
+ * url="[link which will be opened after click on button; e.g. "/animals"]"
+ * onClick={[function]} if set url ignored
+ * content=[react node, e.g. <div>123</div>,]
+ * visible={boolean} required for exit animation
  * */
 
 export { FloatingBtn } from "./FloatingBtn.jsx";

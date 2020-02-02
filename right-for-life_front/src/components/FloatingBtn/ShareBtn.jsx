@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { FloatingBtn } from "./FloatingBtn.jsx";
 import PropTypes from "prop-types";
-import CSSTransition from 'react-addons-css-transition-group';
 import {
   FacebookShareButton,
   FacebookIcon,
@@ -17,71 +16,68 @@ import {
 
 } from "react-share";
 
-export class ShareBtn extends React.Component {
-  state = {
-    closed: false
-  };
+const buttonComponentsArr = [
+  {
+    key: 'facebook-btn',
+    btn: FacebookShareButton,
+    icon: FacebookIcon
+  },
+  {
+    key: 'viber-btn',
+    btn: ViberShareButton,
+    icon: ViberIcon
+  },
+  {
+    key: 'telegram-btn',
+    btn: TelegramShareButton,
+    icon: TelegramIcon
+  },
+  {
+    key: 'whatsapp-btn',
+    btn: WhatsappShareButton,
+    icon: WhatsappIcon
+  },
+];
 
-  buttonComponentsArr = [
-    {
-      key: 'facebook-btn',
-      btn: FacebookShareButton,
-      icon: FacebookIcon
-    },
-    {
-      key: 'viber-btn',
-      btn: ViberShareButton,
-      icon: ViberIcon
-    },
-    {
-      key: 'telegram-btn',
-      btn: TelegramShareButton,
-      icon: TelegramIcon
-    },
-    {
-      key: 'whatsapp-btn',
-      btn: WhatsappShareButton,
-      icon: WhatsappIcon
-    },
-  ];
+export const ShareBtn = ({position, shareUrl = window.location.href,}) => {
+  let fromStorage = sessionStorage.getItem('share-opened');
+  // comparing using instead JSON.parse for incorrect JSON cases
+  fromStorage = fromStorage ? fromStorage === 'true' : true;
 
-  render() {
-    const {position, shareUrl = window.location.href,} = this.props;
+  const [opened, setOpened] = useState(fromStorage);
 
-    return (
-      <div className="relative width-full">
-        <FloatingBtn
-          icon={this.state.closed ? 'fa-share-alt' : 'fa-times'}
-          position={position}
-          onClick={this.handleClick.bind(this)}/>
+  return (
+    <div className="relative width-full">
+      <FloatingBtn
+        icon={opened ? 'times' : 'share-alt'}
+        position={position}
+        onClick={() => {
+          setOpened(!opened);
+          sessionStorage.setItem('share-opened', JSON.stringify(!opened));
+        }}/>
 
-        {this.buttonComponentsArr.map((item, index) => (
-          <div key={item.key} style={{transform: `translate(0, ${70 * (index + 1)}px)`}}>
-            <CSSTransition
-              transitionName="floating-button__extend"
-              transitionEnter={false}
-              transitionLeaveTimeout={250}>
-              {this.state.closed ? null :
-                <div data-floating-btn-index={index + 1}>
-                  <FloatingBtn
-                    position={position}
-                    content={(
-                      <item.btn url={shareUrl}>
-                        <item.icon size={35} round={true}/>
-                      </item.btn>
-                    )}/>
-                </div>
-              }
-            </CSSTransition>
-          </div>
-        ))}
-      </div>)
-  }
+      {buttonComponentsArr.map((item, index) => (
+        <div
+          key={item.key}
+          style={{transform: `translate(0, ${70 * (index + 1)}px)`}}
+          data-floating-btn-index={index + 1}>
 
-  handleClick() {
-    this.setState({closed: !this.state.closed})
-  }
-}
+          <FloatingBtn
+            position={position}
+            content={(
+              <item.btn url={shareUrl}>
+                <item.icon size={35} round={true}/>
+              </item.btn>
+            )}
+            visible={opened}
+          />
+
+        </div>
+      ))}
+
+    </div>
+  )
+};
 
 ShareBtn.propTypes = {
   shareUrl: PropTypes.string,
