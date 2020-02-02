@@ -4,7 +4,7 @@ import { API } from '../../rootConstants';
 import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
 
 export const ArticlesListWidget = () => (
-  <article className="h-full w-full flex flex-wrap flex-row lg:flex-col justify-between rounded-xl text-lightgray-700">
+  <article className="h-full w-full flex flex-wrap flex-row lg:flex-col justify-between rounded-xl font-bold text-lightgray-700">
     <ArticlesListWidgetEmergency 
       color="red" 
       url="emergency" 
