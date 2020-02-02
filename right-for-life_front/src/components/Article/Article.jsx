@@ -29,15 +29,19 @@ export const Article = ({article}) => {
         >
           {calcAge(Number(date))} назад
         </aside>
+      </div>
+        { gallery?.length ? (
+          <div className="mb-10 md:mx-20">
+            <ArticleImageGallery images={gallery} />
+          </div>
+        ) : null }
+      <div className="mx-10 md:mx-20">
         <p className="font-medium text-lightgray-600 mb-12">
           {text}
         </p>
-        { gallery && gallery.length ? <div className="mb-10">
-          <ArticleImageGallery images={gallery} />
-        </div> : null }
-        { videos && videos.length ? videos.map(video =>
+        { videos?.length ? videos.map(video =>
           <div className="video-iframe-container" key={video}>
-            <YouTube videoId={video}/>
+            <YouTube videoId={video} />
           </div>) : null }
       </div>
     </article>
