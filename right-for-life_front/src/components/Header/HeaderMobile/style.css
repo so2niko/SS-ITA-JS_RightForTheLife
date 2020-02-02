@@ -1,0 +1,35 @@
+.header__mobile-menu-container .header__mobile-menu-enter-active {
+  overflow-y: hidden;
+}
+
+.header__mobile-menu-enter {
+  transform: translate(0, 100%);
+}
+.header__mobile-menu-enter-active {
+  transform: translate(0);
+  transition: 300ms;
+}
+.header__mobile-menu-exit {
+  transform: translate(0);
+  overflow-y: hidden;
+}
+
+.header__mobile-menu-exit-active {
+  transform: translate(0, 100%);
+  transition: 300ms;
+}
+
+.header__mobile-menu-bg-enter {
+  opacity: 0;
+}
+.header__mobile-menu-bg-enter-active {
+  opacity: .25;
+  transition: opacity 200ms;
+}
+.header__mobile-menu-bg-exit {
+  opacity: .25;
+}
+.header__mobile-menu-bg-exit-active {
+  opacity: 0;
+  transition: opacity 200ms;
+}

@@ -1,7 +1,6 @@
 import React from "react";
 import { FloatingBtn } from "./FloatingBtn.jsx";
 import PropTypes from "prop-types";
-import CSSTransition from 'react-addons-css-transition-group';
 import {
   FacebookShareButton,
   FacebookIcon,
@@ -16,6 +15,7 @@ import {
   WhatsappIcon,
 
 } from "react-share";
+const CSSTransition = () => <div/>;
 
 export class ShareBtn extends React.Component {
   state = {
