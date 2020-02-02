@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BE_URL } from '../helpers/configs';
 
 class App extends Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:4000/animals')
+    fetch(`${BE_URL}/animals`)
       .then(resp => resp.json())
       .then(data => {
         console.log(data);
@@ -23,7 +24,7 @@ class App extends Component {
   };
 
   newAnimal = () => {
-    fetch('http://localhost:4000/animals', {
+    fetch(`${BE_URL}/animals`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: 'Thor', type: 'cat', gender: 'm', age: 1564661532000 }),
@@ -33,7 +34,7 @@ class App extends Component {
   removeAnimal = (e) => {
     e.preventDefault();
     console.log(this.state.textId);
-    fetch('http://localhost:4000/animals', {
+    fetch(`${BE_URL}/animals`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ _id: this.state.textId }),
