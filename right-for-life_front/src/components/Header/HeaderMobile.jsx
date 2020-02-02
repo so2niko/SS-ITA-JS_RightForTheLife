@@ -29,18 +29,20 @@ export class HeaderMobile extends React.Component {
         {this.state.categoriesClosed ? null : (
           <div>
             <div className="opacity-25 bg-black fixed w-full h-full z-30" onClick={this.hideCategories}/>
-            <ul
-              className="rounded-t-xl fixed flex flex-col justify-between items-center w-full bg-gray-100 shadow-2xl font-bold text-xl text-gray-600 z-30 bottom-0 mb-16 py-8 overflow-auto max-h-full">
-              <HeaderLink to="/" title="Главная" onClick={this.hideCategories}/>
+            <div className="fixed justify-center items-center w-full z-30 bottom-0 mb-16 overflow-auto max-h-full">
+              <ul
+                className="rounded-t-xl flex flex-col justify-between items-center w-full bg-gray-100 shadow-2xl font-bold text-xl text-gray-600 py-8">
+                <HeaderLink to="/" title="Главная" onClick={this.hideCategories}/>
 
-              <HeaderButton to="/help" title="Помощь" color="green" onClick={this.hideCategories}/>
-              <HeaderLink to="/animals" title="Питомцы" onClick={this.hideCategories}/>
-              <HeaderLink to="/stories" title="Счастливые истории" onClick={this.hideCategories}/>
+                <HeaderButton to="/help" title="Помощь" color="green" onClick={this.hideCategories}/>
+                <HeaderLink to="/animals" title="Питомцы" onClick={this.hideCategories}/>
+                <HeaderLink to="/stories" title="Счастливые истории" onClick={this.hideCategories}/>
 
-              <HeaderButton to="/emergency" title="Срочники" color="red" onClick={this.hideCategories}/>
-              <HeaderLink to="/news" title="Новости" onClick={this.hideCategories}/>
-              <HeaderLink to="/about" title="О нас" onClick={this.hideCategories}/>
-            </ul>
+                <HeaderButton to="/emergency" title="Срочники" color="red" onClick={this.hideCategories}/>
+                <HeaderLink to="/news" title="Новости" onClick={this.hideCategories}/>
+                <HeaderLink to="/about" title="О нас" onClick={this.hideCategories}/>
+              </ul>
+            </div>
           </div>
         )}
 
@@ -49,7 +51,7 @@ export class HeaderMobile extends React.Component {
   }
 
   toggleCategories = () => {
-    if(this.state.categoriesClosed) {
+    if (this.state.categoriesClosed) {
       this.showCategories();
     } else {
       this.hideCategories();
