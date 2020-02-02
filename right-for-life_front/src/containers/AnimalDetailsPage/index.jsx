@@ -1,15 +1,15 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import CSSTransition from "react-addons-css-transition-group";
-import { API } from "../../rootConstants";
-import { AnimalDetails } from "./AnimalDetails.jsx";
-import { ErrorIndicator } from "../../components/ErrorIndicator";
-import { withFetchDataIndicators } from "../../hoc/withFetchDataIndicators";
-import "./style.css";
+import React from 'react';
+import CSSTransition from 'react-addons-css-transition-group';
+import { Link } from 'react-router-dom';
+import { ErrorIndicator } from '../../components/ErrorIndicator';
+import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
+import { API } from '../../rootConstants';
+import { AnimalDetails } from './AnimalDetails.jsx';
+import './style.css';
 
 const AnimalDetailsPage = props => {
   const petId = props.match.params.id;
-  const petObj = props.data.find(animal => String(animal.id) === petId);
+  const petObj = props.data.find(animal => String(animal._id) === petId);
 
   return petObj ? (
     <CSSTransition

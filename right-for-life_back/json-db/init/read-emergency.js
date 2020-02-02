@@ -34,7 +34,7 @@ function extractedAnimals(Animal) {
       date: emergency.date,
       title: emergency.title,
       photo: emergency.photo,
-      text: emergency.photo,
+      text: emergency.text,
     }));
   }
   return newEmergencies;
