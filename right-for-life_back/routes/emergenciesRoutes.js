@@ -2,14 +2,31 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 
-const AboutScheme = require('../models/AboutSchema.js');
-const AboutModel = mongoose.connection.model('About', AboutScheme);
+const EmergencyScheme = require('../models/EmergencySchema.js');
+const EmergencyModel = mongoose.connection.model('Emergency', EmergencyScheme);
 
 router.get('/', (req, res, next) => {
-  AboutModel.findOne()
+  EmergencyModel.find()
     .exec()
     .then(doc => {
       res.status(200).json(doc);
+    });
+});
+
+router.get('/:ID', (req, res, next) => {
+  EmergencyModel.findById(new mongoose.Types.ObjectId(req.params.emergencyID))
+    .exec()
+    .then(doc => {
+      if (doc)
+        res.status(200).json(doc);
+      else
+        throw { status: 400, message: 'not found' };
+    })
+    .catch(err => {
+      if (err.status === 400)
+        res.status(400).json(err);
+      else
+        res.status(500).json(err);
     });
 });
 
@@ -19,7 +36,7 @@ router.post('/', (req, res, next) => {
     name: req.body.name,
     price: req.body.price,
   };
-  const newAnimal = new AboutModel(animal);
+  const newAnimal = new EmergencyModel(animal);
   newAnimal.save()
     .then(result => {
       console.log(result);
