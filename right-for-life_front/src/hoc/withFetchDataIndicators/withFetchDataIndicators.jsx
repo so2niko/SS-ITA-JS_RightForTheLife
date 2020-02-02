@@ -1,20 +1,23 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'; 
 import PropTypes from 'prop-types';
+import { useQuery } from '../../helpers/useQuery';
 import { requestData } from './actions';
 import { ErrorIndicator } from '../../components/ErrorIndicator';
 import { LoadIndicator } from '../../components/LoadIndicator';
 
 export const withFetchDataIndicators = (WrappedComponent, API, isUpdate) => (props) => {
-  const { name, api } = API;
+  const { error, data: dataStore } = useSelector(({ fetchDataReducer }) => ({ ...fetchDataReducer }));
   const dispatch = useDispatch();
-  let { error, data } = useSelector(({ fetchDataReducer }) => ({ ...fetchDataReducer }));
+  const query = useQuery().toString();
+  const { name, api: baseApi } = API;
 
-  data = data[name];
+  const data = dataStore[name];
+  const api = baseApi + `${query ? `?${query}` : ''}`;
 
   useEffect(() => {
     if (isUpdate || !data) dispatch(requestData({ api, name }));
-  }, []);
+  }, [query]);
 
   const action = (
     <button 

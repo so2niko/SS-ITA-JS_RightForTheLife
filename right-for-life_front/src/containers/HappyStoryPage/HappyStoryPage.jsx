@@ -13,7 +13,7 @@ const HappyStoryPage = ({ data }) => {
     return (
       <ErrorIndicator
         message="Страница не найдена :("
-        renderAction={() => <Link to="/">Вернуться на главную</Link>}
+        renderAction={() => <Link to="/stories">Посмотреть другие истории</Link>}
       />
     );
   
@@ -27,6 +27,7 @@ const HappyStoryPage = ({ data }) => {
 const wrappedComponent = withFetchDataIndicators(
   HappyStoryPage,
   API.HAPPY_STORIES,
+  true,
 );
 
 export { wrappedComponent as HappyStoryPage };

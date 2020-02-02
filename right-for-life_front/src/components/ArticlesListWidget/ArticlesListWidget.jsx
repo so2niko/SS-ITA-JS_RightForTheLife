@@ -3,26 +3,31 @@ import { Link } from 'react-router-dom';
 import { API } from '../../rootConstants';
 import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
 
-export const ArticlesListWidget = () => {
-  return (
-    <article className="h-full flex flex-col justify-between rounded-xl text-lightgray-700">
-      <ArticlesListWidgetEmergency color="red" url="emergency" />
-      <ArticlesListWidgetItem
-        color="green"
-        url="help"
-        data={{ photo: 'https://pbs.twimg.com/media/Dp9hsCEWsAAhWXP.jpg', title: "ПОМОЩЬ ФОНДУ" }}
-      />
-      <ArticlesListWidgetNews url="news" />
-      <div className="w-full flex justify-center"></div>
-    </article>
-  );
-};
+export const ArticlesListWidget = () => (
+  <article className="h-full w-full flex flex-wrap flex-row lg:flex-col justify-between rounded-xl text-lightgray-700">
+    <ArticlesListWidgetEmergency 
+      color="red" 
+      url="emergency" 
+    />
+    <ArticlesListWidgetItem
+      color="green"
+      url="help"
+      data={{ photo: 'https://pbs.twimg.com/media/Dp9hsCEWsAAhWXP.jpg', title: "ПОМОЩЬ ФОНДУ" }}
+    />
+    <ArticlesListWidgetNews 
+      url="news" 
+    />
+    <div className="min-w-full flex justify-center" />
+  </article>
+);
 
 const ArticlesListWidgetItem = ({ data, color, url }) => {
   const { id, title, photo } = data[0] || data; 
 
   return (
-    <Link to={`${id ? `/${url}/${id}` : `/${url}`}`}>
+    <Link 
+      to={`${id ? `/${url}/${id}` : `/${url}`}`}
+      className="block w-full">
       <section 
         className="rounded-xl shadow-2xl"
         style={{ height: '7.5rem' }}>

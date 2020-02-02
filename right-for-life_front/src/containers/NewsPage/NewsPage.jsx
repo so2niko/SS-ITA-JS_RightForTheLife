@@ -27,6 +27,7 @@ const NewsPage = ({ data }) => {
 const wrappedComponent = withFetchDataIndicators(
   NewsPage, 
   API.NEWS,
+  true,
 );
 
 export { wrappedComponent as NewsPage };

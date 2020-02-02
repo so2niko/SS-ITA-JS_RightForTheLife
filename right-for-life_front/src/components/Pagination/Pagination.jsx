@@ -9,7 +9,7 @@ export function Pagination ({classNames, currentPageNum, totalPagesQuantity, pag
     classNames,
   );
 
-  const pageButtonClasses = "bg-white w-10 h-10 sm:w-12 sm:h-12 flex rounded-lg sm:rounded-full sm:mx-1 justify-center items-center border border-gray-400";
+  const pageButtonClasses = "flex w-10 h-10 sm:w-12 sm:h-12 sm:mx-1 rounded-full justify-center items-center font-bold shadow-md text-gray-600 bg-white";
 
   function handlePaginationElementClick(event, nextPage) {
     event.preventDefault();
@@ -103,7 +103,7 @@ function PaginationButton({classNames, pageNum, isActive, paginationElementClick
   return (
     <Link
       to={`${pathname}?page=${pageNum}`}
-      className={cn(classNames, {'text-white bg-blue-500 cursor-default': isActive})}
+      className={cn(classNames, {'font-bold text-blue-700 bg-blue-200 cursor-default': isActive})}
       onClick={isActive ? (event)=>{event.preventDefault()} : (event) => paginationElementClickHandler(event, pageNum)}
     >
       {pageNum}
