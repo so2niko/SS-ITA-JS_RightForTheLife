@@ -6,24 +6,19 @@ import { ErrorIndicator } from "../../components/ErrorIndicator";
 import { withFetchDataIndicators } from "../../hoc/withFetchDataIndicators";
 import "./style.css";
 
-
 const AnimalDetailsPage = props => {
   const petId = props.match.params.id;
-  const petObj = props.data.find(animal => String(animal.id) === petId);
+  const petObj = props.data.find(animal => String(animal._id) === petId);
 
-  return petObj ? (
-    <AnimalDetails {...petObj} />
-  ) : (
+  return petObj ? <AnimalDetails {...petObj} /> : (
     <ErrorIndicator
       message="Страница не найдена :("
       renderAction={() => <Link to="/animals">Вернуться на главную</Link>}
     />
   );
 };
-
 const wrappedComponent = withFetchDataIndicators(
   AnimalDetailsPage,
   API.ANIMALS,
 );
-
 export { wrappedComponent as AnimalDetailsPage };
