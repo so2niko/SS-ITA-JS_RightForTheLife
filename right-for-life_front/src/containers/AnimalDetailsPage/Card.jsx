@@ -14,7 +14,7 @@ class Card extends React.Component {
   }
 
   render() {
-    const { name, age, photos, gender, breed } = this.props;
+    const { name, age, photos, gender } = this.props;
 
     return (
       <>
