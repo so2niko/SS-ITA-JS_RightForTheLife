@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import {Link, useLocation} from "react-router-dom";
 import {
   FacebookIcon,
   FacebookShareButton,
@@ -13,7 +12,6 @@ import {
 import './style.css';
 
 export const BackAndShareButtons = () => {
-  const {pathname: currentURL} = useLocation();
   const shareUrl = window.location.href;
   const [active, setActive] = useState();
 
