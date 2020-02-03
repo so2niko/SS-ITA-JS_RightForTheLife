@@ -13,7 +13,7 @@ const AnimalsList = ({ data }) => (
 const wrappedComponent = withFetchDataIndicators(
   withPagination(AnimalsList, 8),
   API.ANIMALS,
-  true
+  true,
 );
 
 export { wrappedComponent as AnimalsList };
