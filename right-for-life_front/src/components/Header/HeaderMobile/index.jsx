@@ -9,10 +9,23 @@ export class HeaderMobile extends React.Component {
   state = {
     pagesListVisible: false,
   };
-  useOrNotBack = false;
+  prevUrl = null;
 
   componentDidMount() {
-    window.addEventListener('popstate', this.removePagesListElem);
+    window.addEventListener('popstate', () => {
+      if (this.state.pagesListVisible) {
+        this.removePagesListElem();
+      }
+
+      /* fixme: If you open a category, then go back, and want to go back,
+               *** you need to double-click back to return from this page
+              possible solution: you need to call history.back() before redirecting to the category
+              */
+      if (this.prevUrl === window.location.href) {
+        this.prevUrl = null;
+        window.history.back();
+      }
+    });
     window.addEventListener('resize', () => {
       if (window.innerWidth >= 1024)
         this.hidePagesList()
@@ -56,12 +69,9 @@ export class HeaderMobile extends React.Component {
               onExited={() => this.menuContainer.current.style.overflow = null}
             >
 
-              {/* fixme: If you open a category, then go back, and want to go back,
-               *** you need to double-click back to return from this page
-              possible solution: you need to call history.back() before redirecting to the category
-              */}
               <Menu hidePagesList={() => {
-                this.removePagesListElem();
+                this.prevUrl = window.location.href;
+                this.removePagesListElem()
               }}/>
 
             </CSSTransition>
