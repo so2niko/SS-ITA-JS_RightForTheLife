@@ -40,7 +40,7 @@ function App({store}) {
             <Route exact path="/about" component={AboutPage}/>
             <Route exact path="/emergency" component={EmergencyHelpPage}/>
             <Route exact path="/emergency/:id" component={SingleEmergencyHelpPage}/>
-            <Route exact path="/login" component={LoginPage}/>
+            <Route exact path="/admin" component={LoginPage}/>
             <Route render={() =>
               <ErrorIndicator
                 message="Страница не найдена :("
