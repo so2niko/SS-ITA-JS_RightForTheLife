@@ -8,7 +8,7 @@ import "./style.css";
 
 const AnimalDetailsPage = props => {
   const petId = props.match.params.id;
-  const petObj = props.data.find(animal => String(animal.id) === petId);
+  const petObj = props.data.find(animal => String(animal._id) === petId);
 
   return petObj ? <AnimalDetails {...petObj} /> : (
     <ErrorIndicator
