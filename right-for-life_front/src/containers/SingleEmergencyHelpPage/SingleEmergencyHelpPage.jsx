@@ -29,7 +29,6 @@ const SingleEmergencyHelpPage = ({ data }) => {
 const wrappedComponent = withFetchDataIndicators(
   SingleEmergencyHelpPage,
   API.EMERGENCY_HELP,
-  true,
 );
 
 export { wrappedComponent as SingleEmergencyHelpPage };

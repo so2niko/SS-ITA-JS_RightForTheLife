@@ -27,7 +27,6 @@ const HappyStoryPage = ({ data }) => {
 const wrappedComponent = withFetchDataIndicators(
   HappyStoryPage,
   API.HAPPY_STORIES,
-  true,
 );
 
 export { wrappedComponent as HappyStoryPage };
