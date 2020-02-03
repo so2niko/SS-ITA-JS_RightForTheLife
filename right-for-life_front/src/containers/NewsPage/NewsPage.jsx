@@ -18,7 +18,7 @@ const NewsPage = ({ data }) => {
     );
 
   return (
-    <div className="-mt-10 max-w-4xl mx-auto mb-20">
+    <div className="-mt-6 lg:-mt-8 max-w-4xl mx-auto mb-20">
       <Article article={article} />
     </div>
   );

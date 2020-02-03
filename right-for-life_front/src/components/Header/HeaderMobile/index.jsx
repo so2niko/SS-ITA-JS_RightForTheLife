@@ -6,26 +6,18 @@ import './style.css'
 
 export class HeaderMobile extends React.Component {
   menuContainer = React.createRef();
+
   state = {
     pagesListVisible: false,
   };
-  prevUrl = null;
 
   componentDidMount() {
     window.addEventListener('popstate', () => {
       if (this.state.pagesListVisible) {
         this.removePagesListElem();
       }
-
-      /* fixme: If you open a category, then go back, and want to go back,
-               *** you need to double-click back to return from this page
-              possible solution: you need to call history.back() before redirecting to the category
-              */
-      if (this.prevUrl === window.location.href) {
-        this.prevUrl = null;
-        window.history.back();
-      }
     });
+
     window.addEventListener('resize', () => {
       if (window.innerWidth >= 1024)
         this.hidePagesList()
@@ -35,51 +27,30 @@ export class HeaderMobile extends React.Component {
   render() {
     return (
       <nav className="block lg:hidden">
-        <ul
-          className="header-element fixed flex justify-center items-center w-full bg-white shadow-2xl z-40 h-16 bottom-0 cursor-pointer"
-          onClick={this.togglePagesList}>
-          <div className="mx-2">
-            <img width="40px" src={logo} alt="logo"/>
-          </div>
+        <ul onClick={this.togglePagesList}
+            className="header__mobile-menu fixed flex justify-center items-center w-full bg-white shadow-2xl z-40 h-16 bottom-0 cursor-pointer">
+          <div className="mx-2"><img width="40px" src={logo} alt="logo"/></div>
         </ul>
 
         <div>
-          <CSSTransition
-            in={this.state.pagesListVisible}
-            unmountOnExit={true}
-            timeout={300}
-            classNames="header__mobile-menu-bg">
-            <div className="opacity-25 bg-black fixed w-full h-full z-30 bottom-0"
-                 onClick={this.hidePagesList}/>
+          <CSSTransition in={this.state.pagesListVisible} unmountOnExit={true} timeout={300}
+                         classNames="header__mobile-menu-bg">
+            <div className="opacity-25 bg-black fixed w-full h-full z-30 bottom-0" onClick={this.hidePagesList}/>
           </CSSTransition>
 
-          <div
-            className="header__mobile-menu-container fixed justify-center items-center w-full z-30 bottom-0 mb-16 overflow-auto"
-            style={{maxHeight: 'calc(100vh - 4rem)'}}
-            ref={this.menuContainer}>
+          <div style={{maxHeight: 'calc(100vh - 4rem)'}} ref={this.menuContainer}
+               className="header__mobile-menu-container fixed justify-center items-center w-full z-30 bottom-0 mb-16 overflow-auto">
 
-            <CSSTransition
-              in={this.state.pagesListVisible}
-              unmountOnExit={true}
-              timeout={300}
-              classNames="header__mobile-menu"
-              onEntering={() => this.menuContainer.current.style.overflow = 'hidden'}
-              onExiting={() => this.menuContainer.current.style.overflow = 'hidden'}
-              onEntered={() => this.menuContainer.current.style.overflow = null}
-              onExited={() => this.menuContainer.current.style.overflow = null}
-            >
-
-              <Menu hidePagesList={() => {
-                this.prevUrl = window.location.href;
-                this.removePagesListElem()
-              }}/>
-
+            <CSSTransition in={this.state.pagesListVisible} unmountOnExit={true} timeout={300}
+                           classNames="header__mobile-menu"
+                           onEntering={() => this.menuContainer.current.style.overflow = 'hidden'}
+                           onExiting={() => this.menuContainer.current.style.overflow = 'hidden'}
+                           onEntered={() => this.menuContainer.current.style.overflow = null}
+                           onExited={() => this.menuContainer.current.style.overflow = null}>
+              <Menu/>
             </CSSTransition>
-
           </div>
         </div>
-
-
       </nav>
     )
   }
@@ -102,10 +73,11 @@ export class HeaderMobile extends React.Component {
 
   removePagesListElem = () => {
     const scrollY = document.body.style.top;
-    document.body.style.position = '';
-    document.body.style.top = '';
-    window.scrollTo(0, parseInt(scrollY || '0') * -1);
+    document.body.style.position = null;
+    document.body.style.top = null;
+    document.body.style.maxWidth = null;
 
+    window.scrollTo(0, parseInt(scrollY || '0') * -1);
     this.setState({pagesListVisible: false});
   };
 
@@ -114,7 +86,6 @@ export class HeaderMobile extends React.Component {
     window.history.pushState(null, null, window.location.href);
 
     this.setState({pagesListVisible: true});
-
     const scrollTop = window.pageYOffset;
 
     document.body.style.position = 'fixed';
