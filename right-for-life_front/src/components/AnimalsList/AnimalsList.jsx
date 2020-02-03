@@ -6,7 +6,7 @@ import { AnimalCard } from "../../components/AnimalCard/AnimalCard";
 
 const AnimalsList = ({ data }) => (
 	<ul className="flex flex-wrap justify-center mb-8">
-		{ data.map(animal => <AnimalCard key={animal.id} animal={animal} />) }
+		{ data.map(animal => <AnimalCard key={animal._id} animal={animal} />) }
 	</ul>
 );
 

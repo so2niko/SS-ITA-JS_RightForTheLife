@@ -7,7 +7,7 @@ import { Article } from "../../components/Article";
 
 const NewsPage = ({ data }) => {
   let { id } = useParams();
-  const article = data.find(article => article.id === Number(id));
+  const article = data.find(article => article._id === id);
 
   if (!article)
     return (

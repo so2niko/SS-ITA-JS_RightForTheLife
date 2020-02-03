@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 export const ArticleItem = ({article}) => {
-  const {title, date, photo, text, id} = article;
+  const { title, date, photo, text, _id } = article;
   const { pathname: currentURL } = useLocation();
 
   return (
@@ -17,7 +17,7 @@ export const ArticleItem = ({article}) => {
         <h2 className="uppercase mb-2 font-bold">{title.slice(0, 80)}{title.length >= 80 ? '...' : ''}</h2>
         <p className="mt-b font-size-sm">{text.slice(0, 120)}...</p>
           <Link
-            to={`${currentURL}/${id}`}
+            to={`${currentURL}/${_id}`}
             className="min-w-5/12 bg-orange-300 hover:bg-orange-400 text-orange-700 font-bold py-3 px-2
                        rounded-xl outline-none absolute"
             style={{bottom: '20px', right: '20px'}}
