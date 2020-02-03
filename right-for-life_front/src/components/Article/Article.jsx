@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 import calcAge from '../../helpers/calcAge';
-import {BackAndShareButtons} from "../BackAndShareButtons";
+import { BackAndShareButtons } from '../BackAndShareButtons';
 
 export const Article = ({article}) => {
   const {title, date, photo, text} = article;
@@ -20,9 +20,7 @@ export const Article = ({article}) => {
         {title}
       </h2>
       <div className="mx-10 md:mx-20">
-        <aside
-          className="font-medium text-lightgray-700 text-right text-xl mb-10"
-        >
+        <aside className="font-medium text-lightgray-700 text-right text-xl mb-10">
           {calcAge(Number(date))} назад
         </aside>
         <p className="font-medium text-lightgray-600">
