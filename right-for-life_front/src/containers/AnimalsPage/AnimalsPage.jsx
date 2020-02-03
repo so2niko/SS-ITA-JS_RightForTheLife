@@ -3,7 +3,7 @@ import { Filters } from "../../components/Filters";
 import { AnimalsList } from "../../components/AnimalsList";
 
 export const AnimalsPage = () => {
-  const filters = [['breed', 'dog'], ['breed', 'cat'], ['gender', 'mars'], ['gender', 'venus']];
+  const filters = [['type', 'пес'], ['type', 'кот'], ['gender', 'M'], ['gender', 'Ж']];
 
   return (
     <div className="animals-page -mx-4">

@@ -14,9 +14,9 @@ export const FiltersItem = ({ filter, updateParams }) => {
         onClick={() => updateParams(filter)} 
       />
       <label 
-        className="block w-full p-2 rounded-lg text-center text-lg text-gray-600 bg-gray-100 cursor-pointer" 
+        className="block w-full p-2 rounded-lg text-center text-lg text-gray-600 bg-gray-100 cursor-pointer uppercase font-bold" 
         htmlFor={value}>
-        <i className={`fas fa-${value}`} />
+        {value}
       </label>
     </>
   );
