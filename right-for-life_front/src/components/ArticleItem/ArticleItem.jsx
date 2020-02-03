@@ -11,7 +11,7 @@ export const ArticleItem = ({article}) => {
         className="h-64 rounded-xl bg-cover shadow-md bg-center"
         style={{backgroundImage: "url(" + photo + ")"}}
       />
-      <div className="z-00 w-19/20 bg-white text-lightgray-700 shadow-xl rounded-xl self-center -mt-10 px-5
+      <div className="z-0 w-19/20 bg-white text-lightgray-700 shadow-xl rounded-xl self-center -mt-10 px-5
                       pt-5 overflow-hidden relative xl:h-56">
         <p className="font-medium mb-2">{new Date(Number(date)).toLocaleDateString()}</p>
         <h2 className="uppercase mb-2 font-bold">{title.slice(0, 80)}{title.length >= 80 ? '...' : ''}</h2>
