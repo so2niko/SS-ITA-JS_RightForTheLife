@@ -19,6 +19,7 @@ import { AboutPage } from './containers/AboutPage';
 import { EmergencyHelpPage } from "./containers/EmergencyHelpPage"
 import { SingleEmergencyHelpPage } from "./containers/SingleEmergencyHelpPage"
 import { ScrollToTop } from "./components/ScrollToTop";
+import { LoginPage } from "./containers/LoginPage";
 
 function App({store}) {
   return (
@@ -39,6 +40,7 @@ function App({store}) {
             <Route exact path="/about" component={AboutPage}/>
             <Route exact path="/emergency" component={EmergencyHelpPage}/>
             <Route exact path="/emergency/:id" component={SingleEmergencyHelpPage}/>
+            <Route exact path="/login" component={LoginPage}/>
             <Route render={() =>
               <ErrorIndicator
                 message="Страница не найдена :("
