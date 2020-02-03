@@ -4,7 +4,7 @@ import { PopUpContacts } from "../PopUpContacts";
 import calcAge from '../../helpers/calcAge';
 
 export const AnimalCard = (props) => {
-  const { name, age, photos, id } = props.animal;
+  const { name, age, photos, _id } = props.animal;
   const [ modalIsOpen, setModalIsOpen ] = useState(false);
 
   const handleShowingModal = () => {
@@ -33,7 +33,7 @@ export const AnimalCard = (props) => {
               Приютить
             </button>
             <Link 
-              to={"/animals/" + id} 
+              to={"/animals/" + _id} 
               className="w-1/2 ml-2">
               <button
                 className="w-full py-2 rounded-xl font-bold text-lg text-orange-700 bg-orange-200 hover:bg-orange-300 "
