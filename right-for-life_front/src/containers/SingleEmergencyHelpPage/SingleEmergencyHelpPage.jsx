@@ -1,11 +1,11 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { API } from "../../rootConstants";
-import { withFetchDataIndicators } from "../../hoc/withFetchDataIndicators";
-import { ErrorIndicator } from "../../components/ErrorIndicator";
 import { Article } from "../../components/Article";
+import { ErrorIndicator } from "../../components/ErrorIndicator";
+import { withFetchDataIndicators } from "../../hoc/withFetchDataIndicators";
 
-const NewsPage = ({ data }) => {
+const SingleEmergencyHelpPage = ({ data }) => {
   let { id } = useParams();
   const article = data.find(article => article.id === Number(id));
 
@@ -13,7 +13,9 @@ const NewsPage = ({ data }) => {
     return (
       <ErrorIndicator
         message="Страница не найдена :("
-        renderAction={() => <Link to="/news">Вернуться к новостям</Link>}
+        renderAction={() => (
+          <Link to="/emergency">Вернуться на страницу срочной помощи</Link>
+        )}
       />
     );
 
@@ -25,8 +27,8 @@ const NewsPage = ({ data }) => {
 };
 
 const wrappedComponent = withFetchDataIndicators(
-  NewsPage, 
-  API.NEWS,
+  SingleEmergencyHelpPage,
+  API.EMERGENCY_HELP,
 );
 
-export { wrappedComponent as NewsPage };
+export { wrappedComponent as SingleEmergencyHelpPage };

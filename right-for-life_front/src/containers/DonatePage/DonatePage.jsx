@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { API } from '../../rootConstants';
 import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
 import TabBar from '../../components/TabBar';
 
@@ -8,8 +8,8 @@ const DonatePage = ({ data }) => {
     const { title, manager, summary, paymentMethodsInfo, moneyTransferInfo } = data;
 
     return (
-        <div className="min-h-full pt-16 pb-2 max-w-5xl mx-auto text-lightgray-700">
-            <header className="my-5">
+        <div className="text-lightgray-700">
+            <header className="mb-5">
                 <h1 className="text-4xl uppercase font-bold">{title}</h1>
             </header>
             <section className="mb-5">
@@ -24,7 +24,6 @@ const DonatePage = ({ data }) => {
     );
 };
 
-const dataUrl = 'https://student-dev-ivan.github.io/Web-UI-HW/DB/donatePageInfo.json';
-const wrappedComponent = withFetchDataIndicators(DonatePage, dataUrl);
+const wrappedComponent = withFetchDataIndicators(DonatePage, API.DONATE);
 
 export { wrappedComponent as DonatePage };
