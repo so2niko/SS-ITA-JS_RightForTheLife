@@ -32,12 +32,12 @@ export const Filters = ({ filters }) => {
       </ul>
       <button 
         type="submit"
-        className={`m-2 ml-4 text-lg font-bold text-${params.length ? 'blue-700' : 'gray-600'}`}
+        className={`m-2 ml-4 text-lg font-bold text-${params.length ? 'blue-700' : 'gray-600'} focus:outline-none`}
         disabled={params.length === 0}>
         Применить
       </button>
       <button
-        className={`m-2 mr-4 text-lg font-bold text-${params.length ? 'red-700' : 'gray-600'}`}
+        className={`m-2 mr-4 text-lg font-bold text-${params.length ? 'red-700' : 'gray-600'} focus:outline-none`}
         onClick={() => {
           setParams([]);
           form.current.reset();

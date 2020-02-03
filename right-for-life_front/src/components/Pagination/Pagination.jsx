@@ -9,7 +9,7 @@ export function Pagination ({classNames, currentPageNum, totalPagesQuantity, pag
     classNames,
   );
 
-  const pageButtonClasses = "flex w-10 h-10 sm:w-12 sm:h-12 sm:mx-1 rounded-full justify-center items-center font-bold shadow-md text-gray-600 bg-white";
+  const pageButtonClasses = "flex w-10 h-10 sm:w-12 sm:h-12 mx-1 rounded-full justify-center items-center font-bold shadow-md text-gray-600 bg-white";
 
   function handlePaginationElementClick(event, nextPage) {
     event.preventDefault();
