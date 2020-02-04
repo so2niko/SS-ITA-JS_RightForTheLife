@@ -1,12 +1,23 @@
 import React from "react";
 import { FloatingBtn } from "./FloatingBtn.jsx";
+import { connect } from 'react-redux';
+import PropTypes from "prop-types"
 
-export const BackBtn = ({position}) => (
+const BackBtn = ({position, urlForBackBtn}) => (
   <div className="relative width-full">
     <FloatingBtn
-      icon="fa-arrow-left"
+      icon="arrow-left"
       position={position}
-      onClick={window.history.length === 1 ? null : () => window.history.back()}
-      url="/"/>
+      onClick={urlForBackBtn ? null : () => window.history.back()}
+      url={urlForBackBtn}/>
   </div>
 );
+
+BackBtn.propTypes = {
+  position: PropTypes.string,
+  urlForBackBtn: PropTypes.string,
+};
+
+const withConnect = connect(state => ({urlForBackBtn: state.urlForBackBtn}))(BackBtn);
+
+export {withConnect as BackBtn};

@@ -1,6 +1,6 @@
 import React from "react";
 import calcAge from '../../helpers/calcAge';
-import {BackAndShareButtons} from "../BackAndShareButtons";
+import { BackBtn, ShareBtn } from '../FloatingBtn';
 import YouTube from 'react-youtube';
 import {ArticleImageGallery} from "../ArticleImageGallery";
 
@@ -11,11 +11,13 @@ export const Article = ({article}) => {
 
   return (
     <article>
+      <BackBtn position="left-0 ml-2 mt-6"/>
+      <ShareBtn position="right-0 mr-2 mt-6"/>
+
       <div
         className="h-78 rounded-b-xl bg-cover shadow-md bg-center"
         style={{backgroundImage: "url(" + photo + ")"}}
       >
-        <BackAndShareButtons />
       </div>
       <h2 className="uppercase font-extrabold text-xl z-20 relative bg-white text-lightgray-700
                  shadow-xl rounded-xl -mt-10 px-8 flex items-center mx-8 mb-10"
