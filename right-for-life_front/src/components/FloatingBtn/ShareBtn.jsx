@@ -15,7 +15,6 @@ import {
   WhatsappIcon,
 
 } from "react-share";
-const CSSTransition = () => <div/>;
 
 const buttonComponentsArr = [
   {
