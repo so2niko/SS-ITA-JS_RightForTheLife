@@ -1,40 +1,44 @@
-import React from 'react'
-import {Pagination} from "../../components/Pagination";
-import {ErrorIndicator} from "../../components/ErrorIndicator";
-import {Link} from "react-router-dom";
+import React from "react";
+import { useHistory, useLocation } from 'react-router-dom';
+import { useQuery } from "../../helpers/useQuery";
+import { Pagination } from "../../components/Pagination";
+import { ErrorIndicator } from "../../components/ErrorIndicator";
+import { Link } from "react-router-dom";
 
 export const withPagination = (WrappedComponent, articlesPerPage) => (props) => {
+  const query = useQuery();
+  const history = useHistory();
+  const location = useLocation();
 
-  const requestedPageNum = extractAndCheckRequestedPage(props.data, articlesPerPage, props.location);
+  const requestedPageNum = extractAndCheckRequestedPage(props.data, articlesPerPage, location);
   if(!requestedPageNum) {
     return <ErrorIndicator
       message="Нет такой страницы"
-      renderAction={() => <Link to={`${props.location.pathname}`}>Вернуться к первой странице</Link>}
+      renderAction={() => <Link to={`${location.pathname}`}>Вернуться к первой странице</Link>}
     />
   }
 
   function handlePaginationPageChange(nextPage) {
-    window.scrollTo(0, 0)
-    props.history.push(`${props.location.pathname}?page=${nextPage}`);
+    window.scrollTo(0, 0);
+    query.set('page', nextPage);
+    history.push(`${location.pathname}?${query.toString()}`);
   }
 
   return <>
     <WrappedComponent
       {...props}
       data = {trimDataForCurrentPage(props.data, requestedPageNum, articlesPerPage)}
-      name = {WrappedComponent.name}
     />
     <Pagination
-      classNames="mb-16"
+      classNames="mb-14"
       currentPageNum={requestedPageNum}
       totalPagesQuantity={Math.ceil(props.data.length / articlesPerPage)}
       pageChangeHandler={handlePaginationPageChange}
     />
   </>
 
-  function extractAndCheckRequestedPage(articles, articlesPerPage, location) {
-    const params = new URLSearchParams(location.search);
-    const requestedPage = params.get("page");
+  function extractAndCheckRequestedPage(articles, articlesPerPage) {
+    const requestedPage = query.get("page");
 
     if(!requestedPage) {
       return 1

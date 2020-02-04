@@ -6,7 +6,7 @@ export const Header = () => {
 	return (
 		<header>
 			<nav>
-				<ul className="fixed flex justify-center items-center py-2 w-full bg-white shadow-md font-bold text-xl text-gray-600 z-50">
+				<ul className="fixed flex justify-center items-center py-2 w-full bg-white shadow-lg font-bold text-xl text-gray-600 z-50">
 					<NavLink
 						className="mx-2 cursor-pointer"
 						exact
