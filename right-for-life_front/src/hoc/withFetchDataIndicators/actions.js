@@ -1,4 +1,4 @@
-import { FETCH_DATA_REQUEST, FETCH_DATA_SUCCESS, FETCH_DATA_FAILURE } from './constants';
+import { FETCH_DATA_REQUEST, FETCH_DATA_SUCCESS, FETCH_DATA_FAILURE, FETCH_DATA_RESET } from './constants';
 
 export const requestData = (payload) => ({
   type: FETCH_DATA_REQUEST,
@@ -12,5 +12,10 @@ export const successData = (payload) => ({
 
 export const failureData = (payload) => ({
   type: FETCH_DATA_FAILURE,
+  payload,
+});
+
+export const resetData = (payload) => ({
+  type: FETCH_DATA_RESET,
   payload,
 });

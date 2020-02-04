@@ -1,12 +1,14 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import { FETCH_DATA_REQUEST } from './constants';
-import { successData, failureData } from './actions';
+import { successData, failureData, resetData } from './actions';
 
 export function* fetchDataWatcher() {
   yield takeEvery(FETCH_DATA_REQUEST, fetchData);
 }
 
-function* fetchData({ payload: { api, name } }) {  
+function* fetchData({ payload: { api, name } }) {    
+  yield put(resetData(name));
+
   let success = null;
   let failure = null;
 
