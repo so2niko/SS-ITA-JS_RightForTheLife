@@ -6,7 +6,7 @@ import './SuppliesTable.css';
 import SuppliesCategoryButtons from '../SuppliesCategoryButtons';
 
 const SuppliesTable = props => {
-  const [category, setCategory] = useState(null);
+  const [category, setCategory] = useState({ name: null, label: null });
   const getTableBody = suppliesArr => {
     return suppliesArr.map(el => {
       return <SuppliesTableRow itemData={el} key={el._id} />;
@@ -39,30 +39,30 @@ const SuppliesTable = props => {
 
   const categoryBtnHandlers = {
     onAllClick() {
-      setCategory('all');
+      setCategory({ name: 'all', label: 'Все' });
     },
     onFoodClick() {
-      setCategory('Корма');
+      setCategory({ name: 'food', label: 'Корма' });
     },
     onProductsClick() {
-      setCategory('Продукты');
+      setCategory({ name: 'products', label: 'Продукты' });
     },
     onMedicineClick() {
-      setCategory('Медикаменты');
+      setCategory({ name: 'medicine', label: 'Медикаменты' });
     },
     onHouseholdClick() {
-      setCategory('Хозяйственные нужды');
+      setCategory({ name: 'household', label: 'Хозяйственные нужды' });
     },
     onNeedsClick() {
-      setCategory('Важности и нужности');
+      setCategory({ name: 'needs', label: 'Важности и нужности' });
     }
   };
 
   let table = null;
-  if (category) {
+  if (category.name) {
     let { data } = props;
-    if (category !== 'all') {
-      data = data.filter(supply => supply.type === category);
+    if (category.name !== 'all') {
+      data = data.filter(supply => supply.type === category.label);
     }
     table = (
       <table className='table-fixed mx-auto mt-6'>
@@ -74,7 +74,10 @@ const SuppliesTable = props => {
 
   return (
     <div>
-      <SuppliesCategoryButtons clickHandlers={categoryBtnHandlers} />
+      <SuppliesCategoryButtons
+        clickHandlers={categoryBtnHandlers}
+        activeCategory={category.name}
+      />
       {table}
     </div>
   );
