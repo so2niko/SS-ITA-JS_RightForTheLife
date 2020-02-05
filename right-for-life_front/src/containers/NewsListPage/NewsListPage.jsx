@@ -13,6 +13,7 @@ const NewsListPage = ({ data }) => {
 const wrappedComponent = withFetchDataIndicators(
   withPagination(NewsListPage, 10),
   API.NEWS,
+  true,
 );
 
 export { wrappedComponent as NewsListPage };
