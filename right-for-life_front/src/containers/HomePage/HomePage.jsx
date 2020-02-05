@@ -17,8 +17,8 @@ export const HomePage = () => (
         </p>
       </article>
     </section>
-    <section className="w-full lg:w-1/3 h-72 lg:h-auto p-5">
-      <HomeArticlesListWidget url="news" />
+    <section className="w-full lg:w-1/3 lg:h-auto p-5">
+      <ArticlesListWidget />
     </section>
   </article>
 );
@@ -26,9 +26,4 @@ export const HomePage = () => (
 const HomeImageCarousel = withFetchDataIndicators(
   ImageCarousel,
   API.HAPPY_STORIES,
-);
-const HomeArticlesListWidget = withFetchDataIndicators(
-  ArticlesListWidget,
-  API.NEWS,
-  true,
 );

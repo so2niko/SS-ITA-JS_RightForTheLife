@@ -22,24 +22,21 @@ export const ArticlesListWidget = () => (
 );
 
 const ArticlesListWidgetItem = ({ data, color, url }) => {
-  const { id, title, photo } = data[0] || data; 
+  const { _id, title, photo } = data[0] || data; 
 
   return (
     <Link 
-      to={`${id ? `/${url}/${id}` : `/${url}`}`}
-      className="block w-full">
+      to={`${_id ? `/${url}/${_id}` : `/${url}`}`}
+      className="block w-full mb-16">
       <section 
-        className="rounded-xl shadow-2xl"
-        style={{ height: '7.5rem' }}>
+        className="h-48 lg:h-30 rounded-xl shadow-2xl">
         <img 
-          className={`block w-full object-cover rounded-xl border-4 border-white ${color ? `border-4 border-${color}-300` : ''}`}
-          style={{ height: '7.5rem' }} 
+          className={`block w-full h-48 lg:h-30 object-cover rounded-xl border-4 border-white ${color ? `border-4 border-${color}-300` : ''}`}
           src={photo} 
           alt={title} 
         />
         <div 
-          className={`relative z-10 h-full flex items-center -mt-5 mx-3 p-2 px-5 bg-white rounded-xl shadow-2xl-light ${color ? `bg-${color}-300 text-${color}-700` : ''}`} 
-          style={{ maxHeight: '3.75rem' }}>
+          className={`relative z-10 h-full max-h-15 flex items-center -mt-5 mx-3 p-2 px-5 bg-white rounded-xl shadow-2xl-light ${color ? `bg-${color}-300 text-${color}-700` : ''}`}>
           <h3>{title}</h3>
         </div>
       </section>
