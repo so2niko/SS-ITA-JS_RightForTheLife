@@ -21,8 +21,6 @@ const SuppliesTable = props => {
       headerRow = (
         <tr className={trClass}>
           <th className='px-4 py-2'>Товар</th>
-          <th className='px-4 py-2'>Тип</th>
-          <th className='px-4 py-2 w-32'>Кол-во</th>
           <th className='px-4 py-2'>Инфо</th>
         </tr>
       );

@@ -6,7 +6,7 @@ import SuppliesTable from '../SuppliesTable';
 
 const TabBar = ({ paymentMethodsInfo, moneyTransferInfo }) => {
 
-    const tabLabels = ['Помочь деньгами', 'Помочь товарами'];
+    const tabLabels = ['Помочь деньгами', 'Нужды приюта'];
     const [activeTab, setActiveTab] = useState(tabLabels[0]);
 
     const onTabClick = (tabLabel) => setActiveTab(tabLabel);
