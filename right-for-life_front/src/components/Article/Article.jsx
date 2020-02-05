@@ -3,11 +3,15 @@ import calcAge from '../../helpers/calcAge';
 import { BackBtn, ShareBtn } from '../FloatingBtn';
 import YouTube from 'react-youtube';
 import {ArticleImageGallery} from "../ArticleImageGallery";
+import { DonateButton } from "../DonateButton";
+import { useLocation } from 'react-router-dom';
+
 
 import './style.css';
 
 export const Article = ({article}) => {
   const {title, date, photo, text, gallery, videos} = article;
+  const { pathname: currentURL } = useLocation();
 
   return (
     <article>
@@ -19,12 +23,13 @@ export const Article = ({article}) => {
         style={{backgroundImage: "url(" + photo + ")"}}
       >
       </div>
-      <h2 className="uppercase font-extrabold text-xl z-20 relative bg-white text-lightgray-700
-                 shadow-xl rounded-xl -mt-10 px-8 flex items-center mx-8 mb-10"
+      <div className="uppercase font-extrabold text-xl z-20 relative bg-white text-lightgray-700
+                 shadow-xl rounded-xl -mt-10 px-8 flex items-center mx-8 mb-10 justify-between"
           style={{minHeight: "100px"}}
       >
         {title}
-      </h2>
+        {currentURL.includes('emergency') ? <DonateButton style={{marginLeft:'10px'}}/> : null}
+      </div>
       <div className="mx-10 md:mx-20">
         <aside
           className="font-medium text-lightgray-700 text-right text-xl mb-10"
