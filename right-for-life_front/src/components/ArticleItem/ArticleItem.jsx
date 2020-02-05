@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { DonateButton } from '../DonateButton';
 
 export const ArticleItem = ({article}) => {
   const {title, date, photo, text, id} = article;
@@ -16,6 +17,13 @@ export const ArticleItem = ({article}) => {
         <p className="font-medium mb-2">{new Date(Number(date)).toLocaleDateString()}</p>
         <h2 className="uppercase mb-2 font-bold">{title.slice(0, 80)}{title.length >= 80 ? '...' : ''}</h2>
         <p className="mt-b font-size-sm">{text.slice(0, 120)}...</p>
+         { 
+         currentURL === '/emergency' ?
+           <DonateButton 
+            className="min-w-5/12 bg-orange-200 hover:bg-orange-300 text-red-600 font-bold py-3 px-2 rounded-xl outline-none absolute"
+            style={{bottom: '20px', right:'150px'}}
+            /> : null
+          }
           <Link
             to={`${currentURL}/${id}`}
             className="min-w-5/12 bg-orange-300 hover:bg-orange-400 text-orange-700 font-bold py-3 px-2
