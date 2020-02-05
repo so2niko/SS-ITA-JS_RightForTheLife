@@ -32,7 +32,26 @@ export const Footer = () => {
 				</li>
 			</ul>
 			<span className="mx-24">Designed by SoftServe Inc.</span>
-			<DonateButton />
+      <DonateButton />
+			<NavLink
+				className="mx-4 cursor-pointer text-gray-600 hover:text-gray-700"
+				exact
+				to="/reports"
+				activeClassName="text-gray-700"
+			>
+				Отчеты
+			</NavLink>
+			<NavLink
+				className="mx-4 cursor-pointer text-red-600 hover:text-red-700 select-none"
+				exact
+				to="/"
+			>
+				<img
+					width="40px"
+					src={logo}
+					alt="logo"
+				/>
+			</NavLink>
 		</footer>
 	);
 };
