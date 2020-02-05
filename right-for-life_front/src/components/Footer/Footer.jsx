@@ -31,6 +31,14 @@ export const Footer = () => {
 			</ul>
 			<span className="mx-24">Developed by group DP-180 Web-UI SoftServe Inc.</span>
 			<NavLink
+				className="mx-4 cursor-pointer text-gray-600 hover:text-gray-700"
+				exact
+				to="/reports"
+				activeClassName="text-gray-700"
+			>
+				Отчеты
+			</NavLink>
+			<NavLink
 				className="mx-4 cursor-pointer text-red-600 hover:text-red-700 select-none"
 				exact
 				to="/"
