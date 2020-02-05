@@ -20,6 +20,8 @@ import { EmergencyHelpPage } from "./containers/EmergencyHelpPage"
 import { SingleEmergencyHelpPage } from "./containers/SingleEmergencyHelpPage"
 import { ScrollToTop } from "./components/ScrollToTop";
 import { LoginPage } from "./containers/LoginPage";
+import {ReportsPage} from "./containers/ReportsPage";
+import {ReportPage} from "./containers/ReportPage/ReportPage";
 
 function App({store}) {
   return (
@@ -34,6 +36,8 @@ function App({store}) {
             <Route exact path="/animals/:id" component={AnimalDetailsPage}/>
             <Route exact path="/news" component={NewsListPage}/>
             <Route exact path="/news/:id" component={NewsPage}/>
+            <Route exact path="/reports" component={ReportsPage}/>
+            <Route exact path="/reports/:id" component={ReportPage}/>
             <Route exact path="/stories" component={HappyStoriesPage}/>
             <Route exact path="/stories/:id" component={HappyStoryPage}/>
             <Route exact path="/help" component={DonatePage}/>
