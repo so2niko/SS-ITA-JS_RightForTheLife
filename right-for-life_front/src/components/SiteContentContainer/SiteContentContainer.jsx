@@ -53,7 +53,7 @@ class SiteContentContainer extends React.Component {
     const {children} = this.props;
 
     return (
-      <main className="container mx-auto flex-grow flex-shrink-0 mt-24 px-3">
+      <main className="container mx-auto flex-grow flex-shrink-0 pt-6 lg:pt-24 px-3">
         {children}
       </main>
     )
