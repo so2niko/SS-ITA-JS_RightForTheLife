@@ -1,4 +1,5 @@
-export const BE_URL = 'http://localhost:4000';
+//export const BE_URL = 'http://localhost:4000';
+export const BE_URL = 'http://192.168.0.105:4000';
 
 export const API = Object.freeze({
   ANIMALS: {
@@ -22,7 +23,8 @@ export const API = Object.freeze({
     api: `${BE_URL}/supplies`,
   },
   ABOUT_US: {
-    name: 'ABOUT_US',
+    // name: 'ABOUT_US',
+    name: 'https://maksv21.github.io/softserve/about',
     api: `${BE_URL}/about`,
   },
   EMERGENCY_HELP: {

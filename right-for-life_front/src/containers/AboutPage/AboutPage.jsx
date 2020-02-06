@@ -1,21 +1,27 @@
 import React from "react";
 import { API } from "../../rootConstants";
 import { withFetchDataIndicators } from "../../hoc/withFetchDataIndicators";
-import AboutContent from "../../components/AboutContent";
-import AboutContacts from "../../components/AboutContacts";
+import AboutContent from "./AboutContent";
+import AboutContacts from "./AboutContacts";
+import { Title } from "../../components/Title"
 
-const AboutPage = ({ data }) => {
-  const { image, text, facebook, phone, email, additionalContacts } = data;
-
-  return (
+const AboutPage = ({data: {photos, text, facebook, phone, email, instagram}}) => {
+  console.log(Title)
+return (
+  <div>
+    <Title title="О нас"/>
     <div className="about-page pb-8 px-5">
-      <AboutContent contentData={{ image, text }} />
+      <AboutContent photos={photos} text={text}/>
       <AboutContacts
-        contactsData={{ facebook, phone, email, additionalContacts }}
-      />
+        facebook={facebook}
+        phone={phone}
+        email={email}
+        instagram={instagram}/>
     </div>
-  );
-};
+  </div>
+);
+}
+
 
 const wrappedComponent = withFetchDataIndicators(AboutPage, API.ABOUT_US);
 
