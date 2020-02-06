@@ -12,20 +12,17 @@ export const ArticleItem = ({article}) => {
         className="h-64 rounded-xl bg-cover shadow-md bg-center"
         style={{backgroundImage: "url(" + photo + ")"}}
       />
-      <div className={`z-40 w-19/20 bg-white text-lightgray-700 shadow-xl rounded-xl self-center -mt-10 px-5 pt-5 pb-20 overflow-hidden relative  ${text?.length > 0 ? 'xl:h-56' : ''}`}>
+      <div className={`z-0 w-19/20 bg-white text-lightgray-700 shadow-xl rounded-xl self-center -mt-10 px-5
+                      pt-5 pb-20 overflow-hidden relative  ${text?.length > 0 ? 'xl:h-56' : ''}`}>
         <p className="font-medium mb-2">{new Date(Number(date)).toLocaleDateString()}</p>
         <h2 className="uppercase mb-2 font-bold">{title.slice(0, 80)}{title.length >= 80 ? '...' : ''}</h2>
         {text?.length > 0 ? <p className="mt-b font-size-sm">{text.slice(0, 120)}...</p> : ''}
-        {currentURL === '/emergency' ?
-          <DonateButton 
-            className="min-w-5/12 bg-orange-200 hover:bg-orange-300 text-red-600 font-bold py-3 px-2 rounded-xl outline-none absolute"
-            style={{bottom: '20px', right:'150px'}}
-          /> : null
-        }
         <Link
           to={`${currentURL}/${_id}`}
-          className="min-w-5/12 bg-orange-300 hover:bg-orange-400 text-orange-700 font-bold py-3 px-2 rounded-xl outline-none absolute"
-          style={{bottom: '20px', right: '20px'}}>
+          className="min-w-5/12 bg-orange-300 hover:bg-orange-400 text-orange-700 font-bold py-3 px-2
+                       rounded-xl outline-none absolute"
+          style={{bottom: '20px', right: '20px'}}
+        >
           Подробнее
         </Link>
       </div>

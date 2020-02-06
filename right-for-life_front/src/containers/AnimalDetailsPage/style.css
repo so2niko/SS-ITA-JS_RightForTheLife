@@ -1,19 +1,13 @@
-
 .animal-details__btn {
   transition: background-color .2s;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.animal-details-card__pet-img {
-  max-height: 500px;
+.animal-details__share-mobile button:focus {
+  outline: 0;
 }
 
-.animal-details-card-appear {
-  opacity: 0.01;
-  transform: translate(0, 20%);
-}
-
-.animal-details-card-appear.animal-details-card-appear-active {
-  transform: translate(0);
-  opacity: 1;
-  transition: .2s ease-in;
+.animal-details__share-mobile {
+  transition: background-color .2s;
+  -webkit-tap-highlight-color: transparent;
 }

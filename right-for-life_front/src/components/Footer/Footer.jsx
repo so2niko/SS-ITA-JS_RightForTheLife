@@ -9,7 +9,7 @@ export const Footer = () => {
 	const iconsClassName = 'mx-2 text-3xl';
 
 	return (
-		<footer className="flex flex-shrink-0 justify-center items-center py-3 bg-white shadow-md font-bold text-xl text-gray-600">
+		<footer className="flex flex-shrink-0 justify-center items-center py-3 bg-white shadow-md font-bold text-xl text-gray-600 mb-16 lg:mb-0">
 			<ul className="flex">
 				<li>
 					<a

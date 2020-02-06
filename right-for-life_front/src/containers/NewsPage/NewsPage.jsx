@@ -18,14 +18,14 @@ const NewsPage = ({ data }) => {
     );
 
   return (
-    <div className="-mt-10 max-w-4xl mx-auto">
+    <div className="-mt-6 lg:-mt-8 max-w-4xl mx-auto">
       <Article article={article} />
     </div>
   );
 };
 
 const wrappedComponent = withFetchDataIndicators(
-  NewsPage, 
+  NewsPage,
   API.NEWS,
 );
 
