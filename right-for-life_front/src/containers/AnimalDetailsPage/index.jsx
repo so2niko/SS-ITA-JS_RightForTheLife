@@ -17,10 +17,8 @@ const AnimalDetailsPage = props => {
     />
   );
 };
-
 const wrappedComponent = withFetchDataIndicators(
   AnimalDetailsPage,
   API.ANIMALS,
 );
-
 export { wrappedComponent as AnimalDetailsPage };

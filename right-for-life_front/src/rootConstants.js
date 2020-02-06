@@ -4,7 +4,8 @@ export const BE_URL = 'http://192.168.0.105:4000';
 export const API = Object.freeze({
   ANIMALS: {
     name: 'ANIMALS',
-    api: `${BE_URL}/animals`,
+    // api: `${BE_URL}/animals`,
+    api: 'https://maksv21.github.io/softserve/animals/',
   },
   NEWS: {
     name: 'NEWS',
