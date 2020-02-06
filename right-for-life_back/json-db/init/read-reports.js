@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const fs = require('fs');
 const dbOptions = require('../../utils/configs.js').dbOptions;
 const connectionURI = require('../../utils/configs.js').connectionURI;
-const ReportsSchema = require('../../models/ReportsSchema.js');
+const ReportSchema = require('../../models/ReportSchema.js');
 
 initReports();
 
@@ -16,8 +16,8 @@ function getConnection() {
 
 function initReports() {
   const connection = getConnection();
-  const ReportsModel = connection.model('Reports', ReportsSchema);
-  ReportsModel.insertMany(extractedReports(ReportsModel))
+  const ReportModel = connection.model('Report', ReportSchema);
+  ReportModel.insertMany(extractedReports(ReportModel))
     .then(() => {
       console.log('Reports collection created');
       connection.close();
@@ -25,16 +25,15 @@ function initReports() {
     .catch(err => console.log('save error\n' + err));
 }
 
-function extractedReports(Reports) {
+function extractedReports(Report) {
   const reportsContent = JSON.parse(readReports());
   const newReports = [];
-  for (reports of reportsContent) {
-    newReports.push(new Reports({
+  for (report of reportsContent) {
+    newReports.push(new Report({
       _id: new mongoose.Types.ObjectId(),
-      date: reports.date,
-      title: reports.title,
-      photo: reports.photo,
-      text: reports.text,
+      date: report.date,
+      title: report.title,
+      gallery: report.gallery
     }));
   }
   return newReports;

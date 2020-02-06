@@ -2,20 +2,20 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 
-const ReportsScheme = require('../models/ReportsSchema.js');
-const ReportsModel = mongoose.connection.model('Reports', ReportsScheme);
+const ReportScheme = require('../models/ReportSchema.js');
+const ReportModel = mongoose.connection.model('Report', ReportScheme);
 
 router.get('/', (req, res, next) => {
-  ReportsModel.find()
+  ReportModel.find()
     .exec()
     .then(doc => {
       res.status(200).json(doc);
     });
 });
 
-router.get('/:reportsID', (req, res, next) => {
-  console.log(req.params.reportsID);
-  ReportsModel.findById(new mongoose.Types.ObjectId(req.params.reportsID))
+router.get('/:reportID', (req, res, next) => {
+  console.log(req.params.reportID);
+  ReportModel.findById(new mongoose.Types.ObjectId(req.params.reportID))
     .exec()
     .then(doc => {
       if (doc)
@@ -37,8 +37,8 @@ router.post('/', (req, res, next) => {
     name: req.body.name,
     price: req.body.price,
   };
-  const newAnimal = new ReportsModel(report);
-  newAnimal.save()
+  const newReport = new ReportModel(report);
+  newReport.save()
     .then(result => {
       console.log(result);
     })

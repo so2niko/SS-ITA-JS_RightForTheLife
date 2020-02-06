@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
-const ReportsSchema = new mongoose.Schema(
+const ReportSchema = new mongoose.Schema(
   {
     _id: mongoose.Schema.Types.ObjectId,
     date: Number,
     title: String,
-    gallery: [String]
+    gallery: Array
   });
 
-module.exports = ReportsSchema;
+module.exports = ReportSchema;
