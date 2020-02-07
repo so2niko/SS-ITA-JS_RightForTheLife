@@ -8,7 +8,7 @@ import {BackBtn} from "../../components/FloatingBtn";
 
 const ReportPage = ({data}) => {
   let {id} = useParams();
-  const article = data.find(article => article._id === Number(id));
+  const article = data.find(article => article._id === id);
 
   if (!article)
     return (
