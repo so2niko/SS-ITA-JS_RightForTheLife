@@ -91,7 +91,6 @@ Gallery.propTypes = {
 Gallery.defaultProps = {
   slideInterval: 6000,
   additionalClass: 'rounded-xl overflow-hidden',
-  //imgClass: 'object-top object-cover w-full',
   imgClass: 'object-contain w-full',
   alt: 'Фонд "Мы за право на жизнь"',
 };
