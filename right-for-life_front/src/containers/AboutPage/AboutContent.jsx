@@ -7,7 +7,7 @@ const AboutContent = ({photos, text}) => (
     <Gallery photos={photos} alt="О нас"/>
 
     {text.map(paragraph => (
-      <p className="my-3 rounded-xl bg-gray-300 text-gray-700 p-5 font-medium">
+      <p className="my-3 text-lightgray-600 px-5 py-1 font-medium">
         {paragraph}
       </p>
     ))}
