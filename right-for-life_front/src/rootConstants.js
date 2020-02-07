@@ -32,6 +32,6 @@ export const API = Object.freeze({
   },
   REPORTS: {
     name: 'REPORTS',
-    api: 'https://raw.githubusercontent.com/protonaby/demo3-animal-shelter/master/db/reports_common.json',
+    api: `${BE_URL}/reports`,
   },
 });

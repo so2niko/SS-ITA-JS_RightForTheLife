@@ -1,6 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
+import { DonateButton } from '../DonateButton';
+
 import logo from "../../assets/logo.jpg";
 
 export const Footer = () => {
@@ -29,7 +31,7 @@ export const Footer = () => {
 					</a>
 				</li>
 			</ul>
-			<span className="mx-24">Developed by group DP-180 Web-UI SoftServe Inc.</span>
+			<span className="mx-24">Designed by SoftServe Inc.</span>
 			<NavLink
 				className="mx-4 cursor-pointer text-gray-600 hover:text-gray-700"
 				exact
@@ -38,17 +40,7 @@ export const Footer = () => {
 			>
 				Отчеты
 			</NavLink>
-			<NavLink
-				className="mx-4 cursor-pointer text-red-600 hover:text-red-700 select-none"
-				exact
-				to="/"
-			>
-				<img
-					width="40px"
-					src={logo}
-					alt="logo"
-				/>
-			</NavLink>
+			<DonateButton />
 		</footer>
 	);
 };
