@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { DonateButton } from '../DonateButton';
+
 const PaymentMethod = ({ name, details }) => {
     return (
         <section className='mb-3'>
@@ -26,6 +28,7 @@ const DonateInfo = ({ paymentMethodsInfo, moneyTransferInfo }) => {
     if (!!paymentMethodsInfo) {
         return (
             <article className='payment_methods mt-10 text-center'>
+                <DonateButton />
                 <h2 className='text-2xl font-bold mb-3'>{paymentMethodsInfo.title}</h2>
                 {paymentMethodsInfo.paymentMethods.map((method, i) =>
                     <PaymentMethod key={i} {...method} />)}
