@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const AboutContacts = ({facebook, phone, email, instagram}) => {
   const iconsClassName = 'mx-2 text-4xl';
