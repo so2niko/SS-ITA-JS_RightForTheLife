@@ -1,0 +1,43 @@
+.image-gallery-edited .image-gallery-slide {
+  outline: none;
+}
+
+.image-gallery-edited .image-gallery .nav {
+  opacity: 0;
+  transition: .4s;
+}
+
+.image-gallery-edited .image-gallery:hover .nav {
+  transition: .3s;
+  opacity: 1;
+}
+
+.image-gallery-edited .image-gallery-bullets {
+  top: 20px;
+  height: 0;
+}
+
+.image-gallery-edited .image-gallery-bullets-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.image-gallery-edited .image-gallery-bullet {
+  height: 0.1rem!important;
+  width: 0.1rem!important;
+  background-color: #ffffff!important;
+  border: none!important;
+  box-shadow: none!important;
+  transform: scale(0.5)!important;
+  opacity: 50%;
+  margin: 0 6px!important;
+}
+
+.image-gallery-edited .image-gallery-bullet.active,
+.image-gallery-edited .image-gallery-bullet:hover {
+  cursor: default!important;
+  height: 0.55rem!important;
+  width: 0.55rem!important;
+  transform: scale(0.9)!important;
+}
