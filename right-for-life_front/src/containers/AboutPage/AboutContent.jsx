@@ -25,7 +25,6 @@ class AboutContent extends React.Component {
             onTouchEnd={() => this.imageGallery.play()}
             renderLeftNav={this.renderNav.bind(this, false)}
             renderRightNav={this.renderNav.bind(this, true)}
-            showBullets={true}
           />
 
           <p className="my-3 rounded-xl bg-gray-300 text-gray-700 p-5 font-medium">
