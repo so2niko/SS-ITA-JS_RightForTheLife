@@ -16,7 +16,7 @@ const AboutContacts = ({facebook, phone, email, instagram}) => {
         <i className={`fas fa-envelope text-red-500 ${iconsClassName}`}/>
       </Contact>
 
-      <Contact color="red" href={instagram} title="instagram" newTab={true}>
+      <Contact color="red" href={instagram} title="Instagram" newTab={true}>
         <i className={`fab fa-instagram text-red-400 font-thin ${iconsClassName}`}/>
       </Contact>
     </div>

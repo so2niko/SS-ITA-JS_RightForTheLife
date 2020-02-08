@@ -3,7 +3,8 @@ export const BE_URL = 'http://localhost:4000';
 export const API = Object.freeze({
   ANIMALS: {
     name: 'ANIMALS',
-    api: `${BE_URL}/animals`,
+    // api: `${BE_URL}/animals`,
+    api: 'https://maksv21.github.io/softserve/animals/',
   },
   NEWS: {
     name: 'NEWS',
@@ -23,8 +24,7 @@ export const API = Object.freeze({
   },
   ABOUT_US: {
     name: 'ABOUT_US',
-    api: 'https://maksv21.github.io/softserve/about',
-    //api: `${BE_URL}/about`,
+    api: `${BE_URL}/about`,
   },
   EMERGENCY_HELP: {
     name: 'EMERGENCY_HELP',
