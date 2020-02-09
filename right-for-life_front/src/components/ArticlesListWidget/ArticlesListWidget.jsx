@@ -18,7 +18,9 @@ export const ArticlesListWidget = () => (
     <ArticlesListWidgetNews
       url="news"
     />
-    <div className="min-w-full flex justify-center"><DonateButton /></div>
+    <div className="min-w-full flex justify-center">
+      <DonateButton className="px-8 py-3 rounded-xl text-lg shadow-2xl-light border-2 border-orange-300 text-red-600 bg-orange-200 hover:bg-orange-300" />
+    </div>
   </article>
 );
 

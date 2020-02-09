@@ -11,7 +11,7 @@ export const HomePage = () => (
       <ImageCarouselWithData />
       <HomeArticleWithData />
     </section>
-    <section className="w-full lg:w-1/3 h-72 lg:h-auto p-5">
+    <section className="w-full lg:w-1/3 lg:h-auto p-5">
       <ArticlesListWidgetWithData url="news" />
     </section>
   </article>
