@@ -11,7 +11,6 @@ const AboutSchema = new mongoose.Schema(
     facebook: String,
     phone: String,
     email: String,
-    __v: Number,
   });
 
 module.exports = AboutSchema;

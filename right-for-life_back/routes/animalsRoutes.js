@@ -6,9 +6,24 @@ const AnimalScheme = require('../models/AnimalSchema.js');
 const AnimalModel = mongoose.connection.model('Animal', AnimalScheme);
 
 router.get('/', (req, res, next) => {
-  AnimalModel.find()
+  if (req.query) {
+    next();
+  } else {
+    AnimalModel.find()
+      .exec()
+      .then(doc => {
+        res.status(200).json(doc);
+      });
+  }
+});
+
+router.get('/', (req, res, next) => {
+  const type = req.query.type;
+  const gender = req.query.gender;
+  AnimalModel.find({ type: type, gender: gender })
     .exec()
     .then(doc => {
+      console.log(doc);
       res.status(200).json(doc);
     });
 });
