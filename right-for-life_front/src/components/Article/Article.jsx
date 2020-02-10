@@ -2,7 +2,7 @@ import React from "react";
 import calcAge from '../../helpers/calcAge';
 import { BackBtn, ShareBtn } from '../FloatingBtn';
 import YouTube from 'react-youtube';
-import {ArticleImageGallery} from "../ArticleImageGallery";
+import { ArticleImageGallery } from "../ArticleImageGallery";
 import { DonateButton } from "../DonateButton";
 import { useLocation } from 'react-router-dom';
 
