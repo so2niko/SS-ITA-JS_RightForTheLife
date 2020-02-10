@@ -19,8 +19,8 @@ export const ArticleItem = ({article}) => {
         {text?.length > 0 ? <p className="mt-b font-size-sm">{text.slice(0, 120)}...</p> : ''}
         {currentURL === '/emergency' ?
           <DonateButton 
-            className="min-w-5/12 bg-orange-200 hover:bg-orange-300 text-red-600 font-bold py-3 px-2 rounded-xl outline-none absolute"
-            style={{bottom: '20px', right:'150px'}}
+            className="min-w-5/12 bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-3 px-2 rounded-xl outline-none absolute"
+            style={{bottom: '20px', right:'135px'}}
           /> : null
         }
         <Link

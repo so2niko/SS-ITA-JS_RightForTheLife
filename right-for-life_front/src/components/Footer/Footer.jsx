@@ -10,7 +10,7 @@ const Footer = ({ data }) => {
 	const iconsClassName = 'mx-2 text-3xl';
 
 	return (
-		<footer className="flex flex-col lg:flex-row flex-shrink-0 justify-center items-center py-3 bg-white shadow-md font-bold text-xl text-gray-600 my-16 lg:mb-0">
+		<footer className="flex flex-col lg:flex-row xl:flex-row flex-shrink-0 justify-center items-center py-3 bg-white shadow-md font-bold text-xl text-gray-600 my-16 lg:mb-0">
 			<ul className="flex my-2">
 				<li>
 					<a
@@ -41,9 +41,9 @@ const Footer = ({ data }) => {
 					</a>
 				</li>
 			</ul>
-			<span className="mx-24 my-2">Designed by SoftServe Inc.</span>
+			<span className="hidden lg:flex xl:flex text-center mx-24 my-2">Designed by SoftServe Inc.</span>
 			<NavLink
-				className="mx-4 cursor-pointer text-gray-600 hover:text-gray-700"
+				className="hidden lg:flex xl:flex mx-4 cursor-pointer text-gray-600 hover:text-gray-700"
 				exact
 				to="/reports"
 				activeClassName="text-gray-700"

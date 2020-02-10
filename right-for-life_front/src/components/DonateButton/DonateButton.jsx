@@ -9,7 +9,7 @@ export const DonateButton = ({ href, className, style }) => {
             href={href}
             style={style}
         >
-            Перевести средства
+            Помочь
         </a>
     );
 };
@@ -17,6 +17,6 @@ export const DonateButton = ({ href, className, style }) => {
 DonateButton.defaultProps = {
     style: null,
     href: 'https://next.privat24.ua/payments',
-    className: 'min-w-5/12 bg-orange-200 hover:bg-orange-300 text-red-600 font-bold py-1 px-3 rounded-xl'
+    className: 'min-w-5/12 bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-1 px-3 rounded-xl'
 };
 
