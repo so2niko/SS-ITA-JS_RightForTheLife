@@ -21,7 +21,7 @@ const AboutContacts = ({ contactsData }) => {
   ) : null;
 
   return (
-    <div className='about-contacts-links flex flex-row justify-around'>
+    <div className='about-contacts-links flex flex-row md:justify-around justify-between flex-wrap'>
       <button
         className={`bg-transparent text-gray-700 font-semibold py-2 px-4 border border-transparent hover:border-blue-800 hover:bg-blue-200  rounded-xl`}
       >
