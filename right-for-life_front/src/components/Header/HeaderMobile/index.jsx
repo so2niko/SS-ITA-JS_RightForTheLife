@@ -76,6 +76,7 @@ export class HeaderMobile extends React.Component {
     document.body.style.position = null;
     document.body.style.top = null;
     document.body.style.maxWidth = null;
+    document.body.style.width = null;
 
     window.scrollTo(0, parseInt(scrollY || '0') * -1);
     this.setState({pagesListVisible: false});
@@ -90,6 +91,7 @@ export class HeaderMobile extends React.Component {
 
     document.body.style.position = 'fixed';
     document.body.style.maxWidth = '100vw';
+    document.body.style.width = '100%';
     document.body.style.top = `-${scrollTop}px`;
   };
 }
