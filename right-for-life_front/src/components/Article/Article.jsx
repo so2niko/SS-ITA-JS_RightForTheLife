@@ -5,6 +5,7 @@ import YouTube from 'react-youtube';
 import {ArticleImageGallery} from "../ArticleImageGallery";
 import { DonateButton } from "../DonateButton";
 import { useLocation } from 'react-router-dom';
+import { Select } from "../Select";
 
 
 import './style.css';
@@ -43,6 +44,7 @@ export const Article = ({article}) => {
           </div>
         ) : null }
       <div className="mx-10 md:mx-20">
+        <Select optEdit optDelete optPinToHomePage />
         <p className="font-medium text-lightgray-600 mb-12">
           {text}
         </p>
