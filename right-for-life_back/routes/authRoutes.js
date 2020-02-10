@@ -2,12 +2,14 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
+const secret = 'itsasecret';
 
 const UserScheme = require('../models/UserSchema.js');
 const UserModel = mongoose.connection.model('User', UserScheme);
 
-
-router.post('/signin', (req, res, next) => {
+router.post('/signup', (req, res) => {
   if (req.body.hasOwnProperty('password') && req.body.hasOwnProperty('email')) {
     UserModel.find({ email: req.body.email }).exec()
       .then(user => {
@@ -44,16 +46,20 @@ router.post('/signin', (req, res, next) => {
   }
 });
 
-router.post('/signup', (req, res, next) => {
+router.post('/signin', (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   if (email && password) {
     UserModel.findOne({ email: email })
       .then(user => {
         bcrypt.compare(password, user.password, (err, result) => {
-          console.log(result);
           if (result) {
-            res.status(200).end();
+            const token = jwt.sign({ username: user.username, email }, secret, { expiresIn: '1h' });
+            console.log(token);
+            res.send(token).status(200).end();
+          }
+          else {
+            res.status(401).end();
           }
         });
       })
