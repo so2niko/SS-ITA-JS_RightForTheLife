@@ -42,7 +42,7 @@ const AboutContacts = ({ contactsData }) => {
       >
         <a
           className={centerItemClass}
-          href={`${facebook}`}
+          href={`${instagram}`}
           target='_blank'
           rel='noopener noreferrer'
         >
