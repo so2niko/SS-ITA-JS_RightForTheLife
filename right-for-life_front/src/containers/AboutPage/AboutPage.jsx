@@ -1,17 +1,30 @@
-import React from "react";
-import { API } from "../../rootConstants";
-import { withFetchDataIndicators } from "../../hoc/withFetchDataIndicators";
-import AboutContent from "../../components/AboutContent";
-import AboutContacts from "../../components/AboutContacts";
+import React from 'react';
+import { API } from '../../rootConstants';
+import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
+import AboutContent from '../../components/AboutContent';
+import AboutContacts from '../../components/AboutContacts';
+import AboutCarousel from '../../components/AboutCarousel';
 
 const AboutPage = ({ data }) => {
-  const { image, text, facebook, phone, email, additionalContacts } = data;
+  const {
+    photos,
+    text,
+    facebook,
+    phone,
+    email,
+    instagram,
+    additionalContacts
+  } = data;
 
   return (
-    <div className="about-page pb-8 px-5">
-      <AboutContent contentData={{ image, text }} />
+    <div className='about-page pb-8 px-5'>
+      <h2 className='px-4 font-bold text-lightgray-700 text-4xl uppercase'>
+        О нас
+      </h2>
+      <AboutCarousel />
+      <AboutContent contentData={{ photos, text }} />
       <AboutContacts
-        contactsData={{ facebook, phone, email, additionalContacts }}
+        contactsData={{ facebook, phone, email, additionalContacts, instagram }}
       />
     </div>
   );

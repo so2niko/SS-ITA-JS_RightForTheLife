@@ -1,17 +1,12 @@
 import React from 'react';
 
 const AboutContent = ({ contentData }) => {
-  const { image, text } = contentData;
-  if (!image || !text) {
+  const { photos, text } = contentData;
+  if (!photos || !text) {
     return null;
   }
   return (
     <div>
-      <img
-        className='w-full object-cover rounded-xl'
-        src={`${image}`}
-        alt='shelters pets'
-      />
       <div className='text-justify mx-16 '>
         {text.map((par, i) => {
           return (

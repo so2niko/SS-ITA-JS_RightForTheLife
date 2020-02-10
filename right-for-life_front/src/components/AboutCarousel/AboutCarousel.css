@@ -1,0 +1,24 @@
+.about__slider {
+  margin: 0 15%;
+}
+
+.about__slider .slick-prev:before,
+.about__slider .slick-next:before {
+  color: #4a5568;
+  font-size: 1.5rem;
+}
+
+.about__slider-item {
+  cursor: pointer;
+}
+
+.about__slider-item:focus {
+  outline: none;
+}
+
+.about__slider-img {
+  width: auto;
+  height: 75vh;
+  display: block;
+  margin: 0 auto;
+}
