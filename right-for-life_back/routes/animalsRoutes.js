@@ -18,12 +18,9 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/', (req, res, next) => {
-  const type = req.query.type;
-  const gender = req.query.gender;
-  AnimalModel.find({ type: type, gender: gender })
+  AnimalModel.find()
     .exec()
     .then(doc => {
-      console.log(doc);
       res.status(200).json(doc);
     });
 });
