@@ -29,12 +29,15 @@ function extractedAnimals(About) {
   const aboutContent = JSON.parse(readAnimals());
   return new About({
     _id: new mongoose.Types.ObjectId(),
-    image: aboutContent.image,
+    textHome: aboutContent.textHome,
+    photosHome: aboutContent.photosHome,
     text: aboutContent.text,
+    photos: aboutContent.photos,
+    instagram: aboutContent.instagram,
     facebook: aboutContent.facebook,
     phone: aboutContent.phone,
     email: aboutContent.email,
-    additionalContacts: aboutContent.additionalContacts,
+    __v: aboutContent.__v,
   });
 }
 

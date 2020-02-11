@@ -3,12 +3,15 @@ const mongoose = require('mongoose');
 const AboutSchema = new mongoose.Schema(
   {
     _id: mongoose.Schema.Types.ObjectId,
-    image: String,
+    textHome: Array,
+    photosHome: Array,
     text: Array,
+    photos: Array,
+    instagram: String,
     facebook: String,
     phone: String,
     email: String,
-    additionalContacts: String,
+    __v: Number,
   });
 
 module.exports = AboutSchema;

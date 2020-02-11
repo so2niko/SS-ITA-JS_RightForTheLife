@@ -16,11 +16,11 @@ export const ImageCarousel = ({ data }) => {
     return (
         <div className="h-80 flex items-center justify-center rounded-xl mb-4">
             <Slider {...sliderSettings}>
-                {data.slice(0, 9).map((item, idx) => (
+                {data.photosHome.slice(0, 7).reverse().map((photoUrl, idx) => (
                     <div key={idx}>
                         <div
-                            className="h-80 rounded-xl bg-cover bg-top"
-                            style={{ backgroundImage: "url(" + item.photo + ")" }}
+                            className="h-80 rounded-xl bg-cover bg-center"
+                            style={{ backgroundImage: "url(" + photoUrl + ")" }}
                         ></div>
                     </div>
                 ))}
