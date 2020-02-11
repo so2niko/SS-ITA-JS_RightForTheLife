@@ -150,10 +150,12 @@ module.exports = {
       '8': '2rem',
       '10': '2.5rem',
       '12': '3rem',
+      '13': '3.25rem',
       '14': '3.5rem',
       '16': '4rem',
       '20': '5rem',
       '24': '6rem',
+      '30': '7.5rem',
       '32': '8rem',
       '40': '10rem',
       '48': '12rem',
@@ -302,6 +304,8 @@ module.exports = {
     inset: {
       '0': '0',
       auto: 'auto',
+      '100': '100%',
+      '100plus10': 'calc(100% + 10px)'
     },
     letterSpacing: {
       tighter: '-0.05em',
@@ -330,6 +334,7 @@ module.exports = {
       ...negative(theme('spacing')),
     }),
     maxHeight: {
+      '15': '3.75rem',
       full: '100%',
       screen: '100vh',
     },
