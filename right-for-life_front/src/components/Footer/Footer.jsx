@@ -6,11 +6,11 @@ import { API } from "../../rootConstants";
 import { DonateButton } from '../DonateButton';
 
 const Footer = ({ data }) => {
-	const { instagram, facebook, phone, email} = data;
+	const { instagram, facebook, phone, email } = data;
 	const iconsClassName = 'mx-2 text-3xl';
 
 	return (
-		<footer className="flex flex-col lg:flex-row xl:flex-row flex-shrink-0 justify-center items-center py-3 bg-white shadow-md font-bold text-xl text-gray-600 my-16 lg:mb-0">
+		<footer className="flex flex-col sm:flex-row flex-shrink-0 justify-center items-center py-3 bg-white shadow-md font-bold text-xl text-gray-600 my-16 lg:mb-0">
 			<ul className="flex my-2">
 				<li>
 					<a
@@ -31,7 +31,7 @@ const Footer = ({ data }) => {
 					</a>
 				</li>
 				<li>
-					<a href={`tel:${phone.replace('\'','')}`}>
+					<a href={`tel:${phone.replace('\'', '')}`}>
 						<i className={`fas fa-phone-square-alt text-green-500 ${iconsClassName}`}></i>
 					</a>
 				</li>
@@ -41,16 +41,18 @@ const Footer = ({ data }) => {
 					</a>
 				</li>
 			</ul>
-			<span className="hidden lg:flex xl:flex text-center mx-24 my-2">Designed by SoftServe Inc.</span>
-			<NavLink
-				className="hidden lg:flex xl:flex mx-4 cursor-pointer text-gray-600 hover:text-gray-700"
-				exact
-				to="/reports"
-				activeClassName="text-gray-700"
-			>
-				Отчеты
-			</NavLink>
-			<div className="my-2"><DonateButton /></div>
+			<span className="hidden md:flex text-center mx-24 my-2">Designed by SoftServe Inc.</span>
+			<section className="flex items-center sm:flex-row">
+				<NavLink
+					className="sm:flex mx-4 cursor-pointer text-gray-600 hover:text-gray-700"
+					exact
+					to="/reports"
+					activeClassName="text-gray-700"
+				>
+					Отчеты
+				</NavLink>
+				<div className="my-2"><DonateButton /></div>
+			</section>
 		</footer>
 	);
 };
