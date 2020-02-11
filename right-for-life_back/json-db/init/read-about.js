@@ -37,6 +37,7 @@ function extractedAnimals(About) {
     facebook: aboutContent.facebook,
     phone: aboutContent.phone,
     email: aboutContent.email,
+    __v: aboutContent.__v,
   });
 }
 
