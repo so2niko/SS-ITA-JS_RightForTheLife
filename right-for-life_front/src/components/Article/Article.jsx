@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import calcAge from '../../helpers/calcAge';
 import { BackBtn, ShareBtn } from '../FloatingBtn';
 import YouTube from 'react-youtube';
@@ -10,6 +10,10 @@ import { useLocation } from 'react-router-dom';
 import './style.css';
 
 export const Article = ({article}) => {
+  const [originalArticleData, setOriginalArticleData] = useState(article);
+  const [modifiedArticleData, setModifiedArticleData] = useState(article);
+  const isEditMode = true;
+
   const {title, date, photo, text, gallery, videos} = article;
   const { pathname: currentURL } = useLocation();
 
@@ -19,9 +23,17 @@ export const Article = ({article}) => {
       <ShareBtn position="right-0 mr-2 mt-6"/>
 
       <div
-        className="h-78 rounded-b-xl bg-cover shadow-md bg-center"
-        style={{backgroundImage: "url(" + photo + ")"}}
+        className="h-78 rounded-b-xl bg-cover shadow-md bg-center flex"
+        style={{backgroundImage: "url(" + (isEditMode ? modifiedArticleData.photo : originalArticleData.photo)  + ")"}}
       >
+        {isEditMode ? (
+          <div className="m-auto">
+            <button>
+              {modifiedArticleData.photo ? 'Изменить изображение' : 'Установить изображение'}
+            </button>
+          </div>
+        ) : null
+        }
       </div>
       <div className="uppercase font-extrabold text-xl z-20 relative bg-white text-lightgray-700
                  shadow-xl rounded-xl -mt-10 px-8 flex items-center mx-8 mb-10 justify-between"
