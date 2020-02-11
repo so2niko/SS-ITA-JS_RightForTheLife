@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useFormik } from 'formik'
 
 export const LoginPage = () => {
+  const history = useHistory();
   const authApi = 'http://localhost:4000/auth/signin';
 
   const formik = useFormik({
@@ -29,6 +31,7 @@ export const LoginPage = () => {
           console.log(data);
           if (data) {
             sessionStorage.setItem('token', data);
+            history.push('/');
           }
         })
         .catch(error => console.log(error))
