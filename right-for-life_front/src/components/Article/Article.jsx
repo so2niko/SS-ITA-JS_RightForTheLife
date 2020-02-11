@@ -28,12 +28,22 @@ export const Article = ({article}) => {
       >
         {isEditMode ? (
           <div className="m-auto">
-            <button>
+            <input
+              className="hidden"
+              type="file"
+              accept="image/*"
+              id="imageInput"
+              onChange={() => {}}
+            />
+            <label
+              htmlFor="imageInput"
+              className="p-4 rounded-xl bg-gray-300 hover:bg-gray-400 cursor-pointer shadow-2xl"
+            >
               {modifiedArticleData.photo ? 'Изменить изображение' : 'Установить изображение'}
-            </button>
+            </label>
           </div>
-        ) : null
-        }
+          ) : null
+          }
       </div>
       <div className="uppercase font-extrabold text-xl z-20 relative bg-white text-lightgray-700
                  shadow-xl rounded-xl -mt-10 px-8 flex items-center mx-8 mb-10 justify-between"
