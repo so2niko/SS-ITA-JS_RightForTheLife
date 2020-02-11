@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import logo from "../../../assets/logo.jpg";
 import { HeaderItem } from "./HeaderItem";
 import React from "react";
-import './style.css';
+import "./style.css";
 
 export const HeaderDesktop = () => (
   <nav className="hidden lg:block">
