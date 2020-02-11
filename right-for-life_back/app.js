@@ -9,6 +9,7 @@ const aboutRoutes = require('./routes/aboutRoutes.js');
 const donateRoutes = require('./routes/donatesRoutes.js');
 const emergencyRoutes = require('./routes/emergenciesRoutes.js');
 const reportsRoutes = require('./routes/reportsRoutes.js');
+const authRoutes = require('./routes/authRoutes.js');
 const mongoose = require('mongoose');
 const dbOptions = require('./utils/configs.js').dbOptions;
 
@@ -36,6 +37,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use('/auth', authRoutes);
 app.use('/animals', animalRoutes);
 app.use('/news', newsRoutes);
 app.use('/supplies', suppliesRoutes);

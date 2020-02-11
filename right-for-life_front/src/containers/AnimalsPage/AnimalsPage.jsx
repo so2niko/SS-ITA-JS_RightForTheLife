@@ -1,9 +1,9 @@
-import React from "react";
-import { Filters } from "../../components/Filters";
-import { AnimalsList } from "../../components/AnimalsList";
+import React from 'react';
+import { AnimalsList } from '../../components/AnimalsList';
+import { Filters } from '../../components/Filters';
 
 export const AnimalsPage = () => {
-  const filters = [['type', 'пес'], ['type', 'кот'], ['gender', 'M'], ['gender', 'Ж']];
+  const filters = [['type', 'пес'], ['type', 'кот'], ['gender', 'М'], ['gender', 'Ж']];
 
   return (
     <div className="animals-page -mx-4">
