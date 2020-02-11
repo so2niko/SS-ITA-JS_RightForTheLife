@@ -6,18 +6,6 @@ const AnimalScheme = require('../models/AnimalSchema.js');
 const AnimalModel = mongoose.connection.model('Animal', AnimalScheme);
 
 router.get('/', (req, res, next) => {
-  if (req.query) {
-    next();
-  } else {
-    AnimalModel.find()
-      .exec()
-      .then(doc => {
-        res.status(200).json(doc);
-      });
-  }
-});
-
-router.get('/', (req, res, next) => {
   AnimalModel.find()
     .exec()
     .then(doc => {
