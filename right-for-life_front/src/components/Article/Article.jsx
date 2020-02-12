@@ -25,7 +25,7 @@ export const Article = ({article}) => {
       </div>
       <div className="uppercase font-extrabold text-xl z-20 relative bg-white text-lightgray-700
                  shadow-xl rounded-xl -mt-10 px-8 flex items-center mx-8 mb-10 justify-between"
-          style={{minHeight: "100px"}}
+           style={{minHeight: "100px"}}
       >
         {title}
         {currentURL.includes('emergency') ? <DonateButton style={{marginLeft:'10px'}}/> : null}
@@ -37,11 +37,11 @@ export const Article = ({article}) => {
           {calcAge(Number(date))} назад
         </aside>
       </div>
-        { gallery?.length ? (
-          <div className="mb-10 md:mx-20">
-            <ArticleImageGallery images={gallery} />
-          </div>
-        ) : null }
+      { gallery?.length ? (
+        <div className="mb-10 md:mx-20">
+          <ArticleImageGallery images={gallery} />
+        </div>
+      ) : null }
       <div className="mx-10 md:mx-20">
         <p className="font-medium text-lightgray-600 mb-12">
           {text}
