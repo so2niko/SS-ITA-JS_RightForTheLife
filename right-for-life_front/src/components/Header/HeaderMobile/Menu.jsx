@@ -3,7 +3,7 @@ import React from "react";
 
 export const Menu = () => (
   <ul
-    className="rounded-t-xl flex flex-col justify-between items-center w-full bg-gray-100 font-bold text-xl text-gray-600 py-8 m-auto"
+    className="rounded-t-xl flex flex-col justify-between items-center w-full bg-gray-100 font-bold text-xl text-gray-600 py-8 mx-auto mt-20"
     style={{maxWidth: '700px'}}>
     <HeaderItem to="/" title="Главная"/>
 
@@ -16,5 +16,3 @@ export const Menu = () => (
     <HeaderItem to="/about" title="О нас"/>
   </ul>
 );
-
-
