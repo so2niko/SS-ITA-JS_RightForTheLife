@@ -1,43 +1,35 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from "prop-types";
+import { UploadImages } from '../../services/UploadImages';
+import './EditArticleFeaturedImage.css';
 
-export const EditArticleFeaturedImage = ({image, imageChangeHandler}) => {
-
-  const [currentImage, setCurrentImage] = useState(image);
+export const EditArticleFeaturedImage = ({ image, imageChangeHandler }) => {
   const inputRef = useRef();
 
   return (
     <div
-      className="h-78 rounded-b-xl bg-cover shadow-md bg-center flex"
-      style={{backgroundImage: "url(" + currentImage  + ")"}}
-    >
-      <div className="m-auto">
+      className="relative h-78 rounded-b-xl bg-cover shadow-md bg-center overflow-hidden"
+      style={{backgroundImage: "url(" + image  + ")"}}>
+      <div className="eafi-update absolute inset-0 w-full h-full z-10 hover:bg-orange-100 opacity-75">
         <input
+          ref={inputRef}
           className="hidden"
           type="file"
-          ref={inputRef}
           accept="image/*"
           id="imageInput"
           onChange={() => {
-            const inputData = new FormData();
-            inputData.set('image', inputRef.current.files[0]);
-            fetch("https://api.imgbb.com/1/upload?key=9bb650fa23db8e445857ad9b20e41c2b", {
-              method: "POST",
-              body: inputData,
+            UploadImages(inputRef.current.files).then(links => {
+              imageChangeHandler(links[0]);
             })
-              .then(res => res.json())
-              .then(json => {
-                imageChangeHandler(json.data.url);
-                setCurrentImage(json.data.url);
-              })
-              .catch(err => console.log(err));
           }}
         />
         <label
           htmlFor="imageInput"
-          className="p-4 rounded-xl bg-gray-300 hover:bg-gray-400 cursor-pointer shadow-2xl"
-        >
-          {currentImage ? 'Изменить изображение' : 'Установить изображение'}
+          className="flex justify-center items-center w-full h-full font-bold uppercase text-xl text-orange-700 invisible cursor-pointer">
+          { image 
+            ? <span><i className="fas fa-sync-alt px-3" />Изменить изображение</span> 
+            : <span><i className="fas fa-cloud-upload-alt px-3" />Установить изображение</span> 
+          }
         </label>
       </div>
     </div>
