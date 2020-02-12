@@ -4,16 +4,16 @@ import { UploadImages } from '../../services/UploadImages';
 import './UpdateImageGallery.css';
 
 export const UpdateImageGallery = ({ images, updateImages }) => {
-  const inputRef = useRef();
-  const [progress, setProgress] = useState(0);
   const [isUpload, setIsUpload] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const inputRef = useRef();
 
   return (
     <article className="-mx-2 p-1 rounded-lg bg-orange-100">
       <section className="relative flex flex-wrap">
         {isUpload && (
           <div className="absolute inset-0 w-full h-full p-1 z-10">
-            <span className="flex justify-center items-center w-full h-full rounded-lg font-bold text-orange-700 bg-orange-200 opacity-75">
+            <span className="flex justify-center items-center w-full h-full rounded-lg font-bold text-orange-700 bg-orange-100 opacity-75">
             <div className="loader loader-3">
               <div className="dot dot1" style={{ background: '#c05621' }}></div>
               <div className="dot dot2" style={{ background: '#c05621' }}></div>
@@ -51,7 +51,7 @@ export const UpdateImageGallery = ({ images, updateImages }) => {
           className="absolute top-0 left-0 bottom-0 p-1"
           style={{ width: `${progress}%`, transition: '300ms' }}>
           <div className="flex justify-center items-center w-full h-full rounded-lg bg-orange-300">
-            {isUpload && progress > 0 && <span className="font-bold text-orange-700">{progress.toFixed(0)}%</span>}
+            {isUpload && progress > 0 && <span className="font-bold text-orange-700">{progress}%</span>}
           </div>
         </div>
         <label className={`flex justify-center items-center w-full h-full rounded-lg font-bold text-orange-700 bg-orange-200 ${!isUpload ? 'hover:bg-orange-300 cursor-pointer' : ''}`}>
@@ -67,14 +67,13 @@ export const UpdateImageGallery = ({ images, updateImages }) => {
             disabled={isUpload}
             onChange={() => {
               setIsUpload(true);
-              new UploadImages(inputRef.current.files)
-                .getLinks(setProgress)
-                .then(links => {
-                  updateImages([...images, ...links]);
-                  setProgress(0);
-                  setIsUpload(false);
-                  inputRef.current.value = "";
-                });
+
+              UploadImages(inputRef.current.files, setProgress).then(links => {
+                updateImages([...images, ...links]);
+                setProgress(0);
+                setIsUpload(false);
+                inputRef.current.value = "";
+              })
             }}
             ref={inputRef}
             className="hidden"
