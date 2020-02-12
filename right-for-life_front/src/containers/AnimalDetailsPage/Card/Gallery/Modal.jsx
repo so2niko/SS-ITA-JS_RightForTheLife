@@ -12,18 +12,7 @@ export class Modal extends React.Component {
     this.pswpElement = document.querySelector('.pswp');
 
     this.items = this.props.photos.map(src => ({src, ...this.getSizes()}));
-    window.addEventListener('popstate', this.closeModal);
   }
-
-  componentWillUnmount() {
-    window.removeEventListener('popstate', this.closeModal);
-  }
-
-  closeModal = () => {
-    if (this.gallery) {
-      this.gallery.close();
-    }
-  };
 
   init = ({index, getThumbBoundsFn, sizes}) => {
     this.items = sizes && this.prevSizes !== sizes ?
@@ -41,14 +30,10 @@ export class Modal extends React.Component {
       zoomEl: false,
       shareEl: false,
       preloaderEl: false,
-      history: false,
     };
 
     this.gallery = new PhotoSwipe(this.pswpElement, PhotoSwipeUI_Default, this.items, options);
     this.gallery.init();
-
-    this.gallery.listen('close', () => window.history.back());
-    window.history.pushState(null, null, '#gallery-opened');
   };
 
   // if sizes not loaded yet
