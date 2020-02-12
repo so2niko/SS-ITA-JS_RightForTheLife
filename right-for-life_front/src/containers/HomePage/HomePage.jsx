@@ -8,7 +8,7 @@ import { withFetchDataIndicators } from "../../hoc/withFetchDataIndicators";
 export const HomePage = () => (
   <article className="flex flex-col lg:flex-row flex-1 pb-8">
     <section className="w-full lg:w-2/3 p-5">
-      <ImageCarouselWithData />
+      <ImageCarouselWithData page={'home'}/>
       <HomeArticleWithData />
     </section>
     <section className="w-full lg:w-1/3 h-72 lg:h-auto p-5">
