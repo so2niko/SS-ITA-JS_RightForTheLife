@@ -9,7 +9,7 @@ export const UpdateImageGallery = ({ images, updateImages }) => {
   const inputRef = useRef();
 
   return (
-    <article className="-mx-2 p-1 rounded-lg border border-orange-200 bg-orange-100">
+    <article className="-mx-2 my-10 p-1 rounded-lg border border-orange-200 bg-orange-100">
       <section className="relative flex flex-wrap">
         {isUpload && (
           <div className="absolute inset-0 w-full h-full p-1 z-10">
