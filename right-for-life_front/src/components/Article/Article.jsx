@@ -5,7 +5,8 @@ import YouTube from 'react-youtube';
 import {ArticleImageGallery} from "../ArticleImageGallery";
 import { DonateButton } from "../DonateButton";
 import { useLocation } from 'react-router-dom';
-
+import { extractVideoIdFromYouTubeLink } from "../../helpers/extractVideoIdFromYouTubeLink";
+import { EditArticleFeaturedImage } from "../EditArticleFeaturedImage";
 
 import './style.css';
 
@@ -22,29 +23,15 @@ export const Article = ({article}) => {
       <BackBtn position="left-0 ml-2 mt-6"/>
       <ShareBtn position="right-0 mr-2 mt-6"/>
 
-      <div
-        className="h-78 rounded-b-xl bg-cover shadow-md bg-center flex"
-        style={{backgroundImage: "url(" + (isEditMode ? modifiedArticleData.photo : originalArticleData.photo)  + ")"}}
-      >
         {isEditMode ? (
-          <div className="m-auto">
-            <input
-              className="hidden"
-              type="file"
-              accept="image/*"
-              id="imageInput"
-              onChange={() => {}}
-            />
-            <label
-              htmlFor="imageInput"
-              className="p-4 rounded-xl bg-gray-300 hover:bg-gray-400 cursor-pointer shadow-2xl"
-            >
-              {modifiedArticleData.photo ? 'Изменить изображение' : 'Установить изображение'}
-            </label>
-          </div>
-          ) : null
+          <EditArticleFeaturedImage image={article.photo} imageChangeHandler={(value => console.log(value))}/>
+          ) : (
+          <div
+            className="h-78 rounded-b-xl bg-cover shadow-md bg-center flex"
+            style={{backgroundImage: "url(" + (isEditMode ? modifiedArticleData.photo : originalArticleData.photo)  + ")"}}
+          />
+        )
           }
-      </div>
       <div className="uppercase font-extrabold text-xl z-20 relative bg-white text-lightgray-700
                  shadow-xl rounded-xl -mt-10 px-8 flex items-center mx-8 mb-10 justify-between"
           style={{minHeight: "100px"}}
@@ -70,7 +57,7 @@ export const Article = ({article}) => {
         </p>
         { videos?.length ? videos.map(video =>
           <div className="video-iframe-container" key={video}>
-            <YouTube videoId={video} />
+            <YouTube videoId={extractVideoIdFromYouTubeLink(video)} />
           </div>) : null }
       </div>
     </article>

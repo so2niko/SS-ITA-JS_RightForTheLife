@@ -30,7 +30,7 @@ export const LoginPage = () => {
   return (
     <div className="w-full min-h-full flex items-center justify-center">
       <form onSubmit={formik.handleSubmit} className="flex-grow max-w-xs text-lightgray-700">
-        <h1 className="text-3xl font-medium mb-8 ml-2  ">Добро пожаловать!</h1>
+        <h1 className="text-3xl font-medium mb-8 ml-2">Добро пожаловать!</h1>
         <div className="mb-6">
           <label
             htmlFor="username"
