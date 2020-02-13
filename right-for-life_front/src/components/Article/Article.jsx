@@ -6,7 +6,9 @@ import { ArticleImageGallery } from "../ArticleImageGallery";
 import { DonateButton } from "../DonateButton";
 import { useLocation } from 'react-router-dom';
 import { EditArticleFeaturedImage } from '../EditArticleFeaturedImage';
+import { EditVideosList } from "../EditVideosList";
 import { UpdateImageGallery } from '../UpdateImageGallery';
+import { extractVideoIdFromYouTubeLink } from "../../helpers/extractVideoIdFromYouTubeLink";
 
 import './style.css';
 
@@ -86,11 +88,17 @@ export const Article = ({article}) => {
         </p>
       </div>
 
-      <div>
-        { state.videos?.length ? state.videos.map(video =>
-          <div className="video-iframe-container" key={video}>
-            <YouTube videoId={video} />
-          </div>) : null }
+      <div className={`px-10 md:px-20 ${isEdit ? 'py-10 bg-orange-100' : ''}`}>
+        {isEdit
+          ? <EditVideosList
+              videosList={state.videos}
+              videosListChangeHandler={videos => setState({...state, videos})}
+            />
+          : state.videos?.length ? state.videos.map(video =>
+            <div className="video-iframe-container" key={video}>
+              <YouTube videoId={extractVideoIdFromYouTubeLink(video)} />
+            </div>) : null
+        }
       </div>
     </article>
   );
