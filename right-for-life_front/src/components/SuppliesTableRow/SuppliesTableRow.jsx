@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SuppliesTableRow = ({ itemData }) => {
-  const { name, type, info, amount } = itemData;
+  const { name, info } = itemData;
 
   return (
     <tr>

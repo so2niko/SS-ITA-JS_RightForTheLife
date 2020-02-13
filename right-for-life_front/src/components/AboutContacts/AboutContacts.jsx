@@ -1,7 +1,13 @@
 import React from 'react';
 
 const AboutContacts = ({ contactsData }) => {
-  const { facebook, phone, email, additionalContacts } = contactsData;
+  const {
+    facebook,
+    phone,
+    email,
+    instagram,
+    additionalContacts
+  } = contactsData;
   if (!facebook) {
     return null;
   }
@@ -15,9 +21,9 @@ const AboutContacts = ({ contactsData }) => {
   ) : null;
 
   return (
-    <div className='about-contacts-links flex flex-row justify-around'>
+    <div className='about-contacts-links flex flex-row md:justify-around justify-between flex-wrap'>
       <button
-        className={`bg-transparent text-gray-700 font-semibold py-2 px-4 border border-transparent hover:border-blue-800 hover:text-blue-800 hover:bg-blue-200  rounded-xl`}
+        className={`bg-transparent text-gray-700 font-semibold py-2 px-4 border border-transparent hover:border-blue-800 hover:bg-blue-200  rounded-xl`}
       >
         <a
           className={centerItemClass}
@@ -29,6 +35,19 @@ const AboutContacts = ({ contactsData }) => {
             className={`fab fa-facebook-square text-blue-700 ${iconsClassName}`}
           ></i>
           <span>Facebook</span>
+        </a>
+      </button>
+      <button
+        className={`bg-transparent text-gray-700 font-semibold py-2 px-4 border border-transparent hover:border-pink-600 hover:bg-pink-200  rounded-xl`}
+      >
+        <a
+          className={centerItemClass}
+          href={`${instagram}`}
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          <i className={`fab fa-instagram text-pink-700 ${iconsClassName}`}></i>
+          <span>Instagram</span>
         </a>
       </button>
       <button
