@@ -46,12 +46,16 @@ export const Article = ({article}) => {
 
       <div 
         className={`uppercase font-extrabold text-xl z-20 relative bg-white text-lightgray-700 shadow-xl rounded-xl -mt-10 px-8 flex items-center mx-8 mb-10 justify-between ${isEdit ? 'bg-orange-200' : '' }`}
-        style={{minHeight: "100px"}}
-        ref={titleRef}
-        contentEditable={isEdit}
-        suppressContentEditableWarning={true}
-        onBlur={() => setState({ ...state, title: titleRef.current.textContent })}>
-        {state.title}
+        style={{minHeight: "100px"}}>
+        <div
+          className="flex-grow"
+          ref={titleRef}
+          contentEditable={isEdit}
+          suppressContentEditableWarning={true}
+          onBlur={() => setState({ ...state, title: titleRef.current.textContent })}
+        >
+          {state.title}
+        </div>
         {currentURL.includes('emergency') ? <DonateButton style={{marginLeft:'10px'}}/> : null}
       </div>
 
