@@ -20,8 +20,9 @@ import { EmergencyHelpPage } from "./containers/EmergencyHelpPage"
 import { SingleEmergencyHelpPage } from "./containers/SingleEmergencyHelpPage"
 import { ScrollToTop } from "./components/ScrollToTop";
 import { LoginPage } from "./containers/LoginPage";
-import {ReportsPage} from "./containers/ReportsPage";
-import {ReportPage} from "./containers/ReportPage/ReportPage";
+import { ReportsPage } from "./containers/ReportsPage";
+import { ReportPage } from "./containers/ReportPage/ReportPage";
+import { GalleryLayout } from "./containers/AnimalDetailsPage/Card/Gallery";
 
 function App({store}) {
   return (
@@ -55,6 +56,8 @@ function App({store}) {
         </SiteContentContainer>
         <Footer/>
       </Router>
+
+      <GalleryLayout />
     </Provider>
   );
 }

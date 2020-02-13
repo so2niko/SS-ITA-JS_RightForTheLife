@@ -1,8 +1,8 @@
-import React from 'react';
-import { PopUpContacts } from '../../../components/PopUpContacts';
-import calcAge from '../../../helpers/calcAge';
-import { Photos } from "./Photos.jsx";
-import './style.css'
+import React from "react";
+import { PopUpContacts } from "../../../components/PopUpContacts";
+import calcAge from "../../../helpers/calcAge";
+import { Gallery } from "./Gallery";
+import "./style.css";
 
 export class Card extends React.Component {
   state = {
@@ -27,15 +27,13 @@ export class Card extends React.Component {
   render() {
     const {name, age, photos, gender} = this.props;
 
-    const imagesArr = photos.map(item => ({source: item}));
-
     return (
-      <div>
+      <>
         {this.state.modalIsOpen && <PopUpContacts handleShowingModal={() => window.history.back()}/>}
         <li className="animal-details-card w-full flex flex-col">
           <div className="pointer">
-            <div className="rounded-b-xl sm:rounded-xl overflow-hidden shadow-lg z-0 relative">
-              <Photos imagesArr={imagesArr}/>
+            <div className="rounded-b-xl sm:rounded-xl overflow-hidden shadow-lg z-0 relative -mx-3 sm:mx-0">
+              <Gallery photos={photos}/>
             </div>
           </div>
           <div className="w-11/12 p-4 bg-white text-gray-700 uppercase shadow-xl rounded-b-xl self-center">
@@ -60,7 +58,7 @@ export class Card extends React.Component {
 
           </div>
         </li>
-      </div>
+      </>
     );
   }
 }
