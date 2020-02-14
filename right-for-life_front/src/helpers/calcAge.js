@@ -1,18 +1,16 @@
 function calcAge(ms) {
-  let months = Math.ceil((Date.now() - new Date(ms)) / 2592000000);
+  const ageObj = _calcRange(ms);
+  const parsedAgeObj = Object.entries(ageObj).reduce((acc, [type, count]) => {
+    if (!acc.finish && count) {
+      acc[acc.first ? 'second' : 'first'] = count + ' ' + formatAge(type, count)
+    }
 
-  if (months < 12) {
-    let weeks = Math.ceil(months/2);
-    weeks = weeks < 4 ? weeks : 2;
+    if (acc.second) acc.finish = true;
 
-    return `${months} ${formatAge('months', months)} ${weeks} ${formatAge('weeks', weeks)}`;
-  }
-  else {
-    let years = Math.floor(months / 12);
-    months = months % 12;
+    return acc;
+  }, {});
 
-    return `${years} ${formatAge('years', years)} ${months} ${formatAge('months', months)}`;
-  }
+  return parsedAgeObj.second ? parsedAgeObj.first + ' ' + parsedAgeObj.second : parsedAgeObj.first;
 }
 
 function formatAge(type, count) {
@@ -44,5 +42,40 @@ function formatCounter(n, first, second, third) {
   }
   return first
 }
+
+export const _calcRange = (from, to = Date.now()) => {
+  if (!(Number.isInteger(from) && Number.isInteger(to))) {
+    console.error('Warning: expected from and to be integer, but gets:', from, to)
+  }
+
+  if (from > to) {
+    console.error('Warning: from should be lower than to. Gets:', from, to)
+  }
+
+  const dateFrom = new Date(from);
+  const dateTo = new Date(to);
+
+  const daysRange = dateTo.getDate() - dateFrom.getDate();
+  const daysWithoutWeeks = daysRange < 0 ? _daysInMonth(from) + daysRange : daysRange;
+  const days = daysWithoutWeeks % 7; // 7 - days in week
+
+  const weeks = daysWithoutWeeks / 7 ^ 0;
+
+  const monthsRaw = dateTo.getMonth() - dateFrom.getMonth();
+  const monthsWithDays = monthsRaw < 0 ? 12 + monthsRaw : monthsRaw; // 12 - months in year
+  const months = dateFrom.getDate() > dateTo.getDate() ? monthsWithDays - 1 : monthsWithDays;
+
+  const yearsWithMonth = dateTo.getFullYear() - dateFrom.getFullYear();
+  const years = dateFrom.getMonth() > dateTo.getMonth() ? yearsWithMonth - 1 : yearsWithMonth;
+
+  return {years, months, weeks, days};
+};
+
+const _daysInMonth = (ms) => {
+  const date = new Date(ms);
+  date.setMonth(date.getMonth() + 1);
+  date.setDate(0);
+  return date.getDate();
+};
 
 export default calcAge;
