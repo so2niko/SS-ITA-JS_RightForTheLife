@@ -26,52 +26,56 @@ export const Select = ({classNames, optAdd, optEdit, optDelete, optPinToHomePage
   return (
     <>
       {optAdd ? (
-        <div
-          className={`relative inline-block ${classNames}`}
-        >
-          <i
-            onClick={() => chooseOptionHandler('add')}
-            className="fas fa-plus text-2xl hover:bg-gray-200 cursor-pointer w-12 h-12 rounded-full flex justify-center items-center shadow-xl bg-white"
-          />
+        <div className={`inline-block ${classNames}`}>
+          <div
+            className="relative inline-block"
+          >
+            <i
+              onClick={() => chooseOptionHandler('add')}
+              className="fas fa-plus text-2xl hover:bg-gray-200 cursor-pointer w-12 h-12 rounded-full flex justify-center items-center shadow-xl bg-white"
+            />
+          </div>
         </div>
       ) : (
-        <div
-          ref={componentRef}
-          className={`relative inline-block ${classNames}`}
-        >
-          <i
-            onClick={() => !isSelectOpened && setIsSelectOpened(true)}
-            className="fas fa-pencil-alt text-2xl hover:bg-gray-200 cursor-pointer w-12 h-12 rounded-full flex justify-center items-center shadow-xl bg-white"
-          />
-          <ul
-            className={cn({'w-56' : isSelectOpened}, {'w-0 h-0' : !isSelectOpened}, "absolute top-100plus10 right-0 bg-white rounded-lg overflow-hidden shadow-xl py-1 text-lightgray-600 select-none")}
-            onClick={handleSelectListClick}
+        <div className={`inline-block ${classNames}`}>
+          <div
+            ref={componentRef}
+            className="relative inline-block"
           >
-            {optEdit ? (
-              <li
-                data-role="pinToHomePage"
-                className="py-2 pl-2 pr-4 text-right cursor-pointer hover:bg-gray-200"
-              >
-                Прикрепить на главную
-              </li>
-            ) : null}
-            {optPinToHomePage ? (
-              <li
-                data-role="edit"
-                className="py-2 pl-2 pr-4 text-right cursor-pointer hover:bg-gray-200"
-              >
-                Редактировать
-              </li>
-            ) : null}
-            {optDelete ? (
-              <li
-                data-role="delete"
-                className="py-2 pl-2 pr-4 text-right cursor-pointer hover:bg-red-200 text-red-600 text-xs"
-              >
-                <i className="fas fa-trash pr-3" />Удалить
-              </li>
-            ) : null}
-          </ul>
+            <i
+              onClick={() => !isSelectOpened && setIsSelectOpened(true)}
+              className="fas fa-pencil-alt text-2xl hover:bg-gray-200 cursor-pointer w-12 h-12 rounded-full flex justify-center items-center shadow-xl bg-white"
+            />
+            <ul
+              className={cn({'w-56' : isSelectOpened}, {'w-0 h-0' : !isSelectOpened}, "absolute top-100plus10 right-0 bg-white rounded-lg overflow-hidden shadow-xl py-1 text-lightgray-600 select-none")}
+              onClick={handleSelectListClick}
+            >
+              {optEdit ? (
+                <li
+                  data-role="pinToHomePage"
+                  className="py-2 pl-2 pr-4 text-right cursor-pointer hover:bg-gray-200"
+                >
+                  Прикрепить на главную
+                </li>
+              ) : null}
+              {optPinToHomePage ? (
+                <li
+                  data-role="edit"
+                  className="py-2 pl-2 pr-4 text-right cursor-pointer hover:bg-gray-200"
+                >
+                  Редактировать
+                </li>
+              ) : null}
+              {optDelete ? (
+                <li
+                  data-role="delete"
+                  className="py-2 pl-2 pr-4 text-right cursor-pointer hover:bg-red-200 text-red-600 text-xs"
+                >
+                  <i className="fas fa-trash pr-3" />Удалить
+                </li>
+              ) : null}
+            </ul>
+          </div>
         </div>
       )}
     </>

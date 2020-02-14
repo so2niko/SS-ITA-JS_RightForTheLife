@@ -12,6 +12,7 @@ import { extractVideoIdFromYouTubeLink } from "../../helpers/extractVideoIdFromY
 import { EditModeBar } from '../EditModeBar';
 
 import './style.css';
+import {Select} from "../Select";
 
 export const Article = ({article}) => {
   const { pathname: currentURL } = useLocation();
@@ -21,16 +22,35 @@ export const Article = ({article}) => {
   const titleRef = useRef(null);
   const textRef = useRef(null);
   const [isEdit, setIsEdit] = useState(false);
+  const [isEditModeBarOpen, setIsEditModeBarOpen] = useState(false);
+
+  function selectOptionChoseHandler(selectedOption) {
+    switch (selectedOption) {
+      case 'edit':
+        setIsEditModeBarOpen(true);
+        setIsEdit(true);
+    }
+  }
 
   return (
     <article>
       <BackBtn position="left-0 ml-2 mt-6"/>
       <ShareBtn position="right-0 mr-2 mt-6"/>
 
-      <EditModeBar  
-        onEdit={() => setIsEdit(!isEdit)}
-        state={state}
-      />
+      {isEditModeBarOpen
+        ? <EditModeBar
+          isOpen={isEditModeBarOpen}
+          onEdit={() => setIsEdit(!isEdit)}
+          state={state}
+          />
+        : <Select
+          classNames="fixed z-50 top-0 right-0 mr-10 mt-20"
+          chooseOptionHandler={selectOptionChoseHandler}
+          optEdit
+          optDelete
+          optPinToHomePage
+          />
+      }
 
       {isEdit
         ? <EditArticleFeaturedImage 
