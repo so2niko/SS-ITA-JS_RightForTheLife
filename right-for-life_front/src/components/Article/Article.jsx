@@ -9,6 +9,7 @@ import { EditArticleFeaturedImage } from '../EditArticleFeaturedImage';
 import { EditVideosList } from "../EditVideosList";
 import { UpdateImageGallery } from '../UpdateImageGallery';
 import { extractVideoIdFromYouTubeLink } from "../../helpers/extractVideoIdFromYouTubeLink";
+import { EditModeBar } from '../EditModeBar';
 
 import './style.css';
 
@@ -26,12 +27,10 @@ export const Article = ({article}) => {
       <BackBtn position="left-0 ml-2 mt-6"/>
       <ShareBtn position="right-0 mr-2 mt-6"/>
 
-      <button onClick={() => {
-        setIsEdit(!isEdit);
-        console.log(state);
-      }}>
-        EDIT
-      </button>
+      <EditModeBar  
+        onEdit={() => setIsEdit(!isEdit)}
+        state={state}
+      />
 
       {isEdit
         ? <EditArticleFeaturedImage 
