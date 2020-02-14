@@ -73,6 +73,10 @@ export const _calcRange = (from, to = Date.now()) => {
 
 const _daysInMonth = (ms) => {
   const date = new Date(ms);
+
+  // if a next month has a lower days
+  date.setDate(1);
+
   date.setMonth(date.getMonth() + 1);
   date.setDate(0);
   return date.getDate();
