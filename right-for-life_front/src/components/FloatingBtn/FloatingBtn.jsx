@@ -30,7 +30,8 @@ export const FloatingBtn = ({
           {iconElem}
         </Link>
       ) : (
-        <div onClick={onClick} className={className}>
+        // eslint-disable-next-line  jsx-a11y/click-events-have-key-events
+        <div role="button" onClick={onClick} className={className}>
           <SwitchTransition>
             <CSSTransition
               key={icon}

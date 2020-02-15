@@ -1,7 +1,7 @@
 import React from 'react';
 
 export class GalleryLayout extends React.Component {
-  shouldComponentUpdate(nextProps, nextState, nextContext) {
+  shouldComponentUpdate() {
     // false because it non react code
     return false;
   }
@@ -21,13 +21,13 @@ export class GalleryLayout extends React.Component {
             <div className="pswp__top-bar">
               <div className="pswp__counter" />
 
-              <button
+              <div
                 className="pswp__button pswp__button--close"
                 title="Закрыть (Esc)"
               />
-              <button className="pswp__button pswp__button--share" title="" />
-              <button className="pswp__button pswp__button--fs" title="" />
-              <button className="pswp__button pswp__button--zoom" title="" />
+              <div className="pswp__button pswp__button--share" title="" />
+              <div className="pswp__button pswp__button--fs" title="" />
+              <div className="pswp__button pswp__button--zoom" title="" />
 
               <div className="pswp__preloader">
                 <div className="pswp__preloader__icn">
@@ -42,12 +42,12 @@ export class GalleryLayout extends React.Component {
               <div className="pswp__share-tooltip" />
             </div>
 
-            <button
+            <div
               className="pswp__button pswp__button--arrow--left"
               title="Назад (стрелочка влево)"
             />
 
-            <button
+            <div
               className="pswp__button pswp__button--arrow--right"
               title="Вперед (стрелочка вправо)"
             />

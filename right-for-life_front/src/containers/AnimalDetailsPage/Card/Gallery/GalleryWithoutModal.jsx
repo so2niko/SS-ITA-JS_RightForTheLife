@@ -6,6 +6,7 @@ export class GalleryWithoutModal extends React.Component {
   componentDidMount() {
     Swiper.use([Navigation, Pagination]);
 
+    // eslint-disable no-new
     new Swiper('.swiper-container', {
       autoHeight: true,
       pagination: {
@@ -45,7 +46,7 @@ export class GalleryWithoutModal extends React.Component {
                 className="object-cover w-full cursor-pointer"
                 onClick={
                   onClick
-                    ? e =>
+                    ? () =>
                         onClick({
                           index,
                           getThumbBoundsFn: () => this.getThumbBoundsFn(index),
