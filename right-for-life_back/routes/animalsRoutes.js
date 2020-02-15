@@ -33,15 +33,8 @@ router.get('/:animalID', (req, res, next) => {
 router.post('/', (req, res, next) => {
   const { photos, name, type, gender, description, age } = req.body;
 
-  new AnimalModel({
-    _id: new mongoose.Types.ObjectId(),
-    photos: photos,
-    name: name,
-    type: type,
-    gender: gender,
-    age: age,
-    description: description,
-  }).save()
+  new AnimalModel({ _id: new mongoose.Types.ObjectId(), photos, name, type, gender, age, description })
+    .save()
     .then(animal => {
       console.log(animal);
       res.status(200).json(animal);
@@ -74,11 +67,11 @@ router.put('/:animalID', (req, res, next) => {
           res.status(500).end();
         });
     });
-});
+})
+;
 
 router.delete('/:animalID', (req, res, next) => {
-  const animalId = new mongoose.Types.ObjectId(req.params.animalID);
-  AnimalModel.deleteOne({ _id: animalId })
+  AnimalModel.deleteOne({ _id: new mongoose.Types.ObjectId(req.params.animalID) })
     .then(() => {
       res.status(200).end();
     })
