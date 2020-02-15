@@ -7,7 +7,7 @@ const AnimalModel = mongoose.connection.model('Animal', AnimalScheme);
 
 
 router.get('/', (req, res, next) => {
-  if (req.query.length > 0) {
+  if (req.query.type && req.query.gender) {
     const { type, gender } = req.query;
     AnimalModel.find({ type: type, gender: gender })
       .exec()
