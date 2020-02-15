@@ -5,12 +5,22 @@ const mongoose = require('mongoose');
 const AnimalScheme = require('../models/AnimalSchema.js');
 const AnimalModel = mongoose.connection.model('Animal', AnimalScheme);
 
+
 router.get('/', (req, res, next) => {
-  AnimalModel.find()
-    .exec()
-    .then(doc => {
-      res.status(200).json(doc);
-    });
+  if (req.query.length > 0) {
+    const { type, gender } = req.query;
+    AnimalModel.find({ type: type, gender: gender })
+      .exec()
+      .then(animals => {
+        res.status(200).json(animals);
+      });
+  } else {
+    AnimalModel.find()
+      .exec()
+      .then(animals => {
+        res.status(200).json(animals);
+      });
+  }
 });
 
 router.get('/:animalID', (req, res, next) => {

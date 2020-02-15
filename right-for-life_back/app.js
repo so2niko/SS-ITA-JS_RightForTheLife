@@ -9,7 +9,7 @@ const suppliesRoutes = require('./routes/supliesRoutes.js');
 const aboutRoutes = require('./routes/aboutRoutes.js');
 const donateRoutes = require('./routes/donatesRoutes.js');
 const emergencyRoutes = require('./routes/emergenciesRoutes.js');
-const reportsRoutes = require('./routes/reportsRoutes.js');
+const reportRoutes = require('./routes/reportsRoutes.js');
 const authRoutes = require('./routes/authRoutes.js');
 const mongoose = require('mongoose');
 const dbOptions = require('./utils/configs.js').dbOptions;
@@ -46,8 +46,8 @@ app.use('/supplies', suppliesRoutes);
 app.use('/happyStories', happyStoriesRoutes);
 app.use('/about', aboutRoutes);
 app.use('/donate', donateRoutes);
-app.use('/emergency', emergencyRoutes);
-app.use('/reports', reportsRoutes);
+app.use('/emergencies', emergencyRoutes);
+app.use('/reports', reportRoutes);
 
 app.use((req, res, next) => {
   const error = new Error('Not found!');

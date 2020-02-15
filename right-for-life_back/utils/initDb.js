@@ -19,6 +19,6 @@ setTimeout(() => {
   require('../json-db/init/read-emergency.js');
   require('../json-db/init/read-reports.js');
   console.log('---init finished---');
-}, 1000);
+}, 3000);
 
 mongoose.connection.close();
