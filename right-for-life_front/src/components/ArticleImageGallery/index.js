@@ -1,1 +1,1 @@
-export { ArticleImageGallery } from './ArticleImageGallery'
+export { ArticleImageGallery } from './ArticleImageGallery';

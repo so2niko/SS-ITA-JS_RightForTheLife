@@ -11,7 +11,8 @@ export const EditModeBar = ({ state, onEdit }) => {
           onClick={() => {
             setIsEdit(!isEdit);
             onEdit();
-          }}>
+          }}
+        >
           {isEdit ? 'Предпросмотр' : 'Редактировать'}
         </button>
       </section>
@@ -20,14 +21,16 @@ export const EditModeBar = ({ state, onEdit }) => {
           className="mx-2 px-4 py-2 rounded-lg font-bold text-green-800 bg-green-300 hover:bg-green-400 uppercase"
           onClick={() => {
             onEdit();
-          }}>
+          }}
+        >
           Сохранить
         </button>
         <button
           className="mx-2 px-4 py-2 rounded-lg font-bold text-green-800 bg-green-300 hover:bg-green-400 uppercase"
           onClick={() => {
             window.location.reload();
-          }}>
+          }}
+        >
           Отменить
         </button>
       </section>

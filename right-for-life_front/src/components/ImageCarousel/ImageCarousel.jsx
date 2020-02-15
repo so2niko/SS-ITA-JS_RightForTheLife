@@ -1,5 +1,4 @@
 import React from 'react';
-// import Carousel from 'react-images';
 import Slider from 'react-animated-slider';
 import 'react-animated-slider/build/horizontal.css';
 import './ImageCarousel.css';
@@ -15,22 +14,12 @@ export const ImageCarousel = ({ data, page }) => {
       case 'about':
         photosData = photos;
         break;
+      default:
+        break;
     }
     return photosData.map(el => {
       return { image: el };
     });
-  };
-  const getSliderClass = () => {
-    let sliderClasses;
-    switch (page) {
-      case 'home':
-        sliderClasses = '';
-        break;
-      case 'about':
-        sliderClasses = '';
-        break;
-    }
-    return sliderClasses;
   };
 
   return (
@@ -41,7 +30,7 @@ export const ImageCarousel = ({ data, page }) => {
             key={index}
             style={{
               background: `url('${slide.image}') no-repeat center center `,
-              backgroundSize: 'contain'
+              backgroundSize: 'contain',
             }}
           >
             <h2>{slide.title}</h2>

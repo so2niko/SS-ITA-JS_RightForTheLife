@@ -14,32 +14,31 @@ export const UpdateImageGallery = ({ images, updateImages }) => {
         {isUpload && (
           <div className="absolute inset-0 w-full h-full p-1 z-10">
             <span className="flex justify-center items-center w-full h-full rounded-lg font-bold text-orange-700 bg-orange-100 opacity-75">
-            <div className="loader loader-3">
-              <div className="dot dot1" style={{ background: '#c05621' }}></div>
-              <div className="dot dot2" style={{ background: '#c05621' }}></div>
-              <div className="dot dot3" style={{ background: '#c05621' }}></div>
-            </div>
+              <div className="loader loader-3">
+                <div className="dot dot1" style={{ background: '#c05621' }} />
+                <div className="dot dot2" style={{ background: '#c05621' }} />
+                <div className="dot dot3" style={{ background: '#c05621' }} />
+              </div>
             </span>
           </div>
         )}
         {images.map((image, idx) => (
-          <div
-            key={idx} 
-            className="relative w-1/2 h-48 md:w-1/3 p-1">
+          <div key={image} className="relative w-1/2 h-48 md:w-1/3 p-1">
             <img
               src={image}
               className="w-full h-full object-cover rounded-lg overflow-hidden"
               alt=""
-            />  
+            />
             <div className="absolute inset-0 w-full h-full p-1">
-              <button 
+              <button
                 className="uig-delete w-full h-full hover:bg-orange-100 opacity-75"
                 onClick={() => {
                   updateImages([
                     ...images.slice(0, idx),
                     ...images.slice(idx + 1),
-                  ])
-                }}>
+                  ]);
+                }}
+              >
                 <i className="fas fa-times text-4xl text-orange-700 invisible" />
               </button>
             </div>
@@ -47,23 +46,30 @@ export const UpdateImageGallery = ({ images, updateImages }) => {
         ))}
       </section>
       <section className="relative w-full h-14 p-1">
-        <div 
+        <div
           className="absolute top-0 left-0 bottom-0 p-1"
-          style={{ width: `${progress}%`, transition: '300ms' }}>
+          style={{ width: `${progress}%`, transition: '300ms' }}
+        >
           <div className="flex justify-center items-center w-full h-full rounded-lg bg-orange-300">
-            {isUpload && progress > 0 && <span className="font-bold text-orange-700">{progress}%</span>}
+            {isUpload && progress > 0 && (
+              <span className="font-bold text-orange-700">{progress}%</span>
+            )}
           </div>
         </div>
-        <label className={`flex justify-center items-center w-full h-full rounded-lg font-bold text-orange-700 bg-orange-200 ${!isUpload ? 'hover:bg-orange-300 cursor-pointer' : ''}`}>
+        <label
+          htmlFor="upload-image"
+          className={`flex justify-center items-center w-full h-full rounded-lg font-bold text-orange-700 bg-orange-200 ${
+            !isUpload ? 'hover:bg-orange-300 cursor-pointer' : ''
+          }`}
+        >
           {!isUpload && (
             <>
               <i className="fas fa-cloud-upload-alt px-2 text-lg" />
-              <span className="text-sm uppercase">
-                Загрузить изображения
-              </span>
+              <span className="text-sm uppercase">Загрузить изображения</span>
             </>
           )}
           <input
+            id="upload-image"
             disabled={isUpload}
             onChange={() => {
               setIsUpload(true);
@@ -72,14 +78,14 @@ export const UpdateImageGallery = ({ images, updateImages }) => {
                 updateImages([...images, ...links]);
                 setProgress(0);
                 setIsUpload(false);
-                inputRef.current.value = "";
-              })
+                inputRef.current.value = '';
+              });
             }}
             ref={inputRef}
             className="hidden"
             type="file"
-            accept="image/*" 
-            multiple 
+            accept="image/*"
+            multiple
           />
         </label>
       </section>

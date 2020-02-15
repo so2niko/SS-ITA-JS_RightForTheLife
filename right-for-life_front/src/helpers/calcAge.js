@@ -2,7 +2,10 @@ function calcAge(ms) {
   const ageObj = _calcRange(ms);
   const parsedAgeObj = Object.entries(ageObj).reduce((acc, [type, count]) => {
     if (!acc.finish && count) {
-      acc[acc.first ? 'second' : 'first'] = count + ' ' + formatAge(type, count)
+      acc[acc.first ? 'second' : 'first'] = `${count} ${formatAge(
+        type,
+        count,
+      )}`;
     }
 
     if (acc.second) acc.finish = true;
@@ -10,19 +13,20 @@ function calcAge(ms) {
     return acc;
   }, {});
 
-  return parsedAgeObj.second ? parsedAgeObj.first + ' ' + parsedAgeObj.second : parsedAgeObj.first;
+  return parsedAgeObj.second
+    ? `${parsedAgeObj.first} ${parsedAgeObj.second}`
+    : parsedAgeObj.first;
 }
 
 function formatAge(type, count) {
   const allTypes = {
-    years: (n) => formatCounter(n, 'лет', 'год', 'года'),
-    months: (n) => formatCounter(n, 'месяцев', 'месяц', 'месяца'),
-    weeks: (n) => formatCounter(n, 'недель', 'неделя', 'недели'),
-    days: (n) => formatCounter(n, 'дней', 'день', 'дня'),
+    years: n => formatCounter(n, 'лет', 'год', 'года'),
+    months: n => formatCounter(n, 'месяцев', 'месяц', 'месяца'),
+    weeks: n => formatCounter(n, 'недель', 'неделя', 'недели'),
+    days: n => formatCounter(n, 'дней', 'день', 'дня'),
   };
 
   return allTypes[type](count);
-
 }
 
 function formatCounter(n, first, second, third) {
@@ -40,38 +44,47 @@ function formatCounter(n, first, second, third) {
   if (n === '2' || n === '3' || n === '4') {
     return third;
   }
-  return first
+  return first;
 }
 
 export const _calcRange = (from, to = Date.now()) => {
   if (!(Number.isInteger(from) && Number.isInteger(to))) {
-    console.error('Warning: expected from and to be integer, but gets:', from, to)
+    console.error(
+      'Warning: expected from and to be integer, but gets:',
+      from,
+      to,
+    );
   }
 
   if (from > to) {
-    console.error('Warning: from should be lower than to. Gets:', from, to)
+    console.error('Warning: from should be lower than to. Gets:', from, to);
   }
 
   const dateFrom = new Date(from);
   const dateTo = new Date(to);
 
   const daysRange = dateTo.getDate() - dateFrom.getDate();
-  const daysWithoutWeeks = daysRange < 0 ? _daysInMonth(from) + daysRange : daysRange;
+  const daysWithoutWeeks =
+    daysRange < 0 ? _daysInMonth(from) + daysRange : daysRange;
   const days = daysWithoutWeeks % 7; // 7 - days in week
 
-  const weeks = daysWithoutWeeks / 7 ^ 0;
+  const weeks = (daysWithoutWeeks / 7) ^ 0;
 
   const monthsRaw = dateTo.getMonth() - dateFrom.getMonth();
   const monthsWithDays = monthsRaw < 0 ? 12 + monthsRaw : monthsRaw; // 12 - months in year
-  const months = dateFrom.getDate() > dateTo.getDate() ? monthsWithDays - 1 : monthsWithDays;
+  const months =
+    dateFrom.getDate() > dateTo.getDate() ? monthsWithDays - 1 : monthsWithDays;
 
   const yearsWithMonth = dateTo.getFullYear() - dateFrom.getFullYear();
-  const years = dateFrom.getMonth() > dateTo.getMonth() ? yearsWithMonth - 1 : yearsWithMonth;
+  const years =
+    dateFrom.getMonth() > dateTo.getMonth()
+      ? yearsWithMonth - 1
+      : yearsWithMonth;
 
-  return {years, months, weeks, days};
+  return { years, months, weeks, days };
 };
 
-const _daysInMonth = (ms) => {
+const _daysInMonth = ms => {
   const date = new Date(ms);
 
   // if a next month has a lower days
