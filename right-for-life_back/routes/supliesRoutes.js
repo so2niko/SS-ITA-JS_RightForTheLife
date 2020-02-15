@@ -31,32 +31,56 @@ router.get('/:supplyID', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-  const animal = {
+  const { name, type, info, amount } = req.body;
+
+  new SupplyModel({
     _id: new mongoose.Types.ObjectId(),
-    name: req.body.name,
-    price: req.body.price,
-  };
-  const newAnimal = new SupplyModel(animal);
-  newAnimal.save()
-    .then(result => {
-      console.log(result);
+    name: name,
+    type: type,
+    info: info,
+    amount: amount,
+  }).save()
+    .then(supply => {
+      console.log(supply);
+      res.status(200).json(supply);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).end();
+    });
+});
+
+router.put('/:supplyID', (req, res, next) => {
+  const { name, type, info, amount } = req.body;
+
+  SupplyModel.findById(new mongoose.Types.ObjectId(req.params.supplyID))
+    .exec()
+    .then(supply => {
+      supply.name = name;
+      supply.type = type;
+      supply.info = info;
+      supply.amount = amount;
+      supply.save()
+        .then(animal => {
+          console.log(animal);
+          res.status(200).json(animal);
+        })
+        .catch(err => {
+          console.log(err);
+          res.status(500).end();
+        });
+    });
+});
+
+router.delete('/:supplyID', (req, res, next) => {
+  const supplyID = new mongoose.Types.ObjectId(req.params.supplyID);
+  SupplyModel.deleteOne({ _id: supplyID })
+    .then(() => {
+      res.status(200).end();
     })
     .catch(err => {
       console.log(err);
     });
-  res.status(200).json({ message: 'animals POST', animal });
-
-});
-
-router.put('/:animalID', (req, res, next) => {
-  const animalId = req.params.animalID;
-  res.status(200).json({ animalId, message: 'animals PUT' });
-
-});
-
-router.delete('/:animalID', (req, res, next) => {
-  const animalId = req.params.animalID;
-  res.status(200).json({ message: 'animals DELETE', animalId });
 });
 
 module.exports = router;

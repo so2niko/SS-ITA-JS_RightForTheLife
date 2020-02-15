@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const homeRoutes = require('./routes/homeRoutes.js');
 const animalRoutes = require('./routes/animalsRoutes.js');
 const newsRoutes = require('./routes/newsRoutes.js');
 const happyStoriesRoutes = require('./routes/happyStoriesRoutes.js');
@@ -37,6 +38,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use('/home', homeRoutes);
 app.use('/auth', authRoutes);
 app.use('/animals', animalRoutes);
 app.use('/news', newsRoutes);
