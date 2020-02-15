@@ -32,9 +32,8 @@ function extractedSupplies(Supply) {
     newSupplies.push(new Supply({
       _id: new mongoose.Types.ObjectId(),
       name: supply.name,
-      type: supply.type,
       info: supply.info,
-      amount: supply.amount,
+      type: supply.type,
     }));
   }
   return newSupplies;

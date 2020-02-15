@@ -7,6 +7,8 @@ const HappyStorySchema = new mongoose.Schema(
     title: String,
     photo: String,
     text: String,
+    gallery: Array,
+    videos: Array,
   });
 
 module.exports = HappyStorySchema;

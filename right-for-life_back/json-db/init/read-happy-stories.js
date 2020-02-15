@@ -35,6 +35,8 @@ function extractedHappyStories(HappyStory) {
       title: happyStory.title,
       photo: happyStory.photo,
       text: happyStory.text,
+      gallery: happyStory.gallery,
+      videos: happyStory.videos,
     }));
   }
   return newHappyStories;

@@ -29,10 +29,8 @@ function extracteAbout(About) {
   const aboutContent = JSON.parse(readAbout());
   return new About({
     _id: new mongoose.Types.ObjectId(),
-    textHome: aboutContent.textHome,
-    photosHome: aboutContent.photosHome,
-    text: aboutContent.text,
-    photos: aboutContent.photos,
+    gallery: aboutContent.gallery,
+    description: aboutContent.description,
     instagram: aboutContent.instagram,
     facebook: aboutContent.facebook,
     phone: aboutContent.phone,

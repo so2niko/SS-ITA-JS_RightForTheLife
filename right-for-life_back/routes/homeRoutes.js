@@ -15,9 +15,9 @@ router.get('/', (req, res, next) => {
   HomeModel.findOne()
     .exec()
     .then(doc => {
-      if (doc.emergencies) {
-        EmergencyModel.findById(doc.emergencies);
-      }
+      // if (doc&&doc.emergencies) {
+      //   EmergencyModel.findById(doc.emergencies);
+      // }
       res.status(200).json(doc);
     });
 });
