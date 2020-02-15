@@ -34,6 +34,8 @@ function extractedAnimals(Animal) {
       date: emergency.date,
       title: emergency.title,
       photo: emergency.photo,
+      gallery: emergency.gallery,
+      videos: emergency.videos,
       text: emergency.text,
     }));
   }

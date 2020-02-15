@@ -17,7 +17,7 @@ function getConnection() {
 function initAbout() {
   const connection = getConnection();
   const AboutModel = connection.model('About', AboutSchema);
-  extractedAnimals(AboutModel).save()
+  extractedAbout(AboutModel).save()
     .then(() => {
       console.log('About collection created');
       connection.close();
@@ -25,7 +25,7 @@ function initAbout() {
     .catch(err => console.log('About save error\n' + err));
 }
 
-function extractedAnimals(About) {
+function extractedAbout(About) {
   const aboutContent = JSON.parse(readAnimals());
   return new About({
     _id: new mongoose.Types.ObjectId(),
