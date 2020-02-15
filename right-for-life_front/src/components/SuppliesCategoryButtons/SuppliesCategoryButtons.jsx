@@ -7,58 +7,58 @@ const SuppliesCategoryButtons = ({ clickHandlers, activeCategory }) => {
     onProductsClick,
     onMedicineClick,
     onHouseholdClick,
-    onNeedsClick
+    onNeedsClick,
   } = clickHandlers;
 
   const buttonsArr = [
     {
       name: 'all',
       label: 'Все',
-      icon: <i className='fas fa-paw'></i>,
+      icon: <i className="fas fa-paw" />,
       onClickFunc() {
         onAllClick();
-      }
+      },
     },
     {
       name: 'food',
       label: 'Корма',
-      icon: <i className='fas fa-bone'></i>,
+      icon: <i className="fas fa-bone" />,
       onClickFunc() {
         onFoodClick();
-      }
+      },
     },
     {
       name: 'products',
       label: 'Продукты',
-      icon: <i className='fas fa-utensils'></i>,
+      icon: <i className="fas fa-utensils" />,
       onClickFunc() {
         onProductsClick();
-      }
+      },
     },
     {
       name: 'medicine',
       label: 'Медикаменты',
-      icon: <i className='fas fa-pills'></i>,
+      icon: <i className="fas fa-pills" />,
       onClickFunc() {
         onMedicineClick();
-      }
+      },
     },
     {
       name: 'household',
       label: 'Хозяйственные нужды',
-      icon: <i className='fas fa-hammer'></i>,
+      icon: <i className="fas fa-hammer" />,
       onClickFunc() {
         onHouseholdClick();
-      }
+      },
     },
     {
       name: 'needs',
       label: 'Важности и нужности',
-      icon: <i className='fas fa-box-open'></i>,
+      icon: <i className="fas fa-box-open" />,
       onClickFunc() {
         onNeedsClick();
-      }
-    }
+      },
+    },
   ];
 
   const btnDefaultClass =
@@ -67,7 +67,7 @@ const SuppliesCategoryButtons = ({ clickHandlers, activeCategory }) => {
   const btnInactiveClass = 'bg-gray-400 hover:bg-gray-700 hover:text-white ';
 
   return (
-    <div className='flex flex-row justify-around flex-wrap mt-10 text-xl'>
+    <div className="flex flex-row justify-around flex-wrap mt-10 text-xl">
       {buttonsArr.map((btn, idx) => {
         const btnClass = `${btnDefaultClass}${
           activeCategory === btn.name ? btnActiveClass : btnInactiveClass

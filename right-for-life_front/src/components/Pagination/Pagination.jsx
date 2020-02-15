@@ -1,24 +1,28 @@
-import React from "react";
+import React from 'react';
 import cn from 'classnames';
 import { Link, useLocation } from 'react-router-dom';
 
-export function Pagination ({classNames, currentPageNum, totalPagesQuantity, pageChangeHandler}) {
-
+export function Pagination({
+  classNames,
+  currentPageNum,
+  totalPagesQuantity,
+  pageChangeHandler,
+}) {
   const paginationContainerClasses = cn(
     'flex flex-wrap justify-center select-none',
     classNames,
   );
 
-  const pageButtonClasses = "flex w-10 h-10 sm:w-12 sm:h-12 mx-1 rounded-full justify-center items-center font-bold shadow-md text-gray-600 bg-white";
+  const pageButtonClasses =
+    'flex w-10 h-10 sm:w-12 sm:h-12 mx-1 rounded-full justify-center items-center font-bold shadow-md text-gray-600 bg-white';
 
   function handlePaginationElementClick(event, nextPage) {
     event.preventDefault();
     pageChangeHandler(nextPage);
   }
 
-
   function getPaginationPageButtons() {
-    let buttons = [];
+    const buttons = [];
     let startPosition = 1;
     let endPosition = totalPagesQuantity;
 
@@ -30,7 +34,7 @@ export function Pagination ({classNames, currentPageNum, totalPagesQuantity, pag
           pageNum={1}
           isActive={false}
           paginationElementClickHandler={handlePaginationElementClick}
-        />
+        />,
       );
       buttons.push(<PaginationDots key={2} />);
       startPosition = currentPageNum - 2;
@@ -48,12 +52,12 @@ export function Pagination ({classNames, currentPageNum, totalPagesQuantity, pag
           pageNum={i}
           isActive={currentPageNum === i}
           paginationElementClickHandler={handlePaginationElementClick}
-        />
+        />,
       );
     }
 
     if (currentPageNum + 2 < totalPagesQuantity - 1) {
-      buttons.push(<PaginationDots key={totalPagesQuantity - 1}/>);
+      buttons.push(<PaginationDots key={totalPagesQuantity - 1} />);
       buttons.push(
         <PaginationButton
           key={totalPagesQuantity}
@@ -61,7 +65,7 @@ export function Pagination ({classNames, currentPageNum, totalPagesQuantity, pag
           pageNum={totalPagesQuantity}
           isActive={false}
           paginationElementClickHandler={handlePaginationElementClick}
-        />
+        />,
       );
     }
 
@@ -92,40 +96,64 @@ export function Pagination ({classNames, currentPageNum, totalPagesQuantity, pag
         </div>
       )}
     </>
-  )
+  );
 }
 
-
-function PaginationButton({classNames, pageNum, isActive, paginationElementClickHandler}) {
+function PaginationButton({
+  classNames,
+  pageNum,
+  isActive,
+  paginationElementClickHandler,
+}) {
   const { pathname } = useLocation();
-
 
   return (
     <Link
       to={`${pathname}?page=${pageNum}`}
-      className={cn(classNames, {'font-bold text-blue-700 bg-blue-200 cursor-default': isActive})}
-      onClick={isActive ? (event)=>{event.preventDefault()} : (event) => paginationElementClickHandler(event, pageNum)}
+      className={cn(classNames, {
+        'font-bold text-blue-700 bg-blue-200 cursor-default': isActive,
+      })}
+      onClick={
+        isActive
+          ? event => {
+              event.preventDefault();
+            }
+          : event => paginationElementClickHandler(event, pageNum)
+      }
     >
       {pageNum}
     </Link>
-  )
+  );
 }
 
-
-function PaginationStepButton({classNames, currentPageNum, buttonType, paginationElementClickHandler}) {
+function PaginationStepButton({
+  classNames,
+  currentPageNum,
+  buttonType,
+  paginationElementClickHandler,
+}) {
   const { pathname } = useLocation();
 
   return (
     <Link
-      to={`${pathname}?page=${buttonType === 'forward' ? currentPageNum + 1 : currentPageNum - 1}`}
+      to={`${pathname}?page=${
+        buttonType === 'forward' ? currentPageNum + 1 : currentPageNum - 1
+      }`}
       className={classNames}
-      onClick={(event) => paginationElementClickHandler(event, buttonType === 'forward' ? currentPageNum + 1 : currentPageNum - 1)}
+      onClick={event =>
+        paginationElementClickHandler(
+          event,
+          buttonType === 'forward' ? currentPageNum + 1 : currentPageNum - 1,
+        )
+      }
     >
       {buttonType === 'forward' ? '>' : '<'}
     </Link>
-  )
+  );
 }
 
 function PaginationDots() {
-  return <div className='flex items-center mx-1 sm:mx-3 cursor-default'>. . .</div>
+  return (
+    <div className="flex items-center mx-1 sm:mx-3 cursor-default">. . .</div>
+  );
 }

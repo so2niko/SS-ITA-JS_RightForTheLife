@@ -1,15 +1,20 @@
-import { FETCH_DATA_FAILURE, FETCH_DATA_SUCCESS, FETCH_DATA_REQUEST, FETCH_DATA_RESET } from './constants';
+import {
+  FETCH_DATA_FAILURE,
+  FETCH_DATA_SUCCESS,
+  FETCH_DATA_REQUEST,
+  FETCH_DATA_RESET,
+} from './constants';
 
 export const fetchDataReducer = (state = { data: {}, error: null }, action) => {
   const { type, payload } = action;
 
-  switch(type) {
+  switch (type) {
     case FETCH_DATA_RESET: {
-      const { data } = state;  
-    
+      const { data } = state;
+
       delete data[payload];
 
-      return { ...state, data }
+      return { ...state, data };
     }
 
     case FETCH_DATA_REQUEST: {
@@ -23,7 +28,7 @@ export const fetchDataReducer = (state = { data: {}, error: null }, action) => {
     case FETCH_DATA_SUCCESS: {
       const { success, name } = payload;
       const { data } = state;
-      
+
       data[name] = success;
 
       return { ...state, data };

@@ -1,3 +1,3 @@
-export const extractVideoIdFromYouTubeLink = (link) => {
-  return link.replace(/.*(watch\?v=|tu\.be\/)/, "");
-}
+export const extractVideoIdFromYouTubeLink = link => {
+  return link.replace(/.*(watch\?v=|tu\.be\/)/, '');
+};

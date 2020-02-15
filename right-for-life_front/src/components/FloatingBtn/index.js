@@ -25,6 +25,6 @@
  * visible={boolean} required for exit animation
  * */
 
-export { FloatingBtn } from "./FloatingBtn.jsx";
-export { BackBtn } from "./BackBtn.jsx";
-export { ShareBtn } from "./ShareBtn.jsx";
+export { FloatingBtn } from './FloatingBtn';
+export { BackBtn } from './BackBtn';
+export { ShareBtn } from './ShareBtn';
