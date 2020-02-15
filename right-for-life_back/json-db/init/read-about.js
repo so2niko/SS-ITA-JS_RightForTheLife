@@ -6,7 +6,7 @@ const AboutSchema = require('../../models/AboutSchema.js');
 
 initAbout();
 
-function readAnimals() {
+function readAbout() {
   return fs.readFileSync('./json-db/about_us_info.json', 'utf8');
 }
 
@@ -26,7 +26,7 @@ function initAbout() {
 }
 
 function extractedAnimals(About) {
-  const aboutContent = JSON.parse(readAnimals());
+  const aboutContent = JSON.parse(readAbout());
   return new About({
     _id: new mongoose.Types.ObjectId(),
     textHome: aboutContent.textHome,
@@ -37,7 +37,6 @@ function extractedAnimals(About) {
     facebook: aboutContent.facebook,
     phone: aboutContent.phone,
     email: aboutContent.email,
-    __v: aboutContent.__v,
   });
 }
 

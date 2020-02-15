@@ -17,7 +17,7 @@ function getConnection() {
 function initEmergency() {
   const connection = getConnection();
   const EmergencyModel = connection.model('Emergency', EmergencySchema);
-  EmergencyModel.insertMany(extractedAnimals(EmergencyModel))
+  EmergencyModel.insertMany(extractedEmergencies(EmergencyModel))
     .then(() => {
       console.log('Emergency collection created');
       connection.close();
@@ -25,7 +25,7 @@ function initEmergency() {
     .catch(err => console.log('save error\n' + err));
 }
 
-function extractedAnimals(Animal) {
+function extractedEmergencies(Animal) {
   const emergencyContent = JSON.parse(readEmergencies());
   const newEmergencies = [];
   for (emergency of emergencyContent) {

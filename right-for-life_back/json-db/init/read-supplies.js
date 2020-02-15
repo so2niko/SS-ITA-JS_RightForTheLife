@@ -17,7 +17,7 @@ function getConnection() {
 function initSupplies() {
   const connection = getConnection();
   const SupplyModel = connection.model('Supply', SupplySchema);
-  SupplyModel.insertMany(extractedNews(SupplyModel))
+  SupplyModel.insertMany(extractedSupplies(SupplyModel))
     .then(() => {
       console.log('Supplies collection created');
       connection.close();
@@ -25,7 +25,7 @@ function initSupplies() {
     .catch(err => console.log('save error\n' + err));
 }
 
-function extractedNews(Supply) {
+function extractedSupplies(Supply) {
   const suppliesContent = JSON.parse(readSupplies());
   const newSupplies = [];
   for (supply of suppliesContent) {
