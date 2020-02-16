@@ -19,11 +19,16 @@ router.get('/', (req, res, next) => {
   AnimalModel
     .paginate(filter, pagination)
     .then(animals => {
+      if (animals.page > animals.totalPages) {
+        throw { status: 400, message: 'not found' };
+      }
       res.status(200).json(animals);
     })
     .catch(err => {
-      console.log(err);
-      res.status(500).end();
+      if (err.status === 400)
+        res.status(400).json(err);
+      else
+        res.status(500).json(err);
     });
 });
 
