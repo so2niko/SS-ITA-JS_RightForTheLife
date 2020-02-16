@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const paginate = require('mongoose-paginate-v2');
 
-const AnimalSchema = new mongoose.Schema(
+AnimalSchema = new mongoose.Schema(
   {
     _id: mongoose.Schema.Types.ObjectId,
     name: String,
@@ -10,5 +11,7 @@ const AnimalSchema = new mongoose.Schema(
     photos: Array,
     description: String,
   });
+
+AnimalSchema.plugin(paginate);
 
 module.exports = AnimalSchema;

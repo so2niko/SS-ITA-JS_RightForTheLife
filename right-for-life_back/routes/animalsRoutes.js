@@ -7,14 +7,17 @@ const AnimalModel = mongoose.connection.model('Animal', AnimalScheme);
 
 
 router.get('/', (req, res, next) => {
-  const { type, gender } = req.query;
+  const { type, gender, page, limit } = req.query;
   const filter = {};
+  const pagination = { page: 1, limit: 10 };
 
   type ? filter.type = type : '';
   gender ? filter.gender = gender : '';
+  page ? pagination.page = page : '';
+  limit ? pagination.limit = limit : '';
 
-  AnimalModel.find(filter)
-    .exec()
+  AnimalModel
+    .paginate(filter, pagination)
     .then(animals => {
       res.status(200).json(animals);
     })
