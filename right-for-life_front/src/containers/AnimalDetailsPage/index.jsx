@@ -7,18 +7,25 @@ import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
 import './style.css';
 
 const AnimalDetailsPage = ({ match, data }) => {
+  const isEdit = true;
   const petId = match.params.id;
-  const petObj = data.find(animal => String(animal._id) === petId);
 
-  return petObj ? (
-    <AnimalDetails {...petObj} />
-  ) : (
-    <ErrorIndicator
-      message="Страница не найдена :("
-      renderAction={() => <Link to="/animals">Вернуться на главную</Link>}
-    />
-  );
+  if (isEdit && petId === 'new') {
+    return (
+      <AnimalDetails isEdit isEditModeBarOpen  />
+    )
+  }
+  else {
+    const petObj = data.find(animal => String(animal._id) === petId);
+    return petObj
+      ? <AnimalDetails {...petObj} />
+      : <ErrorIndicator
+        message="Страница не найдена :("
+        renderAction={() => <Link to="/animals">Вернуться на главную</Link>}
+      />
+  }
 };
+
 const wrappedComponent = withFetchDataIndicators(
   AnimalDetailsPage,
   API.ANIMALS,
