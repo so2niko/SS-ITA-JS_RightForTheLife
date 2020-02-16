@@ -1,12 +1,14 @@
 import React from 'react';
-import { Swiper, Navigation, Pagination } from 'swiper/js/swiper.esm.js';
+import { Swiper, Navigation, Pagination } from 'swiper/js/swiper.esm';
 import 'swiper/css/swiper.css';
 
 export class GalleryWithoutModal extends React.Component {
   componentDidMount() {
     Swiper.use([Navigation, Pagination]);
 
-    // eslint-disable no-new
+    const { photos } = this.props;
+
+    // eslint-disable-next-line no-new
     new Swiper('.swiper-container', {
       autoHeight: true,
       pagination: {
@@ -20,63 +22,16 @@ export class GalleryWithoutModal extends React.Component {
       watchOverflow: true,
     });
 
-    this.getPicturesSizes(this.props.photos).then(
-      s => (this.sizesForModal = s),
-    );
+    this.getPicturesSizes(photos).then(s => {
+      this.sizesForModal = s;
+      return null;
+    });
 
     window.addEventListener('resize', this.handleResize);
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleResize);
-  }
-
-  render() {
-    const { photos, onClick } = this.props;
-
-    return (
-      <div className="swiper-container">
-        <div className="swiper-wrapper">
-          {photos.map((src, index) => (
-            <div className="swiper-slide" key={src}>
-              <img
-                src={src}
-                onDragStart={e => e.preventDefault()}
-                alt="Фото питомца"
-                className="object-cover w-full cursor-pointer"
-                onClick={
-                  onClick
-                    ? () =>
-                        onClick({
-                          index,
-                          getThumbBoundsFn: () => this.getThumbBoundsFn(index),
-                          sizes: this.sizesForModal,
-                        })
-                    : null
-                }
-              />
-            </div>
-          ))}
-        </div>
-
-        <div className="swiper-pagination" />
-
-        {[false, true].map(isRight => (
-          <div
-            key={isRight ? 'r' : 'l'}
-            className={`hidden lg:flex z-10 swiper-button-${
-              isRight ? 'next' : 'prev'
-            }-custom cursor-pointer align-middle justify-center text-white text-2xl h-full w-10 absolute top-0 opacity-75
-             ${isRight ? 'right-0' : ''}`}
-            style={{ background: 'rgba(255,255,255,0.05)' }}
-          >
-            <i
-              className={`fas fa-chevron-${isRight ? 'right' : 'left'} m-auto`}
-            />
-          </div>
-        ))}
-      </div>
-    );
   }
 
   // for modal
@@ -126,15 +81,65 @@ export class GalleryWithoutModal extends React.Component {
   };
 
   handleResize = () => {
+    const { photos } = this.props;
+
     if (this.timerForSizes) {
       clearTimeout(this.timerForSizes);
     }
 
     // timer to skip unnecessary starts
     this.timerForSizes = setTimeout(() => {
-      this.getPicturesSizes(this.props.photos).then(
-        s => (this.sizesForModal = s),
-      );
+      this.getPicturesSizes(photos).then(s => {
+        this.sizesForModal = s;
+      });
     }, 400);
   };
+
+  render() {
+    const { photos, onClick } = this.props;
+
+    return (
+      <div className="swiper-container">
+        <div className="swiper-wrapper">
+          {photos.map((src, index) => (
+            <div className="swiper-slide" key={src}>
+              <img // eslint-disable-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events
+                src={src}
+                onDragStart={e => e.preventDefault()}
+                alt="Фото питомца"
+                className="object-cover w-full cursor-pointer"
+                onClick={
+                  onClick
+                    ? () =>
+                        onClick({
+                          index,
+                          getThumbBoundsFn: () => this.getThumbBoundsFn(index),
+                          sizes: this.sizesForModal,
+                        })
+                    : null
+                }
+              />
+            </div>
+          ))}
+        </div>
+
+        <div className="swiper-pagination" />
+
+        {[false, true].map(isRight => (
+          <div
+            key={isRight ? 'r' : 'l'}
+            className={`hidden lg:flex z-10 swiper-button-${
+              isRight ? 'next' : 'prev'
+            }-custom cursor-pointer align-middle justify-center text-white text-2xl h-full w-10 absolute top-0 opacity-75
+             ${isRight ? 'right-0' : ''}`}
+            style={{ background: 'rgba(255,255,255,0.05)' }}
+          >
+            <i
+              className={`fas fa-chevron-${isRight ? 'right' : 'left'} m-auto`}
+            />
+          </div>
+        ))}
+      </div>
+    );
+  }
 }

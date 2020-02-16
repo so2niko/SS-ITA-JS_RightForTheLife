@@ -12,7 +12,7 @@ export const FloatingBtn = ({
   content,
   visible,
 }) => {
-  const className = `floating-button absolute z-20 bg-white hover:bg-gray-300 rounded-full flex items-center justify-center cursor-pointer shadow-lg text-gray-700 text-lg h-12 w-12 ${position}`;
+  const className = `floating-button absolute z-20 bg-white hover:bg-gray-300 rounded-full flex items-center justify-center cursor-pointer shadow-lg text-gray-700 text-lg h-12 w-12 focus:outline-none ${position}`;
   const iconElem = content || <i className={`fas fa-${icon}`} />;
 
   return (
@@ -30,8 +30,12 @@ export const FloatingBtn = ({
           {iconElem}
         </Link>
       ) : (
-        // eslint-disable-next-line  jsx-a11y/click-events-have-key-events
-        <div role="button" onClick={onClick} className={className}>
+        <div // eslint-disable-line jsx-a11y/click-events-have-key-events
+          role="button"
+          onClick={onClick}
+          className={className}
+          tabIndex={-1}
+        >
           <SwitchTransition>
             <CSSTransition
               key={icon}

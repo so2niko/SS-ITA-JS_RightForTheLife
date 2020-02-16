@@ -1,70 +1,74 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef } from 'react';
 import { Card } from './Card';
-import { BackBtn, ShareBtn } from '../../components/FloatingBtn'
-import { ShareMobile } from "./ShareMobile.jsx";
+import { BackBtn, ShareBtn } from '../../components/FloatingBtn';
+import { ShareMobile } from './ShareMobile';
 import { UpdateImageGallery } from '../../components/UpdateImageGallery';
 import { EditModeBar } from '../../components/EditModeBar';
 import { Select } from '../../components/Select';
-import './style.css'
+import './style.css';
 
-export const AnimalDetails = (props) => {
+export const AnimalDetails = props => {
+  const { fromPropsIsEditModeBarOpen, fromPropsIsEdit } = props;
   const [animal, setAnimal] = useState(props);
-  const [isEdit, setIsEdit] = useState(props.isEdit);
-  const [isEditModeBarOpen, setIsEditModeBarOpen] = useState(props.isEditModeBarOpen);
+  const [isEdit, setIsEdit] = useState(fromPropsIsEdit);
+  const [isEditModeBarOpen, setIsEditModeBarOpen] = useState(
+    fromPropsIsEditModeBarOpen,
+  );
 
   const descriptionRef = useRef();
 
   const selectOptionChoseHandler = selectedOption => {
-    switch (selectedOption) {
-      case 'edit':
-        setIsEditModeBarOpen(true);
-        setIsEdit(true);
-        break;
-      default:
-        return null;
+    if (selectedOption === 'edit') {
+      setIsEditModeBarOpen(true);
+      setIsEdit(true);
     }
   };
 
-  const updateName = (newName) => setAnimal({ ...animal, name: newName });
-  const updateAge = (newAge) => setAnimal({ ...animal, age: newAge });
-  const updateGender = (newGender) => setAnimal({ ...animal, gender: newGender });
+  const updateName = newName => setAnimal({ ...animal, name: newName });
+  const updateAge = newAge => setAnimal({ ...animal, age: newAge });
+  const updateGender = newGender => setAnimal({ ...animal, gender: newGender });
 
   return (
     <div className="-mt-6 sm:mt-0">
-      {!isEdit &&
+      {!isEdit && (
         <>
           <BackBtn />
           <div className="hidden sm:block">
             <ShareBtn />
           </div>
         </>
-      }
+      )}
 
-      {isEditModeBarOpen
-        ? <EditModeBar
+      {isEditModeBarOpen ? (
+        <EditModeBar
           isOpen={isEditModeBarOpen}
           onEdit={() => setIsEdit(!isEdit)}
         />
-        : <Select
+      ) : (
+        <Select
           classNames="fixed z-50 top-0 right-0 mr-10 mt-20"
           chooseOptionHandler={selectOptionChoseHandler}
           optEdit
           optDelete
         />
-      }
+      )}
 
-      <div className="flex-none sm:flex mx-auto px-0 sm:px-4" style={{ maxWidth: '800px' }}>
+      <div
+        className="flex-none sm:flex mx-auto px-0 sm:px-4"
+        style={{ maxWidth: '800px' }}
+      >
         <div className="w-full sm:w-1/2">
-          {
-            isEdit
-              ? <Card {...animal}
-                updateName={updateName}
-                updateGender={updateGender}
-                updateAge={updateAge}
-                isEdit
-              />
-              : <Card {...animal} isEdit={false} />
-          }
+          {isEdit ? (
+            <Card
+              {...animal}
+              updateName={updateName}
+              updateGender={updateGender}
+              updateAge={updateAge}
+              isEdit
+            />
+          ) : (
+            <Card {...animal} isEdit={false} />
+          )}
           {isEdit && (
             <UpdateImageGallery
               images={animal.photos}
@@ -80,16 +84,22 @@ export const AnimalDetails = (props) => {
           suppressContentEditableWarning
           ref={descriptionRef}
           onBlur={() =>
-            setAnimal({ ...animal, description: descriptionRef.current.textContent })
+            setAnimal({
+              ...animal,
+              description: descriptionRef.current.textContent,
+            })
           }
           className={`w-full sm:w-1/2 mt-10 sm:mt-5 mb-5 mx-0 sm:ml-12 sm:mr-12 md:mr-8 lg:mr-0 font-medium 
-            text-gray-700 border-8 border-transparent ${isEdit ? 'bg-orange-100' : ''}`}>
+            text-gray-700 border-8 border-transparent ${
+              isEdit ? 'bg-orange-100' : ''
+            }`}
+        >
           {animal.description}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 AnimalDetails.defaultProps = {
   name: 'Имя питомца',
@@ -97,4 +107,4 @@ AnimalDetails.defaultProps = {
   photos: [],
   gender: '',
   description: 'История питомца.',
-}
+};

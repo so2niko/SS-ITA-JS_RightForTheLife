@@ -1,6 +1,6 @@
 import React from 'react';
 import PhotoSwipe from 'photoswipe';
-import PhotoSwipeUI_Default from 'photoswipe/dist/photoswipe-ui-default';
+import PhotoSwipeUIDefault from 'photoswipe/dist/photoswipe-ui-default';
 import 'photoswipe/dist/photoswipe.css';
 import 'photoswipe/dist/default-skin/default-skin.css';
 import './style.css';
@@ -9,16 +9,17 @@ export class Modal extends React.Component {
   maxSize = 2000;
 
   componentDidMount() {
+    const { photos } = this.props;
     this.pswpElement = document.querySelector('.pswp');
 
-    this.items = this.props.photos.map(src => ({ src, ...this.getSizes() }));
+    this.items = photos.map(src => ({ src, ...this.getSizes() }));
   }
 
   init = ({ index, getThumbBoundsFn, sizes }) => {
     this.items =
       sizes && this.prevSizes !== sizes
-        ? sizes.map((imgSize, index) => ({
-            src: this.items[index].src,
+        ? sizes.map((imgSize, imgIndex) => ({
+            src: this.items[imgIndex].src,
             ...imgSize,
           }))
         : this.items;
@@ -39,7 +40,7 @@ export class Modal extends React.Component {
 
     this.gallery = new PhotoSwipe(
       this.pswpElement,
-      PhotoSwipeUI_Default,
+      PhotoSwipeUIDefault,
       this.items,
       options,
     );

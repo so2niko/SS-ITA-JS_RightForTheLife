@@ -48,26 +48,6 @@ export function _calcRange(from, to = Date.now()) {
   return { years, months, weeks, days };
 }
 
-function calcAge(ms) {
-  const ageObj = _calcRange(ms);
-  const parsedAgeObj = Object.entries(ageObj).reduce((acc, [type, count]) => {
-    if (!acc.finish && count) {
-      acc[acc.first ? 'second' : 'first'] = `${count} ${formatAge(
-        type,
-        count,
-      )}`;
-    }
-
-    if (acc.second) acc.finish = true;
-
-    return acc;
-  }, {});
-
-  return parsedAgeObj.second
-    ? `${parsedAgeObj.first} ${parsedAgeObj.second}`
-    : parsedAgeObj.first;
-}
-
 function formatCounter(countAll, first, second, third) {
   // slice is needed if n is more than 99
   const countWithTwo = String(countAll).slice(-2);
@@ -95,6 +75,26 @@ function formatAge(type, count) {
   };
 
   return allTypes[type](count);
+}
+
+function calcAge(ms) {
+  const ageObj = _calcRange(ms);
+  const parsedAgeObj = Object.entries(ageObj).reduce((acc, [type, count]) => {
+    if (!acc.finish && count) {
+      acc[acc.first ? 'second' : 'first'] = `${count} ${formatAge(
+        type,
+        count,
+      )}`;
+    }
+
+    if (acc.second) acc.finish = true;
+
+    return acc;
+  }, {});
+
+  return parsedAgeObj.second
+    ? `${parsedAgeObj.first} ${parsedAgeObj.second}`
+    : parsedAgeObj.first;
 }
 
 export default calcAge;

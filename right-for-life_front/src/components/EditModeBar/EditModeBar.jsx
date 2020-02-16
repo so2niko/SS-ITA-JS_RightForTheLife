@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export const EditModeBar = ({ state, onEdit }) => {
+export const EditModeBar = ({ onEdit }) => {
   const [isEdit, setIsEdit] = useState(true);
 
   return (

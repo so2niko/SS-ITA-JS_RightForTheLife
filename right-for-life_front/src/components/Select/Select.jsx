@@ -36,56 +36,54 @@ export const Select = ({
         <div className={`inline-block ${classNames}`}>
           <div className="relative inline-block">
             <Link to={`${location.pathname}/new`} className="w-1/2 ml-2">
-              <i
-                className="fas fa-plus text-2xl hover:bg-gray-200 cursor-pointer w-12 h-12 rounded-full flex justify-center items-center shadow-xl bg-white"
-              />
+              <i className="fas fa-plus text-2xl hover:bg-gray-200 cursor-pointer w-12 h-12 rounded-full flex justify-center items-center shadow-xl bg-white" />
             </Link>
           </div>
         </div>
       ) : (
-          <div className={`inline-block ${classNames}`}>
-            <div ref={componentRef} className="relative inline-block">
-              <i
-                onClick={() => !isSelectOpened && setIsSelectOpened(true)}
-                className="fas fa-pencil-alt text-2xl hover:bg-gray-200 cursor-pointer w-12 h-12 rounded-full flex justify-center items-center shadow-xl bg-white"
-              />
-              <ul
-                className={cn(
-                  { 'w-56': isSelectOpened },
-                  { 'w-0 h-0': !isSelectOpened },
-                  'absolute top-100plus10 right-0 bg-white rounded-lg overflow-hidden shadow-xl py-1 text-lightgray-600 select-none',
-                )}
-                onClick={handleSelectListClick}
-              >
-                {optPinToHomePage ? (
-                  <li
-                    data-role="pinToHomePage"
-                    className="py-2 pl-2 pr-4 text-right cursor-pointer hover:bg-gray-200"
-                  >
-                    Прикрепить на главную
+        <div className={`inline-block ${classNames}`}>
+          <div ref={componentRef} className="relative inline-block">
+            <i
+              onClick={() => !isSelectOpened && setIsSelectOpened(true)}
+              className="fas fa-pencil-alt text-2xl hover:bg-gray-200 cursor-pointer w-12 h-12 rounded-full flex justify-center items-center shadow-xl bg-white"
+            />
+            <ul
+              className={cn(
+                { 'w-56': isSelectOpened },
+                { 'w-0 h-0': !isSelectOpened },
+                'absolute top-100plus10 right-0 bg-white rounded-lg overflow-hidden shadow-xl py-1 text-lightgray-600 select-none',
+              )}
+              onClick={handleSelectListClick}
+            >
+              {optPinToHomePage ? (
+                <li
+                  data-role="pinToHomePage"
+                  className="py-2 pl-2 pr-4 text-right cursor-pointer hover:bg-gray-200"
+                >
+                  Прикрепить на главную
                 </li>
-                ) : null}
-                {optEdit ? (
-                  <li
-                    data-role="edit"
-                    className="py-2 pl-2 pr-4 text-right cursor-pointer hover:bg-gray-200"
-                  >
-                    Редактировать
+              ) : null}
+              {optEdit ? (
+                <li
+                  data-role="edit"
+                  className="py-2 pl-2 pr-4 text-right cursor-pointer hover:bg-gray-200"
+                >
+                  Редактировать
                 </li>
-                ) : null}
-                {optDelete ? (
-                  <li
-                    data-role="delete"
-                    className="py-2 pl-2 pr-4 text-right cursor-pointer hover:bg-red-200 text-red-600 text-xs"
-                  >
-                    <i className="fas fa-trash pr-3" />
-                    Удалить
+              ) : null}
+              {optDelete ? (
+                <li
+                  data-role="delete"
+                  className="py-2 pl-2 pr-4 text-right cursor-pointer hover:bg-red-200 text-red-600 text-xs"
+                >
+                  <i className="fas fa-trash pr-3" />
+                  Удалить
                 </li>
-                ) : null}
-              </ul>
-            </div>
+              ) : null}
+            </ul>
           </div>
-        )}
+        </div>
+      )}
     </>
   );
 };
