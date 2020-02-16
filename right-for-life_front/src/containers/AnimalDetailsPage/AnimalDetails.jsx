@@ -39,7 +39,7 @@ export const AnimalDetails = (props) => {
           </div>
         </>
       }
-      
+
       {isEditModeBarOpen
         ? <EditModeBar
           isOpen={isEditModeBarOpen}
@@ -73,7 +73,7 @@ export const AnimalDetails = (props) => {
           )}
         </div>
 
-        <ShareMobile className="mt-8 -mb-6" />
+        {!isEdit && <ShareMobile className="mt-8 -mb-6" />}
 
         <div
           contentEditable={isEdit}
