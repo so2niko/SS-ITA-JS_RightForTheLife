@@ -13,12 +13,11 @@ const NewsModel = mongoose.connection.model('News', NewsScheme);
 
 router.get('/', (req, res, next) => {
   HomeModel.findOne()
+    .populate({ path: 'news', select: '_id title photo' })
+    .populate({ path: 'emergencies', select: '_id title photo' })
     .exec()
-    .then(doc => {
-      // if (doc&&doc.emergencies) {
-      //   EmergencyModel.findById(doc.emergencies);
-      // }
-      res.status(200).json(doc);
+    .then(home => {
+      res.status(200).json(home);
     });
 });
 
@@ -45,11 +44,20 @@ router.put('/pin-emergencies', (req, res, next) => {
       EmergencyModel.findById(emergencyId)
         .exec()
         .then((emergency) => {
+          if (!emergency) {
+            throw { status: 400, message: 'emergency not found' };
+          }
           home.emergencies = emergency;
           home.save()
             .then(() => {
-              res.status(200).json(doc);
+              res.status(200).json(home);
             });
+        })
+        .catch(err => {
+          if (err.status === 400)
+            res.status(400).json(err);
+          else
+            res.status(500).json(err);
         });
     });
 });
@@ -63,11 +71,20 @@ router.put('/pin-news', (req, res, next) => {
       NewsModel.findById(newsId)
         .exec()
         .then((news) => {
-          home.emergencies = news;
+          if (!news) {
+            throw { status: 400, message: 'news not found' };
+          }
+          home.news = news;
           home.save()
             .then(() => {
-              res.status(200).json(doc);
+              res.status(200).json(home);
             });
+        })
+        .catch(err => {
+          if (err.status === 400)
+            res.status(400).json(err);
+          else
+            res.status(500).json(err);
         });
     });
 });

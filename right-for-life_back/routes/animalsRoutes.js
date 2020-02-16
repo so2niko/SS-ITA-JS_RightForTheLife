@@ -7,20 +7,21 @@ const AnimalModel = mongoose.connection.model('Animal', AnimalScheme);
 
 
 router.get('/', (req, res, next) => {
-  if (req.query.type && req.query.gender) {
-    const { type, gender } = req.query;
-    AnimalModel.find({ type: type, gender: gender })
-      .exec()
-      .then(animals => {
-        res.status(200).json(animals);
-      });
-  } else {
-    AnimalModel.find()
-      .exec()
-      .then(animals => {
-        res.status(200).json(animals);
-      });
-  }
+  const { type, gender } = req.query;
+  const filter = {};
+
+  type ? filter.type = type : '';
+  gender ? filter.gender = gender : '';
+
+  AnimalModel.find(filter)
+    .exec()
+    .then(animals => {
+      res.status(200).json(animals);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).end();
+    });
 });
 
 router.get('/:animalID', (req, res, next) => {
