@@ -1,13 +1,13 @@
-import React from "react";
-import { Link, useParams } from "react-router-dom";
-import { API } from "../../rootConstants";
-import { withFetchDataIndicators } from "../../hoc/withFetchDataIndicators";
-import { ErrorIndicator } from "../../components/ErrorIndicator";
-import { Article } from "../../components/Article";
+import React from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { API } from '../../rootConstants';
+import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
+import { ErrorIndicator } from '../../components/ErrorIndicator';
+import { Article } from '../../components/Article';
 
 const NewsPage = ({ data }) => {
-  let { id } = useParams();
-  const article = data.find(article => article._id === id);
+  const { id } = useParams();
+  const article = data.find(item => item._id === id);
 
   if (!article)
     return (
@@ -24,9 +24,6 @@ const NewsPage = ({ data }) => {
   );
 };
 
-const wrappedComponent = withFetchDataIndicators(
-  NewsPage,
-  API.NEWS,
-);
+const wrappedComponent = withFetchDataIndicators(NewsPage, API.NEWS);
 
 export { wrappedComponent as NewsPage };

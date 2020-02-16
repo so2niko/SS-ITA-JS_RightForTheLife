@@ -6,16 +6,17 @@ export const FiltersItem = ({ filter, updateParams }) => {
 
   return (
     <>
-      <input 
-        className="hidden" 
-        type="radio" 
-        name={key} 
+      <input
+        className="hidden"
+        type="radio"
+        name={key}
         id={value}
-        onClick={() => updateParams(filter)} 
+        onClick={() => updateParams(filter)}
       />
-      <label 
-        className="block w-full p-2 rounded-lg text-center text-lg text-gray-600 bg-gray-100 cursor-pointer uppercase font-bold" 
-        htmlFor={value}>
+      <label
+        className="block w-full p-2 rounded-lg text-center text-lg text-gray-600 bg-gray-100 cursor-pointer uppercase font-bold"
+        htmlFor={value}
+      >
         {value}
       </label>
     </>

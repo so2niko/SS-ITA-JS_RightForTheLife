@@ -1,35 +1,46 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux'; 
 import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
 import { useQuery } from '../../helpers/useQuery';
 import { requestData } from './actions';
 import { ErrorIndicator } from '../../components/ErrorIndicator';
 import { LoadIndicator } from '../../components/LoadIndicator';
 
-export const withFetchDataIndicators = (WrappedComponent, API, isUpdate) => (props) => {
-  const { error, data: dataStore } = useSelector(({ fetchDataReducer }) => ({ ...fetchDataReducer }));
+export const withFetchDataIndicators = (
+  WrappedComponent,
+  API,
+  isUpdate,
+) => props => {
+  const { error, data: dataStore } = useSelector(({ fetchDataReducer }) => ({
+    ...fetchDataReducer,
+  }));
   const dispatch = useDispatch();
   const query = useQuery().toString();
   const { name, api: baseApi } = API;
 
   const data = dataStore[name];
-  const api = baseApi + `${query ? `?${query}` : ''}`;
+  const api = `${baseApi}${query ? `?${query}` : ''}`;
 
   useEffect(() => {
     if (isUpdate || !data) dispatch(requestData({ api, name }));
   }, [query]);
 
   const action = (
-    <button 
+    <button
       className="mt-1 font-bold text-orange-400 hover:text-orange-500 uppercase"
-      onClick={() => dispatch(requestData({ api, name }))}>
+      onClick={() => dispatch(requestData({ api, name }))}
+    >
       Обновить
     </button>
   );
 
-  if (error) return <ErrorIndicator message="Упс... Ошибка!" renderAction={() => action} />
-  if (!data) return <LoadIndicator message="Загружаем данные..." />
-  if (data) return <WrappedComponent {...props} data={data} />
+  if (error)
+    return (
+      <ErrorIndicator message="Упс... Ошибка!" renderAction={() => action} />
+    );
+  if (!data) return <LoadIndicator message="Загружаем данные..." />;
+  if (data) return <WrappedComponent {...props} data={data} />;
+  return null;
 };
 
 withFetchDataIndicators.propTypes = {
@@ -39,4 +50,4 @@ withFetchDataIndicators.propTypes = {
     api: PropTypes.string.isRequired,
   }).isRequired,
   isUpdate: PropTypes.bool,
-}
+};

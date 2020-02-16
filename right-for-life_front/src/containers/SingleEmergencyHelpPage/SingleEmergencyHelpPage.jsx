@@ -6,8 +6,8 @@ import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
 import { API } from '../../rootConstants';
 
 const SingleEmergencyHelpPage = ({ data }) => {
-  let { id } = useParams();
-  const article = data.find(article => article._id === id);
+  const { id } = useParams();
+  const article = data.find(item => item._id === id);
 
   if (!article)
     return (

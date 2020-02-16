@@ -6,6 +6,8 @@ const HappyStorySchema = new mongoose.Schema(
     date: Number,
     title: String,
     photo: String,
+    gallery: Array,
+    videos: Array,
     text: String,
     gallery: Array,
     videos: Array,

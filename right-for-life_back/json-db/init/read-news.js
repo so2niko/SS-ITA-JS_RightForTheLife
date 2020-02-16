@@ -34,6 +34,8 @@ function extractedNews(News) {
       date: news.date,
       title: news.title,
       photo: news.photo,
+      gallery: news.gallery,
+      videos: news.videos,
       text: news.text,
     }));
   }

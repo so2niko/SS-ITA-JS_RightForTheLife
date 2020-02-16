@@ -1,4 +1,4 @@
-import { _calcRange } from "../calcAge";
+import { _calcRange } from '../calcAge';
 
 describe('Calculate range (USA format)', () => {
   it('If from > to, should log error', () => {
@@ -21,7 +21,7 @@ describe('Calculate range (USA format)', () => {
       months: 0,
       weeks: 4,
       days: 2,
-    })
+    });
   });
 
   it('If from.d lower to.d for 1, should return days=1', () => {
@@ -30,7 +30,7 @@ describe('Calculate range (USA format)', () => {
       months: 0,
       weeks: 0,
       days: 1,
-    })
+    });
   });
 
   it('If from.m more to.m for 1, should return months=11', () => {
@@ -39,7 +39,7 @@ describe('Calculate range (USA format)', () => {
       months: 11,
       weeks: 0,
       days: 0,
-    })
+    });
   });
 
   it('If from.m lower to.m for 1, should return months=1', () => {
@@ -48,7 +48,7 @@ describe('Calculate range (USA format)', () => {
       months: 1,
       weeks: 0,
       days: 0,
-    })
+    });
   });
 
   it('If from.y lower to.y for 1, should return years=1', () => {
@@ -57,11 +57,11 @@ describe('Calculate range (USA format)', () => {
       months: 0,
       weeks: 0,
       days: 0,
-    })
+    });
   });
 
   function createTest(from, to) {
-    const createDate = (dateStr) => {
+    const createDate = dateStr => {
       const dateArr = dateStr.split('/').map(i => +i);
       const date = new Date();
 

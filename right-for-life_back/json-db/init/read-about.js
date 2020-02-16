@@ -17,7 +17,7 @@ function getConnection() {
 function initAbout() {
   const connection = getConnection();
   const AboutModel = connection.model('About', AboutSchema);
-  extracteAbout(AboutModel).save()
+  extractedAbout(AboutModel).save()
     .then(() => {
       console.log('About collection created');
       connection.close();

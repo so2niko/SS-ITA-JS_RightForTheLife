@@ -20,14 +20,14 @@ const SuppliesTable = props => {
     if (hasAnyElements) {
       headerRow = (
         <tr className={trClass}>
-          <th className='px-4 py-2'>Товар</th>
-          <th className='px-4 py-2'>Инфо</th>
+          <th className="px-4 py-2">Товар</th>
+          <th className="px-4 py-2">Инфо</th>
         </tr>
       );
     } else {
       headerRow = (
         <tr className={trClass}>
-          <th className='px-4 py-2'>В данной категории нет товаров</th>
+          <th className="px-4 py-2">В данной категории нет товаров</th>
         </tr>
       );
     }
@@ -53,7 +53,7 @@ const SuppliesTable = props => {
     },
     onNeedsClick() {
       setCategory({ name: 'needs', label: 'Важности и нужности' });
-    }
+    },
   };
 
   let table = null;
@@ -63,7 +63,7 @@ const SuppliesTable = props => {
       data = data.filter(supply => supply.type === category.label);
     }
     table = (
-      <table className='table-fixed mx-auto mt-6'>
+      <table className="table-fixed mx-auto mt-6">
         <TableHeader hasAnyElements={data.length} />
         <tbody>{getTableBody(data)}</tbody>
       </table>
