@@ -9,8 +9,6 @@ const HappyStorySchema = new mongoose.Schema(
     gallery: Array,
     videos: Array,
     text: String,
-    gallery: Array,
-    videos: Array,
   });
 
 module.exports = HappyStorySchema;

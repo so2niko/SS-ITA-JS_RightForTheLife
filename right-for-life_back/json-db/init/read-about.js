@@ -25,7 +25,7 @@ function initAbout() {
     .catch(err => console.log('About save error\n' + err));
 }
 
-function extracteAbout(About) {
+function extractedAbout(About) {
   const aboutContent = JSON.parse(readAbout());
   return new About({
     _id: new mongoose.Types.ObjectId(),
