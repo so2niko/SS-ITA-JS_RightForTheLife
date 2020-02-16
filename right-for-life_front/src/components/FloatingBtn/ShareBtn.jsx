@@ -64,7 +64,7 @@ export const ShareBtn = ({ position, shareUrl }) => {
           <FloatingBtn
             position={position}
             content={
-              <item.btn url={shareUrl || getDefaultUrl}>
+              <item.btn url={shareUrl || getDefaultUrl()}>
                 <item.icon size={35} round />
               </item.btn>
             }
