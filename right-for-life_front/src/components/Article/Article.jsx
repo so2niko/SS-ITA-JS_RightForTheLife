@@ -39,15 +39,15 @@ export const Article = ({ article }) => {
 
   return (
     <article>
-      <BackBtn position="left-0 ml-2 mt-6" />
-      <ShareBtn position="right-0 mr-2 mt-6" />
+      {!isEdit && (
+        <>
+          <BackBtn position="left-0 ml-2 mt-6" />
+          <ShareBtn position="right-0 mr-2 mt-6" />
+        </>
+      )}
 
       {isEditModeBarOpen ? (
-        <EditModeBar
-          isOpen={isEditModeBarOpen}
-          onEdit={() => setIsEdit(!isEdit)}
-          state={state}
-        />
+        <EditModeBar onEdit={() => setIsEdit(!isEdit)} data={state} />
       ) : (
         <Select
           classNames="fixed z-50 top-0 right-0 mr-10 mt-20"
@@ -135,7 +135,7 @@ export const Article = ({ article }) => {
             videosListChangeHandler={videos => setState({ ...state, videos })}
           />
         ) : (
-          state.videos?.length &&
+          state.videos.length > 0 &&
           state.videos.map(video => (
             <div className="video-iframe-container" key={video}>
               <YouTube videoId={extractVideoIdFromYouTubeLink(video)} />
