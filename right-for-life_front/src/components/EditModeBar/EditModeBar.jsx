@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useReducer } from 'react';
+import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { isEqual } from 'lodash';
 import { EditModeBarDialog } from './EditModeBarDialog';
@@ -22,19 +23,24 @@ const reducer = (state, action) => {
   }
 };
 
-export const EditModeBar = ({ data, onEdit }) => {
+export const EditModeBar = ({ data, onEdit, onSave, onCancel }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [oldData, setOldData] = useState(null);
   const history = useHistory();
-  const unblockHistory = history.block(
-    `${
-      !isEqual(data, oldData) ? 'Есть НЕ СОХРАНЕННЫЕ изменения!' : ''
-    } Вы уверенны, что хотите ВЫЙТИ из режима редактрования?`,
-  );
+  let unblockHistory;
 
   useEffect(() => {
     setOldData({ ...data });
-    return () => unblockHistory();
+
+    unblockHistory = history.block(
+      `${
+        !isEqual(data, oldData) ? 'Есть НЕ СОХРАНЕННЫЕ изменения!' : ''
+      } Вы уверенны, что хотите ВЫЙТИ из режима редактрования?`,
+    );
+
+    return () => {
+      unblockHistory();
+    };
   }, []);
 
   return (
@@ -75,9 +81,7 @@ export const EditModeBar = ({ data, onEdit }) => {
         <EditModeBarDialog
           message="Вы уверенны что хотите СОХРАНИТЬ изменения?"
           onTrue={() => {
-            unblockHistory();
-            history.goBack();
-            console.log(data);
+            onSave();
           }}
           onFalse={() => {
             dispatch({ type: 'MODAL_ON_UNSAVE' });
@@ -91,8 +95,7 @@ export const EditModeBar = ({ data, onEdit }) => {
             !isEqual(data, oldData) ? 'Есть НЕ СОХРАНЕННЫЕ изменения!' : ''
           } Вы уверенны, что хотите ВЫЙТИ из режима редактрования?`}
           onTrue={() => {
-            unblockHistory();
-            history.goBack();
+            onCancel();
           }}
           onFalse={() => {
             dispatch({ type: 'MODAL_ON_UNSAVE' });
@@ -101,4 +104,11 @@ export const EditModeBar = ({ data, onEdit }) => {
       )}
     </article>
   );
+};
+
+EditModeBar.propTypes = {
+  data: PropTypes.any.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
 };
