@@ -10,9 +10,7 @@ const AboutPage = ({ data }) => {
 
   return (
     <div className="about-page pb-8 px-5">
-      <h2 className="px-4 font-bold text-lightgray-700 text-4xl uppercase">
-        О нас
-      </h2>
+      <h2 className="mb-6 px-4 font-bold text-lightgray-700 text-4xl uppercase">О нас</h2>
       <ImageCarousel data={gallery} page="about" />
       <AboutContent text={description} />
       <AboutContacts

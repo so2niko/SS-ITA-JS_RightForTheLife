@@ -6,7 +6,7 @@ import { ErrorIndicator } from '../../components/ErrorIndicator';
 import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
 import './style.css';
 
-const AnimalDetailsPage = ({ match, data }) => {
+const AnimalDetailsPage = ({ match, data: {docs: animals} }) => {
   const isEdit = true;
   const petId = match.params.id;
 
@@ -16,7 +16,7 @@ const AnimalDetailsPage = ({ match, data }) => {
     )
   }
   else {
-    const petObj = data.find(animal => String(animal._id) === petId);
+    const petObj = animals.find(animal => String(animal._id) === petId);
     return petObj
       ? <AnimalDetails {...petObj} />
       : <ErrorIndicator
