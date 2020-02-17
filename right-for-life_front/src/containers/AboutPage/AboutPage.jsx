@@ -36,10 +36,12 @@ const AboutPage = ({ data }) => {
         О нас
       </h2>
       <ImageCarousel data={gallery} page="about" />
-      <UpdateImageGallery
-        images={gallery}
-        updateImages={gallery => setState({ ...state, gallery })}
-      />
+      {isEdit ? (
+        <UpdateImageGallery
+          images={gallery}
+          updateImages={gallery => setState({ ...state, gallery })}
+        />
+      ) : null}
       <AboutContent
         text={description}
         isEditable={isEdit}
