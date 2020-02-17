@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import YouTube from 'react-youtube';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import calcAge from '../../helpers/calcAge';
 import { BackBtn, ShareBtn } from '../FloatingBtn';
 import { ArticleImageGallery } from '../ArticleImageGallery';
@@ -16,7 +16,8 @@ import { Select } from '../Select';
 import { CUDService } from '../../services/CUDService';
 
 export const Article = ({ article }) => {
-  const { pathname: currentURL } = useLocation();
+  const history = useHistory();
+  const { pathname } = useLocation();
   article.gallery = [];
   article.videos = [];
   const [state, setState] = useState(article);
@@ -31,11 +32,13 @@ export const Article = ({ article }) => {
         setIsEditModeBarOpen(true);
         setIsEdit(true);
         break;
-
+      case 'no-edit':
+        setIsEditModeBarOpen(false);
+        setIsEdit(false);
+        break;
       default:
         return null;
     }
-    return null;
   };
 
   return (
@@ -52,21 +55,20 @@ export const Article = ({ article }) => {
           data={state}
           onEdit={() => setIsEdit(!isEdit)}
           onSave={() => {
-            state._id
-              ? CUDService.PUT(
-                  currentURL.match('/.*/')[0] + state._id, 
-                  state,
-                )
-              : CUDService.POST(
-                  currentURL.match('/.*/')[0].slice(0, -1),
-                  state,
-                );
-            setIsEditModeBarOpen(!isEditModeBarOpen);
-            setIsEdit(!isEdit);
+            let url;
+
+            if (state._id) {
+              url = pathname.match('/.*/')[0] + state._id;
+              CUDService.PUT(url, state);
+            } else {
+              url = pathname.match('/.*/')[0].slice(0, -1);
+              CUDService.POST(url, state);
+              history.goBack();
+            }
+            selectOptionChoseHandler('no-edit');
           }}
           onCancel={() => {
-            setIsEditModeBarOpen(false);
-            setIsEdit(false);
+            selectOptionChoseHandler('no-edit');
           }}
         />
       ) : (
@@ -108,7 +110,7 @@ export const Article = ({ article }) => {
         >
           {state.title}
         </div>
-        {currentURL.includes('emergency') ? (
+        {pathname.includes('emergency') ? (
           <DonateButton style={{ marginLeft: '10px' }} />
         ) : null}
       </div>
