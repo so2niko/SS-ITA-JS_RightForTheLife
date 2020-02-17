@@ -14,12 +14,11 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/:newsID', (req, res, next) => {
-  console.log(req.params.newsID);
   NewsModel.findById(new mongoose.Types.ObjectId(req.params.newsID))
     .exec()
-    .then(doc => {
-      if (doc)
-        res.status(200).json(doc);
+    .then(news => {
+      if (news)
+        res.status(200).json(news);
       else
         throw { status: 400, message: 'not found' };
     })
@@ -32,32 +31,46 @@ router.get('/:newsID', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-  const animal = {
-    _id: new mongoose.Types.ObjectId(),
-    name: req.body.name,
-    price: req.body.price,
-  };
-  const newAnimal = new NewsModel(animal);
-  newAnimal.save()
-    .then(result => {
-      console.log(result);
+  const { date, title, photo, text } = req.body;
+
+  new NewsModel({ _id: new mongoose.Types.ObjectId(), date, title, photo, text })
+    .save()
+    .then(news => {
+      res.status(200).json(news);
     })
     .catch(err => {
       console.log(err);
     });
-  res.status(200).json({ message: 'animals POST', animal });
-
 });
 
-router.put('/:animalID', (req, res, next) => {
-  const animalId = req.params.animalID;
-  res.status(200).json({ animalId, message: 'animals PUT' });
+router.put('/:newsID', (req, res, next) => {
+  const { date, title, photo, text } = req.body;
 
+  NewsModel.findById(new mongoose.Types.ObjectId(req.params.newsID))
+    .exec()
+    .then(news => {
+      news.date = date;
+      news.title = title;
+      news.photo = photo;
+      news.text = text;
+      news.save()
+        .then(() => {
+          res.status(200).json(news);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    });
 });
 
-router.delete('/:animalID', (req, res, next) => {
-  const animalId = req.params.animalID;
-  res.status(200).json({ message: 'animals DELETE', animalId });
+router.delete('/:newsID', (req, res, next) => {
+  NewsModel.deleteOne({ _id: new mongoose.Types.ObjectId(req.params.newsID) })
+    .then(() => {
+      res.status(200).end();
+    })
+    .catch(err => {
+      console.log(err);
+    });
 });
 
 module.exports = router;

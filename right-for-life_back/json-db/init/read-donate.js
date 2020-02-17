@@ -6,7 +6,7 @@ const DonateSchema = require('../../models/DonateSchema.js');
 
 initDonate();
 
-function readNews() {
+function readDonate() {
   return fs.readFileSync('./json-db/donate.json', 'utf8');
 }
 
@@ -29,7 +29,7 @@ function initDonate() {
 }
 
 function extractedDonate(DonateModel) {
-  const donateContent = JSON.parse(readNews());
+  const donateContent = JSON.parse(readDonate());
   const newDonate = new DonateModel({
     _id: new mongoose.Types.ObjectId(),
     title: donateContent.title,

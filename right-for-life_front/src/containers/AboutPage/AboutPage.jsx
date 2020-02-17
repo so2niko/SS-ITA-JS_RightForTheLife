@@ -6,17 +6,15 @@ import AboutContacts from '../../components/AboutContacts';
 import { ImageCarousel } from '../../components/ImageCarousel';
 
 const AboutPage = ({ data }) => {
-  const { text, facebook, phone, email, instagram, additionalContacts } = data;
+  const { gallery, description, facebook, instagram, phone, email } = data;
 
   return (
     <div className="about-page pb-8 px-5">
-      <h2 className="px-4 font-bold text-lightgray-700 text-4xl uppercase">
-        О нас
-      </h2>
-      <ImageCarousel data={data} page="about" />
-      <AboutContent text={text} />
+      <h2 className="mb-6 px-4 font-bold text-lightgray-700 text-4xl uppercase">О нас</h2>
+      <ImageCarousel data={gallery} page="about" />
+      <AboutContent text={description} />
       <AboutContacts
-        contactsData={{ facebook, phone, email, additionalContacts, instagram }}
+        contactsData={{ facebook, phone, email, instagram }}
       />
     </div>
   );

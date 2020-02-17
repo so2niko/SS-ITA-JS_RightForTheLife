@@ -32,32 +32,45 @@ router.get('/:reportID', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-  const report = {
-    _id: new mongoose.Types.ObjectId(),
-    name: req.body.name,
-    price: req.body.price,
-  };
-  const newReport = new ReportModel(report);
-  newReport.save()
-    .then(result => {
-      console.log(result);
+  new ReportModel({ _id: new mongoose.Types.ObjectId(), date, title, gallery })
+    .save()
+    .then(report => {
+      res.status(200).json(report);
     })
     .catch(err => {
       console.log(err);
     });
-  res.status(200).json({ message: 'reports POST', report });
-
 });
 
 router.put('/:reportID', (req, res, next) => {
-  const reportId = req.params.reportID;
-  res.status(200).json({ reportId, message: 'reports PUT' });
-
+  const { date, title, gallery } = req.body;
+  ReportModel.findById(new mongoose.Types.ObjectId(req.params.reportID))
+    .exec()
+    .then(report => {
+      report.date = date;
+      report.title = title;
+      report.gallery = gallery;
+      report.save()
+        .then(() => {
+          res.status(200).json(report);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    })
+    .catch(err => {
+      console.log(err);
+    });
 });
 
 router.delete('/:reportID', (req, res, next) => {
-  const reportId = req.params.reportID;
-  res.status(200).json({ message: 'reports DELETE', reportId });
+  ReportModel.deleteOne({ _id: new mongoose.Types.ObjectId(req.params.reportID) })
+    .then(() => {
+      res.status(200).end();
+    })
+    .catch(err => {
+      console.log(err);
+    });
 });
 
 module.exports = router;
