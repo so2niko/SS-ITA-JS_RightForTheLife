@@ -10,6 +10,9 @@ router.get('/', (req, res, next) => {
     .exec()
     .then(doc => {
       res.status(200).json(doc);
+    })
+    .catch(err => {
+      console.log(err);
     });
 });
 
@@ -31,32 +34,48 @@ router.get('/:happyStoryID', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-  const animal = {
-    _id: new mongoose.Types.ObjectId(),
-    name: req.body.name,
-    price: req.body.price,
-  };
-  const newAnimal = new HappyStoryModel(animal);
-  newAnimal.save()
-    .then(result => {
-      console.log(result);
+  const { date, title, photo, text } = req.body;
+
+  new HappyStoryModel({ _id: new mongoose.Types.ObjectId(), date, title, photo, text })
+    .save()
+    .then(story => {
+      res.status(200).json(story);
     })
     .catch(err => {
       console.log(err);
     });
-  res.status(200).json({ message: 'animals POST', animal });
 
 });
 
-router.put('/:animalID', (req, res, next) => {
-  const animalId = req.params.animalID;
-  res.status(200).json({ animalId, message: 'animals PUT' });
+router.put('/:happyStoryID', (req, res, next) => {
+  const { date, title, photo, text } = req.body;
 
+  HappyStoryModel.findById(new mongoose.Types.ObjectId(req.params.happyStoryID))
+    .exec()
+    .then(story => {
+      story.date = date;
+      story.title = title;
+      story.photo = photo;
+      story.text = text;
+      story.save()
+        .then(() => {
+          res.status(200).json(story);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    });
 });
 
-router.delete('/:animalID', (req, res, next) => {
-  const animalId = req.params.animalID;
-  res.status(200).json({ message: 'animals DELETE', animalId });
+router.delete('/:happyStoryID', (req, res, next) => {
+  HappyStoryModel.deleteOne({ _id: new mongoose.Types.ObjectId(req.params.happyStoryID) })
+    .then(() => {
+      res.status(200).end();
+    })
+    .catch(err => {
+      console.log(err);
+    });
+
 });
 
 module.exports = router;

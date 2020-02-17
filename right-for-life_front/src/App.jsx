@@ -43,10 +43,10 @@ function App({ store }) {
             <Route exact path="/stories/:id" component={HappyStoryPage} />
             <Route exact path="/help" component={DonatePage} />
             <Route exact path="/about" component={AboutPage} />
-            <Route exact path="/emergency" component={EmergencyHelpPage} />
+            <Route exact path="/emergencies" component={EmergencyHelpPage} />
             <Route
               exact
-              path="/emergency/:id"
+              path="/emergencies/:id"
               component={SingleEmergencyHelpPage}
             />
             <Route exact path="/admin" component={LoginPage} />

@@ -13,22 +13,26 @@ router.get('/', (req, res, next) => {
     });
 });
 
-router.post('/', (req, res, next) => {
-  const animal = {
-    _id: new mongoose.Types.ObjectId(),
-    name: req.body.name,
-    price: req.body.price,
-  };
-  const newAnimal = new AboutModel(animal);
-  newAnimal.save()
-    .then(result => {
-      console.log(result);
-    })
-    .catch(err => {
-      console.log(err);
-    });
-  res.status(200).json({ message: 'animals POST', animal });
+router.put('/', (req, res, next) => {
+  const { gallery, description, instagram, facebook, phone, email } = req.body;
 
+  AboutModel.findOne()
+    .exec()
+    .then(about => {
+      about.gallery = gallery;
+      about.description = description;
+      about.instagram = instagram;
+      about.facebook = facebook;
+      about.phone = phone;
+      about.email = email;
+      about.save()
+        .then(() => {
+          res.status(200).json(about);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    });
 });
 
 router.put('/:animalID', (req, res, next) => {

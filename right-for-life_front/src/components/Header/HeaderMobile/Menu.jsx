@@ -12,7 +12,7 @@ export const Menu = () => (
     <HeaderItem to="/animals" title="Питомцы" />
     <HeaderItem to="/stories" title="Счастливые истории" />
 
-    <HeaderItem to="/emergency" title="Срочники" color="red" />
+    <HeaderItem to="/emergencies" title="Срочники" color="red" />
     <HeaderItem to="/news" title="Новости" />
     <HeaderItem to="/about" title="О нас" />
   </ul>
