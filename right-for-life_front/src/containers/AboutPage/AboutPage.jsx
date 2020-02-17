@@ -8,15 +8,26 @@ import { UpdateImageGallery } from '../../components/UpdateImageGallery';
 
 const AboutPage = ({ data }) => {
   const [state, setState] = useState(data);
-  const [isEdit, setIsEdit] = useState(true);
-  const { gallery, description, facebook, instagram, phone, email } = state;
+  console.log(state);
+  const [isEdit, setIsEdit] = useState(false);
+  const {
+    gallery,
+    description,
+    facebook,
+    instagram,
+    phone,
+    email,
+    additionalContacts,
+  } = state;
   const setNewDescription = (i, text) => {
-    // console.log(i, text);
-    // console.log(state.description[i]);
     const textArr = [...state.description];
     textArr[i] = text;
     setState({ ...state, description: textArr });
-    // setState({ ...state, description: text });
+  };
+  const setNewContact = (contactName, contactInfo) => {
+    const newState = { ...state };
+    newState[contactName] = contactInfo;
+    setState({ ...newState });
   };
 
   return (
@@ -34,7 +45,11 @@ const AboutPage = ({ data }) => {
         isEditable={isEdit}
         setNewText={setNewDescription}
       />
-      <AboutContacts contactsData={{ facebook, phone, email, instagram }} />
+      <AboutContacts
+        contactsData={{ facebook, phone, email, instagram, additionalContacts }}
+        isEditable={isEdit}
+        setNewContact={setNewContact}
+      />
     </div>
   );
 };
