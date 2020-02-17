@@ -26,6 +26,7 @@ export const AnimalDetails = (props) => {
   };
 
   const updateName = (newName) => setAnimal({ ...animal, name: newName });
+  const updateType = (newType) => setAnimal({ ...animal, type: newType });
   const updateAge = (newAge) => setAnimal({ ...animal, age: newAge });
   const updateGender = (newGender) => setAnimal({ ...animal, gender: newGender });
 
@@ -59,6 +60,7 @@ export const AnimalDetails = (props) => {
             isEdit
               ? <Card {...animal}
                 updateName={updateName}
+                updateType={updateType}
                 updateGender={updateGender}
                 updateAge={updateAge}
                 isEdit
