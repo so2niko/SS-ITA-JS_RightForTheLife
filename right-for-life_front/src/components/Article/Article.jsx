@@ -13,6 +13,7 @@ import { EditModeBar } from '../EditModeBar';
 
 import './style.css';
 import { Select } from '../Select';
+import { CUDService } from '../../services/CUDService';
 
 export const Article = ({ article }) => {
   const { pathname: currentURL } = useLocation();
@@ -47,7 +48,27 @@ export const Article = ({ article }) => {
       )}
 
       {isEditModeBarOpen ? (
-        <EditModeBar onEdit={() => setIsEdit(!isEdit)} data={state} />
+        <EditModeBar
+          data={state}
+          onEdit={() => setIsEdit(!isEdit)}
+          onSave={() => {
+            state._id
+              ? CUDService.PUT(
+                  currentURL.match('/.*/')[0] + state._id, 
+                  state,
+                )
+              : CUDService.POST(
+                  currentURL.match('/.*/')[0].slice(0, -1),
+                  state,
+                );
+            setIsEditModeBarOpen(!isEditModeBarOpen);
+            setIsEdit(!isEdit);
+          }}
+          onCancel={() => {
+            setIsEditModeBarOpen(false);
+            setIsEdit(false);
+          }}
+        />
       ) : (
         <Select
           classNames="fixed z-50 top-0 right-0 mr-10 mt-20"
