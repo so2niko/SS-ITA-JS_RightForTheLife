@@ -1,17 +1,9 @@
 export const BE_URL = 'http://localhost:4000';
 
 export const API = Object.freeze({
-  ANIMALS: {
-    name: 'ANIMALS',
-    api: `${BE_URL}/animals`,
-  },
-  NEWS: {
-    name: 'NEWS',
-    api: `${BE_URL}/news`,
-  },
-  HAPPY_STORIES: {
-    name: 'HAPPY_STORIES',
-    api: `${BE_URL}/happyStories`,
+  HOME: {
+    name: 'HOME',
+    api: `${BE_URL}/home`,
   },
   DONATE: {
     name: 'DONATE',
@@ -21,13 +13,25 @@ export const API = Object.freeze({
     name: 'SUPPLIES',
     api: `${BE_URL}/supplies`,
   },
-  ABOUT_US: {
-    name: 'ABOUT_US',
-    api: `${BE_URL}/about`,
+  ANIMALS: {
+    name: 'ANIMALS',
+    api: `${BE_URL}/animals`,
+  },
+  HAPPY_STORIES: {
+    name: 'HAPPY_STORIES',
+    api: `${BE_URL}/happyStories`,
   },
   EMERGENCY_HELP: {
     name: 'EMERGENCY_HELP',
-    api: `${BE_URL}/emergency`,
+    api: `${BE_URL}/emergencies`,
+  },
+  NEWS: {
+    name: 'NEWS',
+    api: `${BE_URL}/news`,
+  },
+  ABOUT_US: {
+    name: 'ABOUT_US',
+    api: `${BE_URL}/about`,
   },
   REPORTS: {
     name: 'REPORTS',
