@@ -7,10 +7,10 @@ import { EditModeBar } from '../../components/EditModeBar';
 import { Select } from '../../components/Select';
 import './style.css'
 
-export const AnimalDetails = (props) => {
-  const [animal, setAnimal] = useState(props);
-  const [isEdit, setIsEdit] = useState(props.isEdit);
-  const [isEditModeBarOpen, setIsEditModeBarOpen] = useState(props.isEditModeBarOpen);
+export const AnimalDetails = ({isEdit: isEditProp, isEditModeBarOpen: isEditModeBarOpenProp, ...rest}) => {
+  const [animal, setAnimal] = useState(rest);
+  const [isEdit, setIsEdit] = useState(isEditProp);
+  const [isEditModeBarOpen, setIsEditModeBarOpen] = useState(isEditModeBarOpenProp);
 
   const descriptionRef = useRef();
 
@@ -26,6 +26,7 @@ export const AnimalDetails = (props) => {
   };
 
   const updateName = (newName) => setAnimal({ ...animal, name: newName });
+  const updateType = (newType) => setAnimal({ ...animal, type: newType });
   const updateAge = (newAge) => setAnimal({ ...animal, age: newAge });
   const updateGender = (newGender) => setAnimal({ ...animal, gender: newGender });
 
@@ -59,6 +60,7 @@ export const AnimalDetails = (props) => {
             isEdit
               ? <Card {...animal}
                 updateName={updateName}
+                updateType={updateType}
                 updateGender={updateGender}
                 updateAge={updateAge}
                 isEdit
