@@ -6,18 +6,26 @@ import { FiltersItem } from './FiltersItem';
 const updateQuery = (params, location, history, query) => {
   query.delete('page');
 
-  if (params.length > 0) {
-    params.forEach(([key, value]) => query.set(key, value));
+  const entriesParams = Object.entries(params);
+
+  if (entriesParams.length > 0) {
+    entriesParams.forEach(([key, value]) => query.set(key, value));
     history.push(`${location.pathname}?${query.toString()}`);
   }
 };
 
 export const Filters = ({ filters }) => {
-  const [params, setParams] = useState([]);
   const form = useRef(null);
   const location = useLocation();
   const history = useHistory();
   const query = useQuery();
+  const initialParams = {};
+
+  [...query.entries()].forEach(([key, value]) => {
+    initialParams[key] = value;
+  });
+
+  const [params, setParams] = useState(initialParams);
 
   return (
     <form
@@ -33,7 +41,10 @@ export const Filters = ({ filters }) => {
           <li key={filter[1]} className="w-1/2 p-2">
             <FiltersItem
               filter={filter}
-              updateParams={param => setParams([...params, param])}
+              updateParams={([key, value]) =>
+                setParams({ ...params, [key]: value })
+              }
+              params={params}
             />
           </li>
         ))}
@@ -41,22 +52,22 @@ export const Filters = ({ filters }) => {
       <button
         type="submit"
         className={`m-2 ml-4 text-lg font-bold text-${
-          params.length ? 'blue-700' : 'gray-600'
+          Object.keys(params).length ? 'blue-700' : 'gray-600'
         } focus:outline-none`}
-        disabled={params.length === 0}
+        disabled={Object.keys(params).length === 0}
       >
         Применить
       </button>
       <button
         className={`m-2 mr-4 text-lg font-bold text-${
-          params.length ? 'red-700' : 'gray-600'
+          Object.keys(params).length ? 'red-700' : 'gray-600'
         } focus:outline-none`}
         onClick={() => {
           setParams([]);
           form.current.reset();
           history.push(location.pathname);
         }}
-        disabled={params.length === 0}
+        disabled={Object.keys(params).length === 0}
       >
         Очистить
       </button>
