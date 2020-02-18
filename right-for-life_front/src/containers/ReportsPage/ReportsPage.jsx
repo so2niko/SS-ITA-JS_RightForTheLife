@@ -1,11 +1,10 @@
 import React from 'react';
 import { API } from '../../rootConstants';
-import { withPagination } from '../../hoc/withPagination';
+// import { withPagination } from '../../hoc/withPagination';
 import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
 import { ArticlesList } from '../../components/ArticlesList';
 
 const ReportsPage = ({ data }) => {
-  console.log(data);
   data.forEach(item => (item.photo = item.gallery[0]));
   return (
     <div>
@@ -14,9 +13,6 @@ const ReportsPage = ({ data }) => {
   );
 };
 
-const wrappedComponent = withFetchDataIndicators(
-  withPagination(ReportsPage, 10),
-  API.REPORTS,
-);
+const wrappedComponent = withFetchDataIndicators(ReportsPage, API.REPORTS);
 
 export { wrappedComponent as ReportsPage };
