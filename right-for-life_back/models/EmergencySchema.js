@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const paginate = require('mongoose-paginate-v2');
 
 const EmergencySchema = new mongoose.Schema(
   {
@@ -10,5 +11,7 @@ const EmergencySchema = new mongoose.Schema(
     videos: Array,
     text: String,
   });
+
+EmergencySchema.plugin(paginate);
 
 module.exports = EmergencySchema;

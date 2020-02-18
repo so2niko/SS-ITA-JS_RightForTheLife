@@ -7,7 +7,19 @@ import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
 
 const HappyStoryPage = ({ data }) => {
   const { id } = useParams();
-  const article = data.find(item => item._id === id);
+  let article = data.docs.find(item => item._id === id);
+
+  if (id === 'new') {
+    article = {
+      _id: 'new',
+      gallery: [],
+      videos: [],
+      date: Date.now(),
+      title: 'Введите заголовок...',
+      photo: '',
+      text: 'Введите текст...',
+    };
+  }
 
   if (!article)
     return (

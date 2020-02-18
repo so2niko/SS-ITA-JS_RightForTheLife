@@ -1,10 +1,12 @@
 import React, { useState, useRef } from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
 import { Card } from './Card';
 import { BackBtn, ShareBtn } from '../../components/FloatingBtn';
 import { ShareMobile } from './ShareMobile';
 import { UpdateImageGallery } from '../../components/UpdateImageGallery';
 import { EditModeBar } from '../../components/EditModeBar';
 import { Select } from '../../components/Select';
+import { CUDService } from '../../services/CUDService';
 import './style.css';
 
 export const AnimalDetails = ({
@@ -12,6 +14,8 @@ export const AnimalDetails = ({
   isEditModeBarOpen: isEditModeBarOpenProp,
   ...rest
 }) => {
+  const history = useHistory();
+  const { pathname } = useLocation();
   const [animal, setAnimal] = useState(rest);
   const [isEdit, setIsEdit] = useState(isEditProp);
   const [isEditModeBarOpen, setIsEditModeBarOpen] = useState(
@@ -21,9 +25,17 @@ export const AnimalDetails = ({
   const descriptionRef = useRef();
 
   const selectOptionChoseHandler = selectedOption => {
-    if (selectedOption === 'edit') {
-      setIsEditModeBarOpen(true);
-      setIsEdit(true);
+    switch (selectedOption) {
+      case 'edit':
+        setIsEditModeBarOpen(true);
+        setIsEdit(true);
+        break;
+      case 'no-edit':
+        setIsEditModeBarOpen(false);
+        setIsEdit(false);
+        break;
+      default:
+        return null;
     }
   };
 
@@ -45,8 +57,25 @@ export const AnimalDetails = ({
 
       {isEditModeBarOpen ? (
         <EditModeBar
-          isOpen={isEditModeBarOpen}
+          data={animal}
           onEdit={() => setIsEdit(!isEdit)}
+          onSave={() => {
+            let url;
+
+            if (animal._id) {
+              url = pathname.match('/.*/')[0] + animal._id;
+              CUDService.PUT(url, animal);
+            } else {
+              url = pathname.match('/.*/')[0].slice(0, -1);
+              CUDService.POST(url, animal);
+              history.goBack();
+            }
+
+            selectOptionChoseHandler('no-edit');
+          }}
+          onCancel={() => {
+            selectOptionChoseHandler('no-edit');
+          }}
         />
       ) : (
         <Select

@@ -35,7 +35,7 @@ export const Select = ({
       {optAdd ? (
         <div className={`inline-block ${classNames}`}>
           <div className="relative inline-block">
-            <Link to={`${location.pathname}/new`} className="w-1/2 ml-2">
+            <Link to={`${location.pathname}/new`}>
               <i className="fas fa-plus text-2xl hover:bg-gray-200 cursor-pointer w-12 h-12 rounded-full flex justify-center items-center shadow-xl bg-white" />
             </Link>
           </div>

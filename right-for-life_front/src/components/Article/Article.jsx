@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import YouTube from 'react-youtube';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import calcAge from '../../helpers/calcAge';
 import { BackBtn, ShareBtn } from '../FloatingBtn';
 import { ArticleImageGallery } from '../ArticleImageGallery';
@@ -13,16 +13,24 @@ import { EditModeBar } from '../EditModeBar';
 
 import './style.css';
 import { Select } from '../Select';
+import { CUDService } from '../../services/CUDService';
 
 export const Article = ({ article }) => {
-  const { pathname: currentURL } = useLocation();
-  article.gallery = [];
-  article.videos = [];
+  const history = useHistory();
+  const { pathname } = useLocation();
   const [state, setState] = useState(article);
+
+  const isEditModeOn = article._id === 'new';
+
   const titleRef = useRef(null);
   const textRef = useRef(null);
-  const [isEdit, setIsEdit] = useState(false);
-  const [isEditModeBarOpen, setIsEditModeBarOpen] = useState(false);
+  const [isEdit, setIsEdit] = useState(isEditModeOn);
+  const [isEditModeBarOpen, setIsEditModeBarOpen] = useState(isEditModeOn);
+
+  let articleType;
+  if (pathname.includes('emergencies')) articleType = 'emergencies';
+  else if (pathname.includes('news')) articleType = 'news';
+  else if (pathname.includes('stories')) articleType = 'happyStories';
 
   const selectOptionChoseHandler = selectedOption => {
     switch (selectedOption) {
@@ -30,11 +38,35 @@ export const Article = ({ article }) => {
         setIsEditModeBarOpen(true);
         setIsEdit(true);
         break;
-
+      case 'no-edit':
+        setIsEditModeBarOpen(false);
+        setIsEdit(false);
+        break;
+      case 'cancel-edit':
+        // eslint-disable-next-line
+        location.reload();
+        break;
+      case 'delete':
+        CUDService.DELETE(`/${articleType}/${state._id}`).then(() =>
+          history.goBack(),
+        );
+        break;
+      case 'save':
+        (() => {
+          if (state._id === 'new') {
+            CUDService.POST(`/${articleType}`, state).then(() =>
+              history.goBack(),
+            );
+          } else {
+            const url = `/${articleType}/${state._id}`;
+            CUDService.PUT(url, state);
+          }
+          selectOptionChoseHandler('no-edit');
+        })();
+        break;
       default:
         return null;
     }
-    return null;
   };
 
   return (
@@ -47,7 +79,12 @@ export const Article = ({ article }) => {
       )}
 
       {isEditModeBarOpen ? (
-        <EditModeBar onEdit={() => setIsEdit(!isEdit)} data={state} />
+        <EditModeBar
+          data={state}
+          onEdit={() => setIsEdit(!isEdit)}
+          onSave={() => selectOptionChoseHandler('save')}
+          onCancel={() => selectOptionChoseHandler('cancel-edit')}
+        />
       ) : (
         <Select
           classNames="fixed z-50 top-0 right-0 mr-10 mt-20"
@@ -87,14 +124,14 @@ export const Article = ({ article }) => {
         >
           {state.title}
         </div>
-        {currentURL.includes('emergency') ? (
+        {pathname.includes('emergency') ? (
           <DonateButton style={{ marginLeft: '10px' }} />
         ) : null}
       </div>
 
       <div className="mx-10 md:mx-20">
         <aside className="font-medium text-lightgray-700 text-right text-xl mb-10">
-          {calcAge(Number(state.date))} назад
+          {calcAge(Number(state.date))}
         </aside>
       </div>
 
