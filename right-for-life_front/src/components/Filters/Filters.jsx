@@ -36,7 +36,7 @@ export const Filters = ({ filters }) => {
         updateQuery(params, location, history, query);
       }}
     >
-      <ul className="flex flex-wrap sm:flex-no-wrap w-full pr-2 md:border-r md:border-gray-300">
+      <ul className="flex flex-wrap sm:flex-no-wrap w-full md:pr-2 md:border-r md:border-gray-300">
         {filters.map(filter => (
           <li key={filter[1]} className="w-1/2 p-2">
             <FiltersItem
@@ -51,7 +51,7 @@ export const Filters = ({ filters }) => {
       </ul>
       <button
         type="submit"
-        className={`m-2 ml-4 text-lg font-bold text-${
+        className={`m-2 md:ml-4 text-lg font-bold text-${
           Object.keys(params).length ? 'blue-700' : 'gray-600'
         } focus:outline-none`}
         disabled={Object.keys(params).length === 0}
@@ -59,7 +59,7 @@ export const Filters = ({ filters }) => {
         Применить
       </button>
       <button
-        className={`m-2 mr-4 text-lg font-bold text-${
+        className={`m-2 md:mr-4 text-lg font-bold text-${
           Object.keys(params).length ? 'red-700' : 'gray-600'
         } focus:outline-none`}
         onClick={() => {
