@@ -1,5 +1,0 @@
-input[type="radio"].hidden:checked + label {
-  background-color: #bee3f8;
-  color: #2b6cb0;
-  transition: 200ms;
-}

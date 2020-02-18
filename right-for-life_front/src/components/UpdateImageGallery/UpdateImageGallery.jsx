@@ -22,28 +22,36 @@ export const UpdateImageGallery = ({ images, updateImages }) => {
             </span>
           </div>
         )}
-        {images.map((image, idx) => (
-          <div key={image} className="relative w-1/2 h-48 md:w-1/3 p-1">
-            <img
-              src={image}
-              className="w-full h-full object-cover rounded-lg overflow-hidden"
-              alt=""
-            />
-            <div className="absolute inset-0 w-full h-full p-1">
-              <button
-                className="uig-delete w-full h-full hover:bg-orange-100 opacity-75"
-                onClick={() => {
-                  updateImages([
-                    ...images.slice(0, idx),
-                    ...images.slice(idx + 1),
-                  ]);
-                }}
-              >
-                <i className="fas fa-times text-4xl text-orange-700 invisible" />
-              </button>
+        {images.length > 0 ? (
+          images.map((image, idx) => (
+            <div key={image} className="relative w-1/2 h-48 md:w-1/3 p-1">
+              <img
+                src={image}
+                className="w-full h-full object-cover rounded-lg overflow-hidden"
+                alt=""
+              />
+              <div className="absolute inset-0 w-full h-full p-1">
+                <button
+                  className="uig-delete w-full h-full hover:bg-orange-100 opacity-75"
+                  onClick={() => {
+                    updateImages([
+                      ...images.slice(0, idx),
+                      ...images.slice(idx + 1),
+                    ]);
+                  }}
+                >
+                  <i className="fas fa-times text-4xl text-orange-700 invisible" />
+                </button>
+              </div>
             </div>
+          ))
+        ) : (
+          <div className="flex items-center justify-center h-12 w-full">
+            <p className="font-bold text-sm text-orange-700 uppercase opacity-25">
+              На этой странице нет изображений
+            </p>
           </div>
-        ))}
+        )}
       </section>
       <section className="relative w-full h-14 p-1">
         <div
