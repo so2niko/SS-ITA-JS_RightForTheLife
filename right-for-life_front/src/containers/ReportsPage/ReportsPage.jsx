@@ -5,6 +5,7 @@ import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
 import { ArticlesList } from '../../components/ArticlesList';
 
 const ReportsPage = ({ data }) => {
+  console.log(data);
   data.forEach(item => (item.photo = item.gallery[0]));
   return (
     <div>
