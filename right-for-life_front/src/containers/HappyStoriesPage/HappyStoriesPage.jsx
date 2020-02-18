@@ -2,14 +2,16 @@ import React from 'react';
 import { API } from '../../rootConstants';
 import { ArticlesList } from '../../components/ArticlesList';
 import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
-import { withPagination } from '../../hoc/withPagination';
 
-const HappyStoriesPage = ({ data }) => (
-  <ArticlesList articles={data} listTitle="Cчастливые истории" />
-);
+const HappyStoriesPage = props => {
+  console.log('props', props);
+  return (
+    <ArticlesList articles={props.data.docs} listTitle="Cчастливые истории" />
+  );
+};
 
 const wrappedComponent = withFetchDataIndicators(
-  withPagination(HappyStoriesPage, 10),
+  HappyStoriesPage,
   API.HAPPY_STORIES,
   true,
 );

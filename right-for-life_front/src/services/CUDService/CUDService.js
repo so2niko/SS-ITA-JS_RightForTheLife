@@ -29,7 +29,7 @@ export class CUDService {
       });
   }
 
-  static DELETE(url, data) {
+  static DELETE(url, data = '') {
     return fetch(`${BE_URL}${url}`, {
       method: 'DELETE',
       headers: {

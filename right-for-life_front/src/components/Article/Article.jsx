@@ -39,6 +39,11 @@ export const Article = ({ article }) => {
         setIsEditModeBarOpen(false);
         setIsEdit(false);
         break;
+      case 'delete':
+        CUDService.DELETE(`/happyStories/${state._id}`).then(() =>
+          history.goBack(),
+        );
+        break;
       default:
         return null;
     }
@@ -60,13 +65,13 @@ export const Article = ({ article }) => {
           onSave={() => {
             let url;
 
-            if (state._id) {
-              url = pathname.match('/.*/')[0] + state._id;
-              CUDService.PUT(url, state);
+            if (state._id === 'new') {
+              CUDService.POST('/happyStories', state).then(() =>
+                history.goBack(),
+              );
             } else {
-              url = pathname.match('/.*/')[0].slice(0, -1);
-              CUDService.POST(url, state);
-              history.goBack();
+              url = `/happyStories/${state._id}`;
+              CUDService.PUT(url, state).then(() => console.log('PUT GOOD'));
             }
             selectOptionChoseHandler('no-edit');
           }}
@@ -120,7 +125,7 @@ export const Article = ({ article }) => {
 
       <div className="mx-10 md:mx-20">
         <aside className="font-medium text-lightgray-700 text-right text-xl mb-10">
-          {calcAge(Number(state.date))} назад
+          {calcAge(Number(state.date))}
         </aside>
       </div>
 
