@@ -27,6 +27,11 @@ export const Article = ({ article }) => {
   const [isEdit, setIsEdit] = useState(isEditModeOn);
   const [isEditModeBarOpen, setIsEditModeBarOpen] = useState(isEditModeOn);
 
+  let articleType;
+  if (pathname.includes('emergencies')) articleType = 'emergencies';
+  else if (pathname.includes('news')) articleType = 'news';
+  else if (pathname.includes('stories')) articleType = 'happyStories';
+
   const selectOptionChoseHandler = selectedOption => {
     switch (selectedOption) {
       case 'edit':
@@ -37,19 +42,23 @@ export const Article = ({ article }) => {
         setIsEditModeBarOpen(false);
         setIsEdit(false);
         break;
+      case 'cancel-edit':
+        // eslint-disable-next-line
+        location.reload();
+        break;
       case 'delete':
-        CUDService.DELETE(`/happyStories/${state._id}`).then(() =>
+        CUDService.DELETE(`/${articleType}/${state._id}`).then(() =>
           history.goBack(),
         );
         break;
       case 'save':
         (() => {
           if (state._id === 'new') {
-            CUDService.POST('/happyStories', state).then(() =>
+            CUDService.POST(`/${articleType}`, state).then(() =>
               history.goBack(),
             );
           } else {
-            const url = `/happyStories/${state._id}`;
+            const url = `/${articleType}/${state._id}`;
             CUDService.PUT(url, state);
           }
           selectOptionChoseHandler('no-edit');
@@ -74,6 +83,7 @@ export const Article = ({ article }) => {
           data={state}
           onEdit={() => setIsEdit(!isEdit)}
           onSave={() => selectOptionChoseHandler('save')}
+          onCancel={() => selectOptionChoseHandler('cancel-edit')}
         />
       ) : (
         <Select
