@@ -1,18 +1,19 @@
 import React from 'react';
 import { API } from '../../rootConstants';
-// import { withPagination } from '../../hoc/withPagination';
+import { withPagination } from '../../hoc/withPagination';
 import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
 import { ArticlesList } from '../../components/ArticlesList';
 
-const ReportsPage = ({ data }) => {
-  data.forEach(item => (item.photo = item.gallery[0]));
-  return (
-    <div>
-      <ArticlesList articles={data} listTitle="Финансовые отчеты" />
-    </div>
-  );
+const ReportsPage =  ({ data }) => {
+  const reports = [ ...data ];
+  reports.forEach(item => {item.photo = item.gallery[0];});
+  return <ArticlesList articles={reports} listTitle="Финансовые отчеты" />;
 };
 
-const wrappedComponent = withFetchDataIndicators(ReportsPage, API.REPORTS);
+const wrappedComponent = withFetchDataIndicators(
+  withPagination(ReportsPage),
+  API.REPORTS,
+  true,
+);
 
 export { wrappedComponent as ReportsPage };

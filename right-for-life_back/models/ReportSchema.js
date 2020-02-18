@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const paginate = require('mongoose-paginate-v2');
 
 const ReportSchema = new mongoose.Schema(
   {
@@ -7,5 +8,7 @@ const ReportSchema = new mongoose.Schema(
     title: String,
     gallery: Array
   });
+
+ReportSchema.plugin(paginate);
 
 module.exports = ReportSchema;
