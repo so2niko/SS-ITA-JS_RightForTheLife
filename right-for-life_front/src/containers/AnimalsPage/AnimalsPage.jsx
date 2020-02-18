@@ -14,12 +14,12 @@ export const AnimalsPage = () => {
 
   return (
     <div className="animals-page -mx-4">
-      <h2 className="mb-6 px-4 font-bold text-lightgray-700 text-4xl uppercase">
-        Питомцы
-      </h2>
-      {isEdit && (
-        <Select classNames="fixed z-50 top-0 right-0 mr-10 mt-20" optAdd />
-      )}
+      <div className="flex items-center">
+        <h2 className="mb-6 px-4 font-bold text-lightgray-700 text-4xl uppercase">
+          Питомцы
+        </h2>
+        {isEdit && <Select classNames="mb-6" optAdd />}
+      </div>
       <Filters filters={filters} />
       <AnimalsList />
     </div>
