@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import YouTube from 'react-youtube';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import calcAge from '../../helpers/calcAge';
 import { BackBtn, ShareBtn } from '../FloatingBtn';
 import { ArticleImageGallery } from '../ArticleImageGallery';
@@ -13,9 +13,11 @@ import { EditModeBar } from '../EditModeBar';
 
 import './style.css';
 import { Select } from '../Select';
+import { CUDService } from '../../services/CUDService';
 
 export const Article = ({ article }) => {
-  const { pathname: currentURL } = useLocation();
+  const history = useHistory();
+  const { pathname } = useLocation();
   article.gallery = [];
   article.videos = [];
   const [state, setState] = useState(article);
@@ -30,23 +32,44 @@ export const Article = ({ article }) => {
         setIsEditModeBarOpen(true);
         setIsEdit(true);
         break;
-
+      case 'no-edit':
+        setIsEditModeBarOpen(false);
+        setIsEdit(false);
+        break;
       default:
         return null;
     }
-    return null;
   };
 
   return (
     <article>
-      <BackBtn position="left-0 ml-2 mt-6" />
-      <ShareBtn position="right-0 mr-2 mt-6" />
+      {!isEdit && (
+        <>
+          <BackBtn position="left-0 ml-2 mt-6" />
+          <ShareBtn position="right-0 mr-2 mt-6" />
+        </>
+      )}
 
       {isEditModeBarOpen ? (
         <EditModeBar
-          isOpen={isEditModeBarOpen}
+          data={state}
           onEdit={() => setIsEdit(!isEdit)}
-          state={state}
+          onSave={() => {
+            let url;
+
+            if (state._id) {
+              url = pathname.match('/.*/')[0] + state._id;
+              CUDService.PUT(url, state);
+            } else {
+              url = pathname.match('/.*/')[0].slice(0, -1);
+              CUDService.POST(url, state);
+              history.goBack();
+            }
+            selectOptionChoseHandler('no-edit');
+          }}
+          onCancel={() => {
+            selectOptionChoseHandler('no-edit');
+          }}
         />
       ) : (
         <Select
@@ -87,7 +110,7 @@ export const Article = ({ article }) => {
         >
           {state.title}
         </div>
-        {currentURL.includes('emergency') ? (
+        {pathname.includes('emergency') ? (
           <DonateButton style={{ marginLeft: '10px' }} />
         ) : null}
       </div>
@@ -135,7 +158,7 @@ export const Article = ({ article }) => {
             videosListChangeHandler={videos => setState({ ...state, videos })}
           />
         ) : (
-          state.videos?.length &&
+          state.videos.length > 0 &&
           state.videos.map(video => (
             <div className="video-iframe-container" key={video}>
               <YouTube videoId={extractVideoIdFromYouTubeLink(video)} />
