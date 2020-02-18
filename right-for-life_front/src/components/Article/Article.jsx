@@ -21,10 +21,13 @@ export const Article = ({ article }) => {
   article.gallery = [];
   article.videos = [];
   const [state, setState] = useState(article);
+
+  const isEditModeOn = article._id === 'new';
+
   const titleRef = useRef(null);
   const textRef = useRef(null);
-  const [isEdit, setIsEdit] = useState(false);
-  const [isEditModeBarOpen, setIsEditModeBarOpen] = useState(false);
+  const [isEdit, setIsEdit] = useState(isEditModeOn);
+  const [isEditModeBarOpen, setIsEditModeBarOpen] = useState(isEditModeOn);
 
   const selectOptionChoseHandler = selectedOption => {
     switch (selectedOption) {
