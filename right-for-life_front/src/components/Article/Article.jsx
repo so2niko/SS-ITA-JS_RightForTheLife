@@ -42,6 +42,10 @@ export const Article = ({ article }) => {
         setIsEditModeBarOpen(false);
         setIsEdit(false);
         break;
+      case 'cancel-edit':
+        // eslint-disable-next-line
+        location.reload();
+        break;
       case 'delete':
         CUDService.DELETE(`/${articleType}/${state._id}`).then(() =>
           history.goBack(),
@@ -79,6 +83,7 @@ export const Article = ({ article }) => {
           data={state}
           onEdit={() => setIsEdit(!isEdit)}
           onSave={() => selectOptionChoseHandler('save')}
+          onCancel={() => selectOptionChoseHandler('cancel-edit')}
         />
       ) : (
         <Select
