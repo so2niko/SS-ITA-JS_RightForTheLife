@@ -27,6 +27,11 @@ export const Article = ({ article }) => {
   const [isEdit, setIsEdit] = useState(isEditModeOn);
   const [isEditModeBarOpen, setIsEditModeBarOpen] = useState(isEditModeOn);
 
+  let articleType;
+  if (pathname.includes('emergencies')) articleType = 'emergencies';
+  if (pathname.includes('news')) articleType = 'news';
+  if (pathname.includes('stories')) articleType = 'happyStories';
+
   const selectOptionChoseHandler = selectedOption => {
     switch (selectedOption) {
       case 'edit':
@@ -38,18 +43,18 @@ export const Article = ({ article }) => {
         setIsEdit(false);
         break;
       case 'delete':
-        CUDService.DELETE(`/happyStories/${state._id}`).then(() =>
+        CUDService.DELETE(`/${articleType}/${state._id}`).then(() =>
           history.goBack(),
         );
         break;
       case 'save':
         (() => {
           if (state._id === 'new') {
-            CUDService.POST('/happyStories', state).then(() =>
+            CUDService.POST(`/${articleType}`, state).then(() =>
               history.goBack(),
             );
           } else {
-            const url = `/happyStories/${state._id}`;
+            const url = `/${articleType}/${state._id}`;
             CUDService.PUT(url, state);
           }
           selectOptionChoseHandler('no-edit');
