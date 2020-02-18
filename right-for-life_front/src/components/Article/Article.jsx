@@ -124,7 +124,7 @@ export const Article = ({ article }) => {
         >
           {state.title}
         </div>
-        {pathname.includes('emergency') ? (
+        {pathname.includes('emergencies') ? (
           <DonateButton style={{ marginLeft: '10px' }} />
         ) : null}
       </div>
@@ -141,7 +141,7 @@ export const Article = ({ article }) => {
           updateImages={gallery => setState({ ...state, gallery })}
         />
       ) : (
-        state.gallery.length > 0 && (
+        state.gallery?.length > 0 && (
           <div className="mb-10 md:mx-20">
             <ArticleImageGallery images={state.gallery} />
           </div>
@@ -172,7 +172,7 @@ export const Article = ({ article }) => {
             videosListChangeHandler={videos => setState({ ...state, videos })}
           />
         ) : (
-          state.videos.length > 0 &&
+          state.videos?.length > 0 &&
           state.videos.map(video => (
             <div className="video-iframe-container" key={video}>
               <YouTube videoId={extractVideoIdFromYouTubeLink(video)} />

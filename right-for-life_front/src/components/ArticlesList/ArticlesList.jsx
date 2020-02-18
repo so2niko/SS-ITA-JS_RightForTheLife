@@ -14,7 +14,7 @@ export const ArticlesList = ({ articles, listTitle }) => {
         {isEdit ? <Select optAdd classNames="ml-4" /> : null}
       </div>
       <div className="flex flex-wrap justify-center -mx-4">
-        {articles.map(article => {
+        {articles?.map(article => {
           return <ArticleItem key={article._id} article={article} />;
         })}
       </div>
