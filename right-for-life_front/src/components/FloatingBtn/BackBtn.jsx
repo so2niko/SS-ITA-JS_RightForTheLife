@@ -15,11 +15,12 @@ const BackBtn = ({ position, urlForBackBtn }) => (
 );
 
 BackBtn.propTypes = {
-  position: PropTypes.string.isRequired,
+  position: PropTypes.string,
   urlForBackBtn: PropTypes.string,
 };
 
 BackBtn.defaultProps = {
+  position: 'left-0 ml-2 mt-2',
   urlForBackBtn: '',
 };
 

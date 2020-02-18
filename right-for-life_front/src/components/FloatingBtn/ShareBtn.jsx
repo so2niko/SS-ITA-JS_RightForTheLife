@@ -35,7 +35,9 @@ const buttonComponentsArr = [
   },
 ];
 
-export const ShareBtn = ({ position, shareUrl = window.location.href }) => {
+const getDefaultUrl = () => window.location.href;
+
+export const ShareBtn = ({ position, shareUrl }) => {
   let fromStorage = sessionStorage.getItem('share-opened');
   // comparing using instead JSON.parse for incorrect JSON cases
   fromStorage = fromStorage ? fromStorage === 'true' : true;
@@ -62,7 +64,7 @@ export const ShareBtn = ({ position, shareUrl = window.location.href }) => {
           <FloatingBtn
             position={position}
             content={
-              <item.btn url={shareUrl}>
+              <item.btn url={shareUrl || getDefaultUrl()}>
                 <item.icon size={35} round />
               </item.btn>
             }
@@ -81,5 +83,5 @@ ShareBtn.propTypes = {
 
 ShareBtn.defaultProps = {
   position: 'right-0 mr-2 mt-2',
-  shareUrl: '',
+  shareUrl: null,
 };

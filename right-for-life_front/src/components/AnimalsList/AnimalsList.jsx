@@ -11,7 +11,7 @@ const AnimalsList = ({ data: { docs: animals } }) => {
         <AnimalCard key={animal._id} animal={animal} />
       ))}
     </ul>
-  )
+  );
 };
 
 const wrappedComponent = withFetchDataIndicators(

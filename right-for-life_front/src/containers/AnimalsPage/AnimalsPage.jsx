@@ -18,12 +18,7 @@ export const AnimalsPage = () => {
         <h2 className="mb-6 px-4 font-bold text-lightgray-700 text-4xl uppercase">
           Питомцы
         </h2>
-        {isEdit &&
-          <Select
-            classNames="mb-6"
-            optAdd
-          />
-        }
+        {isEdit && <Select classNames="mb-6" optAdd />}
       </div>
       <Filters filters={filters} />
       <AnimalsList />

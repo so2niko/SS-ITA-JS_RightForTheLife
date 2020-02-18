@@ -17,9 +17,6 @@ const HomePage = ({ data }) => (
   </article>
 );
 
-const wrappedComponent = withFetchDataIndicators(
-  HomePage,
-  API.HOME,
-);
+const wrappedComponent = withFetchDataIndicators(HomePage, API.HOME);
 
 export { wrappedComponent as HomePage };
