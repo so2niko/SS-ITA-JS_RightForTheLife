@@ -18,13 +18,14 @@ import { CUDService } from '../../services/CUDService';
 export const Article = ({ article }) => {
   const history = useHistory();
   const { pathname } = useLocation();
-  article.gallery = [];
-  article.videos = [];
   const [state, setState] = useState(article);
+
+  const isEditModeOn = article._id === 'new';
+
   const titleRef = useRef(null);
   const textRef = useRef(null);
-  const [isEdit, setIsEdit] = useState(false);
-  const [isEditModeBarOpen, setIsEditModeBarOpen] = useState(false);
+  const [isEdit, setIsEdit] = useState(isEditModeOn);
+  const [isEditModeBarOpen, setIsEditModeBarOpen] = useState(isEditModeOn);
 
   const selectOptionChoseHandler = selectedOption => {
     switch (selectedOption) {
@@ -35,6 +36,24 @@ export const Article = ({ article }) => {
       case 'no-edit':
         setIsEditModeBarOpen(false);
         setIsEdit(false);
+        break;
+      case 'delete':
+        CUDService.DELETE(`/happyStories/${state._id}`).then(() =>
+          history.goBack(),
+        );
+        break;
+      case 'save':
+        (() => {
+          if (state._id === 'new') {
+            CUDService.POST('/happyStories', state).then(() =>
+              history.goBack(),
+            );
+          } else {
+            const url = `/happyStories/${state._id}`;
+            CUDService.PUT(url, state);
+          }
+          selectOptionChoseHandler('no-edit');
+        })();
         break;
       default:
         return null;
@@ -54,22 +73,7 @@ export const Article = ({ article }) => {
         <EditModeBar
           data={state}
           onEdit={() => setIsEdit(!isEdit)}
-          onSave={() => {
-            let url;
-
-            if (state._id) {
-              url = pathname.match('/.*/')[0] + state._id;
-              CUDService.PUT(url, state);
-            } else {
-              url = pathname.match('/.*/')[0].slice(0, -1);
-              CUDService.POST(url, state);
-              history.goBack();
-            }
-            selectOptionChoseHandler('no-edit');
-          }}
-          onCancel={() => {
-            selectOptionChoseHandler('no-edit');
-          }}
+          onSave={() => selectOptionChoseHandler('save')}
         />
       ) : (
         <Select
@@ -117,7 +121,7 @@ export const Article = ({ article }) => {
 
       <div className="mx-10 md:mx-20">
         <aside className="font-medium text-lightgray-700 text-right text-xl mb-10">
-          {calcAge(Number(state.date))} назад
+          {calcAge(Number(state.date))}
         </aside>
       </div>
 

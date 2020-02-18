@@ -24,3 +24,4 @@ yarn-error.log*
 
 # other
 tailwind.css
+.vscode

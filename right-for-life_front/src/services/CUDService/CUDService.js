@@ -29,15 +29,11 @@ export class CUDService {
       });
   }
 
-  static DELETE(url, data) {
+  static DELETE(url) {
     return fetch(`${BE_URL}${url}`, {
       method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
     })
-      .then(response => response.json())
+      .then(response => response)
       .catch(error => {
         throw new Error(error);
       });
