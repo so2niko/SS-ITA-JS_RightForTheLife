@@ -6,10 +6,16 @@ const HappyStoryScheme = require('../models/HappyStorySchema.js');
 const HappyStoryModel = mongoose.connection.model('HappyStory', HappyStoryScheme);
 
 router.get('/', (req, res, next) => {
-  HappyStoryModel.find()
-    .exec()
-    .then(doc => {
-      res.status(200).json(doc);
+  const pagination = { page: 1, limit: 10 };
+  const { page, limit } = req.query;
+
+  page ? pagination.page = page : '';
+  limit ? pagination.limit = limit : '';
+
+  HappyStoryModel
+    .paginate({}, pagination)
+    .then(stories => {
+      res.status(200).json(stories);
     })
     .catch(err => {
       console.log(err);
@@ -19,9 +25,9 @@ router.get('/', (req, res, next) => {
 router.get('/:happyStoryID', (req, res, next) => {
   HappyStoryModel.findById(new mongoose.Types.ObjectId(req.params.happyStoryID))
     .exec()
-    .then(doc => {
-      if (doc)
-        res.status(200).json(doc);
+    .then(story => {
+      if (story)
+        res.status(200).json(story);
       else
         throw { status: 400, message: 'not found' };
     })
@@ -34,9 +40,9 @@ router.get('/:happyStoryID', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-  const { date, title, photo, text } = req.body;
+  const { date, title, photo, text, gallery, videos } = req.body;
 
-  new HappyStoryModel({ _id: new mongoose.Types.ObjectId(), date, title, photo, text })
+  new HappyStoryModel({ _id: new mongoose.Types.ObjectId(), date, title, photo, text, gallery, videos })
     .save()
     .then(story => {
       res.status(200).json(story);
@@ -48,7 +54,7 @@ router.post('/', (req, res, next) => {
 });
 
 router.put('/:happyStoryID', (req, res, next) => {
-  const { date, title, photo, text } = req.body;
+  const { date, title, photo, text, gallery, videos } = req.body;
 
   HappyStoryModel.findById(new mongoose.Types.ObjectId(req.params.happyStoryID))
     .exec()
@@ -57,6 +63,8 @@ router.put('/:happyStoryID', (req, res, next) => {
       story.title = title;
       story.photo = photo;
       story.text = text;
+      story.gallery = gallery;
+      story.videos = videos;
       story.save()
         .then(() => {
           res.status(200).json(story);
