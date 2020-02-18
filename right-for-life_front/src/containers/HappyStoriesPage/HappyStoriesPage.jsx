@@ -4,7 +4,6 @@ import { ArticlesList } from '../../components/ArticlesList';
 import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
 
 const HappyStoriesPage = props => {
-  console.log('props', props);
   return (
     <ArticlesList articles={props.data.docs} listTitle="Cчастливые истории" />
   );
