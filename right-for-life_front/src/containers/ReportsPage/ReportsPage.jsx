@@ -4,9 +4,11 @@ import { withPagination } from '../../hoc/withPagination';
 import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
 import { ArticlesList } from '../../components/ArticlesList';
 
-const ReportsPage =  ({ data }) => {
-  const reports = [ ...data ];
-  reports.forEach(item => {item.photo = item.gallery[0];});
+const ReportsPage = ({ data }) => {
+  const reports = data || [];
+  reports.forEach(item => {
+    item.photo = item.gallery[0];
+  });
   return <ArticlesList articles={reports} listTitle="Финансовые отчеты" />;
 };
 
