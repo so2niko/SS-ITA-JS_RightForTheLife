@@ -13,7 +13,7 @@ const AboutContent = ({ text, isEditable, setNewText }) => {
               suppressContentEditableWarning
               key={i}
               onBlur={e => {
-                setNewText(i, e.target.innerHTML);
+                setNewText(i, e.target.innerText);
               }}
             >
               {par}
