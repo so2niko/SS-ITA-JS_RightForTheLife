@@ -29,8 +29,8 @@ export const Article = ({ article }) => {
 
   let articleType;
   if (pathname.includes('emergencies')) articleType = 'emergencies';
-  if (pathname.includes('news')) articleType = 'news';
-  if (pathname.includes('stories')) articleType = 'happyStories';
+  else if (pathname.includes('news')) articleType = 'news';
+  else if (pathname.includes('stories')) articleType = 'happyStories';
 
   const selectOptionChoseHandler = selectedOption => {
     switch (selectedOption) {
