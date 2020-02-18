@@ -7,7 +7,7 @@ import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
 
 const HappyStoryPage = ({ data }) => {
   const { id } = useParams();
-  let article = data.find(item => item._id === id);
+  let article = data.docs.find(item => item._id === id);
 
   if (id === 'new') {
     article = {

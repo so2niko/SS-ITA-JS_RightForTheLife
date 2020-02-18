@@ -18,8 +18,6 @@ import { CUDService } from '../../services/CUDService';
 export const Article = ({ article }) => {
   const history = useHistory();
   const { pathname } = useLocation();
-  article.gallery = [];
-  article.videos = [];
   const [state, setState] = useState(article);
 
   const isEditModeOn = article._id === 'new';
@@ -44,6 +42,19 @@ export const Article = ({ article }) => {
           history.goBack(),
         );
         break;
+      case 'save':
+        (() => {
+          if (state._id === 'new') {
+            CUDService.POST('/happyStories', state).then(() =>
+              history.goBack(),
+            );
+          } else {
+            const url = `/happyStories/${state._id}`;
+            CUDService.PUT(url, state);
+          }
+          selectOptionChoseHandler('no-edit');
+        })();
+        break;
       default:
         return null;
     }
@@ -62,22 +73,7 @@ export const Article = ({ article }) => {
         <EditModeBar
           data={state}
           onEdit={() => setIsEdit(!isEdit)}
-          onSave={() => {
-            let url;
-
-            if (state._id === 'new') {
-              CUDService.POST('/happyStories', state).then(() =>
-                history.goBack(),
-              );
-            } else {
-              url = `/happyStories/${state._id}`;
-              CUDService.PUT(url, state).then(() => console.log('PUT GOOD'));
-            }
-            selectOptionChoseHandler('no-edit');
-          }}
-          onCancel={() => {
-            selectOptionChoseHandler('no-edit');
-          }}
+          onSave={() => selectOptionChoseHandler('save')}
         />
       ) : (
         <Select
