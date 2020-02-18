@@ -6,8 +6,14 @@ const NewsScheme = require('../models/NewsSchema.js');
 const NewsModel = mongoose.connection.model('News', NewsScheme);
 
 router.get('/', (req, res, next) => {
-  NewsModel.find()
-    .exec()
+  const pagination = { page: 1, limit: 10 };
+  const { page, limit } = req.query;
+
+  page ? pagination.page = page : '';
+  limit ? pagination.limit = limit : '';
+
+  NewsModel
+    .paginate({}, pagination)
     .then(doc => {
       res.status(200).json(doc);
     });

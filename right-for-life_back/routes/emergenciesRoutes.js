@@ -6,8 +6,14 @@ const EmergencyScheme = require('../models/EmergencySchema.js');
 const EmergencyModel = mongoose.connection.model('Emergency', EmergencyScheme);
 
 router.get('/', (req, res, next) => {
-  EmergencyModel.find()
-    .exec()
+  const pagination = { page: 1, limit: 10 };
+  const { page, limit } = req.query;
+
+  page ? pagination.page = page : '';
+  limit ? pagination.limit = limit : '';
+
+  EmergencyModel
+    .paginate({}, pagination)
     .then(doc => {
       res.status(200).json(doc);
     });

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const paginate = require('mongoose-paginate-v2');
 
 const HappyStorySchema = new mongoose.Schema(
   {
@@ -10,5 +11,7 @@ const HappyStorySchema = new mongoose.Schema(
     videos: Array,
     text: String,
   });
+
+HappyStorySchema.plugin(paginate);
 
 module.exports = HappyStorySchema;
