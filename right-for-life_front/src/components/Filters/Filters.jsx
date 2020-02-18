@@ -29,14 +29,14 @@ export const Filters = ({ filters }) => {
 
   return (
     <form
-      className="flex flex-wrap md:flex-no-wrap justify-center items-center mx-4 mb-6 p-1 rounded-xl shadow-lg bg-white"
+      className="flex flex-wrap md:flex-no-wrap md:justify-center justify-around items-center mx-4 mb-6 p-1 rounded-xl shadow-lg bg-white"
       ref={form}
       onSubmit={e => {
         e.preventDefault();
         updateQuery(params, location, history, query);
       }}
     >
-      <ul className="flex flex-wrap sm:flex-no-wrap w-full pr-2 border-r border-gray-300">
+      <ul className="flex flex-wrap sm:flex-no-wrap w-full pr-2 md:border-r md:border-gray-300">
         {filters.map(filter => (
           <li key={filter[1]} className="w-1/2 p-2">
             <FiltersItem
