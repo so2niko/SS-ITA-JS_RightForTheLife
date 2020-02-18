@@ -18,7 +18,7 @@ import { CUDService } from '../../services/CUDService';
 export const Article = ({ article }) => {
   const history = useHistory();
   const { pathname } = useLocation();
-  const [state, setState] = useState(article);
+  const [state, setState] = useState({ ...article });
 
   const isEditModeOn = article._id === 'new';
 
@@ -124,14 +124,17 @@ export const Article = ({ article }) => {
         >
           {state.title}
         </div>
-        {pathname.includes('emergencies') ? (
-          <DonateButton style={{ marginLeft: '10px' }} />
+        {!isEdit && pathname.includes('emergencies') ? (
+          <DonateButton
+            className="bg-yellow-300 hover:bg-yellow-400 text-yellow-700 font-bold py-2 px-4 rounded-lg outline-none"
+            style={{ marginLeft: '10px' }}
+          />
         ) : null}
       </div>
 
       <div className="mx-10 md:mx-20">
         <aside className="font-medium text-lightgray-700 text-right text-xl mb-10">
-          {calcAge(Number(state.date))}
+          {calcAge(state.date) ? `${calcAge(state.date)} назад` : 'сегодня'}
         </aside>
       </div>
 
@@ -165,7 +168,11 @@ export const Article = ({ article }) => {
         </p>
       </div>
 
-      <div className={`px-10 md:px-20 ${isEdit ? 'py-10 bg-orange-100' : ''}`}>
+      <div
+        className={`px-10 md:px-20 rounded-lg ${
+          isEdit ? 'py-10 bg-orange-100' : ''
+        }`}
+      >
         {isEdit ? (
           <EditVideosList
             videosList={state.videos}

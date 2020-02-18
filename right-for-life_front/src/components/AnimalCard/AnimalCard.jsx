@@ -27,7 +27,7 @@ export const AnimalCard = ({ animal }) => {
           <hr />
           <div className="flex p-3">
             <button
-              className="w-1/2 py-2 rounded-xl font-bold text-lg text-green-700 bg-green-200 hover:bg-green-300"
+              className="w-1/2 py-2 rounded-lg font-bold text-green-700 bg-green-200 hover:bg-green-300"
               onClick={handleShowingModal}
               style={{ outline: 'none' }}
             >
@@ -35,7 +35,7 @@ export const AnimalCard = ({ animal }) => {
             </button>
             <Link to={`/animals/${_id}`} className="w-1/2 ml-2">
               <button
-                className="w-full py-2 rounded-xl font-bold text-lg text-orange-700 bg-orange-200 hover:bg-orange-300 "
+                className="w-full py-2 rounded-lg font-bold text-orange-700 bg-orange-200 hover:bg-orange-300 "
                 style={{ outline: 'none' }}
               >
                 История
