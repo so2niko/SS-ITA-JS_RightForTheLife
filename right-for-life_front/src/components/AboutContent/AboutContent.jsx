@@ -7,7 +7,9 @@ const AboutContent = ({ text, isEditable, setNewText }) => {
         {text.map((par, i) => {
           return (
             <p
-              className="my-3 rounded-xl bg-gray-300 p-5"
+              className={`my-3 rounded-xl bg-gray-300 p-5 ${
+                isEditable ? 'bg-orange-200' : ''
+              }`}
               style={{ whiteSpace: 'pre-wrap' }}
               contentEditable={isEditable}
               suppressContentEditableWarning

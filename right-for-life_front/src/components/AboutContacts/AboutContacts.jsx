@@ -81,54 +81,59 @@ const AboutContacts = ({ contactsData, isEditable, setNewContact }) => {
   ) : null;
 
   return (
-    <Fragment>
-      {isEditable ? editContactsBlock : null}
-      <div className={`about-contacts-links ${linksWrapperClass}`}>
-        <button className="bg-transparent text-gray-700 font-semibold py-2 px-4 border border-transparent hover:border-blue-800 hover:bg-blue-200  rounded-xl">
-          <a
-            className={centerItemClass}
-            href={`${facebook}`}
-            target="_blank"
-            rel="noopener noreferrer"
+    <>
+      {isEditable ? (
+        editContactsBlock
+      ) : (
+        <div className={`about-contacts-links ${linksWrapperClass}`}>
+          <button className="bg-transparent text-gray-700 font-semibold py-2 px-4 border border-transparent hover:border-blue-800 hover:bg-blue-200  rounded-xl">
+            <a
+              className={centerItemClass}
+              href={`${facebook}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i
+                className={`fab fa-facebook-square text-blue-700 ${iconsClassName}`}
+              />
+              <span>Facebook</span>
+            </a>
+          </button>
+          <button className="bg-transparent text-gray-700 font-semibold py-2 px-4 border border-transparent hover:border-pink-600 hover:bg-pink-200  rounded-xl">
+            <a
+              className={centerItemClass}
+              href={`${instagram}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i
+                className={`fab fa-instagram text-pink-700 ${iconsClassName}`}
+              />
+              <span>Instagram</span>
+            </a>
+          </button>
+          <button
+            className={` bg-transparent text-gray-700 font-semibold py-2 px-4 border border-transparent hover:border-green-800 hover:bg-green-200  rounded-xl`}
           >
-            <i
-              className={`fab fa-facebook-square text-blue-700 ${iconsClassName}`}
-            />
-            <span>Facebook</span>
-          </a>
-        </button>
-        <button className="bg-transparent text-gray-700 font-semibold py-2 px-4 border border-transparent hover:border-pink-600 hover:bg-pink-200  rounded-xl">
-          <a
-            className={centerItemClass}
-            href={`${instagram}`}
-            target="_blank"
-            rel="noopener noreferrer"
+            <a href={`tel:${phone}`} className={`${centerItemClass}`}>
+              <i
+                className={`fas fa-phone-square-alt text-green-500 ${iconsClassName}`}
+              />
+              <span>{phone}</span>
+            </a>
+          </button>
+          <button
+            className={` bg-transparent text-gray-700 font-semibold py-2 px-4 border border-transparent hover:border-red-800 hover:bg-red-200  rounded-xl`}
           >
-            <i className={`fab fa-instagram text-pink-700 ${iconsClassName}`} />
-            <span>Instagram</span>
-          </a>
-        </button>
-        <button
-          className={` bg-transparent text-gray-700 font-semibold py-2 px-4 border border-transparent hover:border-green-800 hover:bg-green-200  rounded-xl`}
-        >
-          <a href={`tel:${phone}`} className={`${centerItemClass}`}>
-            <i
-              className={`fas fa-phone-square-alt text-green-500 ${iconsClassName}`}
-            />
-            <span>{phone}</span>
-          </a>
-        </button>
-        <button
-          className={` bg-transparent text-gray-700 font-semibold py-2 px-4 border border-transparent hover:border-red-800 hover:bg-red-200  rounded-xl`}
-        >
-          <a href={`mailto:${email}`} className={`${centerItemClass}`}>
-            <i className={`fas fa-envelope text-red-500 ${iconsClassName}`} />
-            <span>{email}</span>
-          </a>
-        </button>
-        {additionalInfo}
-      </div>
-    </Fragment>
+            <a href={`mailto:${email}`} className={`${centerItemClass}`}>
+              <i className={`fas fa-envelope text-red-500 ${iconsClassName}`} />
+              <span>{email}</span>
+            </a>
+          </button>
+          {additionalInfo}
+        </div>
+      )}
+    </>
   );
 };
 
