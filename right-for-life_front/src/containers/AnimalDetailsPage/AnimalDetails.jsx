@@ -34,6 +34,30 @@ export const AnimalDetails = ({
         setIsEditModeBarOpen(false);
         setIsEdit(false);
         break;
+      case 'cancel-edit':
+        // eslint-disable-next-line
+        location.reload();
+        break;
+      case 'delete':
+        CUDService.DELETE(`/animals/${animal._id}`).then(() =>
+          history.goBack(),
+        );
+        break;
+      case 'save':
+        (() => {
+          let url;
+
+          if (animal._id) {
+            url = pathname.match('/.*/')[0] + animal._id;
+            CUDService.PUT(url, animal);
+          }
+          else {
+            url = pathname.match('/.*/')[0].slice(0, -1);
+            CUDService.POST(url, animal).then(response => history.goBack());
+          }
+          selectOptionChoseHandler('no-edit');
+        })();
+        break;
       default:
         return null;
     }
@@ -59,32 +83,17 @@ export const AnimalDetails = ({
         <EditModeBar
           data={animal}
           onEdit={() => setIsEdit(!isEdit)}
-          onSave={() => {
-            let url;
-
-            if (animal._id) {
-              url = pathname.match('/.*/')[0] + animal._id;
-              CUDService.PUT(url, animal);
-            } else {
-              url = pathname.match('/.*/')[0].slice(0, -1);
-              CUDService.POST(url, animal);
-              history.goBack();
-            }
-
-            selectOptionChoseHandler('no-edit');
-          }}
-          onCancel={() => {
-            selectOptionChoseHandler('no-edit');
-          }}
+          onSave={() => selectOptionChoseHandler('save')}
+          onCancel={() => selectOptionChoseHandler('cancel-edit')}
         />
       ) : (
-        <Select
-          classNames="fixed z-50 top-0 right-0 mr-10 mt-20"
-          chooseOptionHandler={selectOptionChoseHandler}
-          optEdit
-          optDelete
-        />
-      )}
+          <Select
+            classNames="fixed z-50 top-0 right-0 mr-10 mt-20"
+            chooseOptionHandler={selectOptionChoseHandler}
+            optEdit
+            optDelete
+          />
+        )}
 
       <div
         className="flex-none sm:flex mx-auto px-0 sm:px-4"
@@ -101,8 +110,8 @@ export const AnimalDetails = ({
               isEdit
             />
           ) : (
-            <Card {...animal} isEdit={false} />
-          )}
+              <Card {...animal} isEdit={false} />
+            )}
           {isEdit && (
             <UpdateImageGallery
               images={animal.photos}
@@ -125,7 +134,7 @@ export const AnimalDetails = ({
           }
           className={`w-full sm:w-1/2 mt-10 sm:mt-5 mb-5 mx-0 sm:ml-12 sm:mr-12 md:mr-8 lg:mr-0 font-medium 
             text-gray-700 border-8 border-transparent ${
-              isEdit ? 'bg-orange-100' : ''
+            isEdit ? 'bg-orange-100' : ''
             }`}
         >
           {animal.description}

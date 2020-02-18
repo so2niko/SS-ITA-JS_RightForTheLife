@@ -13,8 +13,7 @@ export const ImageCarousel = ({ data, page }) => (
             background: `url('${slide}') no-repeat center center `,
             backgroundSize: 'contain',
           }}
-        >
-        </div>
+        />
       ))}
     </Slider>
   </div>
