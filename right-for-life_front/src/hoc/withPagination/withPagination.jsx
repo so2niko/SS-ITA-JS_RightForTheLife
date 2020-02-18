@@ -8,7 +8,6 @@ export const withPagination = (
   WrappedComponent,
   articlesPerPage = 10,
 ) => props => {
-  console.log('withPagination', props);
   const query = useQuery();
   const history = useHistory();
   const location = useLocation();

@@ -31,6 +31,9 @@ const HomePage = ({ data }) => {
 
   const setTitle = title => setState({ ...state, title });
   const setDescription = description => setState({ ...state, description });
+  const imageCarousel = state.gallery?.length ? (
+    <ImageCarousel data={state.gallery} />
+  ) : null;
 
   return (
     <article className="flex flex-col lg:flex-row flex-1 pb-8">
@@ -55,12 +58,14 @@ const HomePage = ({ data }) => {
       )}
       <section className="w-full lg:w-2/3 p-5">
         {!isEdit ? (
-          <ImageCarousel data={state.gallery} />
+          imageCarousel
         ) : (
-          <UpdateImageGallery
-            images={state.gallery}
-            updateImages={gallery => setState({ ...state, gallery })}
-          />
+          <div className="-mt-10">
+            <UpdateImageGallery
+              images={state.gallery}
+              updateImages={gallery => setState({ ...state, gallery })}
+            />
+          </div>
         )}
         <HomeArticle
           title={state.title}

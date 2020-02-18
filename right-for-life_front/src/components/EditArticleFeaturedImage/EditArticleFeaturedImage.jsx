@@ -1,8 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { UploadImages } from '../../services/UploadImages';
 
 export const EditArticleFeaturedImage = ({ image, imageChangeHandler }) => {
+  const [isUpload, setIsUpload] = useState(false);
   const inputRef = useRef();
 
   return (
@@ -18,27 +19,39 @@ export const EditArticleFeaturedImage = ({ image, imageChangeHandler }) => {
           accept="image/*"
           id="imageInput"
           onChange={() => {
+            setIsUpload(true);
             UploadImages(inputRef.current.files).then(links => {
               imageChangeHandler(links[0]);
+              setIsUpload(false);
             });
           }}
         />
-        <label
-          htmlFor="imageInput"
-          className="flex justify-center items-center w-full h-full font-bold uppercase text-xl text-orange-700 cursor-pointer"
-        >
-          {image ? (
-            <span>
-              <i className="fas fa-sync-alt px-3" />
-              Изменить изображение
-            </span>
-          ) : (
-            <span>
-              <i className="fas fa-cloud-upload-alt px-3" />
-              Установить изображение
-            </span>
-          )}
-        </label>
+        {!isUpload ? (
+          <label
+            htmlFor="imageInput"
+            className="flex justify-center items-center w-full h-full font-bold uppercase text-xl text-orange-700 cursor-pointer"
+          >
+            {image ? (
+              <span>
+                <i className="fas fa-sync-alt px-3" />
+                Изменить изображение
+              </span>
+            ) : (
+              <span>
+                <i className="fas fa-cloud-upload-alt px-3" />
+                Установить изображение
+              </span>
+            )}
+          </label>
+        ) : (
+          <div className="flex justify-center items-center w-full h-full font-bold uppercase text-xl text-orange-700">
+            <div className="loader loader-3">
+              <div className="dot dot1" style={{ background: '#c05621' }} />
+              <div className="dot dot2" style={{ background: '#c05621' }} />
+              <div className="dot dot3" style={{ background: '#c05621' }} />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

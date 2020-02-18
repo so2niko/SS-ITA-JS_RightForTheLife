@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useQuery } from '../../helpers/useQuery';
 import { requestData } from './actions';
@@ -16,10 +17,11 @@ export const withFetchDataIndicators = (
   }));
   const dispatch = useDispatch();
   const query = useQuery().toString();
+  const { id } = useParams();
   const { name, api: baseApi } = API;
 
   const data = dataStore[name];
-  const api = `${baseApi}${query ? `?${query}` : ''}`;
+  const api = `${baseApi}${id ? `/${id}` : ''}${query ? `?${query}` : ''}`;
 
   useEffect(() => {
     if (isUpdate || !data) dispatch(requestData({ api, name }));

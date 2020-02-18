@@ -7,7 +7,7 @@ import { AnimalCard } from '../AnimalCard/AnimalCard';
 const AnimalsList = ({ data }) => {
   return (
     <ul className="flex flex-wrap justify-center mb-8">
-      {data.map(animal => (
+      {data?.map(animal => (
         <AnimalCard key={animal._id} animal={animal} />
       ))}
     </ul>
