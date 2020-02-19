@@ -78,7 +78,8 @@ const HomePage = ({ data }) => {
       <section className="w-full lg:w-1/3 lg:h-auto p-5">
         <ArticlesListWidget
           emergency={state.emergencies}
-          article={state?.news || state?.story}
+          article={state?.news || state?.happyStories}
+          articleUrl={state?.news ? 'news' : 'stories'}
         />
       </section>
     </article>

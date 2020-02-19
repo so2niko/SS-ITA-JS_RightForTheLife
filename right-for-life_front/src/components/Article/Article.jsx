@@ -65,8 +65,8 @@ export const Article = ({ article }) => {
         })();
         break;
       case 'pinToHomePage':
-        if (articleType === 'emergencies') {
-          CUDService.PUT('/home/pin-emergencies', { _id: state._id });
+        if (articleType === 'happyStories') {
+          CUDService.PUT('/home/pin-happyStories', { _id: state._id });
         } else {
           CUDService.PUT('/home/pin-news', { _id: state._id });
         }
