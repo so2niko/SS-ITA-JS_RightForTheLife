@@ -23,7 +23,6 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/:reportID', (req, res, next) => {
-  console.log(req.params.reportID);
   ReportModel.findById(new mongoose.Types.ObjectId(req.params.reportID))
     .exec()
     .then(report => {
