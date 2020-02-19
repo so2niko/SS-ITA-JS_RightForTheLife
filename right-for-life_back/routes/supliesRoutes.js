@@ -50,19 +50,18 @@ router.get('/', (req, res, next) => {
 // });
 
 router.put('/', (req, res, next) => {
-  const { supplies } = req.body;
+  const supplies = [...req.body];
   const newSupplies = [];
 
   SupplyModel.deleteMany({})
     .exec()
     .then(() => {
-      supplies.forEach(x => {
+      supplies.forEach(supplie => {
         newSupplies.push(new SupplyModel({
-          _id: new mongoose.Types.ObjectId(),
-          name: x.name,
-          type: x.type,
-          info: x.info,
-          amount: x.amount,
+          _id: supplie._id && new mongoose.Types.ObjectId(),
+          name: supplie.name,
+          type: supplie.type,
+          info: supplie.info,
         }));
       });
       SupplyModel.insertMany(newSupplies)
