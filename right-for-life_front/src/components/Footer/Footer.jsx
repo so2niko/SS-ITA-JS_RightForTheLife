@@ -51,8 +51,8 @@ const Footer = ({ data }) => {
         >
           Отчеты
         </NavLink>
-        <div className="my-2">
-          <DonateButton />
+        <div className="">
+          <DonateButton className="bg-yellow-300 hover:bg-yellow-400 text-yellow-700 font-bold py-2 px-4 rounded-lg outline-none" />
         </div>
       </section>
     </footer>

@@ -83,7 +83,7 @@ export const EditVideosList = ({
         </div>
         <button
           type="submit"
-          className="bg-orange-300 hover:bg-orange-400 text-orange-700 font-bold py-3 px-4 rounded-xl focus:outline-none block ml-auto"
+          className="bg-orange-300 hover:bg-orange-400 text-orange-700 font-bold px-4 py-2 rounded-lg focus:outline-none block ml-auto"
         >
           Добавить видео
         </button>

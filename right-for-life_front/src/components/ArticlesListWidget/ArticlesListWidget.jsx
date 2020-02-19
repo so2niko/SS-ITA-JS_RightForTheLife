@@ -6,7 +6,7 @@ import { DonateButton } from '../DonateButton';
 
 export const ArticlesListWidget = () => (
   <article className="h-full w-full flex flex-wrap flex-row lg:flex-col justify-between rounded-xl font-bold text-lightgray-700">
-    <ArticlesListWidgetEmergency color="red" url="emergency" />
+    <ArticlesListWidgetEmergency color="red" url="emergencies" />
     <ArticlesListWidgetItem
       color="green"
       url="help"
@@ -17,7 +17,7 @@ export const ArticlesListWidget = () => (
     />
     <ArticlesListWidgetNews url="news" />
     <div className="min-w-full flex justify-center">
-      <DonateButton className="px-8 py-3 rounded-xl text-lg shadow-2xl-light border-2 border-orange-300 text-red-600 bg-orange-200 hover:bg-orange-300" />
+      <DonateButton className="w-full mx-20 py-2 rounded-lg text-lg text-xl text-center text-yellow-700 bg-yellow-300 hover:bg-yellow-400" />
     </div>
   </article>
 );

@@ -41,7 +41,7 @@ export const Select = ({
           </div>
         </div>
       ) : (
-        <div className={`inline-block ${classNames}`}>
+        <div className={`inline-block font-bold ${classNames}`}>
           <div ref={componentRef} className="relative inline-block">
             <i
               onClick={() => !isSelectOpened && setIsSelectOpened(true)}

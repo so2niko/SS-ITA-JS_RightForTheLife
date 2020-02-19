@@ -1,23 +1,23 @@
-import React, {useRef, useState} from 'react';
-import {Link, useHistory, useParams} from 'react-router-dom';
-import {API} from '../../rootConstants';
-import {withFetchDataIndicators} from '../../hoc/withFetchDataIndicators';
-import {ErrorIndicator} from '../../components/ErrorIndicator';
-import {ArticleImageGallery} from '../../components/ArticleImageGallery';
-import {UpdateImageGallery} from '../../components/UpdateImageGallery';
-import {BackBtn} from '../../components/FloatingBtn';
-import {EditModeBar} from '../../components/EditModeBar';
-import {Select} from '../../components/Select';
-import {CUDService} from "../../services/CUDService";
+import React, { useRef, useState } from 'react';
+import { Link, useHistory, useParams } from 'react-router-dom';
+import { API } from '../../rootConstants';
+import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
+import { ErrorIndicator } from '../../components/ErrorIndicator';
+import { ArticleImageGallery } from '../../components/ArticleImageGallery';
+import { UpdateImageGallery } from '../../components/UpdateImageGallery';
+import { BackBtn } from '../../components/FloatingBtn';
+import { EditModeBar } from '../../components/EditModeBar';
+import { Select } from '../../components/Select';
+import { CUDService } from '../../services/CUDService';
 
-const ReportPage = ({data}) => {
+const ReportPage = ({ data }) => {
   const history = useHistory();
-  const {id} = useParams();
+  const { id } = useParams();
   const titleRef = useRef(null);
   const isEditModeOn = id === 'new';
   const [isEdit, setIsEdit] = useState(isEditModeOn);
   const [isEditModeBarOpen, setIsEditModeBarOpen] = useState(isEditModeOn);
-  let report = data.docs.find(item => item._id === id);
+  let report = { ...data };
 
   if (id === 'new') {
     report = {
@@ -28,7 +28,7 @@ const ReportPage = ({data}) => {
     };
   }
 
-  const [state, setState] = useState(report);
+  const [state, setState] = useState({ ...report });
 
   const selectOptionChoseHandler = selectedOption => {
     switch (selectedOption) {
@@ -93,23 +93,27 @@ const ReportPage = ({data}) => {
 
       <div className="max-w-4xl mx-auto mb-20">
         <div
-          className={`my-6 font-bold text-lightgray-700 text-4xl uppercase ${isEdit ? 'bg-orange-200' : ''}`}
+          className={`my-6 font-bold text-lightgray-700 text-4xl uppercase ${
+            isEdit ? 'bg-orange-200' : ''
+          }`}
           contentEditable={isEdit}
           ref={titleRef}
-          onBlur={() => setState({...state, title: titleRef.current.textContent})}
+          onBlur={() =>
+            setState({ ...state, title: titleRef.current.textContent })
+          }
         >
           {state.title}
         </div>
-        <BackBtn/>
+        <BackBtn />
         {isEdit ? (
           <UpdateImageGallery
             images={state.gallery}
-            updateImages={gallery => setState({...state, gallery})}
+            updateImages={gallery => setState({ ...state, gallery })}
           />
         ) : (
-          state.gallery.length > 0 && (
+          state.gallery?.length > 0 && (
             <div className="mb-10 md:mx-20">
-              <ArticleImageGallery images={state.gallery}/>
+              <ArticleImageGallery images={state.gallery} />
             </div>
           )
         )}
@@ -118,6 +122,6 @@ const ReportPage = ({data}) => {
   );
 };
 
-const wrappedComponent = withFetchDataIndicators(ReportPage, API.REPORTS);
+const wrappedComponent = withFetchDataIndicators(ReportPage, API.REPORTS, true);
 
-export {wrappedComponent as ReportPage};
+export { wrappedComponent as ReportPage };
