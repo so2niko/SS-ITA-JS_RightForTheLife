@@ -15,7 +15,7 @@ export const ArticlesListWidget = ({ emergency, article }) => (
         title: 'ПОМОЩЬ ФОНДУ',
       }}
     />
-    <ArticlesListWidgetItem data={article} url="news" />
+    {article && <ArticlesListWidgetItem data={article} url="news" />}
     <div className="min-w-full flex justify-center">
       <DonateButton className="w-full mx-20 py-2 rounded-lg text-lg text-xl text-center text-yellow-700 bg-yellow-300 hover:bg-yellow-400" />
     </div>
