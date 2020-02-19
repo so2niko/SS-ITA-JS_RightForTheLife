@@ -10,6 +10,7 @@ import { Select } from '../../components/Select';
 import { UpdateImageGallery } from '../../components/UpdateImageGallery';
 
 const HomePage = ({ data }) => {
+  console.log(data);
   const [state, setState] = useState(data);
   const [isEdit, setIsEdit] = useState(false);
   const [isEditModeBarOpen, setIsEditModeBarOpen] = useState(false);

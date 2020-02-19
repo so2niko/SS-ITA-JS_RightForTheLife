@@ -6,7 +6,7 @@ import { DonateButton } from '../DonateButton';
 
 export const ArticlesListWidget = () => (
   <article className="h-full w-full flex flex-wrap flex-row lg:flex-col justify-between rounded-xl font-bold text-lightgray-700">
-    <ArticlesListWidgetEmergency color="red" url="emergency" />
+    <ArticlesListWidgetEmergency color="red" url="emergencies" />
     <ArticlesListWidgetItem
       color="green"
       url="help"
