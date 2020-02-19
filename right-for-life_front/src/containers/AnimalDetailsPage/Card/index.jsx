@@ -106,7 +106,7 @@ const renderCardContent = ({ name, gender, age, photos, showModal }) => {
         <p className="text-sm font-medium">{calcAge(age)}</p>
         <button
           onClick={showModal}
-          className="animal-details__btn w-full font-bold py-2 px-2 rounded-xl mt-2 focus:outline-none bg-gray-300 hover:bg-gray-400 text-gray-700"
+          className="animal-details__btn w-full font-bold py-2 px-2 rounded-lg mt-2 focus:outline-none bg-gray-300 hover:bg-gray-400 text-gray-700"
         >
           Приютить
         </button>
