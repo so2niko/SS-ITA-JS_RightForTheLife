@@ -2,8 +2,8 @@ import React from 'react';
 
 const Tab = ({ label, onClick, active }) => {
   const colors = active
-    ? 'bg-green-300 hover:bg-green-400 text-green-700'
-    : 'bg-gray-300 hover:bg-gray-400 text-gray-700';
+    ? 'bg-green-300 hover:bg-green-400 text-green-700 cursor-pointer'
+    : 'bg-gray-300 hover:bg-gray-400 text-gray-700 cursor-pointer';
 
   return (
     <li
