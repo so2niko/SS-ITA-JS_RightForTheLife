@@ -10,7 +10,6 @@ import { Select } from '../../components/Select';
 import { UpdateImageGallery } from '../../components/UpdateImageGallery';
 
 const HomePage = ({ data }) => {
-  console.log(data);
   const [state, setState] = useState(data);
   const [isEdit, setIsEdit] = useState(false);
   const [isEditModeBarOpen, setIsEditModeBarOpen] = useState(false);
@@ -77,12 +76,15 @@ const HomePage = ({ data }) => {
         />
       </section>
       <section className="w-full lg:w-1/3 lg:h-auto p-5">
-        <ArticlesListWidget url="news" />
+        <ArticlesListWidget
+          emergency={state.emergencies}
+          article={state?.news || state?.story}
+        />
       </section>
     </article>
   );
 };
 
-const wrappedComponent = withFetchDataIndicators(HomePage, API.HOME);
+const wrappedComponent = withFetchDataIndicators(HomePage, API.HOME, true);
 
 export { wrappedComponent as HomePage };

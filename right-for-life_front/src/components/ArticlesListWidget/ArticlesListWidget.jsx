@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { API } from '../../rootConstants';
-import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
 import { DonateButton } from '../DonateButton';
 
-export const ArticlesListWidget = () => (
-  <article className="h-full w-full flex flex-wrap flex-row lg:flex-col justify-between rounded-xl font-bold text-lightgray-700">
-    <ArticlesListWidgetEmergency color="red" url="emergencies" />
+export const ArticlesListWidget = ({ emergency, article }) => (
+  <article className="h-full w-full flex flex-wrap flex-row lg:flex-col rounded-xl font-bold text-lightgray-700">
+    {emergency && (
+      <ArticlesListWidgetItem data={emergency} color="red" url="emergencies" />
+    )}
     <ArticlesListWidgetItem
       color="green"
       url="help"
@@ -15,7 +15,7 @@ export const ArticlesListWidget = () => (
         title: 'ПОМОЩЬ ФОНДУ',
       }}
     />
-    <ArticlesListWidgetNews url="news" />
+    <ArticlesListWidgetItem data={article} url="news" />
     <div className="min-w-full flex justify-center">
       <DonateButton className="w-full mx-20 py-2 rounded-lg text-lg text-xl text-center text-yellow-700 bg-yellow-300 hover:bg-yellow-400" />
     </div>
@@ -23,7 +23,7 @@ export const ArticlesListWidget = () => (
 );
 
 const ArticlesListWidgetItem = ({ data, color, url }) => {
-  const { _id, title, photo } = data[0] || data;
+  const { _id, title, photo } = data;
 
   return (
     <Link
@@ -43,19 +43,11 @@ const ArticlesListWidgetItem = ({ data, color, url }) => {
             color ? `bg-${color}-300 text-${color}-700` : ''
           }`}
         >
-          <h3>{title}</h3>
+          <h3 className="uppercase">
+            {title.length > 62 ? `${title.slice(0, 62)}...` : title}
+          </h3>
         </div>
       </section>
     </Link>
   );
 };
-
-const ArticlesListWidgetEmergency = withFetchDataIndicators(
-  ArticlesListWidgetItem,
-  API.EMERGENCY_HELP,
-);
-
-const ArticlesListWidgetNews = withFetchDataIndicators(
-  ArticlesListWidgetItem,
-  API.NEWS,
-);
