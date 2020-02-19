@@ -22,7 +22,7 @@ export const ArticlesList = ({ articles, listTitle }) => {
           })
         ) : (
           <div>
-            <ErrorIndicator message="Здесь пока что ничего нет!" />
+            <ErrorIndicator message="Здесь пока ничего нет!" />
           </div>
         )}
       </div>
