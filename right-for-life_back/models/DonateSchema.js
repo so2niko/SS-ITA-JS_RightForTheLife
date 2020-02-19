@@ -25,6 +25,7 @@ const DonateSchema = new mongoose.Schema(
     summary: String,
     paymentMethodsInfo: PaymentSchema,
     moneyTransferInfo: MoneySchema,
+    privat24Token: String,
   });
 
 module.exports = DonateSchema;

@@ -37,6 +37,7 @@ function extractedDonate(DonateModel) {
     summary: donateContent.summary,
     paymentMethodsInfo: donateContent.paymentMethodsInfo,
     moneyTransferInfo: donateContent.moneyTransferInfo,
+    privat24Token: donateContent.privat24Token,
   });
   donateContent.paymentMethodsInfo.paymentMethods.forEach(el => {
     return newDonate.paymentMethodsInfo.paymentMethods.create(el);
