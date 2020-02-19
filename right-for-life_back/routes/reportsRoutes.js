@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const verifyUser = require('../utils/verifyUser.js');
 
 const ReportScheme = require('../models/ReportSchema.js');
 const ReportModel = mongoose.connection.model('Report', ReportScheme);
@@ -41,6 +42,9 @@ router.get('/:reportID', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
   const { date, title, gallery} = req.body;
+
+  if (!verifyUser(JSON.parse(req.get('Authorization')))) res.status(401).end();
+
   new ReportModel({ _id: new mongoose.Types.ObjectId(), date, title, gallery })
     .save()
     .then(report => {
@@ -53,6 +57,9 @@ router.post('/', (req, res, next) => {
 
 router.put('/:reportID', (req, res, next) => {
   const { date, title, gallery } = req.body;
+
+  if (!verifyUser(JSON.parse(req.get('Authorization')))) res.status(401).end();
+
   ReportModel.findById(new mongoose.Types.ObjectId(req.params.reportID))
     .exec()
     .then(report => {
@@ -73,6 +80,8 @@ router.put('/:reportID', (req, res, next) => {
 });
 
 router.delete('/:reportID', (req, res, next) => {
+  if (!verifyUser(JSON.parse(req.get('Authorization')))) res.status(401).end();
+
   ReportModel.deleteOne({ _id: new mongoose.Types.ObjectId(req.params.reportID) })
     .then(() => {
       res.status(200).end();

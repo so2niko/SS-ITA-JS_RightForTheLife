@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const verifyUser = require('../utils/verifyUser.js');
 
 const NewsScheme = require('../models/NewsSchema.js');
 const NewsModel = mongoose.connection.model('News', NewsScheme);
@@ -39,6 +40,8 @@ router.get('/:newsID', (req, res, next) => {
 router.post('/', (req, res, next) => {
   const { date, title, photo, text } = req.body;
 
+  if (!verifyUser(JSON.parse(req.get('Authorization')))) res.status(401).end();
+
   new NewsModel({ _id: new mongoose.Types.ObjectId(), date, title, photo, text })
     .save()
     .then(news => {
@@ -51,6 +54,8 @@ router.post('/', (req, res, next) => {
 
 router.put('/:newsID', (req, res, next) => {
   const { date, title, photo, text } = req.body;
+
+  if (!verifyUser(JSON.parse(req.get('Authorization')))) res.status(401).end();
 
   NewsModel.findById(new mongoose.Types.ObjectId(req.params.newsID))
     .exec()
@@ -70,6 +75,8 @@ router.put('/:newsID', (req, res, next) => {
 });
 
 router.delete('/:newsID', (req, res, next) => {
+  if (!verifyUser(JSON.parse(req.get('Authorization')))) res.status(401).end();
+
   NewsModel.deleteOne({ _id: new mongoose.Types.ObjectId(req.params.newsID) })
     .then(() => {
       res.status(200).end();

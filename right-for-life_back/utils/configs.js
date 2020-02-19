@@ -5,6 +5,7 @@ const dbOptions = {
   dbName: dbName,
 };
 
+module.exports.jwt_secret = 'ita-right.for.life_secret';
 module.exports.dbName = dbName;
 module.exports.dbURL = `mongodb://localhost:27017/${dbName}`;
 module.exports.animalsCollectionName = 'animals';
