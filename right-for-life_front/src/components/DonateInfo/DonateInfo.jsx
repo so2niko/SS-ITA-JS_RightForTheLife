@@ -1,6 +1,9 @@
 import React from 'react';
 
+import { CUDService } from '../../services/CUDService';
+import { EditModeBar } from '../../components/EditModeBar';
 import { DonateButton } from '../DonateButton';
+import { setContext } from 'redux-saga/effects';
 
 const PaymentMethod = ({ name, details, isEdit, setPaymentMethod, toggleEditStyle, index }) => {
   return (
@@ -73,10 +76,42 @@ const MoneyTransfer = ({
   );
 };
 
-const DonateInfo = ({ paymentMethodsInfo, moneyTransferInfo, stateSetters, isEdit, toggleEditStyle }) => {
+const DonateInfo = ({ paymentMethodsInfo, moneyTransferInfo, stateSetters, isEdit, toggleEditStyle, isEditModeBarOpen, updateIsEdit, updateIsEditModeBarOpen, donateInfo }) => {
+
+  const selectOptionChoseHandler = selectedOption => {
+    switch (selectedOption) {
+      case 'edit':
+        updateIsEditModeBarOpen(true);
+        updateIsEdit(true);
+        break;
+      case 'no-edit':
+        updateIsEdit(false);
+        break;
+      case 'cancel-edit':
+        // eslint-disable-next-line
+        location.reload();
+        break;
+      case 'save':
+        (() => {
+          CUDService.PUT('/donate', donateInfo);
+          selectOptionChoseHandler('no-edit');
+        })();
+        break;
+      default:
+        return null;
+    }
+  };
+
   if (paymentMethodsInfo) {
     return (
       <article className="payment_methods mt-10 text-center">
+        {isEditModeBarOpen &&
+          <EditModeBar
+            data={donateInfo}
+            onEdit={() => updateIsEdit(!isEdit)}
+            onSave={() => selectOptionChoseHandler('save')}
+            onCancel={() => selectOptionChoseHandler('cancel-edit')}
+          />}
         <DonateButton />
         <h2 className="text-2xl font-bold mb-3">{paymentMethodsInfo.title}</h2>
         {paymentMethodsInfo.paymentMethods.map((method, i) => (
@@ -97,12 +132,15 @@ const DonateInfo = ({ paymentMethodsInfo, moneyTransferInfo, stateSetters, isEdi
           isEdit={isEdit}
           toggleEditStyle={toggleEditStyle}
         />
-        {isEdit? <input 
-          className="bg-white focus:outline-none text-center focus:shadow-outline my-3 rounded-xl bg-gray-300 p-2 bg-orange-200 block w-full appearance-none leading-normal" 
-          type="text" 
-          placeholder="Token от ПриватБанка">
-        </input> : null}
-      </article>
+        {isEdit ? <input
+          className="bg-white focus:outline-none text-center focus:shadow-outline my-3 rounded-xl bg-gray-300 p-2 bg-orange-200 block w-full appearance-none leading-normal"
+          type="text"
+          name="privat24Token"
+          placeholder="Token от ПриватБанка"
+          onBlur={e => stateSetters.setText(e.target.getAttribute('name'), e.target.value)}>
+        </input> : null
+        }
+      </article >
     );
   }
   return null;

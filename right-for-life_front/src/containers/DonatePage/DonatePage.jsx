@@ -3,14 +3,20 @@ import { API } from '../../rootConstants';
 import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
 import TabBar from '../../components/TabBar';
 import { Select } from '../../components/Select';
-import { CUDService } from '../../services/CUDService';
-import { EditModeBar } from '../../components/EditModeBar';
 import { cloneDeep } from 'lodash';
 
-const DonatePage = ({ data: { title, manager, summary, paymentMethodsInfo, moneyTransferInfo } }) => {
+const DonatePage = ({ data }) => {
+  const {
+    title,
+    manager,
+    summary,
+    paymentMethodsInfo,
+    moneyTransferInfo,
+  } = data;
+
   const [isEdit, setIsEdit] = useState(false);
   const [isEditModeBarOpen, setIsEditModeBarOpen] = useState(false);
-  const [state, setState] = useState(data);
+  const [donateInfo, setDonateInfo] = useState(data);
 
   const updateIsEdit = (value) => setIsEdit(value);
   const updateIsEditModeBarOpen = (value) => setIsEditModeBarOpen(value);
@@ -22,58 +28,45 @@ const DonatePage = ({ data: { title, manager, summary, paymentMethodsInfo, money
         setIsEditModeBarOpen(true);
         setIsEdit(true);
         break;
-      case 'no-edit':
-        setIsEditModeBarOpen(false);
-        setIsEdit(false);
-        break;
       default:
         return null;
     }
   };
 
-
   const stateSetters = {
     setText: (fieldName, name) => {
-      const newState = { ...state };
+      const newState = { ...donateInfo };
       newState[fieldName] = name;
-      setState({ ...newState });
+      setDonateInfo({ ...newState });
       // data.manager = name;
       // setState({ ...data });
     },
     setPaymentMethod: (index, fieldName, value) => {
-      const newState = cloneDeep(state);
-      newState.paymentMethodsInfo.paymentMethods[index][fieldName] = value
-      setState({ ...newState });
+      const newState = cloneDeep(donateInfo);
+      newState.paymentMethodsInfo.paymentMethods[index][fieldName] = value;
+      setDonateInfo({ ...newState });
     },
     setAccount(index, account) {
-      const newState = cloneDeep(state);
+      const newState = cloneDeep(donateInfo);
       newState.moneyTransferInfo.accounts[index] = account;
-      setState({ ...newState });
+      setDonateInfo({ ...newState });
     },
     setMoneyTransferInfo: (fieldName, text) => {
-      const newState = cloneDeep(state);
+      const newState = cloneDeep(donateInfo);
       newState.moneyTransferInfo[fieldName] = text;
-      setState({ ...newState });
+      setDonateInfo({ ...newState });
     }
   };
 
-  const {
-    title,
-    manager,
-    summary,
-    paymentMethodsInfo,
-    moneyTransferInfo,
-  } = data;
-
   return (
     <div className="text-lightgray-700">
-      {!isEditModeBarOpen && <Select
-        classNames="fixed z-50 top-0 right-0 mr-10 mt-20"
-        chooseOptionHandler={selectOptionChoseHandler}
-        optEdit
-      />
+      {!isEditModeBarOpen &&
+        <Select
+          classNames="fixed z-50 top-0 right-0 mr-10 mt-20"
+          chooseOptionHandler={selectOptionChoseHandler}
+          optEdit
+        />
       }
-
       <header className="mb-6">
         <h1 className="text-4xl uppercase font-bold">{title}</h1>
       </header>
@@ -108,8 +101,8 @@ const DonatePage = ({ data: { title, manager, summary, paymentMethodsInfo, money
         paymentMethodsInfo={paymentMethodsInfo}
         moneyTransferInfo={moneyTransferInfo}
         stateSetters={stateSetters}
-        isEdit={isEdit}
         toggleEditStyle={toggleEditStyle}
+        donateInfo={donateInfo}
       />
     </div>
   );
