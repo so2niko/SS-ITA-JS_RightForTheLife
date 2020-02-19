@@ -18,7 +18,7 @@ import { CUDService } from '../../services/CUDService';
 export const Article = ({ article }) => {
   const history = useHistory();
   const { pathname } = useLocation();
-  const [state, setState] = useState(article);
+  const [state, setState] = useState({ ...article });
 
   const isEditModeOn = article._id === 'new';
 
@@ -26,6 +26,11 @@ export const Article = ({ article }) => {
   const textRef = useRef(null);
   const [isEdit, setIsEdit] = useState(isEditModeOn);
   const [isEditModeBarOpen, setIsEditModeBarOpen] = useState(isEditModeOn);
+
+  let articleType;
+  if (pathname.includes('emergencies')) articleType = 'emergencies';
+  else if (pathname.includes('news')) articleType = 'news';
+  else if (pathname.includes('stories')) articleType = 'happyStories';
 
   const selectOptionChoseHandler = selectedOption => {
     switch (selectedOption) {
@@ -37,19 +42,23 @@ export const Article = ({ article }) => {
         setIsEditModeBarOpen(false);
         setIsEdit(false);
         break;
+      case 'cancel-edit':
+        // eslint-disable-next-line
+        location.reload();
+        break;
       case 'delete':
-        CUDService.DELETE(`/happyStories/${state._id}`).then(() =>
+        CUDService.DELETE(`/${articleType}/${state._id}`).then(() =>
           history.goBack(),
         );
         break;
       case 'save':
         (() => {
           if (state._id === 'new') {
-            CUDService.POST('/happyStories', state).then(() =>
+            CUDService.POST(`/${articleType}`, state).then(() =>
               history.goBack(),
             );
           } else {
-            const url = `/happyStories/${state._id}`;
+            const url = `/${articleType}/${state._id}`;
             CUDService.PUT(url, state);
           }
           selectOptionChoseHandler('no-edit');
@@ -74,6 +83,7 @@ export const Article = ({ article }) => {
           data={state}
           onEdit={() => setIsEdit(!isEdit)}
           onSave={() => selectOptionChoseHandler('save')}
+          onCancel={() => selectOptionChoseHandler('cancel-edit')}
         />
       ) : (
         <Select
@@ -114,14 +124,17 @@ export const Article = ({ article }) => {
         >
           {state.title}
         </div>
-        {pathname.includes('emergency') ? (
-          <DonateButton style={{ marginLeft: '10px' }} />
+        {!isEdit && pathname.includes('emergencies') ? (
+          <DonateButton
+            className="bg-yellow-300 hover:bg-yellow-400 text-yellow-700 font-bold py-2 px-4 rounded-lg outline-none"
+            style={{ marginLeft: '10px' }}
+          />
         ) : null}
       </div>
 
       <div className="mx-10 md:mx-20">
         <aside className="font-medium text-lightgray-700 text-right text-xl mb-10">
-          {calcAge(Number(state.date))}
+          {calcAge(state.date) ? `${calcAge(state.date)} назад` : 'сегодня'}
         </aside>
       </div>
 
@@ -131,7 +144,7 @@ export const Article = ({ article }) => {
           updateImages={gallery => setState({ ...state, gallery })}
         />
       ) : (
-        state.gallery.length > 0 && (
+        state.gallery?.length > 0 && (
           <div className="mb-10 md:mx-20">
             <ArticleImageGallery images={state.gallery} />
           </div>
@@ -155,14 +168,18 @@ export const Article = ({ article }) => {
         </p>
       </div>
 
-      <div className={`px-10 md:px-20 ${isEdit ? 'py-10 bg-orange-100' : ''}`}>
+      <div
+        className={`px-10 md:px-20 rounded-lg ${
+          isEdit ? 'py-10 bg-orange-100' : ''
+        }`}
+      >
         {isEdit ? (
           <EditVideosList
             videosList={state.videos}
             videosListChangeHandler={videos => setState({ ...state, videos })}
           />
         ) : (
-          state.videos.length > 0 &&
+          state.videos?.length > 0 &&
           state.videos.map(video => (
             <div className="video-iframe-container" key={video}>
               <YouTube videoId={extractVideoIdFromYouTubeLink(video)} />

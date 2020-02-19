@@ -7,9 +7,21 @@ import { API } from '../../rootConstants';
 
 const SingleEmergencyHelpPage = ({ data }) => {
   const { id } = useParams();
-  const article = data.find(item => item._id === id);
+  let emergency = { ...data };
 
-  if (!article)
+  if (id === 'new') {
+    emergency = {
+      _id: 'new',
+      gallery: [],
+      videos: [],
+      date: Date.now(),
+      title: 'Введите заголовок...',
+      photo: '',
+      text: 'Введите текст...',
+    };
+  }
+
+  if (!emergency || emergency.status === 400)
     return (
       <ErrorIndicator
         message="Страница не найдена :("
@@ -21,7 +33,7 @@ const SingleEmergencyHelpPage = ({ data }) => {
 
   return (
     <div className="-mt-10 max-w-4xl mx-auto">
-      <Article article={article} />
+      <Article article={emergency} />
     </div>
   );
 };
@@ -29,6 +41,7 @@ const SingleEmergencyHelpPage = ({ data }) => {
 const wrappedComponent = withFetchDataIndicators(
   SingleEmergencyHelpPage,
   API.EMERGENCY_HELP,
+  true,
 );
 
 export { wrappedComponent as SingleEmergencyHelpPage };

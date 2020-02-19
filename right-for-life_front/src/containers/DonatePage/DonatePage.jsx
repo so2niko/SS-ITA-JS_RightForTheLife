@@ -7,11 +7,13 @@ import { CUDService } from '../../services/CUDService';
 import { EditModeBar } from '../../components/EditModeBar';
 import { cloneDeep } from 'lodash';
 
-const DonatePage = ({ data }) => {
-  const [state, setState] = useState(data);
+const DonatePage = ({ data: { title, manager, summary, paymentMethodsInfo, moneyTransferInfo } }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [isEditModeBarOpen, setIsEditModeBarOpen] = useState(false);
+  const [state, setState] = useState(data);
 
+  const updateIsEdit = (value) => setIsEdit(value);
+  const updateIsEditModeBarOpen = (value) => setIsEditModeBarOpen(value);
   const toggleEditStyle = (isEdit) => isEdit ? 'my-3 rounded-xl bg-gray-300 p-2 bg-orange-200' : '';
 
   const selectOptionChoseHandler = selectedOption => {
@@ -28,6 +30,7 @@ const DonatePage = ({ data }) => {
         return null;
     }
   };
+
 
   const stateSetters = {
     setText: (fieldName, name) => {
@@ -64,25 +67,13 @@ const DonatePage = ({ data }) => {
 
   return (
     <div className="text-lightgray-700">
-      {isEditModeBarOpen ? (
-        <EditModeBar
-          data={state}
-          onEdit={() => setIsEdit(!isEdit)}
-          onSave={() => {
-            CUDService.PUT('/donate', state);
-            selectOptionChoseHandler('no-edit');
-          }}
-          onCancel={() => {
-            selectOptionChoseHandler('no-edit');
-          }}
-        />
-      ) : (
-          <Select
-            classNames="fixed z-50 top-0 right-0 mr-10 mt-20"
-            chooseOptionHandler={selectOptionChoseHandler}
-            optEdit
-          />
-        )}
+      {!isEditModeBarOpen && <Select
+        classNames="fixed z-50 top-0 right-0 mr-10 mt-20"
+        chooseOptionHandler={selectOptionChoseHandler}
+        optEdit
+      />
+      }
+
       <header className="mb-6">
         <h1 className="text-4xl uppercase font-bold">{title}</h1>
       </header>
@@ -110,6 +101,10 @@ const DonatePage = ({ data }) => {
         </p>
       </section>
       <TabBar
+        isEdit={isEdit}
+        updateIsEdit={updateIsEdit}
+        isEditModeBarOpen={isEditModeBarOpen}
+        updateIsEditModeBarOpen={updateIsEditModeBarOpen}
         paymentMethodsInfo={paymentMethodsInfo}
         moneyTransferInfo={moneyTransferInfo}
         stateSetters={stateSetters}

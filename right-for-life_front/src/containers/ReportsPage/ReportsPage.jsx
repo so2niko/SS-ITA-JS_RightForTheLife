@@ -5,17 +5,17 @@ import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
 import { ArticlesList } from '../../components/ArticlesList';
 
 const ReportsPage = ({ data }) => {
-  data.forEach(item => (item.photo = item.gallery[0]));
-  return (
-    <div>
-      <ArticlesList articles={data} listTitle="Финансовые отчеты" />
-    </div>
-  );
+  const reports = data || [];
+  reports.forEach(item => {
+    item.photo = item.gallery[0];
+  });
+  return <ArticlesList articles={reports} listTitle="Финансовые отчеты" />;
 };
 
 const wrappedComponent = withFetchDataIndicators(
-  withPagination(ReportsPage, 10),
+  withPagination(ReportsPage),
   API.REPORTS,
+  true,
 );
 
 export { wrappedComponent as ReportsPage };

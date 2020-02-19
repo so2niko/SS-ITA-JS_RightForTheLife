@@ -4,16 +4,15 @@ import { useQuery } from '../../helpers/useQuery';
 import { Pagination } from '../../components/Pagination';
 import { ErrorIndicator } from '../../components/ErrorIndicator';
 
-export const withPagination = (WrappedComponent, articlesPerPage) => props => {
+export const withPagination = (
+  WrappedComponent,
+  articlesPerPage = 10,
+) => props => {
   const query = useQuery();
   const history = useHistory();
   const location = useLocation();
 
-  const requestedPageNum = extractAndCheckRequestedPage(
-    props.data,
-    articlesPerPage,
-    location,
-  );
+  const requestedPageNum = extractAndCheckRequestedPage(props.data.totalPages);
   if (!requestedPageNum) {
     return (
       <ErrorIndicator
@@ -28,29 +27,23 @@ export const withPagination = (WrappedComponent, articlesPerPage) => props => {
   function handlePaginationPageChange(nextPage) {
     window.scrollTo(0, 0);
     query.set('page', nextPage);
+    query.set('limit', articlesPerPage);
     history.push(`${location.pathname}?${query.toString()}`);
   }
 
   return (
     <>
-      <WrappedComponent
-        {...props}
-        data={trimDataForCurrentPage(
-          props.data,
-          requestedPageNum,
-          articlesPerPage,
-        )}
-      />
+      <WrappedComponent {...props} data={props.data.docs} />
       <Pagination
         classNames="mb-14"
         currentPageNum={requestedPageNum}
-        totalPagesQuantity={Math.ceil(props.data.length / articlesPerPage)}
+        totalPagesQuantity={props.data.totalPages}
         pageChangeHandler={handlePaginationPageChange}
       />
     </>
   );
 
-  function extractAndCheckRequestedPage(articles, articlesPerPage) {
+  function extractAndCheckRequestedPage(totalPages) {
     const requestedPage = query.get('page');
 
     if (!requestedPage) {
@@ -60,18 +53,9 @@ export const withPagination = (WrappedComponent, articlesPerPage) => props => {
     if (isNaN(requestedPageNum)) {
       return false;
     }
-    if (
-      requestedPageNum < 1 ||
-      requestedPageNum > Math.ceil(articles.length / articlesPerPage)
-    ) {
+    if (requestedPageNum < 1 || requestedPageNum > totalPages) {
       return false;
     }
     return requestedPageNum;
-  }
-
-  function trimDataForCurrentPage(data, requestedPageNum, articlesPerPage) {
-    const start = requestedPageNum * articlesPerPage - articlesPerPage;
-    const end = requestedPageNum * articlesPerPage;
-    return data.slice(start, end);
   }
 };

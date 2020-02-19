@@ -11,23 +11,24 @@ export class HeaderMobile extends React.Component {
 
   currentPadding = 0;
 
-  speedCheckInterval = 25;
+  speedCheckInterval = 25; // ms
 
-  // ms
   sensitivity = 12; // pixels moved for speedCheckInterval
 
-  state = {
-    pagesListVisible: false,
-    touchMoved: false,
-  };
+  constructor(props) {
+    super(props);
 
-  get menu() {
-    return this.menuContainerRef.current;
+    this.state = {
+      pagesListVisible: false,
+      touchMoved: false,
+    };
   }
 
   componentDidMount() {
     window.addEventListener('popstate', () => {
-      if (this.state.pagesListVisible) {
+      const { pagesListVisible } = this.state;
+
+      if (pagesListVisible) {
         this._removePagesListElem();
       }
     });
@@ -37,50 +38,17 @@ export class HeaderMobile extends React.Component {
     });
   }
 
-  render() {
-    return (
-      <nav className="block lg:hidden">
-        <HeaderLayout onClick={this.togglePagesList} />
-
-        <CSSTransition
-          in={this.state.pagesListVisible}
-          unmountOnExit
-          timeout={300}
-          classNames="header__mobile-menu-bg"
-        >
-          <div
-            className="opacity-25 bg-black fixed w-full h-full z-30 bottom-0"
-            onClick={this.hidePagesList}
-          />
-        </CSSTransition>
-
-        <div
-          ref={this.menuContainerRef}
-          style={{ maxHeight: 'calc(100vh - 4rem)' }}
-          onClick={this.handleMenuContainerClick}
-          className={`header__mobile-menu-container fixed justify-center items-center w-full z-30 bottom-0 mb-16 overflow-auto ${
-            this.state.touchMoved ? 'nohover' : ''
-          }`}
-        >
-          <CSSTransition
-            in={this.state.pagesListVisible}
-            unmountOnExit
-            timeout={350}
-            classNames="header__mobile-menu"
-            onEntering={() => (this.menu.style.overflow = 'hidden')}
-            onExiting={() => (this.menu.style.overflow = 'hidden')}
-            onEntered={() => (this.menu.style.overflow = null)}
-            onExited={() => (this.menu.style.overflow = null)}
-          >
-            <Menu />
-          </CSSTransition>
-        </div>
-      </nav>
-    );
+  get menu() {
+    return this.menuContainerRef.current;
   }
 
+  toggleMenuScroll = hide => {
+    this.menu.style.overflow = hide ? 'hidden' : null;
+  };
+
   togglePagesList = () => {
-    if (this.state.pagesListVisible) {
+    const { pagesListVisible } = this.state;
+    if (pagesListVisible) {
       this.hidePagesList();
     } else {
       this.showPagesList();
@@ -104,7 +72,7 @@ export class HeaderMobile extends React.Component {
     this.menu.style.transition = null;
     document.body.classList.remove('mobile-header-opened');
 
-    window.scrollTo(0, parseInt(document.body.style.top || '0') * -1);
+    window.scrollTo(0, parseInt(document.body.style.top || '0', 10) * -1);
     document.body.style.top = null;
 
     this.setState({ pagesListVisible: false });
@@ -137,6 +105,7 @@ export class HeaderMobile extends React.Component {
   };
 
   handleTouchMove = ev => {
+    const { touchMoved } = this.state;
     if (!this.moveOnSwipe) {
       return;
     }
@@ -151,12 +120,13 @@ export class HeaderMobile extends React.Component {
       this.currentPadding >= 0 ? this.currentPadding : 0
     }px, 0)`;
 
-    if (!this.state.touchMoved && this.currentPadding) {
+    if (!touchMoved && this.currentPadding) {
       this.setState({ touchMoved: true });
     }
   };
 
   handleTouchEndOrCancel = () => {
+    const { pagesListVisible, touchMoved } = this.state;
     document.body.style.overscrollBehavior = null;
     if (!this.moveOnSwipe) {
       return;
@@ -175,7 +145,7 @@ export class HeaderMobile extends React.Component {
 
       // timeout used instead ontransitionend for case if back button will be pressed
       setTimeout(() => {
-        if (this.state.pagesListVisible) {
+        if (pagesListVisible) {
           this.hidePagesList();
         }
       }, 200);
@@ -184,7 +154,7 @@ export class HeaderMobile extends React.Component {
     }
 
     this.currentPadding = 0;
-    if (this.state.touchMoved) {
+    if (touchMoved) {
       this.setState({ touchMoved: false });
     }
   };
@@ -194,4 +164,52 @@ export class HeaderMobile extends React.Component {
       this.hidePagesList();
     }
   };
+
+  render() {
+    const { pagesListVisible, touchMoved } = this.state;
+    return (
+      <nav className="block lg:hidden">
+        <HeaderLayout onClick={this.togglePagesList} />
+
+        <CSSTransition
+          in={pagesListVisible}
+          unmountOnExit
+          timeout={300}
+          classNames="header__mobile-menu-bg"
+        >
+          <div // eslint-disable-line  jsx-a11y/click-events-have-key-events
+            aria-label="Закрыть"
+            tabIndex={-1}
+            role="button"
+            className="opacity-25 bg-black fixed w-full h-full z-30 bottom-0 focus:outline-none"
+            onClick={this.hidePagesList}
+          />
+        </CSSTransition>
+
+        <div // eslint-disable-line  jsx-a11y/click-events-have-key-events
+          role="button"
+          ref={this.menuContainerRef}
+          tabIndex={-1}
+          style={{ maxHeight: 'calc(100vh - 4rem)' }}
+          onClick={this.handleMenuContainerClick}
+          className={`header__mobile-menu-container fixed justify-center items-center w-full z-30 bottom-0 mb-16 overflow-auto focus:outline-none ${
+            touchMoved ? 'nohover' : ''
+          }`}
+        >
+          <CSSTransition
+            in={pagesListVisible}
+            unmountOnExit
+            timeout={350}
+            classNames="header__mobile-menu"
+            onEntering={() => this.toggleMenuScroll(true)}
+            onExiting={() => this.toggleMenuScroll(true)}
+            onEntered={this.toggleMenuScroll}
+            onExited={this.toggleMenuScroll}
+          >
+            <Menu />
+          </CSSTransition>
+        </div>
+      </nav>
+    );
+  }
 }

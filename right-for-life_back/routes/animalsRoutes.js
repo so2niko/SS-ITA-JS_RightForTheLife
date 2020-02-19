@@ -55,7 +55,6 @@ router.post('/', (req, res, next) => {
   new AnimalModel({ _id: new mongoose.Types.ObjectId(), photos, name, type, gender, age, description })
     .save()
     .then(animal => {
-      console.log(animal);
       res.status(200).json(animal);
     })
     .catch(err => {
@@ -78,7 +77,6 @@ router.put('/:animalID', (req, res, next) => {
       animal.description = description;
       animal.save()
         .then(animal => {
-          console.log(animal);
           res.status(200).json(animal);
         })
         .catch(err => {

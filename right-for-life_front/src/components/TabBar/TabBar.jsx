@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-
 import Tab from '../Tab';
 import DonateInfo from '../DonateInfo';
 import SuppliesTable from '../SuppliesTable';
 
-const TabBar = ({ stateSetters, paymentMethodsInfo, moneyTransferInfo, isEdit, toggleEditStyle }) => {
+
+const TabBar = ({ isEdit, isEditModeBarOpen, updateIsEdit, updateIsEditModeBarOpen, paymentMethodsInfo, moneyTransferInfo, stateSetters, toggleEditStyle }) => {
+
   const tabLabels = ['Помочь деньгами', 'Нужды приюта'];
   const [activeTab, setActiveTab] = useState(tabLabels[0]);
 
@@ -29,10 +30,18 @@ const TabBar = ({ stateSetters, paymentMethodsInfo, moneyTransferInfo, isEdit, t
             moneyTransferInfo={moneyTransferInfo}
             stateSetters={stateSetters}
             isEdit={isEdit}
+            isEdit={isEditModeBarOpen}
             toggleEditStyle={toggleEditStyle}
+            updateIsEdit={updateIsEdit}
+            updateIsEditModeBarOpen={updateIsEditModeBarOpen}
           />
         ) : (
-            <SuppliesTable />
+            <SuppliesTable
+              isEdit={isEdit}
+              isEditModeBarOpen={isEditModeBarOpen}
+              updateIsEdit={updateIsEdit}
+              updateIsEditModeBarOpen={updateIsEditModeBarOpen}
+            />
           )}
       </div>
     </div>

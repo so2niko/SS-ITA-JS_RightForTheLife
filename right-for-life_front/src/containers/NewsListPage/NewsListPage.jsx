@@ -2,11 +2,16 @@ import React from 'react';
 import { API } from '../../rootConstants';
 import { ArticlesList } from '../../components/ArticlesList';
 import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
+import { withPagination } from '../../hoc/withPagination';
 
-const NewsListPage = props => {
-  return <ArticlesList articles={props.data.docs} listTitle="Новости" />;
+const NewsListPage = ({ data }) => {
+  return <ArticlesList articles={data} listTitle="Новости" />;
 };
 
-const wrappedComponent = withFetchDataIndicators(NewsListPage, API.NEWS, true);
+const wrappedComponent = withFetchDataIndicators(
+  withPagination(NewsListPage),
+  API.NEWS,
+  true,
+);
 
 export { wrappedComponent as NewsListPage };

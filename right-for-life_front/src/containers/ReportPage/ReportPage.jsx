@@ -1,16 +1,69 @@
-import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React, { useRef, useState } from 'react';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import { API } from '../../rootConstants';
 import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
 import { ErrorIndicator } from '../../components/ErrorIndicator';
 import { ArticleImageGallery } from '../../components/ArticleImageGallery';
+import { UpdateImageGallery } from '../../components/UpdateImageGallery';
 import { BackBtn } from '../../components/FloatingBtn';
+import { EditModeBar } from '../../components/EditModeBar';
+import { Select } from '../../components/Select';
+import { CUDService } from '../../services/CUDService';
 
 const ReportPage = ({ data }) => {
+  const history = useHistory();
   const { id } = useParams();
-  const article = data.find(item => item._id === id);
+  const titleRef = useRef(null);
+  const isEditModeOn = id === 'new';
+  const [isEdit, setIsEdit] = useState(isEditModeOn);
+  const [isEditModeBarOpen, setIsEditModeBarOpen] = useState(isEditModeOn);
+  let report = { ...data };
 
-  if (!article)
+  if (id === 'new') {
+    report = {
+      _id: 'new',
+      gallery: [],
+      date: Date.now(),
+      title: 'Введите заголовок...',
+    };
+  }
+
+  const [state, setState] = useState({ ...report });
+
+  const selectOptionChoseHandler = selectedOption => {
+    switch (selectedOption) {
+      case 'edit':
+        setIsEditModeBarOpen(true);
+        setIsEdit(true);
+        break;
+      case 'no-edit':
+        setIsEditModeBarOpen(false);
+        setIsEdit(false);
+        break;
+      case 'cancel-edit':
+        // eslint-disable-next-line
+        location.reload();
+        break;
+      case 'delete':
+        CUDService.DELETE(`/reports/${state._id}`).then(() => history.goBack());
+        break;
+      case 'save':
+        (() => {
+          if (state._id === 'new') {
+            CUDService.POST('/reports', state).then(() => history.goBack());
+          } else {
+            const url = `/reports/${state._id}`;
+            CUDService.PUT(url, state);
+          }
+          selectOptionChoseHandler('no-edit');
+        })();
+        break;
+      default:
+        return null;
+    }
+  };
+
+  if (!report)
     return (
       <ErrorIndicator
         message="Страница не найдена :("
@@ -22,17 +75,53 @@ const ReportPage = ({ data }) => {
 
   return (
     <div>
+      {isEditModeBarOpen ? (
+        <EditModeBar
+          data={state}
+          onEdit={() => setIsEdit(!isEdit)}
+          onSave={() => selectOptionChoseHandler('save')}
+          onCancel={() => selectOptionChoseHandler('cancel-edit')}
+        />
+      ) : (
+        <Select
+          classNames="fixed z-50 top-0 right-0 mr-10 mt-20"
+          chooseOptionHandler={selectOptionChoseHandler}
+          optEdit
+          optDelete
+        />
+      )}
+
       <div className="max-w-4xl mx-auto mb-20">
-        <h1 className="my-6 font-bold text-lightgray-700 text-4xl uppercase">
-          {article.title}
-        </h1>
+        <div
+          className={`my-6 font-bold text-lightgray-700 text-4xl uppercase ${
+            isEdit ? 'bg-orange-200' : ''
+          }`}
+          contentEditable={isEdit}
+          ref={titleRef}
+          onBlur={() =>
+            setState({ ...state, title: titleRef.current.textContent })
+          }
+        >
+          {state.title}
+        </div>
         <BackBtn />
-        <ArticleImageGallery images={article.gallery} />
+        {isEdit ? (
+          <UpdateImageGallery
+            images={state.gallery}
+            updateImages={gallery => setState({ ...state, gallery })}
+          />
+        ) : (
+          state.gallery?.length > 0 && (
+            <div className="mb-10 md:mx-20">
+              <ArticleImageGallery images={state.gallery} />
+            </div>
+          )
+        )}
       </div>
     </div>
   );
 };
 
-const wrappedComponent = withFetchDataIndicators(ReportPage, API.REPORTS);
+const wrappedComponent = withFetchDataIndicators(ReportPage, API.REPORTS, true);
 
 export { wrappedComponent as ReportPage };

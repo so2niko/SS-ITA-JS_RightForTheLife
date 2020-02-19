@@ -6,28 +6,31 @@ import { ErrorIndicator } from '../../components/ErrorIndicator';
 import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
 import './style.css';
 
-const AnimalDetailsPage = ({ match, data: {docs: animals} }) => {
+const AnimalDetailsPage = ({ match, data }) => {
   const isEdit = true;
   const petId = match.params.id;
 
   if (isEdit && petId === 'new') {
+    return <AnimalDetails isEdit isEditModeBarOpen />;
+  }
+
+  if (!data || data.status === 400) {
     return (
-      <AnimalDetails isEdit isEditModeBarOpen  />
-    )
-  }
-  else {
-    const petObj = animals.find(animal => String(animal._id) === petId);
-    return petObj
-      ? <AnimalDetails {...petObj} />
-      : <ErrorIndicator
+      <ErrorIndicator
         message="Страница не найдена :("
-        renderAction={() => <Link to="/animals">Вернуться на главную</Link>}
+        renderAction={() => (
+          <Link to="/animals?limit=8">Вернуться к питомцам</Link>
+        )}
       />
+    );
   }
+
+  return <AnimalDetails {...data} />;
 };
 
 const wrappedComponent = withFetchDataIndicators(
   AnimalDetailsPage,
   API.ANIMALS,
+  true,
 );
 export { wrappedComponent as AnimalDetailsPage };

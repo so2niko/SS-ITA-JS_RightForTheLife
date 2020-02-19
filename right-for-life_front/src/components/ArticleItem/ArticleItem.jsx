@@ -27,16 +27,15 @@ export const ArticleItem = ({ article }) => {
         {text?.length > 0 && (
           <p className="mt-b font-size-sm">{text.slice(0, 120)}...</p>
         )}
-        {currentURL === '/emergency' && (
+        {currentURL === '/emergencies' && (
           <DonateButton
-            className="min-w-5/12 bg-yellow-400 hover:bg-yellow-500 text-yellow-700 font-bold py-3 px-2 
-              rounded-xl outline-none absolute"
-            style={{ bottom: '20px', right: '135px' }}
+            className="bg-yellow-300 hover:bg-yellow-400 text-yellow-700 font-bold py-2 px-4 rounded-lg outline-none absolute"
+            style={{ bottom: '20px', right: '150px' }}
           />
         )}
         <Link
           to={`${currentURL}/${_id}`}
-          className="min-w-5/12 bg-orange-300 hover:bg-orange-400 text-orange-700 font-bold py-3 px-2 rounded-xl outline-none absolute"
+          className="bg-orange-200 hover:bg-orange-300 text-orange-700 font-bold py-2 px-4 rounded-lg outline-none absolute"
           style={{ bottom: '20px', right: '20px' }}
         >
           Подробнее

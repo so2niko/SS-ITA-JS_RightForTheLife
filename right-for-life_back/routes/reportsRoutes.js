@@ -6,20 +6,28 @@ const ReportScheme = require('../models/ReportSchema.js');
 const ReportModel = mongoose.connection.model('Report', ReportScheme);
 
 router.get('/', (req, res, next) => {
-  ReportModel.find()
-    .exec()
-    .then(doc => {
-      res.status(200).json(doc);
-    });
+  const pagination = { page: 1, limit: 10 };
+  const { page, limit } = req.query;
+
+  page ? pagination.page = page : '';
+  limit ? pagination.limit = limit : '';
+
+  ReportModel
+    .paginate({}, pagination)
+    .then(reports => {
+      res.status(200).json(reports);
+    })
+    .catch(err => {
+    console.log(err);
+  });
 });
 
 router.get('/:reportID', (req, res, next) => {
-  console.log(req.params.reportID);
   ReportModel.findById(new mongoose.Types.ObjectId(req.params.reportID))
     .exec()
-    .then(doc => {
-      if (doc)
-        res.status(200).json(doc);
+    .then(report => {
+      if (report)
+        res.status(200).json(report);
       else
         throw { status: 400, message: 'not found' };
     })
@@ -32,6 +40,7 @@ router.get('/:reportID', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
+  const { date, title, gallery} = req.body;
   new ReportModel({ _id: new mongoose.Types.ObjectId(), date, title, gallery })
     .save()
     .then(report => {

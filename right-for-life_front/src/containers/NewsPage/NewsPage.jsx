@@ -7,9 +7,21 @@ import { Article } from '../../components/Article';
 
 const NewsPage = ({ data }) => {
   const { id } = useParams();
-  const article = data.find(item => item._id === id);
+  let news = { ...data };
 
-  if (!article)
+  if (id === 'new') {
+    news = {
+      _id: 'new',
+      gallery: [],
+      videos: [],
+      date: Date.now(),
+      title: 'Введите заголовок новости...',
+      photo: '',
+      text: 'Введите текст новости...',
+    };
+  }
+
+  if (!news || news.status === 400)
     return (
       <ErrorIndicator
         message="Страница не найдена :("
@@ -19,11 +31,11 @@ const NewsPage = ({ data }) => {
 
   return (
     <div className="-mt-6 lg:-mt-8 max-w-4xl mx-auto">
-      <Article article={article} />
+      <Article article={news} />
     </div>
   );
 };
 
-const wrappedComponent = withFetchDataIndicators(NewsPage, API.NEWS);
+const wrappedComponent = withFetchDataIndicators(NewsPage, API.NEWS, true);
 
 export { wrappedComponent as NewsPage };

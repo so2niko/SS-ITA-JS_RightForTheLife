@@ -33,9 +33,7 @@ export const EditModeBar = ({ data, onEdit, onSave, onCancel }) => {
     setOldData({ ...data });
 
     unblockHistory = history.block(
-      `${
-        !isEqual(data, oldData) ? 'Есть НЕ СОХРАНЕННЫЕ изменения!' : ''
-      } Вы уверенны, что хотите ВЫЙТИ из режима редактрования?`,
+      'Вы уверенны, что хотите ВЫЙТИ из режима редактрования?',
     );
 
     return () => {

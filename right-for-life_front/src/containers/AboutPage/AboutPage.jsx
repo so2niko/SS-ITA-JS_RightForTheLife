@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { API } from '../../rootConstants';
 import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
 import AboutContent from '../../components/AboutContent';

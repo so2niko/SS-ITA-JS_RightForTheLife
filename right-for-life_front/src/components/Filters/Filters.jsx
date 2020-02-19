@@ -5,6 +5,7 @@ import { FiltersItem } from './FiltersItem';
 
 const updateQuery = (params, location, history, query) => {
   query.delete('page');
+  console.log(query.toString());
 
   const entriesParams = Object.entries(params);
 
@@ -65,7 +66,11 @@ export const Filters = ({ filters }) => {
         onClick={() => {
           setParams([]);
           form.current.reset();
-          history.push(location.pathname);
+          history.push(
+            location.pathname + query.has('limit')
+              ? `?limit=${query.get('limit')}`
+              : '',
+          );
         }}
         disabled={Object.keys(params).length === 0}
       >

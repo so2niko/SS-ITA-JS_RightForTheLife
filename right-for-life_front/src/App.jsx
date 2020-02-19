@@ -37,6 +37,7 @@ function App({ store }) {
             <Route exact path="/animals/new" component={AnimalDetailsPage} />
             <Route exact path="/news" component={NewsListPage} />
             <Route exact path="/news/:id" component={NewsPage} />
+            <Route exact path="/news/new" component={NewsPage} />
             <Route exact path="/reports" component={ReportsPage} />
             <Route exact path="/reports/:id" component={ReportPage} />
             <Route exact path="/stories" component={HappyStoriesPage} />
@@ -47,6 +48,11 @@ function App({ store }) {
             <Route
               exact
               path="/emergencies/:id"
+              component={SingleEmergencyHelpPage}
+            />
+            <Route
+              exact
+              path="/emergencies/new"
               component={SingleEmergencyHelpPage}
             />
             <Route exact path="/admin" component={LoginPage} />

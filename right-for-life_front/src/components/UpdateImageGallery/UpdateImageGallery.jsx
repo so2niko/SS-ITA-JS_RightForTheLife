@@ -24,7 +24,7 @@ export const UpdateImageGallery = ({ images, updateImages }) => {
         )}
         {images.length > 0 ? (
           images.map((image, idx) => (
-            <div key={image} className="relative w-1/2 h-48 md:w-1/3 p-1">
+            <div key={idx} className="relative w-1/2 h-48 md:w-1/3 p-1">
               <img
                 src={image}
                 className="w-full h-full object-cover rounded-lg overflow-hidden"
@@ -54,16 +54,18 @@ export const UpdateImageGallery = ({ images, updateImages }) => {
         )}
       </section>
       <section className="relative w-full h-14 p-1">
-        <div
-          className="absolute top-0 left-0 bottom-0 p-1"
-          style={{ width: `${progress}%`, transition: '300ms' }}
-        >
-          <div className="flex justify-center items-center w-full h-full rounded-lg bg-orange-300">
-            {isUpload && progress > 0 && (
-              <span className="font-bold text-orange-700">{progress}%</span>
-            )}
+        {isUpload && (
+          <div
+            className="absolute top-0 left-0 bottom-0 p-1"
+            style={{ width: `${progress}%`, transition: '300ms' }}
+          >
+            <div className="flex justify-center items-center w-full h-full rounded-lg bg-orange-300">
+              {isUpload && progress > 0 && (
+                <span className="font-bold text-orange-700">{progress}%</span>
+              )}
+            </div>
           </div>
-        </div>
+        )}
         <label
           htmlFor="upload-image"
           className={`flex justify-center items-center w-full h-full rounded-lg font-bold text-orange-700 bg-orange-200 ${

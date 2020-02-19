@@ -7,10 +7,10 @@ import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
 
 const HappyStoryPage = ({ data }) => {
   const { id } = useParams();
-  let article = data.docs.find(item => item._id === id);
+  let story = { ...data };
 
   if (id === 'new') {
-    article = {
+    story = {
       _id: 'new',
       gallery: [],
       videos: [],
@@ -21,7 +21,7 @@ const HappyStoryPage = ({ data }) => {
     };
   }
 
-  if (!article)
+  if (!story || story.status === 400)
     return (
       <ErrorIndicator
         message="Страница не найдена :("
@@ -33,7 +33,7 @@ const HappyStoryPage = ({ data }) => {
 
   return (
     <div className="-mt-10 max-w-4xl mx-auto">
-      <Article article={article} />
+      <Article article={story} />
     </div>
   );
 };
@@ -41,6 +41,7 @@ const HappyStoryPage = ({ data }) => {
 const wrappedComponent = withFetchDataIndicators(
   HappyStoryPage,
   API.HAPPY_STORIES,
+  true,
 );
 
 export { wrappedComponent as HappyStoryPage };
