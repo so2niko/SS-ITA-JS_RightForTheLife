@@ -11,7 +11,7 @@ export const ArticlesListWidget = ({ emergency, news, happyStories }) => (
       color="yellow"
       url="help"
       data={{
-        photo: 'https://pbs.twimg.com/media/Dp9hsCEWsAAhWXP.jpg',
+        photo: 'https://i.ibb.co/bsf0vCQ/43525-799.jpg',
         title: 'ПОМОЩЬ ФОНДУ',
       }}
     />

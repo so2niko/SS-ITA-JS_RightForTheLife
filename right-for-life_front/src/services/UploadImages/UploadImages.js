@@ -8,7 +8,7 @@ export const UploadImages = (inputFiles, setProgress) =>
       data.set('image', file);
 
       fetch(
-        'https://api.imgbb.com/1/upload?key=9bb650fa23db8e445857ad9b20e41c2b',
+        'https://api.imgbb.com/1/upload?key=d0cdfe1b182d9f6c3d98eedd10838d28',
         {
           method: 'POST',
           body: data,
