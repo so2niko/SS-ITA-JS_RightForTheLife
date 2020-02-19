@@ -5,7 +5,6 @@ import { ErrorIndicator } from '../ErrorIndicator';
 
 export const ArticlesList = ({ articles, listTitle }) => {
   const isEdit = true;
-  console.log(articles);
 
   return (
     <div>
