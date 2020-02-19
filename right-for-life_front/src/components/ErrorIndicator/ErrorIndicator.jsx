@@ -22,5 +22,5 @@ ErrorIndicator.defaultProps = {
 
 ErrorIndicator.propTypes = {
   message: PropTypes.string,
-  renderAction: PropTypes.func.isRequired,
+  renderAction: PropTypes.func,
 };
