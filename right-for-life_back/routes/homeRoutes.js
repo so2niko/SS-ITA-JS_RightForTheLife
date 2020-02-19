@@ -11,10 +11,14 @@ const EmergencyModel = mongoose.connection.model('Emergency', EmergencyScheme);
 const NewsScheme = require('../models/NewsSchema.js');
 const NewsModel = mongoose.connection.model('News', NewsScheme);
 
+const HappyStoryScheme = require('../models/HappyStorySchema.js');
+const HappyStoryModel = mongoose.connection.model('HappyStories', HappyStoryScheme);
+
 router.get('/', (req, res, next) => {
   HomeModel.findOne()
     .populate({ path: 'news', select: '_id title photo' })
     .populate({ path: 'emergencies', select: '_id title photo' })
+    .populate({ path: 'happyStories', select: '_id title photo' })
     .exec()
     .then(home => {
       res.status(200).json(home);
@@ -75,6 +79,33 @@ router.put('/pin-news', (req, res, next) => {
             throw { status: 400, message: 'news not found' };
           }
           home.news = news;
+          home.save()
+            .then(() => {
+              res.status(200).json(home);
+            });
+        })
+        .catch(err => {
+          if (err.status === 400)
+            res.status(400).json(err);
+          else
+            res.status(500).json(err);
+        });
+    });
+});
+
+router.put('/pin-happyStories', (req, res, next) => {
+  const storyId = new mongoose.Types.ObjectId(req.body._id);
+
+  HomeModel.findOne()
+    .exec()
+    .then(home => {
+      HappyStoryModel.findById(storyId)
+        .exec()
+        .then((story) => {
+          if (!story) {
+            throw { status: 400, message: 'story not found' };
+          }
+          home.happyStories = story;
           home.save()
             .then(() => {
               res.status(200).json(home);
