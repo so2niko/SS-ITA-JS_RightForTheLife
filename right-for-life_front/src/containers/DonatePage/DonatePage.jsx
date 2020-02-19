@@ -3,6 +3,7 @@ import { API } from '../../rootConstants';
 import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
 import TabBar from '../../components/TabBar';
 import { Select } from '../../components/Select';
+import { useAuthChecker } from '../../helpers/useAuthChecker';
 import { cloneDeep } from 'lodash';
 
 const DonatePage = ({ data }) => {
@@ -14,10 +15,13 @@ const DonatePage = ({ data }) => {
     moneyTransferInfo,
   } = data;
 
+  const isAuth = useAuthChecker();
+
   const [isEdit, setIsEdit] = useState(false);
   const [isEditModeBarOpen, setIsEditModeBarOpen] = useState(false);
   const [donateInfo, setDonateInfo] = useState(data);
   const [activeTab, setActiveTab] = useState('Помочь деньгами');
+
   const updateActiveTab = (label) => setActiveTab(label);
 
   const updateIsEdit = (value) => setIsEdit(value);
@@ -60,7 +64,7 @@ const DonatePage = ({ data }) => {
 
   return (
     <div className="text-lightgray-700">
-      {!isEditModeBarOpen &&
+      {!isEditModeBarOpen && isAuth &&
         <Select
           classNames="fixed z-50 top-0 right-0 mr-10 mt-20"
           chooseOptionHandler={selectOptionChoseHandler}
