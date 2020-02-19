@@ -76,12 +76,16 @@ const HomePage = ({ data }) => {
         />
       </section>
       <section className="w-full lg:w-1/3 lg:h-auto p-5">
-        <ArticlesListWidget url="news" />
+        <ArticlesListWidget
+          emergency={state.emergencies}
+          news={state.news}
+          happyStories={state.happyStories}
+        />
       </section>
     </article>
   );
 };
 
-const wrappedComponent = withFetchDataIndicators(HomePage, API.HOME);
+const wrappedComponent = withFetchDataIndicators(HomePage, API.HOME, true);
 
 export { wrappedComponent as HomePage };

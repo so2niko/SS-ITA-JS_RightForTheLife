@@ -1,34 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { API } from '../../rootConstants';
-import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
 import { DonateButton } from '../DonateButton';
 
-export const ArticlesListWidget = () => (
-  <article className="h-full w-full flex flex-wrap flex-row lg:flex-col justify-between rounded-xl font-bold text-lightgray-700">
-    <ArticlesListWidgetEmergency color="red" url="emergencies" />
+export const ArticlesListWidget = ({ emergency, news, happyStories }) => (
+  <article className="h-full w-full flex flex-wrap flex-row lg:flex-col rounded-xl font-bold text-lightgray-700">
+    {emergency && (
+      <ArticlesListWidgetItem data={emergency} color="red" url="emergencies" />
+    )}
     <ArticlesListWidgetItem
-      color="green"
+      color="yellow"
       url="help"
       data={{
-        photo: 'https://pbs.twimg.com/media/Dp9hsCEWsAAhWXP.jpg',
+        photo: 'https://i.ibb.co/bsf0vCQ/43525-799.jpg',
         title: 'ПОМОЩЬ ФОНДУ',
       }}
     />
-    <ArticlesListWidgetNews url="news" />
+    {happyStories && (
+      <ArticlesListWidgetItem data={happyStories} color="green" url="stories" />
+    )}
+    {news && <ArticlesListWidgetItem data={news} url="news" />}
     <div className="min-w-full flex justify-center">
-      <DonateButton className="w-full mx-20 py-2 rounded-lg text-lg text-xl text-center text-yellow-700 bg-yellow-300 hover:bg-yellow-400" />
+      <DonateButton className="relative z-10 w-full mx-20 py-2 rounded-lg text-lg text-lg text-center text-yellow-700 bg-yellow-300 hover:bg-yellow-400" />
     </div>
   </article>
 );
 
 const ArticlesListWidgetItem = ({ data, color, url }) => {
-  const { _id, title, photo } = data[0] || data;
+  const { _id, title, photo } = data;
 
   return (
     <Link
       to={`${_id ? `/${url}/${_id}` : `/${url}`}`}
-      className="block w-full mb-16"
+      className="block w-full mb-20"
     >
       <section className="h-48 lg:h-30 rounded-xl shadow-2xl">
         <img
@@ -39,23 +42,15 @@ const ArticlesListWidgetItem = ({ data, color, url }) => {
           alt={title}
         />
         <div
-          className={`relative z-10 h-full max-h-15 flex items-center -mt-5 mx-3 p-2 px-5 bg-white rounded-xl shadow-2xl-light ${
+          className={`relative z-10 h-full max-h-16 flex items-center -mt-5 mx-3 p-2 px-5 bg-white rounded-xl shadow-2xl-light ${
             color ? `bg-${color}-300 text-${color}-700` : ''
           }`}
         >
-          <h3>{title}</h3>
+          <h3 className="uppercase">
+            {title.length > 65 ? `${title.slice(0, 65)}...` : title}
+          </h3>
         </div>
       </section>
     </Link>
   );
 };
-
-const ArticlesListWidgetEmergency = withFetchDataIndicators(
-  ArticlesListWidgetItem,
-  API.EMERGENCY_HELP,
-);
-
-const ArticlesListWidgetNews = withFetchDataIndicators(
-  ArticlesListWidgetItem,
-  API.NEWS,
-);

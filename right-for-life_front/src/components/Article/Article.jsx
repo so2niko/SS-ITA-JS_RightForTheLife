@@ -64,6 +64,25 @@ export const Article = ({ article }) => {
           selectOptionChoseHandler('no-edit');
         })();
         break;
+      case 'pinToHomePage':
+        switch (articleType) {
+          case 'emergencies': {
+            CUDService.PUT('/home/pin-emergencies', { _id: state._id });
+            break;
+          }
+          case 'news': {
+            CUDService.PUT('/home/pin-news', { _id: state._id });
+            break;
+          }
+          case 'happyStories': {
+            CUDService.PUT('/home/pin-happyStories', { _id: state._id });
+            break;
+          }
+          default: {
+            return null;
+          }
+        }
+        break;
       default:
         return null;
     }
