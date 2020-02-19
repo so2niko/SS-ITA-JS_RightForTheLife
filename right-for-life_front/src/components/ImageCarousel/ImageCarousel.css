@@ -23,4 +23,13 @@
 .previousButton svg polygon,
 .nextButton svg polygon {
   fill: #616161;
-} 
+}
+
+@media (max-width: 768px ) {
+  .previousButton,
+  .nextButton {
+    width: 35px;
+    height: 35px;
+    background-color: rgba(255, 255, 255, .5);
+  }
+}
