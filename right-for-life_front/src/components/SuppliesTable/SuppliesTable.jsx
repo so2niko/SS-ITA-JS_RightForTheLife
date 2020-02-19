@@ -143,6 +143,7 @@ const SuppliesTable = ({ isEdit, isEditModeBarOpen, updateIsEdit, updateIsEditMo
     <div>
       {isEditModeBarOpen &&
         <EditModeBar
+          data={supplies}
           onEdit={() => updateIsEdit(!isEdit)}
           onSave={() => selectOptionChoseHandler('save')}
           onCancel={() => selectOptionChoseHandler('cancel-edit')}

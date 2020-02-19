@@ -85,6 +85,7 @@ const DonateInfo = ({ paymentMethodsInfo, moneyTransferInfo, stateSetters, isEdi
         updateIsEdit(true);
         break;
       case 'no-edit':
+        updateIsEditModeBarOpen(false);
         updateIsEdit(false);
         break;
       case 'cancel-edit':
@@ -112,8 +113,8 @@ const DonateInfo = ({ paymentMethodsInfo, moneyTransferInfo, stateSetters, isEdi
             onSave={() => selectOptionChoseHandler('save')}
             onCancel={() => selectOptionChoseHandler('cancel-edit')}
           />}
-        <DonateButton />
-        <h2 className="text-2xl font-bold mb-3">{paymentMethodsInfo.title}</h2>
+        <DonateButton className="text-xl min-w-5/12 bg-yellow-300 text-yellow-700 hover:bg-yellow-400 hover:text-yellow-800 font-bold py-2 px-4 rounded-xl" />
+        <h2 className="text-2xl font-bold my-3">{paymentMethodsInfo.title}</h2>
         {paymentMethodsInfo.paymentMethods.map((method, i) => (
           <PaymentMethod
             key={i}

@@ -17,6 +17,8 @@ const DonatePage = ({ data }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [isEditModeBarOpen, setIsEditModeBarOpen] = useState(false);
   const [donateInfo, setDonateInfo] = useState(data);
+  const [activeTab, setActiveTab] = useState('Помочь деньгами');
+  const updateActiveTab = (label) => setActiveTab(label);
 
   const updateIsEdit = (value) => setIsEdit(value);
   const updateIsEditModeBarOpen = (value) => setIsEditModeBarOpen(value);
@@ -38,8 +40,6 @@ const DonatePage = ({ data }) => {
       const newState = { ...donateInfo };
       newState[fieldName] = name;
       setDonateInfo({ ...newState });
-      // data.manager = name;
-      // setState({ ...data });
     },
     setPaymentMethod: (index, fieldName, value) => {
       const newState = cloneDeep(donateInfo);
@@ -74,8 +74,8 @@ const DonatePage = ({ data }) => {
         <h2 className="text-2xl font-bold mb-3">
           Куратор мини-приюта — <span
             name="manager"
-            className={toggleEditStyle(isEdit)}
-            contentEditable={isEdit}
+            className={toggleEditStyle(isEdit && activeTab === 'Помочь деньгами')}
+            contentEditable={isEdit && activeTab === 'Помочь деньгами'}
             suppressContentEditableWarning
             onBlur={e => stateSetters.setText(e.target.getAttribute('name'), e.target.innerText)}
           >
@@ -83,10 +83,10 @@ const DonatePage = ({ data }) => {
           </span>
         </h2>
         <p
-          className={`text-lg ${toggleEditStyle(isEdit)}`}
+          className={`text-lg ${toggleEditStyle(isEdit && activeTab === 'Помочь деньгами')}`}
           name="summary"
           style={{ whiteSpace: 'pre-wrap' }}
-          contentEditable={isEdit}
+          contentEditable={isEdit && activeTab === 'Помочь деньгами'}
           suppressContentEditableWarning
           onBlur={e => stateSetters.setText(e.target.getAttribute('name'), e.target.innerText)}
         >
@@ -103,6 +103,8 @@ const DonatePage = ({ data }) => {
         stateSetters={stateSetters}
         toggleEditStyle={toggleEditStyle}
         donateInfo={donateInfo}
+        updateActiveTab={updateActiveTab}
+        activeTab={activeTab}
       />
     </div>
   );
