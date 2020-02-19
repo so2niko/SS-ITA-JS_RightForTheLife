@@ -65,10 +65,22 @@ export const Article = ({ article }) => {
         })();
         break;
       case 'pinToHomePage':
-        if (articleType === 'happyStories') {
-          CUDService.PUT('/home/pin-happyStories', { _id: state._id });
-        } else {
-          CUDService.PUT('/home/pin-news', { _id: state._id });
+        switch (articleType) {
+          case 'emergencies': {
+            CUDService.PUT('/home/pin-emergencies', { _id: state._id });
+            break;
+          }
+          case 'news': {
+            CUDService.PUT('/home/pin-news', { _id: state._id });
+            break;
+          }
+          case 'happyStories': {
+            CUDService.PUT('/home/pin-happyStories', { _id: state._id });
+            break;
+          }
+          default: {
+            return null;
+          }
         }
         break;
       default:

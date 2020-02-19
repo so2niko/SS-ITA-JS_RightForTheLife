@@ -2,22 +2,25 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { DonateButton } from '../DonateButton';
 
-export const ArticlesListWidget = ({ emergency, article, articleUrl }) => (
+export const ArticlesListWidget = ({ emergency, news, happyStories }) => (
   <article className="h-full w-full flex flex-wrap flex-row lg:flex-col rounded-xl font-bold text-lightgray-700">
     {emergency && (
       <ArticlesListWidgetItem data={emergency} color="red" url="emergencies" />
     )}
     <ArticlesListWidgetItem
-      color="green"
+      color="yellow"
       url="help"
       data={{
         photo: 'https://pbs.twimg.com/media/Dp9hsCEWsAAhWXP.jpg',
         title: 'ПОМОЩЬ ФОНДУ',
       }}
     />
-    {article && <ArticlesListWidgetItem data={article} url={articleUrl} />}
+    {happyStories && (
+      <ArticlesListWidgetItem data={happyStories} color="green" url="stories" />
+    )}
+    {news && <ArticlesListWidgetItem data={news} url="news" />}
     <div className="min-w-full flex justify-center">
-      <DonateButton className="w-full mx-20 py-2 rounded-lg text-lg text-xl text-center text-yellow-700 bg-yellow-300 hover:bg-yellow-400" />
+      <DonateButton className="relative z-10 w-full mx-20 py-2 rounded-lg text-lg text-lg text-center text-yellow-700 bg-yellow-300 hover:bg-yellow-400" />
     </div>
   </article>
 );
