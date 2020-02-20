@@ -15,7 +15,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.put('/', (req, res, next) => {
-  const { title, manager, summary, paymentMethodsInfo, moneyTransferInfo } = req.body;
+  const { title, manager, summary, paymentMethodsInfo, moneyTransferInfo, privat24Token } = req.body;
 
   if (!verifyUser(JSON.parse(req.get('Authorization')))) res.status(401).end();
 
@@ -27,6 +27,7 @@ router.put('/', (req, res, next) => {
       donate.summary = summary;
       donate.paymentMethodsInfo = paymentMethodsInfo;
       donate.moneyTransferInfo = moneyTransferInfo;
+      donate.privat24Token = privat24Token;
       paymentMethodsInfo.paymentMethods.forEach(el => {
         donate.paymentMethodsInfo.paymentMethods.create(el);
       });
