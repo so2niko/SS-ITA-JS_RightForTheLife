@@ -8,47 +8,60 @@ import { EditModeBar } from '../EditModeBar';
 import { CUDService } from '../../services/CUDService';
 import './SuppliesTable.css';
 
-const SuppliesTable = ({ isEdit, isEditModeBarOpen, updateIsEdit, updateIsEditModeBarOpen, data }) => {
+const SuppliesTable = ({
+  isEdit,
+  isEditModeBarOpen,
+  updateIsEdit,
+  updateIsEditModeBarOpen,
+  data,
+}) => {
   const [supplies, setSupplies] = useState(data);
   const [category, setCategory] = useState({ name: 'all', label: 'Все' });
 
-  const createSupplie = (category) => {
-    let supplie = {
+  const createSupplie = category => {
+    const supplie = {
       _id: uuid.v4(),
       type: category.label,
-      name: "",
-      info: ""
+      name: '',
+      info: '',
     };
     setSupplies([...supplies, supplie]);
-  }
+  };
   const updateSupplie = (id, nameOrInfo, value) => {
     let supplieIndex;
     const supplie = supplies.find((item, index) => {
       if (item._id === id) {
         supplieIndex = index;
         return true;
-      };
+      }
       return false;
     });
 
     supplie[nameOrInfo] = value;
 
-    setSupplies([...supplies.slice(0, supplieIndex), supplie, ...supplies.slice(supplieIndex + 1)])
-  }
-  const deleteSupplie = (id) => {
+    setSupplies([
+      ...supplies.slice(0, supplieIndex),
+      supplie,
+      ...supplies.slice(supplieIndex + 1),
+    ]);
+  };
+  const deleteSupplie = id => {
     let supplieIndex;
     supplies.find((item, index) => {
       if (item._id === id) {
         supplieIndex = index;
         return true;
-      };
+      }
       return false;
     });
 
-    setSupplies([...supplies.slice(0, supplieIndex), ...supplies.slice(supplieIndex + 1)])
-  }
+    setSupplies([
+      ...supplies.slice(0, supplieIndex),
+      ...supplies.slice(supplieIndex + 1),
+    ]);
+  };
 
-  const selectOptionChoseHandler = (selectedOption) => {
+  const selectOptionChoseHandler = selectedOption => {
     switch (selectedOption) {
       case 'edit':
         updateIsEditModeBarOpen(true);
@@ -97,7 +110,7 @@ const SuppliesTable = ({ isEdit, isEditModeBarOpen, updateIsEdit, updateIsEditMo
   const TableBody = ({ suppliesArr }) => {
     return (
       <tbody>
-        {suppliesArr.map(el =>
+        {suppliesArr.map(el => (
           <SuppliesTableRow
             isEdit={isEdit}
             createSupplie={createSupplie}
@@ -106,7 +119,7 @@ const SuppliesTable = ({ isEdit, isEditModeBarOpen, updateIsEdit, updateIsEditMo
             itemData={el}
             key={el._id}
           />
-        )}
+        ))}
       </tbody>
     );
   };
@@ -133,20 +146,21 @@ const SuppliesTable = ({ isEdit, isEditModeBarOpen, updateIsEdit, updateIsEditMo
   };
 
   if (category.name) {
-    (category.name !== 'all')
-      ? data = supplies.filter(supply => supply.type === category.label)
-      : data = [...supplies];
+    category.name !== 'all'
+      ? (data = supplies.filter(supply => supply.type === category.label))
+      : (data = [...supplies]);
   }
 
   return (
     <div>
-      {isEditModeBarOpen &&
+      {isEditModeBarOpen && (
         <EditModeBar
           data={supplies}
           onEdit={() => updateIsEdit(!isEdit)}
           onSave={() => selectOptionChoseHandler('save')}
           onCancel={() => selectOptionChoseHandler('cancel-edit')}
-        />}
+        />
+      )}
       <SuppliesCategoryButtons
         clickHandlers={categoryBtnHandlers}
         activeCategory={category.name}
@@ -154,12 +168,12 @@ const SuppliesTable = ({ isEdit, isEditModeBarOpen, updateIsEdit, updateIsEditMo
       <table className="table-fixed mx-auto mt-6">
         <TableHeader hasAnyElements={data.length} />
         <TableBody suppliesArr={data} />
-        {isEdit && category.name !== 'all' &&
+        {isEdit && category.name !== 'all' && (
           <i
             className="fas fa-plus bg-green-200 hover:bg-green-300 cursor-pointer w-12 h-12 rounded-full flex justify-center items-center self-end"
             onClick={() => createSupplie(category)}
           />
-        }
+        )}
       </table>
     </div>
   );
