@@ -25,7 +25,7 @@ router.put('/', (req, res, next) => {
     .then(() => {
       supplies.forEach(supplie => {
         newSupplies.push(new SupplyModel({
-          _id: supplie._id && new mongoose.Types.ObjectId(),
+          _id: new mongoose.Types.ObjectId(),
           name: supplie.name,
           type: supplie.type,
           info: supplie.info,
