@@ -14,7 +14,7 @@ router.get('/', (req, res, next) => {
   limit ? pagination.limit = limit : '';
 
   HappyStoryModel
-    .paginate({}, pagination)
+    .paginate({}, { ...pagination, sort: { created: -1 } })
     .then(stories => {
       res.status(200).json(stories);
     })
@@ -42,10 +42,11 @@ router.get('/:happyStoryID', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
   const { date, title, photo, text, gallery, videos } = req.body;
+  const created = Date.now();
 
   if (!verifyUser(JSON.parse(req.get('Authorization')))) res.status(401).end();
 
-  new HappyStoryModel({ _id: new mongoose.Types.ObjectId(), date, title, photo, text, gallery, videos })
+  new HappyStoryModel({ _id: new mongoose.Types.ObjectId(), date, title, photo, text, gallery, videos, created })
     .save()
     .then(story => {
       res.status(200).json(story);

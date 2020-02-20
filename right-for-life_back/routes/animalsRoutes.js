@@ -17,7 +17,7 @@ router.get('/', (req, res, next) => {
   limit ? pagination.limit = limit : '';
 
   AnimalModel
-    .paginate(filter, pagination)
+    .paginate(filter, { ...pagination, sort: { created: -1 } })
     .then(animals => {
       if (animals.page > animals.totalPages) {
         throw { status: 400, message: 'not found' };
@@ -51,10 +51,11 @@ router.get('/:animalID', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
   const { photos, name, type, gender, description, age } = req.body;
+  const created = Date.now();
 
   if (!verifyUser(JSON.parse(req.get('Authorization')))) res.status(401).end();
 
-  new AnimalModel({ _id: new mongoose.Types.ObjectId(), photos, name, type, gender, age, description })
+  new AnimalModel({ _id: new mongoose.Types.ObjectId(), photos, name, type, gender, age, description, created })
     .save()
     .then(animal => {
       res.status(200).json(animal);
