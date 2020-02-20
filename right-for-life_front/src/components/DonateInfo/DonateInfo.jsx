@@ -78,7 +78,7 @@ const MoneyTransfer = ({
         contentEditable={isEdit}
         suppressContentEditableWarning
         onBlur={e => setInfo(e.target.getAttribute('name'), e.target.innerText)}
-        // style={{ whiteSpace: 'pre-wrap' }}
+      // style={{ whiteSpace: 'pre-wrap' }}
       >
         {details}
       </pre>
@@ -166,6 +166,7 @@ const DonateInfo = ({
           <input
             className="bg-white focus:outline-none text-center focus:shadow-outline my-3 rounded-xl bg-gray-300 p-2 bg-orange-200 block w-full appearance-none leading-normal"
             type="text"
+            value={donateInfo.private24Token}
             name="privat24Token"
             placeholder="Token от ПриватБанка"
             onBlur={e =>
