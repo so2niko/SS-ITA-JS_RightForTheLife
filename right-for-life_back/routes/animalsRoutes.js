@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const verifyUser = require('../utils/verifyUser.js');
 
 const AnimalScheme = require('../models/AnimalSchema.js');
 const AnimalModel = mongoose.connection.model('Animal', AnimalScheme);
-
 
 router.get('/', (req, res, next) => {
   const { type, gender, page, limit } = req.query;
@@ -52,6 +52,8 @@ router.get('/:animalID', (req, res, next) => {
 router.post('/', (req, res, next) => {
   const { photos, name, type, gender, description, age } = req.body;
 
+  if (!verifyUser(JSON.parse(req.get('Authorization')))) res.status(401).end();
+
   new AnimalModel({ _id: new mongoose.Types.ObjectId(), photos, name, type, gender, age, description })
     .save()
     .then(animal => {
@@ -65,6 +67,8 @@ router.post('/', (req, res, next) => {
 
 router.put('/:animalID', (req, res, next) => {
   const { photos, name, type, gender, description, age } = req.body;
+
+  if (!verifyUser(JSON.parse(req.get('Authorization')))) res.status(401).end();
 
   AnimalModel.findById(new mongoose.Types.ObjectId(req.params.animalID))
     .exec()
@@ -84,10 +88,11 @@ router.put('/:animalID', (req, res, next) => {
           res.status(500).end();
         });
     });
-})
-;
+});
 
 router.delete('/:animalID', (req, res, next) => {
+  if (!verifyUser(JSON.parse(req.get('Authorization')))) res.status(401).end();
+
   AnimalModel.deleteOne({ _id: new mongoose.Types.ObjectId(req.params.animalID) })
     .then(() => {
       res.status(200).end();

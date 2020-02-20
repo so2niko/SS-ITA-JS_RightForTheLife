@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const verifyUser = require('../utils/verifyUser.js');
 
 const HomeScheme = require('../models/HomeSchema.js');
 const HomeModel = mongoose.connection.model('Home', HomeScheme);
@@ -27,6 +28,9 @@ router.get('/', (req, res, next) => {
 
 router.put('/', (req, res, next) => {
   const { gallery, title, description } = req.body;
+
+  if (!verifyUser(JSON.parse(req.get('Authorization')))) res.status(401).end();
+
   HomeModel.findOne()
     .exec()
     .then(doc => {
@@ -41,6 +45,8 @@ router.put('/', (req, res, next) => {
 
 router.put('/pin-emergencies', (req, res, next) => {
   const emergencyId = new mongoose.Types.ObjectId(req.body._id);
+
+  if (!verifyUser(JSON.parse(req.get('Authorization')))) res.status(401).end();
 
   HomeModel.findOne()
     .exec()
@@ -69,6 +75,8 @@ router.put('/pin-emergencies', (req, res, next) => {
 router.put('/pin-news', (req, res, next) => {
   const newsId = new mongoose.Types.ObjectId(req.body._id);
 
+  if (!verifyUser(JSON.parse(req.get('Authorization')))) res.status(401).end();
+
   HomeModel.findOne()
     .exec()
     .then(home => {
@@ -95,6 +103,8 @@ router.put('/pin-news', (req, res, next) => {
 
 router.put('/pin-happyStories', (req, res, next) => {
   const storyId = new mongoose.Types.ObjectId(req.body._id);
+
+  if (!verifyUser(JSON.parse(req.get('Authorization')))) res.status(401).end();
 
   HomeModel.findOne()
     .exec()

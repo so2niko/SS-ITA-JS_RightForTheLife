@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const verifyUser = require('../utils/verifyUser.js');
 
 const EmergencyScheme = require('../models/EmergencySchema.js');
 const EmergencyModel = mongoose.connection.model('Emergency', EmergencyScheme);
@@ -38,6 +39,9 @@ router.get('/:emergencyID', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
   const { date, title, photo, text } = req.body;
+
+  if (!verifyUser(JSON.parse(req.get('Authorization')))) res.status(401).end();
+
   new EmergencyModel({ _id: new mongoose.Types.ObjectId(), date, title, photo, text })
     .save()
     .then(emergency => {
@@ -51,6 +55,8 @@ router.post('/', (req, res, next) => {
 
 router.put('/:emergencyID', (req, res, next) => {
   const { date, title, photo, text } = req.body;
+
+  if (!verifyUser(JSON.parse(req.get('Authorization')))) res.status(401).end();
 
   EmergencyModel.findById(new mongoose.Types.ObjectId(req.params.emergencyID))
     .exec()
@@ -71,6 +77,8 @@ router.put('/:emergencyID', (req, res, next) => {
 });
 
 router.delete('/:emergencyID', (req, res, next) => {
+  if (!verifyUser(JSON.parse(req.get('Authorization')))) res.status(401).end();
+
   EmergencyModel.deleteOne({ _id: new mongoose.Types.ObjectId(req.params.emergencyID) })
     .then(() => {
       res.status(200).end();

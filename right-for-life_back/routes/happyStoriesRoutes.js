@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const verifyUser = require('../utils/verifyUser.js');
 
 const HappyStoryScheme = require('../models/HappyStorySchema.js');
 const HappyStoryModel = mongoose.connection.model('HappyStory', HappyStoryScheme);
@@ -42,6 +43,8 @@ router.get('/:happyStoryID', (req, res, next) => {
 router.post('/', (req, res, next) => {
   const { date, title, photo, text, gallery, videos } = req.body;
 
+  if (!verifyUser(JSON.parse(req.get('Authorization')))) res.status(401).end();
+
   new HappyStoryModel({ _id: new mongoose.Types.ObjectId(), date, title, photo, text, gallery, videos })
     .save()
     .then(story => {
@@ -55,6 +58,8 @@ router.post('/', (req, res, next) => {
 
 router.put('/:happyStoryID', (req, res, next) => {
   const { date, title, photo, text, gallery, videos } = req.body;
+
+  if (!verifyUser(JSON.parse(req.get('Authorization')))) res.status(401).end();
 
   HappyStoryModel.findById(new mongoose.Types.ObjectId(req.params.happyStoryID))
     .exec()
@@ -76,6 +81,8 @@ router.put('/:happyStoryID', (req, res, next) => {
 });
 
 router.delete('/:happyStoryID', (req, res, next) => {
+  if (!verifyUser(JSON.parse(req.get('Authorization')))) res.status(401).end();
+
   HappyStoryModel.deleteOne({ _id: new mongoose.Types.ObjectId(req.params.happyStoryID) })
     .then(() => {
       res.status(200).end();

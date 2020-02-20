@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const verifyUser = require('../utils/verifyUser.js');
 
 const AboutScheme = require('../models/AboutSchema.js');
 const AboutModel = mongoose.connection.model('About', AboutScheme);
@@ -15,6 +16,8 @@ router.get('/', (req, res, next) => {
 
 router.put('/', (req, res, next) => {
   const { gallery, description, instagram, facebook, phone, email } = req.body;
+
+  if (!verifyUser(JSON.parse(req.get('Authorization')))) res.status(401).end();
 
   AboutModel.findOne()
     .exec()
@@ -33,17 +36,6 @@ router.put('/', (req, res, next) => {
           console.log(err);
         });
     });
-});
-
-router.put('/:animalID', (req, res, next) => {
-  const animalId = req.params.animalID;
-  res.status(200).json({ animalId, message: 'animals PUT' });
-
-});
-
-router.delete('/:animalID', (req, res, next) => {
-  const animalId = req.params.animalID;
-  res.status(200).json({ message: 'animals DELETE', animalId });
 });
 
 module.exports = router;

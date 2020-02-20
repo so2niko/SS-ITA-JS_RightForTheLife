@@ -4,31 +4,33 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const secret = 'itsasecret';
+const secret = require('../utils/configs.js').jwt_secret;
 
 const UserScheme = require('../models/UserSchema.js');
 const UserModel = mongoose.connection.model('User', UserScheme);
 
 router.post('/signup', (req, res) => {
+  const { email, username, password } = req.body;
+
   if (req.body.hasOwnProperty('password') && req.body.hasOwnProperty('email')) {
-    UserModel.find({ email: req.body.email }).exec()
+    UserModel.find({ email }).exec()
       .then(user => {
         if (user.length > 0) {
           res.status(422).json({ error: 'invalid user data!' });
         } else {
-          bcrypt.hash(req.body.password, 10, (errHash, hash) => {
+          bcrypt.hash(password, 10, (errHash, hash) => {
             if (errHash) {
               console.log(errHash);
               res.status(500).json({ error: errHash });
             } else {
               new UserModel({
                 _id: new mongoose.Types.ObjectId(),
-                email: req.body.email || '',
+                email: email,
                 password: hash,
-                username: req.body.username || '',
+                username: username,
               }).save()
                 .then(() => {
-                  res.status(200).end();
+                  res.status(200).json({ message: 'user created' });
                 })
                 .catch(err => {
                   console.log(err);
@@ -47,16 +49,15 @@ router.post('/signup', (req, res) => {
 });
 
 router.post('/signin', (req, res) => {
-  const email = req.body.email;
-  const password = req.body.password;
+  const { email, username, password } = req.body;
+
   if (email && password) {
-    UserModel.findOne({ email: email })
+    UserModel.findOne({ email })
       .then(user => {
         bcrypt.compare(password, user.password, (err, result) => {
           if (result) {
-            const token = jwt.sign({ username: user.username, email }, secret, { expiresIn: '1h' });
-            console.log(token);
-            res.send(token).status(200).end();
+            const token = jwt.sign({ username, password: user.password, email }, secret, { expiresIn: '1h' });
+            res.status(200).json(token);
           }
           else {
             res.status(401).end();
