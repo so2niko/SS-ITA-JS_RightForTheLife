@@ -24,10 +24,6 @@ export const Select = ({
   function handleSelectListClick(chosenOptionName) {
     if (chosenOptionName === 'delete-request') {
       setIsConfirmDeletePopupShown(true);
-      // const isUserWantToDelete = window.confirm('Удалить запись?');
-      // if (!isUserWantToDelete) {
-      //   setIsSelectOpened(false);
-      //   return;
     } else if (chosenOptionName === 'delete') {
       chooseOptionHandler(chosenOptionName);
       setIsSelectOpened(false);
