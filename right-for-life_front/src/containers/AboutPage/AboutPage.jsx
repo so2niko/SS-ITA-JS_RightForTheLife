@@ -12,8 +12,7 @@ import { Select } from '../../components/Select';
 import { EditModeBar } from '../../components/EditModeBar';
 
 const AboutPage = ({ data }) => {
-  // const isAuth = useAuthChecker();
-  const isAuth = true;
+  const isAuth = useAuthChecker();
   const { pathname } = useLocation();
   const [state, setState] = useState(data);
   const [isEdit, setIsEdit] = useState(false);
