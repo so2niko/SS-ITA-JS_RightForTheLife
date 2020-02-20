@@ -3,7 +3,6 @@ import { API } from '../../rootConstants';
 import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
 
 const DonateButton = ({ className, style, data }) => {
-  console.log('PRIVAT TOKEN', data.privat24Token)
   return (
     <a
       className={className}
