@@ -65,7 +65,7 @@ const ReportPage = ({ data }) => {
     }
   };
 
-  if (!report)
+  if (!report || report.error)
     return (
       <ErrorIndicator
         message="Страница не найдена :("
