@@ -29,16 +29,16 @@ const DonatePage = ({ data }) => {
   const toggleEditStyle = isEdit =>
     isEdit ? 'my-3 rounded-xl bg-gray-300 p-2 bg-orange-200' : '';
 
-  const selectOptionChoseHandler = selectedOption => {
-    switch (selectedOption) {
-      case 'edit':
-        setIsEditModeBarOpen(true);
-        setIsEdit(true);
-        break;
-      default:
-        return null;
-    }
-  };
+  // const selectOptionChoseHandler = selectedOption => {
+  //   switch (selectedOption) {
+  //     case 'edit':
+  //       setIsEditModeBarOpen(true);
+  //       setIsEdit(true);
+  //       break;
+  //     default:
+  //       return null;
+  //   }
+  // };
 
   const stateSetters = {
     setText: (fieldName, name) => {
@@ -68,7 +68,10 @@ const DonatePage = ({ data }) => {
       {!isEditModeBarOpen && isAuth && (
         <Select
           classNames="fixed z-50 top-0 right-0 mr-10 mt-20"
-          chooseOptionHandler={selectOptionChoseHandler}
+          chooseOptionHandler={() => {
+            setIsEditModeBarOpen(true);
+            setIsEdit(true);
+          }}
           optEdit
         />
       )}

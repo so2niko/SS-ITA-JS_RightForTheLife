@@ -126,8 +126,6 @@ const DonateInfo = ({
           selectOptionChoseHandler('no-edit');
         })();
         break;
-      default:
-        return null;
     }
   };
 
