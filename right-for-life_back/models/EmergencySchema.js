@@ -10,6 +10,7 @@ const EmergencySchema = new mongoose.Schema(
     gallery: Array,
     videos: Array,
     text: String,
+    created: Number,
   });
 
 EmergencySchema.plugin(paginate);

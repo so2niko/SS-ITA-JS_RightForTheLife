@@ -10,6 +10,7 @@ AnimalSchema = new mongoose.Schema(
     age: Number,
     photos: Array,
     description: String,
+    created: Number,
   });
 
 AnimalSchema.plugin(paginate);

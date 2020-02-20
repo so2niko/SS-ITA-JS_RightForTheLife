@@ -10,6 +10,7 @@ const NewsSchema = new mongoose.Schema(
     gallery: Array,
     videos: Array,
     text: String,
+    created: Number,
   });
 
 NewsSchema.plugin(paginate);

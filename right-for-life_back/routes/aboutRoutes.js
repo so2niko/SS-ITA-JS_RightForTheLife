@@ -15,7 +15,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.put('/', (req, res, next) => {
-  const { gallery, description, instagram, facebook, phone, email } = req.body;
+  const { gallery, description, instagram, facebook, phone, email, additionalContacts } = req.body;
 
   if (!verifyUser(JSON.parse(req.get('Authorization')))) res.status(401).end();
 
@@ -28,6 +28,7 @@ router.put('/', (req, res, next) => {
       about.facebook = facebook;
       about.phone = phone;
       about.email = email;
+      about.additionalContacts = additionalContacts;
       about.save()
         .then(() => {
           res.status(200).json(about);

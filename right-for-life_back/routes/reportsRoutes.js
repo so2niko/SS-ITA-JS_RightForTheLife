@@ -14,7 +14,7 @@ router.get('/', (req, res, next) => {
   limit ? pagination.limit = limit : '';
 
   ReportModel
-    .paginate({}, pagination)
+    .paginate({}, { ...pagination, sort: { created: -1 } })
     .then(reports => {
       res.status(200).json(reports);
     })
@@ -42,10 +42,11 @@ router.get('/:reportID', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
   const { date, title, gallery} = req.body;
+  const created = Date.now();
 
   if (!verifyUser(JSON.parse(req.get('Authorization')))) res.status(401).end();
 
-  new ReportModel({ _id: new mongoose.Types.ObjectId(), date, title, gallery })
+  new ReportModel({ _id: new mongoose.Types.ObjectId(), date, title, gallery, created })
     .save()
     .then(report => {
       res.status(200).json(report);

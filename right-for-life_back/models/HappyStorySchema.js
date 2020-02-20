@@ -10,6 +10,7 @@ const HappyStorySchema = new mongoose.Schema(
     gallery: Array,
     videos: Array,
     text: String,
+    created: Number,
   });
 
 HappyStorySchema.plugin(paginate);
