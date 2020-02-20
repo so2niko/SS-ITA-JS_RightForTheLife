@@ -37,7 +37,7 @@
     "start:js": "react-scripts start",
     "build:js": "react-scripts build",
     "start:css": "postcss src/styles/tailwind.src.css -o src/styles/tailwind.css -w",
-    "build:css": "postcss src/styles/tailwind.src.css -o src/styles/tailwind.css --env production",
+    "build:css": "postcss src/styles/tailwind.src.css -o src/styles/tailwind.css",
     "lint": "eslint --fix src/**/*.js src/**/*.jsx"
   },
   "eslintConfig": {
