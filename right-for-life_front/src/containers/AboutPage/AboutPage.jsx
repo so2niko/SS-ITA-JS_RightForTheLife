@@ -12,7 +12,8 @@ import { Select } from '../../components/Select';
 import { EditModeBar } from '../../components/EditModeBar';
 
 const AboutPage = ({ data }) => {
-  const isAuth = useAuthChecker();
+  // const isAuth = useAuthChecker();
+  const isAuth = true;
   const { pathname } = useLocation();
   const [state, setState] = useState(data);
   const [isEdit, setIsEdit] = useState(false);
@@ -40,18 +41,13 @@ const AboutPage = ({ data }) => {
     setState({ ...newState });
   };
 
-  const selectOptionChoseHandler = selectedOption => {
-    switch (selectedOption) {
-      case 'edit':
-        setIsEditModeBarOpen(true);
-        setIsEdit(true);
-        break;
-      case 'no-edit':
-        setIsEditModeBarOpen(false);
-        setIsEdit(false);
-        break;
-      default:
-        return null;
+  const selectOptionChoseHandler = isOptionSelected => {
+    if (isOptionSelected) {
+      setIsEditModeBarOpen(true);
+      setIsEdit(true);
+    } else {
+      setIsEditModeBarOpen(false);
+      setIsEdit(false);
     }
   };
 
@@ -71,10 +67,10 @@ const AboutPage = ({ data }) => {
           onEdit={() => setIsEdit(!isEdit)}
           onSave={() => {
             CUDService.PUT(pathname, state);
-            selectOptionChoseHandler('no-edit');
+            selectOptionChoseHandler(false);
           }}
           onCancel={() => {
-            selectOptionChoseHandler('no-edit');
+            selectOptionChoseHandler(false);
           }}
         />
       ) : (
@@ -93,9 +89,9 @@ const AboutPage = ({ data }) => {
         <ImageCarousel data={gallery} page="about" />
       )}
       <AboutContent
-        text={description}
+        description={description}
         isEditable={isEdit}
-        setNewText={setNewDescription}
+        setNewDescription={setNewDescription}
       />
       <AboutContacts
         contactsData={{ facebook, phone, email, instagram, additionalContacts }}
