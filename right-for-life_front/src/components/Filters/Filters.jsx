@@ -67,11 +67,9 @@ export const Filters = ({ filters }) => {
         onClick={() => {
           setParams([]);
           form.current.reset();
-          history.push(
-            location.pathname + query.has('limit')
-              ? `?limit=${query.get('limit')}`
-              : '',
-          );
+          history.push(location.pathname + (query.has('limit')
+            ? `?limit=${query.get('limit')}`
+            : ''));
         }}
         disabled={Object.keys(params).length === 0}
       >
