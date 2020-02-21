@@ -24,7 +24,7 @@ export const Filters = ({ filters }) => {
   query.delete('page');
 
   [...query.entries()].forEach(([key, value]) => {
-    initialParams[key] = value;
+    if (key !== 'limit') initialParams[key] = value;
   });
 
   const [params, setParams] = useState(initialParams);
